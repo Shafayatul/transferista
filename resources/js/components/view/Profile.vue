@@ -180,13 +180,13 @@
 </div>
 </template>
 <script>
-import DashboardLayout from '../layers/DashboardLayout' 
+import ProfileLayout from '../layers/ProfileLayout' 
 export default {
     components:{
-        DashboardLayout
+        ProfileLayout
     },
     created(){
-        this.$emit(`update:layout`,DashboardLayout)
+        this.$emit(`update:layout`,ProfileLayout)
     }
 }
 </script>

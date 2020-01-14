@@ -1,11 +1,11 @@
 <template>
-    <component :is="layout">
+    <component :is="layout" >
         <router-view :layout.sync="layout"></router-view>
     </component>
 </template>
 
 <script>
-import profile from '../components/view/Profile'
+import AvailableProjects from '../components/view/AvailableProjects'
     export default {
         data(){
             return{
@@ -13,7 +13,7 @@ import profile from '../components/view/Profile'
             }
         },
         components:{
-            'profile': profile
+            AvailableProjects 
         },
         created() {
                         

@@ -11,6 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    // require('mdbvue');
 } catch (e) {}
 
 /**
@@ -22,6 +23,10 @@ try {
 window.axios = require('axios');
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+
+
+const passportToken  = `Bearer ${localStorage.getItem('token')}`;
+window.axios.defaults.headers.common['Authorization'] = passportToken;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening

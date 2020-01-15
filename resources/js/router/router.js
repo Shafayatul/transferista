@@ -9,11 +9,11 @@ import role from '../components/view/Role'
 import profile from '../components/view/Profile'
 import editprofile from '../components/view/EditProfile'
 const routes = [
-    {path:'/',component: AvailableProjects},
-    {path:'/profile',component: profile},
-    {path:'/profile/edit',component: editprofile},
-    {path:'/register',component: register},
-    {path:'/role',component: role}
+    // {path:'/',component: AvailableProjects},
+    // {path:'/profile',component: profile},
+    // {path:'/profile/edit',component: editprofile},
+    // {path:'/register',component: register},
+    // {path:'/role',component: role}
 ];
 
 const router = new VueRouter({

@@ -7643,7 +7643,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\r\n/* .catagoris #catagoribody .mamunurrashid_gig_wraper{\r\n  margin-top: 40px;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card {\r\n  margin-bottom: 30px;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img img{\r\n  -webkit-transition: all .4s;\r\n  -moz-transition: all .4s;\r\n  -o-transition: all .4s;\r\n  -ms-transition: all .4s;\r\n  transition: all .4s;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img {\r\n  overflow: hidden;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card:hover .mr_img img{\r\ntransform: scale(1.1) rotate(3deg);\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body {\r\n  background: #ecf6ff;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price{\r\n  margin: 0px 30px;\r\n  position: relative;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price a p{\r\n  font-size: 15px;\r\n  font-weight: 500;\r\n  line-height: 40px;\r\n  color: #707070;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price .p-box{\r\n  width: 100%;\r\n  background: #fff;\r\n  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);\r\n  padding: 10px 15px;\r\n  position: absolute;\r\n  top: -30px;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title{\r\n  padding: 57px 15px 32px;\r\n  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .p{\r\n font-size: 17px;\r\n font-weight: 500;\r\n width: 60%;\r\n color: #707070;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .sr{\r\n font-size: 16px;\r\n font-weight: 500;\r\n text-align: centerl\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title span i{\r\ncolor: #e9be0b;\r\n}\r\n\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .review{\r\ndisplay: block;\r\nfont-size: 16px;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/* .catagoris #catagoribody .mamunurrashid_gig_wraper{\n  margin-top: 40px;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card {\n  margin-bottom: 30px;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img img{\n  -webkit-transition: all .4s;\n  -moz-transition: all .4s;\n  -o-transition: all .4s;\n  -ms-transition: all .4s;\n  transition: all .4s;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img {\n  overflow: hidden;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card:hover .mr_img img{\ntransform: scale(1.1) rotate(3deg);\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body {\n  background: #ecf6ff;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price{\n  margin: 0px 30px;\n  position: relative;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price a p{\n  font-size: 15px;\n  font-weight: 500;\n  line-height: 40px;\n  color: #707070;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price .p-box{\n  width: 100%;\n  background: #fff;\n  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);\n  padding: 10px 15px;\n  position: absolute;\n  top: -30px;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title{\n  padding: 57px 15px 32px;\n  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .p{\n font-size: 17px;\n font-weight: 500;\n width: 60%;\n color: #707070;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .sr{\n font-size: 16px;\n font-weight: 500;\n text-align: centerl\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title span i{\ncolor: #e9be0b;\n}\n\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .review{\ndisplay: block;\nfont-size: 16px;\n} */\n", ""]);
 
 // exports
 
@@ -39816,7 +39816,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                Lorem ipsum dolor sit amet, consectetur\r\n                                            "
+                                  "\n                                                Lorem ipsum dolor sit amet, consectetur\n                                            "
                                 )
                               ]),
                               _vm._v(" "),
@@ -39853,7 +39853,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                    Lorem ipsum dolor sit amet, consectetur\r\n                                                "
+                                  "\n                                                    Lorem ipsum dolor sit amet, consectetur\n                                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -39890,7 +39890,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                    Lorem ipsum dolor sit amet, consectetur\r\n                                                "
+                                  "\n                                                    Lorem ipsum dolor sit amet, consectetur\n                                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -39948,7 +39948,7 @@ var staticRenderFns = [
                       [
                         _c("div", { staticClass: "dropdown-title" }, [
                           _vm._v(
-                            "\r\n                                        Logged in 5 min ago\r\n                                    "
+                            "\n                                        Logged in 5 min ago\n                                    "
                           )
                         ]),
                         _vm._v(" "),
@@ -39961,7 +39961,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "far fa-user" }),
                             _vm._v(
-                              " Profile\r\n                                    "
+                              " Profile\n                                    "
                             )
                           ]
                         ),
@@ -39975,7 +39975,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-bolt" }),
                             _vm._v(
-                              " Activities\r\n                                    "
+                              " Activities\n                                    "
                             )
                           ]
                         ),
@@ -39989,7 +39989,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-cog" }),
                             _vm._v(
-                              " Settings\r\n                                    "
+                              " Settings\n                                    "
                             )
                           ]
                         ),
@@ -40005,7 +40005,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-sign-out-alt" }),
                             _vm._v(
-                              " Logout\r\n                                    "
+                              " Logout\n                                    "
                             )
                           ]
                         )
@@ -40066,7 +40066,7 @@ var staticRenderFns = [
                 _c("li", [
                   _c("p", [
                     _vm._v(
-                      "\r\n                                Khan Jahan Ali Road, Khulna, Bangladesh.\r\n                            "
+                      "\n                                Khan Jahan Ali Road, Khulna, Bangladesh.\n                            "
                     )
                   ])
                 ])
@@ -40317,7 +40317,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                Lorem ipsum dolor sit amet, consectetur\r\n                                            "
+                                  "\n                                                Lorem ipsum dolor sit amet, consectetur\n                                            "
                                 )
                               ]),
                               _vm._v(" "),
@@ -40354,7 +40354,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                    Lorem ipsum dolor sit amet, consectetur\r\n                                                "
+                                  "\n                                                    Lorem ipsum dolor sit amet, consectetur\n                                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -40391,7 +40391,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                    Lorem ipsum dolor sit amet, consectetur\r\n                                                "
+                                  "\n                                                    Lorem ipsum dolor sit amet, consectetur\n                                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -40449,7 +40449,7 @@ var staticRenderFns = [
                       [
                         _c("div", { staticClass: "dropdown-title" }, [
                           _vm._v(
-                            "\r\n                                        Logged in 5 min ago\r\n                                    "
+                            "\n                                        Logged in 5 min ago\n                                    "
                           )
                         ]),
                         _vm._v(" "),
@@ -40462,7 +40462,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "far fa-user" }),
                             _vm._v(
-                              " Profile\r\n                                    "
+                              " Profile\n                                    "
                             )
                           ]
                         ),
@@ -40476,7 +40476,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-bolt" }),
                             _vm._v(
-                              " Activities\r\n                                    "
+                              " Activities\n                                    "
                             )
                           ]
                         ),
@@ -40490,7 +40490,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-cog" }),
                             _vm._v(
-                              " Settings\r\n                                    "
+                              " Settings\n                                    "
                             )
                           ]
                         ),
@@ -40506,7 +40506,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-sign-out-alt" }),
                             _vm._v(
-                              " Logout\r\n                                    "
+                              " Logout\n                                    "
                             )
                           ]
                         )
@@ -40626,7 +40626,7 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "footer-copyright py-3" }, [
-          _vm._v("\r\n        © 2019 Copyright:\r\n        "),
+          _vm._v("\n        © 2019 Copyright:\n        "),
           _c(
             "a",
             {
@@ -41015,15 +41015,15 @@ var render = function() {
               _c("div", { staticClass: "profile-head" }, [
                 _c("h5", [
                   _vm._v(
-                    "\r\n                                " +
+                    "\n                                " +
                       _vm._s(_vm.name) +
-                      "\r\n                            "
+                      "\n                            "
                   )
                 ]),
                 _vm._v(" "),
                 _c("h6", [
                   _vm._v(
-                    "\r\n                                Web Developer and Designer\r\n                            "
+                    "\n                                Web Developer and Designer\n                            "
                   )
                 ]),
                 _vm._v(" "),
@@ -41214,7 +41214,7 @@ var staticRenderFns = [
           },
           [
             _c("i", { staticClass: "fas fa-chart-pie mr-3" }),
-            _vm._v("Dashboard\r\n        ")
+            _vm._v("Dashboard\n        ")
           ]
         ),
         _vm._v(" "),
@@ -41275,7 +41275,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "file btn btn-lg btn-primary" }, [
           _vm._v(
-            "\r\n                                Change Photo\r\n                                "
+            "\n                                Change Photo\n                                "
           ),
           _c("input", { attrs: { type: "file", name: "file" } })
         ])
@@ -41478,7 +41478,7 @@ var staticRenderFns = [
             },
             [
               _c("i", { staticClass: "fas fa-chart-pie mr-3" }),
-              _vm._v("Dashboard\r\n        ")
+              _vm._v("Dashboard\n        ")
             ]
           ),
           _vm._v(" "),
@@ -41544,7 +41544,7 @@ var staticRenderFns = [
                     _vm._v(" "),
                     _c("div", { staticClass: "file btn btn-lg btn-primary" }, [
                       _vm._v(
-                        "\r\n                                    Change Photo\r\n                                    "
+                        "\n                                    Change Photo\n                                    "
                       ),
                       _c("input", { attrs: { type: "file", name: "file" } })
                     ])
@@ -41555,13 +41555,13 @@ var staticRenderFns = [
                   _c("div", { staticClass: "profile-head" }, [
                     _c("h5", [
                       _vm._v(
-                        "\r\n                                    Kshiti Ghelani\r\n                                "
+                        "\n                                    Kshiti Ghelani\n                                "
                       )
                     ]),
                     _vm._v(" "),
                     _c("h6", [
                       _vm._v(
-                        "\r\n                                    Web Developer and Designer\r\n                                "
+                        "\n                                    Web Developer and Designer\n                                "
                       )
                     ]),
                     _vm._v(" "),
@@ -57845,22 +57845,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODU
 
 
 
-var routes = [{
-  path: '/',
-  component: _components_view_AvailableProjects__WEBPACK_IMPORTED_MODULE_2__["default"]
-}, {
-  path: '/profile',
-  component: _components_view_Profile__WEBPACK_IMPORTED_MODULE_5__["default"]
-}, {
-  path: '/profile/edit',
-  component: _components_view_EditProfile__WEBPACK_IMPORTED_MODULE_6__["default"]
-}, {
-  path: '/register',
-  component: _components_auth_Register__WEBPACK_IMPORTED_MODULE_3__["default"]
-}, {
-  path: '/role',
-  component: _components_view_Role__WEBPACK_IMPORTED_MODULE_4__["default"]
-}];
+var routes = [// {path:'/',component: AvailableProjects},
+  // {path:'/profile',component: profile},
+  // {path:'/profile/edit',component: editprofile},
+  // {path:'/register',component: register},
+  // {path:'/role',component: role}
+];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: routes,
   hashbang: false,

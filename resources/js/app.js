@@ -5,8 +5,16 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
+import * as VueGoogleMaps from 'vue2-google-maps'
+
+Vue.use(VueGoogleMaps, {
+    load: {
+      key: 'AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo',
+      libraries: 'places'
+    },
+});
+Vue.component('google-map', VueGoogleMaps.Map);
 
 window.Bus = new Vue();
 

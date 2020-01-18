@@ -21,19 +21,18 @@
 </div>
 @endsection
 @section('backend-additional-js')
-
+<!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo&libraries=places"></script> -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo&libraries=places"></script>
 <script>
-    
+    var input = document.getElementById('searchTextField');
+    alert(input);
     function initialize() {
-        var input = document.getElementById('origin');
-        var autocomplete = new google.maps.places.Autocomplete(input);
-          console.log(autocomplete);
-        autocomplete.addListener('place_changed', function () {
+      	var autocomplete = new google.maps.places.Autocomplete(input);
+        google.maps.event.addListener(autocomplete, 'place_changed', function () {
             var place = autocomplete.getPlace();
-            console.log(place);
+            alert(place);
         });
     }
-    // google.maps.event.addDomListener(window, 'load', initialize);
+    google.maps.event.addDomListener(window, 'load', initialize);
 </script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo&libraries=places&callback=initialize"></script>
 @endsection

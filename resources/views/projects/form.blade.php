@@ -1,15 +1,15 @@
 <div class="form-group row">
-    <label for="firstname" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+    
 
     <div class="col-md-6">
-        {{-- <input id="origin" type="text" class="form-control" onFocus="geolocate()" name="address_of_origin" required> --}}
-        <input id="origin" type="text" name="address_of_origin" size="50" placeholder="City, address or location" autocomplete="on" runat="server" class="form-control" />
+       
+        <input id="searchTextField" type="text" size="50" placeholder="City, address or location" autocomplete="on" runat="server"  />
     </div>
 </div>
 
 
 
-<div class="form-group row">
+<!-- <div class="form-group row">
     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
 
     <div class="col-md-6">
@@ -67,4 +67,4 @@
             {{ __('Register') }}
         </button>
     </div>
-</div>
+</div> -->

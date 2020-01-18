@@ -10,7 +10,7 @@
                     <div class="value">
                         <div class="row row-space">
                             <div class="col-6">
-                                <div class="input-group-desc" :class="{error: errors.first_name[0]} ">
+                                <div class="input-group-desc" :class="{error: errors.first_name}">
                                     <input v-model="form.first_name" class="input--style-5" type="text" name="first_name">
                                     <span v-if="errors.name" class="help-block" role="alert">
                                         <strong>{{errors.first_name[0]}}</strong>
@@ -19,10 +19,10 @@
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="input-group-desc" :class="{error: errors.name[0]}" >
-                                    <input v-model="form.name" class="input--style-5" type="text" name="last_name">
+                                <div class="input-group-desc"  >
+                                    <input v-model="form.name" :class="{error: errors.name}" class="input--style-5" type="text" name="last_name">
                                     <span v-if="errors.name" class="help-block" role="alert">
-                                        <strong>{{errors.name[0]}}</strong>
+                                        <strong>{{errors.name}}</strong>
                                     </span>
                                     <label class="label--desc">last name</label>
                                 </div>
@@ -33,10 +33,10 @@
                 <div class="form-row">
                     <div class="name">Company</div>
                     <div class="value">
-                        <div class="input-group" :class="{error: errors.company[0]}">
+                        <div class="input-group" :class="{error: errors.company}">
                             <input v-model="form.company" class="input--style-5" type="text" name="company">
                             <span v-if="errors.company" class="help-block" role="alert">
-                                    <strong>{{errors.company[0]}}</strong>
+                                    <strong>{{errors.company}}</strong>
                             </span>
                         </div>
                     </div>
@@ -44,10 +44,10 @@
                 <div class="form-row">
                     <div class="name">Email</div>
                     <div class="value">
-                        <div class="input-group" :class="{error: errors.email[0]}">
+                        <div class="input-group" :class="{error: errors.email}">
                             <input v-model="form.email" class="input--style-5" type="email" name="email">
                             <span v-if="errors.email" class="help-block" role="alert">
-                                <strong>{{errors.email[0]}}</strong>
+                                <strong>{{errors.email}}</strong>
                             </span>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                     <div class="name">Phone</div>
                     <div class="value">
                         <div class="row row-refine">
-                            <div class="col-6" :class="{error: errors.phone[0]}">
+                            <div class="col-6" :class="{error: errors.phone}">
                                 <div class="input-group-desc" >
                                     <input v-model="area_code" class="input--style-5" type="text" name="area_code">
                                     <label class="label--desc">Area Code</label>
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <span v-if="errors.phone" class="help-block" role="alert">
-                                    <strong>{{errors.phone[0]}}</strong>
+                                    <strong>{{errors.phone}}</strong>
                             </span>
                         </div>
                     </div>
@@ -86,11 +86,11 @@
                 <div class="form-row">
                     <div class="name">Confirm Password</div>
                     <div class="value">
-                        <div class="input-group" :class="{error: errors.password[0]}">
+                        <div class="input-group" :class="{error: errors.password}">
                             <input v-model="form.confirm_password" class="input--style-5" type="password" name="password_confirmation">
                         </div>
                         <span v-if="errors.password" class="help-block" role="alert">
-                            <strong>{{errors.password[0]}}</strong>
+                            <strong>{{errors.password}}</strong>
                         </span>
                     </div>
                 </div>
@@ -127,7 +127,7 @@ export default {
                 email: null,
                 phone: null ,
                 password: null,
-                confirm_password: null
+                password_confirmation: null
             },
             errors:{}
         }

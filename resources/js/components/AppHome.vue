@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import AvailableProjects from '../components/view/AvailableProjects'
+import googlemap from './googlemap'
     export default {
         data(){
             return{
@@ -13,7 +13,7 @@ import AvailableProjects from '../components/view/AvailableProjects'
             }
         },
         components:{
-            AvailableProjects 
+            googlemap 
         },
         created() {
                         

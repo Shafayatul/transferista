@@ -1,0 +1,148 @@
+.map-container-5{
+overflow:hidden;
+padding-bottom:56.25%;
+position:relative;
+height:0;
+}
+.map-container-5 iframe{
+left:0;
+top:0;
+height:100%;
+width:100%;
+position:absolute;
+}
+#mainblog {
+   margin-bottom: 5%;
+}
+.date-info{
+  padding: 1%;
+  color:#fff;
+  background:#33b5e5 !important;
+  font-weight: bold;
+}
+.note-editable{
+ height: 120px;
+}
+.job-postdetails .category-dropdown {
+    border: 1px solid 
+    #e3e3e3;
+    border-radius: 5px;
+}
+.job-postdetails label {
+    font-size: 16px;
+    font-weight: 400;
+    color: 
+    #000;
+}
+.job-postdetails .form-group {
+    position: relative;
+    margin-bottom: 40px;
+}
+.job-postdetails .category-dropdown {
+	border: 1px solid #e3e3e3;
+	border-radius: 5px;
+} 
+
+.job-postdetails .category-dropdown a {
+	display: block;
+}
+
+.job-postdetails .category-dropdown .pull-right {
+	margin-top: 15px;
+}
+
+.job-postdetails .dropdown-menu {
+	width: 100%;
+	padding: 10px 0;
+	margin: 0 auto;
+	background: #0d73e6;
+}
+
+.job-postdetails .location .category-dropdown {
+	width: 48%;
+}
+
+.job-postdetails .select-price input[type="text"] {
+	width: 25%;
+}
+
+.job-postdetails .characters {
+	margin-bottom: 30px;
+}
+
+.job-postdetails .agreement.checkbox label:before {
+	top: 0;
+}
+
+.job-user-account {
+	overflow: hidden;
+}
+.select-price input[type="text"] {
+    display: inline-block;
+    width: initial;
+    margin: 0 15px;
+}
+.postdetails .item-description {
+    margin-bottom: 15px;
+}
+.category-dropdown {
+    background-color: 
+    #fff;
+    border-right: 1px solid #e6e6e6;
+    border-radius: 5px 0px 0px 5px;
+    min-width: 200px;
+    line-height: 45px;
+    text-align: left;
+    padding: 0 20px;
+}
+.job-postdetails .category-dropdown a {
+    display: block;
+}
+.job-postdetails label {
+	font-size: 16px;
+	font-weight:400;
+	color:#000;
+}
+
+.job-postdetails label.label-title {
+	padding-top:10px;
+}
+
+.job-postdetails input[type="radio"]+label {
+	cursor: pointer;
+	margin-right:20px;
+	padding-left:25px;
+	vertical-align:sub !important;
+	position:relative;
+	color:#838383;
+	margin-bottom:0;
+}
+
+.job-postdetails input[type="radio"] {
+	
+}
+
+.job-postdetails input[type="radio"] + label:before,
+.job-postdetails input[type="radio"] + label:after {
+	position:absolute;
+	top:5px;
+	left:0;
+	content:"";
+	width:14px;
+	height:14px;
+	border-radius:50%;
+	display:inline-block;
+	background-color:transparent;
+}
+.dropdown.category-dropdown .dropdown-menu a {
+color:#ffffff;
+padding: 8px 16px;
+border: 1px solid transparent;
+border-color:transparent transparent rgba(0, 0, 0, 0.1)
+transparent;
+cursor: pointer;
+
+}
+.dropdown.category-dropdown .dropdown-menu a:hover{
+ background:#20c997; 
+}

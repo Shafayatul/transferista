@@ -41,7 +41,7 @@
     <link href="{{asset('css/style.min.css')}}" rel="stylesheet">
     <link href="{{asset('css/main.css')}}" rel="stylesheet" media="all">
     <link href="{{asset('css/style.css')}}" rel="stylesheet" media="all">
-    <link href="{{asset('css/profile.css')}}" rel="stylesheet" media="all">
+    <link href="{{asset('css/project.css')}}" rel="stylesheet" media="all">
 
 </head>
 <body>

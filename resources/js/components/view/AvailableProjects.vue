@@ -26,8 +26,18 @@
 								<div class="range">
 									<p>Price Range</p>
 									<form action="#">
-										<input type="text" class="mr-price"><span>To</span>
-										<input type="text" class="mr-price">
+										<input v-model="query" v-text="selectedItem ? selectedItem[filterBy] : ''" type="text" class="mr-price">
+										<div class="options">
+											<ul>
+												<li 
+												:key="match[index]" 
+												v-for="(match,index) in matches"
+												:class="{'seleted': (seleted == index)}"
+												v-text="match[filterBy]"
+												@click="itemClicked(index)"
+												></li>
+											</ul>
+										</div>
 										<button type="submit" class="mr-price_btn"><i class="fa fa-angle-right"></i>
 										</button>
 									</form>
@@ -120,15 +130,70 @@
 <script>
 import DashboardLayout from "../layers/DashboardLayout";
 export default {
+	data(){
+		return{
+			seleted: 0,
+			query: null,
+			filterBy: null,
+			selectItem: null
+		}
+	},
     components:{
         DashboardLayout
-    },
+	},
+	methods:{
+		itemClicked(){
+			this.seleted = index;
+			this.selectItem();
+		},
+		selectItem(){
+			this.selectItem = this.matches[this.seleted];
+			this.visible = null;
+		}
+	},
+	computed:{
+		matches(){
+			if(this.query == ''){
+				return [];
+			}
+			return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
+		}
+	},
     created(){
         this.$emit(`update:layout`,DashboardLayout)
     }
 }
 </script>
 <style scoped>
+
+
+
+.options{
+	max-height: 100px;
+	overflow-y: scroll;
+	margin-top: 5px; 
+}
+.options ul{
+	list-style-type: none;
+	text-align: left;
+	padding-left: 0px;
+
+}
+.options ul li{
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+	cursor: pointer;
+	background: lightgrey;
+
+}
+.options ul li .selected{
+
+	background: green;
+	color: white;
+	font-weight: 600;
+
+}
+
 /* .catagoris #catagoribody .mamunurrashid_gig_wraper{
   margin-top: 40px;
 }

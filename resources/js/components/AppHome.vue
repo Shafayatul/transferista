@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import googlemap from './googlemap'
     export default {
         data(){
             return{
@@ -13,7 +12,6 @@ import googlemap from './googlemap'
             }
         },
         components:{
-            googlemap 
         },
         created() {
                         

@@ -55,6 +55,13 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::get('drivers/{driver_id}', 'Api\DriversController@show');
         Route::post('drivers/{driver_id}', 'Api\DriversController@update');
         Route::delete('drivers/{driver_id}', 'Api\DriversController@destroy');
+
+        //Car Section
+        Route::get('cars', 'Api\CarsController@index');
+        Route::post('cars', 'Api\CarsController@store');
+        Route::get('cars/{car_id}', 'Api\CarsController@show');
+        Route::post('cars/{car_id}', 'Api\CarsController@update');
+        Route::delete('cars/{car_id}', 'Api\CarsController@destroy');
     });
 
 

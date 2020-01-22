@@ -21,13 +21,24 @@ Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
 Route::post('login', 'Api\UsersController@login');
 Route::group(['middleware' => ['auth:api']], function() {
+
     Route::get('logout', 'Api\UsersController@logout');
     Route::post('user-info-save', 'Api\UsersController@userInfoSave');
+
     Route::group(['middleware' => ['role:Company']], function () {
         Route::get('employees', 'Api\EmployeesController@index');
         Route::post('employees', 'Api\EmployeesController@store');
         Route::get('employees/{employee_id}', 'Api\EmployeesController@show');
         Route::post('employee-update', 'Api\EmployeesController@update');
         Route::delete('employees/{employee_id}', 'Api\EmployeesController@destroy');
+    });
+
+    //Project Section
+    Route::group(['middleware' => ['role:Company|Customer']], function () {
+        Route::get('projects', 'Api\ProjectsController@index');
+        Route::post('projects', 'Api\ProjectsController@store');
+        Route::get('projects/{project_id}', 'Api\ProjectsController@show');
+        Route::post('projects/{project_id}', 'Api\ProjectsController@update');
+        Route::delete('projects/{project_id}', 'Api\ProjectsController@destroy');
     });
 });

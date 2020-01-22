@@ -5,11 +5,24 @@
 </template>
 
 <script>
+<<<<<<< HEAD
 import AvailableProjects from './view/AvailableProjects'
 export default {
     data(){
         return{
             layout: 'div'
+=======
+    export default {
+        data(){
+            return{
+                layout: 'div'
+            }
+        },
+        components:{
+        },
+        created() {
+                        
+>>>>>>> 9c41e962446b05c480e6f0093ea34b538b4f5f49
         }
     },
     components:{

@@ -5,18 +5,23 @@
 </template>
 
 <script>
-import googlemap from './googlemap'
-    export default {
-        data(){
-            return{
-                layout: 'div'
-            }
-        },
-        components:{
-            googlemap 
-        },
-        created() {
-                        
+import AvailableProjects from './view/AvailableProjects'
+export default {
+    data(){
+        return{
+            layout: 'div'
         }
-    }
+    },
+    components:{
+        AvailableProjects
+    },
+    created() {
+                    
+        }
+}
 </script>
+<style scoped >
+    /* @import '/src/';
+    @import '/src/assets/css/catagori.css';
+    @import '/src/assets/css/responsive.css'; */
+</style>

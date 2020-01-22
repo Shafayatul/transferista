@@ -2,96 +2,117 @@
     <div class="body-class catagoris">
         <section id="catagoribody">
             <div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="input-group" id="adv-search">
+							<input type="text" class="form-control" placeholder="Search for snippets" />
+							<div class="input-group-btn">
+								<div class="btn-group" role="group">
+									
+									<button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+	
                 <div class="row">
                     <div class="col-lg-4 order-last order-lg-first">
                         <div class="mr_aside">
-                            <h3>Catagories</h3>
-                            <ul>
-                                <li><a class="active" href="#">Logo Design</a></li>
-                                <li><a href="#">Product Design</a></li>
-                                <li><a href="#">Flyer Design</a></li>
-                                <li><a href="#">Banner Design</a></li>
-                                <li><a href="#">T-Shirt Design</a></li>
-                                <li><a href="#">Illustration</a></li>
-                                <li><a href="#">2D & 3D Design</a></li>
-                                <li><a href="#">App Design</a></li>
-                                <li><a href="#">Web Template</a></li>
-                                <li><a href="#">Presentation</a></li>
-                            </ul>
-                        </div>
+                            <h3>Filters</h3>
+							<div class="filter-by">
+								<p>Short By :</p>
+								<form action="#">
+									<select class="mr_select">
+										<option value="1">Best Selling</option>
+										<option value="2">New</option>
+										<option value="3">Popular</option>
+										<option value="4">Tranding</option>
+									</select>
+								</form>
+							</div>
+							<div class="filter-by">
+								<p>Duration :</p>
+								<form action="#">
+									<select class="mr_select">
+										<option value="1">Best Selling</option>
+										<option value="2">New</option>
+										<option value="3">Popular</option>
+										<option value="4">Tranding</option>
+									</select>
+								</form>
+							</div>
+							<div class="input-group">
+								<span class="input-group-addon">From</span>
+								<input id="date" type="text" class="form-control" name="date" placeholder="2018-01-01">
+								<span class="input-group-addon">To</span>
+								<input id="date" type="text" class="form-control" name="date" placeholder="2019-01-01">
+								
+			
+								<div class="input-group-btn">
+									<button class="btn btn-default" type="submit">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
+                    	</div>
                     </div>
 					<div class="col-lg-8 order-first order-lg-last">
 						<div class="row filter">
-							<div class="col-md-5">
-								<div class="range">
-									<p>Price Range</p>
-									<form action="#">
-										<input v-model="query" v-text="selectedItem ? selectedItem[filterBy] : ''" type="text" class="mr-price">
-										<div class="options">
-											<ul>
-												<li 
-												:key="match[index]" 
-												v-for="(match,index) in matches"
-												:class="{'seleted': (seleted == index)}"
-												v-text="match[filterBy]"
-												@click="itemClicked(index)"
-												></li>
-											</ul>
-										</div>
-										<button type="submit" class="mr-price_btn"><i class="fa fa-angle-right"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-							<div class="col-md-7">
-								<div class="best-filter">
-									<p>Short By :</p>
-									<form action="#">
-										<select class="mr_select">
-											<option value="1">Best Selling</option>
-											<option value="2">New</option>
-											<option value="3">Popular</option>
-											<option value="4">Tranding</option>
-										</select>
-									</form>
-								</div>
+							<div class="range">
+								<p>Price Range</p>
+								<form action="#">
+									<!-- <input v-model="query" v-text="selectedItem ? selectedItem[filterBy] : ''" type="text" class="mr-price">
+									<div class="options">
+										<ul>
+											<li 
+											:key="match[index]" 
+											v-for="(match,index) in matches"
+											:class="{'seleted': (seleted == index)}"
+											v-text="match[filterBy]"
+											@click="itemClicked(index)"
+											></li>
+										</ul>
+									</div> -->
+									<button type="submit" class="mr-price_btn"><i class="fa fa-angle-right"></i>
+									</button>
+								</form>
 							</div>
 						</div>
 						<div class="row mamunurrashid_gig_wraper">							
 							<div class="col-md-10">
-								<div class="mr_card">
+								<div class="mr_card" v-for="(data,index) in projects" :key="index">
 									<div class="mr_card_body">
 										<div class="offset-1">
 											<div class="p-box row ">											
 												<a class="p col-md-9" href="jobDetails.html">
-													<h5 class="fonts-title">I will Do 2 Minit Logo With 48 Hours <br><small>5 day left</small></h5>
+													<h5 class="fonts-title">{{data.project_title}}<br><small>{{ timeLeft(data.created_at) }} days left</small></h5>
 													<span class="body-color">
-														See more: prime contractors writing publishing, article writing software blog, article writing publishing, blog writers need, excel macro move rows need speed process, 
+														{{data.project_description}}
 													</span>
 												</a>
 												<ul class="col-md-3 text-center">
-                                                    <li class="mb-2"><span>45$</span><br></li>
-                                                    <li class="mb-2"><small>10 bids</small></li>
-                                                    <li class="mb-2"><button class="btn btn-success "><a class="font-color" href="jobDetails.html">Bid Now</a></button></li>
+													<li class="mb-2"><small>10 bids</small></li>
+													<li class="mb-2"><button class="btn btn-success "><a class="font-color" href="jobDetails.html">Bid Now</a></button></li>
 												</ul>
 
 											</div>
 											<div class=" d-flex ">											
-											<p class="sr col-md-4">
-												<span class="stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-												</span><br>
-												<span class="review">
-													23 Review
-												</span>
-											</p>
-											<p class="col-md-4"><i class="fas fa-google-map"></i>Location</p>
-											<p class="col-md-4">Review</p>
-										</div>
+												<p class="sr col-md-4">
+													<!-- <span class="stars">
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star"></i>
+														<i class="fa fa-star-o"></i>
+													</span><br> -->
+													<span class="review">
+														23 Review
+													</span>
+												</p>
+												<p class="col-md-4"><i class="fas fa-google-map"></i>Location</p>
+												<p class="col-md-4">Review</p>
+											</div>
 										</div>
 										
 									</div>
@@ -122,12 +143,14 @@
 							</div>
 						</div>
 					</div>
-                </div>
+            	</div>
             </div>
         </section>
     </div>
 </template>
 <script>
+import Axios from 'axios'
+Axios.defaults.baseURL = 'http://192.168.0.101:8000'
 import DashboardLayout from "../layers/DashboardLayout";
 export default {
 	data(){
@@ -135,37 +158,75 @@ export default {
 			seleted: 0,
 			query: null,
 			filterBy: null,
-			selectItem: null
+			selectItem: null,
+			projects:[]
 		}
 	},
     components:{
         DashboardLayout
 	},
 	methods:{
-		itemClicked(){
-			this.seleted = index;
-			this.selectItem();
-		},
-		selectItem(){
-			this.selectItem = this.matches[this.seleted];
-			this.visible = null;
+		timeLeft(date){
+			let oneDay = 1000*60*60*24; 
+			let today = Date.now();
+			let date1 = date.getTime();
+
+
+			let date2 = date1 + (7*1000*60*60*24);
+
+			let left = Math.round((date2 - today.getTime()/oneDay));
+			
+			return left;
+
 		}
+		// itemClicked(){
+		// 	this.seleted = index;
+		// 	this.selectItem();
+		// },
+		// selectItem(){
+		// 	this.selectItem = this.matches[this.seleted];
+		// 	this.visible = null;
+		// }
 	},
 	computed:{
-		matches(){
-			if(this.query == ''){
-				return [];
-			}
-			return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
-		}
+		// matches(){
+		// 	if(this.query == ''){
+		// 		return [];
+		// 	}
+		// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
+		// }
 	},
     created(){
-        this.$emit(`update:layout`,DashboardLayout)
+		// console.log('working')
+		this.$emit(`update:layout`,DashboardLayout)
+		Axios.get('/api/project-list')
+		.then(res => this.projects = res.data.projects)
+		.catch(error=>console.log(error))
     }
 }
 </script>
 <style scoped>
+.filter-by{
+	text-align: center;
+	padding: 27px 0pc;
+	font-size: 22px;
+}
+.filter-by p{
+	float:  left;
+	margin-left: 50px;
+}
+.filter-by form{
+    border: aliceblue;
+}
+.filter-by form select{
+	
+    color: #1a8282;
+	border: white;
+}
 
+.SectionJobFilter-duration {
+    margin-top: 16px;
+}
 
 
 .options{
@@ -192,6 +253,46 @@ export default {
 	color: white;
 	font-weight: 600;
 
+}
+.dropdown.dropdown-lg .dropdown-menu {
+    margin-top: -1px;
+    padding: 6px 20px;
+}
+.input-group-btn .btn-group {
+    display: flex !important;
+}
+.btn-group .btn {
+    border-radius: 0;
+    margin-left: -1px;
+}
+.btn-group .btn:last-child {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.btn-group .form-horizontal .btn[type="submit"] {
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.form-horizontal .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+.form-group .form-control:last-child {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+@media screen and (min-width: 768px) {
+    #adv-search {   
+		width: 800px;
+    	margin: 30px auto;
+    }
+    .dropdown.dropdown-lg {
+        position: static !important;
+    }
+    .dropdown.dropdown-lg .dropdown-menu {
+        min-width: 500px;
+    }
 }
 
 /* .catagoris #catagoribody .mamunurrashid_gig_wraper{

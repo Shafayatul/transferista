@@ -22,11 +22,11 @@ try {
 
 window.axios = require('axios');
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+// window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-const passportToken  = `Bearer ${localStorage.getItem('token')}`;
-window.axios.defaults.headers.common['Authorization'] = passportToken;
+// const passportToken  = `Bearer ${localStorage.getItem('token')}`;
+// window.axios.defaults.headers.common['Authorization'] = passportToken;
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -40,7 +40,7 @@ window.Pusher = require('pusher-js');
 
 window.Echo = new Echo({
     broadcaster: 'pusher',
-    key: process.env.PUSHER_APP_KEY,
-    cluster: process.env.PUSHER_APP_CLUSTER,
-    encrypted: true
+    key: 'ac11347c5fd2b32684fa',
+    cluster: 'ap2',
+    forceTLS: true
 });

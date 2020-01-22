@@ -33,12 +33,29 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::delete('employees/{employee_id}', 'Api\EmployeesController@destroy');
     });
 
-    //Project Section
+    
     Route::group(['middleware' => ['role:Company|Customer']], function () {
+
+        //Project Section
         Route::get('projects', 'Api\ProjectsController@index');
         Route::post('projects', 'Api\ProjectsController@store');
         Route::get('projects/{project_id}', 'Api\ProjectsController@show');
         Route::post('projects/{project_id}', 'Api\ProjectsController@update');
         Route::delete('projects/{project_id}', 'Api\ProjectsController@destroy');
     });
+
+    Route::group(['middleware' => ['role:Transferista']], function () {
+
+        //Bid Section
+        Route::post('bids', 'Api\BidsController@store');
+
+        //Driver Section
+        Route::get('drivers', 'Api\DriversController@index');
+        Route::post('drivers', 'Api\DriversController@store');
+        Route::get('drivers/{driver_id}', 'Api\DriversController@show');
+        Route::post('drivers/{driver_id}', 'Api\DriversController@update');
+        Route::delete('drivers/{driver_id}', 'Api\DriversController@destroy');
+    });
+
+
 });

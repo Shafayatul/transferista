@@ -17,6 +17,14 @@ use App\Events\SendPosition;
 //     return $request->user();
 // });
 
+Route::group([
+    'prefix' => 'password'
+], function () {
+    Route::post('create', 'Api\Auth\PasswordResetController@create');
+    Route::get('find/{token}', 'Api\Auth\PasswordResetController@find');
+    Route::post('reset', 'Api\Auth\PasswordResetController@reset');
+});
+
 Route:: post('/map',function (Request $request){
     // dd($request);
     $lat = $request->input('lat');
@@ -31,6 +39,8 @@ Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
 Route::post('login', 'Api\UsersController@login');
 Route::group(['middleware' => ['auth:api']], function() {
+
+    Route::post('password-update', 'Api\UsersController@passwordUpdate');
 
     Route::get('logout', 'Api\UsersController@logout');
     Route::post('user-info-save', 'Api\UsersController@userInfoSave');

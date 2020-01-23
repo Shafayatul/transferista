@@ -114,4 +114,46 @@ class UsersController extends Controller
             'message' => 'Successfully Saved user Information!'
         ], 201);
     }
+
+    public function passwordUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'old_password'      => ['required', 'string', 'min:8'],
+            'new_password'      => ['required', 'string', 'min:8'],
+            'confirm_password'  => ['required', 'string', 'min:8'],
+        ]);
+
+        $old_password       = $request->old_password;
+        $new_password       = $request->new_password;
+        $confirm_password   = $request->confirm_password;
+
+        if (Auth::check()) {
+            if ($new_password == $confirm_password) {
+                $current_password = Auth::user()->password;
+                if (Hash::check($old_password, $current_password)) {
+                    $id             = Auth::user()->id;
+                    $user           = User::findOrFail($id);
+                    $user->password = Hash::make($new_password);
+                    $user->save();
+                    // return redirect('/password-change')->with('success', 'Passowrd Updated!');
+                    return response()->json([
+                        'message' => 'Passowrd Updated!'
+                    ], 201);
+                } else {
+                    return response()->json([
+                        'message' => 'Old Password and Current password not matching!'
+                    ]);
+                }
+            } else {
+                // return redirect()->back()->with('error', 'New Password and Confirm password not matching!');
+                return response()->json([
+                    'message' => 'New Password and Confirm password not matching!'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'message' => 'Please login then submit request.'
+            ]);
+        }
+    }
 }

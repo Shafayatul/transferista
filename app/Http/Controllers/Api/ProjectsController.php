@@ -2,18 +2,29 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 
-use App\User;
 use Auth;
+use App\Bid;
+use App\User;
 use App\Project;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class ProjectsController extends Controller
 {
     public function index()
     {
-        $projects = Project::latest()->get();
+        $user = Auth::user();
+        if ($user->hasRole('Company')) {
+            $projects = Project::where('project_owner_id', Auth::id())->latest()->get();
+        }elseif ($user->hasRole('Customer')) {
+            $projects = Project::where('project_owner_id', Auth::id())->latest()->get();
+        }elseif ($user->hasRole('Transferista')) {
+            $projects = Project::where('transferista_id', Auth::id())->latest()->get();
+        }else {
+            $projects = Project::latest()->get();
+        }
+        
         return response()->json([
             'projects' => $projects
         ]);
@@ -99,6 +110,50 @@ class ProjectsController extends Controller
 
         return response()->json([
             'message' => 'Successfully updated project!'
+        ], 201);
+    }
+
+    public function acceptProject($project_id, $transferista_id)
+    {
+        $bid = Bid::where(['project_id' => $project_id, 'transferista_id' => $transferista_id])->first();
+        if ($bid) {
+            $bid->bid_status = 1;
+            $bid->save();
+
+            $project                  = Project::findOrFail($project_id);
+            $project->transferista_id = $bid->transferista_id;
+            $project->project_amount  = $bid->amount;
+            $project->project_status  = 1;
+            $project->save();
+
+            return response()->json([
+                'message' => 'Successfully bid accepted!'
+            ], 201);
+        }else {
+            return response()->json([
+                'message' => 'Bid not accepted!'
+            ], 201);
+        }
+        
+    }
+
+    public function transferProject($project_id)
+    {
+        $project                 = Project::findOrFail($project_id);
+        $project->project_status = 2;
+        $project->save();
+        return response()->json([
+            'message' => 'Project transfer..!'
+        ], 201);
+    }
+
+    public function deliveredProject($project_id)
+    {
+        $project                 = Project::findOrFail($project_id);
+        $project->project_status = 3;
+        $project->save();
+        return response()->json([
+            'message' => 'Project delivered..!'
         ], 201);
     }
 

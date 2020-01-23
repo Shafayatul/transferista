@@ -17,6 +17,14 @@ use App\Events\SendPosition;
 //     return $request->user();
 // });
 
+Route::group([
+    'prefix' => 'password'
+], function () {
+    Route::post('create', 'Api\Auth\PasswordResetController@create');
+    Route::get('find/{token}', 'Api\Auth\PasswordResetController@find');
+    Route::post('reset', 'Api\Auth\PasswordResetController@reset');
+});
+
 Route:: post('/map',function (Request $request){
     // dd($request);
     $lat = $request->input('lat');
@@ -31,6 +39,8 @@ Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
 Route::post('login', 'Api\UsersController@login');
 Route::group(['middleware' => ['auth:api']], function() {
+
+    Route::post('password-update', 'Api\UsersController@passwordUpdate');
 
     Route::get('logout', 'Api\UsersController@logout');
     Route::post('user-info-save', 'Api\UsersController@userInfoSave');
@@ -52,9 +62,16 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::get('projects/{project_id}', 'Api\ProjectsController@show');
         Route::post('projects/{project_id}', 'Api\ProjectsController@update');
         Route::delete('projects/{project_id}', 'Api\ProjectsController@destroy');
+
+        Route::get('project/accept/{project_id}/{transferista_id}', 'Api\ProjectsController@acceptProject');
+        Route::get('project/transfer/{project_id}', 'Api\ProjectsController@transferProject');
     });
 
     Route::group(['middleware' => ['role:Transferista']], function () {
+
+        //Project
+        Route::get('projects', 'Api\ProjectsController@index');
+        Route::get('project/delivered/{project_id}', 'Api\ProjectsController@deliveredProject');
 
         //Bid Section
         Route::post('bids', 'Api\BidsController@store');

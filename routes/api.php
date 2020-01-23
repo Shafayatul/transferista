@@ -16,7 +16,6 @@ use App\Events\SendPosition;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-<<<<<<< HEAD
 
 Route:: post('/map',function (Request $request){
     // dd($request);
@@ -25,7 +24,8 @@ Route:: post('/map',function (Request $request){
     $location = ['lat'=>$lat,'lng'=>$lng];
     event(new SendPosition($location));
     return response()->json(['status'=>'success', 'data'=> $location]);
-=======
+});
+
 Route::get('project-list', 'Api\FrontendsController@index');
 Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
@@ -75,5 +75,4 @@ Route::group(['middleware' => ['auth:api']], function() {
     });
 
 
->>>>>>> 9c41e962446b05c480e6f0093ea34b538b4f5f49
 });

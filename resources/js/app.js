@@ -6,6 +6,9 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 // require('@/assets/css/style.css')
 
 
+import User from './helpers/User'
+
+window.User = User
 
 Vue.use(VueGoogleMaps, {
     load: {

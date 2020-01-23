@@ -18,8 +18,8 @@ Route::view('/{any}/{any1}', 'home');
 // });
 Auth::routes();
 
-Route::get('messages', 'ChatsControler@fetchMessages');
-Route::post('messages', 'ChatsController@sendMessage');
+// Route::get('messages', 'ChatsControler@fetchMessages');
+// Route::post('messages', 'ChatsController@sendMessage');
 
 // Route::get('projects/create', 'ProjectController@create');
 // Route::post('projects', 'ProjectController@store')->name('project');

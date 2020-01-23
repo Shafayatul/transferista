@@ -15,9 +15,9 @@ class EmployeesController extends Controller
 {
     public function index()
     {
-        $companies = Employee::where('company_id', Auth::id())->get();
+        $employees = Employee::where('company_id', Auth::id())->get();
         return response()->json([
-            'companies' => $companies
+            'emplyees' => $emplyees
         ], 201);
     }
 

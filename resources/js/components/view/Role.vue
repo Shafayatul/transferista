@@ -8,26 +8,26 @@
                 <div class="my-body ">
                     <form @submit.prevent="enter">
                         <div class="form-check m-b-20">
-                          <input v-model="form.role"  class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="customer" checked>
+                          <input v-model="role"  class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="1" checked>
                           <label class="form-check-label" for="exampleRadios1">
                            Customer
                           </label>
                         </div>
                         <div class="form-check">
-                          <input v-model="form.role" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="company">
+                          <input v-model="role" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="2">
                           <label class="form-check-label" for="exampleRadios2">
                            Company
                           </label>
                         </div>
                         <div class="form-check">
-                          <input v-model="form.role" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="transferista">
+                          <input v-model="role" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="3">
                           <label class="form-check-label" for="exampleRadios2">
                             Transferista
                           </label>
                         </div>
                        
                         <div class="margin-1">
-                            <button class="btn btn--radius-2 btn-success" type="submit">Register</button>
+                            <button class="btn btn--radius-2 btn-success" type="submit">Confirm</button>
                         </div>
                     </form>
                 </div>
@@ -40,9 +40,7 @@ import DashboardLayoutVue from '../layers/DashboardLayout.vue'
 export default {
     data(){
         return{
-            form:{
-                role: 'customer'
-            }
+            role: null
         }
     },
     components:{
@@ -50,7 +48,23 @@ export default {
     },
     methods:{
         enter(){
-            axios.post('',this.form)
+            if(this.role == 1){
+                this.$router.push({
+                    name: 'customer',
+                    params: {
+                        role: this.role
+                    }
+                })
+            }
+            if(this.role == 2 || this.role == 3){
+                this.$router.push({
+                    name: 'form',
+                    params: {
+                        role: this.role
+                    }
+                })
+            }
+
         }
     },
     created(){

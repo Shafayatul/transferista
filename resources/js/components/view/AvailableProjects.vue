@@ -149,8 +149,8 @@
     </div>
 </template>
 <script>
-import Axios from 'axios'
-Axios.defaults.baseURL = 'http://192.168.0.101:8000'
+// import Axios from 'axios'
+// Axios.defaults.baseURL = 'http://192.168.0.101:8000'
 import DashboardLayout from "../layers/DashboardLayout";
 export default {
 	data(){

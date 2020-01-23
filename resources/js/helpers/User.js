@@ -4,7 +4,7 @@ let role;
 class User{
      
     login(data){       
-        axios.post('/api/blog/login',data)
+        axios.post('/api/login',data)
         .then(res=>this.responseAfterLogin(res))
         .catch(error=>console.log(error.response.data))
     }  
@@ -14,7 +14,7 @@ class User{
         const expiration = res.data.expiration
          role = res.data.user.role
         AppStorage.store(username,access_token,expiration)
-        window.location = '/Blog'
+        window.location = '/role'
     
     }
     hasToken(){

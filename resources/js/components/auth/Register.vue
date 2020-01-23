@@ -12,17 +12,17 @@
                             <div class="col-6">
                                 <div class="input-group-desc" :class="{error: errors.first_name}">
                                     <input v-model="form.first_name" class="input--style-5" type="text" name="first_name">
-                                    <span v-if="errors.name" class="help-block" role="alert">
+                                    <span v-if="errors.first_name" class="help-block" role="alert">
                                         <strong>{{errors.first_name[0]}}</strong>
                                     </span>
                                     <label class="label--desc">first name</label>
                                 </div>
                             </div>
                             <div class="col-6">
-                                <div class="input-group-desc"  >
-                                    <input v-model="form.name" :class="{error: errors.name}" class="input--style-5" type="text" name="last_name">
-                                    <span v-if="errors.name" class="help-block" role="alert">
-                                        <strong>{{errors.name}}</strong>
+                                <div class="input-group-desc">
+                                    <input v-model="form.last_name" :class="{error: errors.name}" class="input--style-5" type="text" name="last_name">
+                                    <span v-if="errors.last_name" class="help-block" role="alert">
+                                        <strong>{{errors.last_name[0]}}</strong>
                                     </span>
                                     <label class="label--desc">last name</label>
                                 </div>
@@ -31,45 +31,12 @@
                     </div>
                 </div>
                 <div class="form-row">
-                    <div class="name">Company</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.company}">
-                            <input v-model="form.company" class="input--style-5" type="text" name="company">
-                            <span v-if="errors.company" class="help-block" role="alert">
-                                    <strong>{{errors.company}}</strong>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
                     <div class="name">Email</div>
                     <div class="value">
                         <div class="input-group" :class="{error: errors.email}">
-                            <input v-model="form.email" class="input--style-5" type="email" name="email">
+                            <input v-model="form.email" class="input--style-5"  name="email">
                             <span v-if="errors.email" class="help-block" role="alert">
-                                <strong>{{errors.email}}</strong>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row m-b-55">
-                    <div class="name">Phone</div>
-                    <div class="value">
-                        <div class="row row-refine">
-                            <div class="col-6" :class="{error: errors.phone}">
-                                <div class="input-group-desc" >
-                                    <input v-model="area_code" class="input--style-5" type="text" name="area_code">
-                                    <label class="label--desc">Area Code</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="input-group-desc">
-                                    <input v-model="number" class="input--style-5" type="text" name="phone">
-                                    <label class="label--desc">Phone Number</label>
-                                </div>
-                            </div>
-                            <span v-if="errors.phone" class="help-block" role="alert">
-                                    <strong>{{errors.phone}}</strong>
+                                <strong>{{errors.email[0]}}</strong>
                             </span>
                         </div>
                     </div>
@@ -87,24 +54,11 @@
                     <div class="name">Confirm Password</div>
                     <div class="value">
                         <div class="input-group" :class="{error: errors.password}">
-                            <input v-model="form.confirm_password" class="input--style-5" type="password" name="password_confirmation">
+                            <input v-model="form.password_confirmation" class="input--style-5" type="password" name="password_confirmation">
                         </div>
                         <span v-if="errors.password" class="help-block" role="alert">
-                            <strong>{{errors.password}}</strong>
+                            <strong>{{errors.password[0]}}</strong>
                         </span>
-                    </div>
-                </div>
-                <div class="form-row p-t-20">
-                    <label class="label label--block">Are you an existing customer?</label>
-                    <div class="p-t-15">
-                        <label class="radio-container m-r-55">Yes
-                            <input type="radio" checked="checked" name="exist">
-                            <span class="checkmark"></span>
-                        </label>
-                        <label class="radio-container">No
-                            <input type="radio" name="exist">
-                            <span class="checkmark"></span>
-                        </label>
                     </div>
                 </div>
                 <div>
@@ -119,13 +73,10 @@ import AuthLayout from '../layers/AuthLayout'
 export default {
     data(){
         return{
-            area_code:null,
-            number: null,
             form:{
                 first_name: null,
                 last_name: null,
                 email: null,
-                phone: null ,
                 password: null,
                 password_confirmation: null
             },
@@ -133,17 +84,16 @@ export default {
         }
     },
     computed:{
-        phone_number(){
-            this.form.phone = this.area_code + this.number 
-        }
     },
     components:{
         AuthLayout
     },
     methods:{
         register(){
-            axios.post('',this.form)
-            .then(res => this.$router.push({name:''}) )
+            axios.post('/api/register',this.form)
+            .then(res => {
+            console.log(res.data)
+            this.$router.push({name:'login'})})
             .catch(error=> this.errors = error.response.data.errors)
         }
     },

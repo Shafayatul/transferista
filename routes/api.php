@@ -52,9 +52,16 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::get('projects/{project_id}', 'Api\ProjectsController@show');
         Route::post('projects/{project_id}', 'Api\ProjectsController@update');
         Route::delete('projects/{project_id}', 'Api\ProjectsController@destroy');
+
+        Route::get('project/accept/{project_id}/{transferista_id}', 'Api\ProjectsController@acceptProject');
+        Route::get('project/transfer/{project_id}', 'Api\ProjectsController@transferProject');
     });
 
     Route::group(['middleware' => ['role:Transferista']], function () {
+
+        //Project
+        Route::get('projects', 'Api\ProjectsController@index');
+        Route::get('project/delivered/{project_id}', 'Api\ProjectsController@deliveredProject');
 
         //Bid Section
         Route::post('bids', 'Api\BidsController@store');

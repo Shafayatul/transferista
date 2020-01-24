@@ -163,7 +163,9 @@ export default{
             .then(res=> 
             this.$router.push({name:'profile'})
             )
-            .catch(error=> this.errors = error.response.data.errors)
+            .catch(error=> {this.errors = error.response.data.errors
+                console.log(error)}
+            )
         }
     },
     created(){

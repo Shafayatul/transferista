@@ -8,31 +8,24 @@
                         <form class="well form-horizontal" @submit.prevent="create">
                             <fieldset>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">First Name</label>
+                                    <label class="col-md-4 control-label">Brand</label>
                                     <div class="col-md-8 inputGroupContainer">
                                     <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                    <input v-model="form.first_name" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
+                                    <input v-model="form.brand" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Last Name</label>
+                                    <label class="col-md-4 control-label">Type</label>
                                     <div class="col-md-8 inputGroupContainer">
                                     <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                    <input v-model="form.last_name" id="addressLine1" name="addressLine1" placeholder="Last name" class="form-control" required="true"  type="text"></div>
+                                    <input v-model="form.type" id="addressLine1" name="addressLine1" placeholder="Last name" class="form-control" required="true"  type="text"></div>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-4 control-label">Phone Number</label>
+                                    <label class="col-md-4 control-label">Number Plate</label>
                                     <div class="col-md-8 inputGroupContainer">
                                     <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                    <input v-model="form.phone" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Email</label>
-                                    <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                    <input v-model="form.email" id="city" name="city" placeholder="Email" class="form-control" required="true" type="text"></div>
+                                    <input v-model="form.plate" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
                                     </div>
                                 </div>
                                 <button type="submit" >Enter</button>
@@ -60,12 +53,17 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <div v-for="(employee,index) in showed" :key="index">
+                        <div v-for="(car,index) in showed" :key="index">
                             <li class="list-group-item">
                                 <div class="checkbox">
-                                    <input type="checkbox" id="checkbox" />
                                     <label for="checkbox">
-                                        {{employee.first_name}}
+                                        {{car.brand}}
+                                    </label>
+                                    <label for="checkbox">
+                                        {{car.type}}
+                                    </label>
+                                    <label for="checkbox">
+                                        {{car.plate}}
                                     </label>
                                 </div>
                                 <div class="pull-right action-buttons" style="float: right;">
@@ -73,8 +71,8 @@
                                     <a  class="trash" @click="trash(index)"><i class="fa fa-trash-alt"></i></a>
                                 </div>
                             </li>
-                            <div  class="modal fade" :id="employee.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <employee  :update="update" :employee="employee"></employee>
+                            <div  class="modal fade" :id="car.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <car  :update="update" :car="car"></car>
                             </div>
                         </div>
                     </ul>
@@ -103,51 +101,50 @@
     </div>
 </template>
 <script>
-import employee from './Employee'
+import car from './car'
 import ProfileLayout from '../layers/ProfileLayout'
 export default {
     data(){
         return{
             form:{
-                first_name:null,
-                last_name:null,
-                phone: null,
-                email:null
+                brand:null,
+                type:null,
+                plate: null
             },
             errors:{},
-            employees:[],
+            cars:[],
             showed:[]
         }
     },
     components:{
-        employee
+        car
     },
     computed:{
 
     },
     created(){
         this.$emit('update:layout',ProfileLayout)
-        axios.get('/api/employees')
+        axios.get('/api/cars')
         .then(res=>{
-                this.employees = res.data.employees
-                this.showed = this.employees.reverse()
+                this.cars = res.data.cars
+                this.showed = this.cars.reverse()
             })
     },
     methods: {
-        update(employee) {
-            axios.post('/api/employee-update',employee)
+        update(car) {
+            axios.post(`/api/cars/${car.id}`,car)
             .then(res=>{
-                 axios.get('/api/employees')
+                 axios.get('/api/cars')
                     .then(res=>{
-                        this.employees = res.data.employees
-                        this.showed = this.employees.reverse()
+                        this.cars = res.data.cars
+                        this.showed = this.cars.reverse()
                     })
                     .catch(error=>this.errors=error.response.data.errors)
                 }
             ).catch(error=>this.errors=error.response.data.errors)
         },
         create() {
-            axios.post('/api/employees',this.form)
+            axios.post('/api/cars',this.form)
             .then(res=>{
                     console.log(res)
                     this.showed.unshift(this.form)
@@ -155,19 +152,19 @@ export default {
             ).catch(error=>console.log(error))
         },
         trash(index) {
-            axios.post(`/api/employees/${employees[index].id}`,this.form)
+            axios.post(`/api/cars/${cars[index].id}`,this.form)
             .then(res=>{
-                     axios.get('/api/employees')
+                     axios.get('/api/cars')
                     .then(res=>{
-                        this.employees = res.data.employees
-                        this.showed = this.employees.reverse()
+                        this.cars = res.data.cars
+                        this.showed = this.cars.reverse()
                     })
                     .catch(error=>this.errors=error.response.data.errors)
                 }
             ).catch(error=>this.errors=error.response.data.errors)
         },
          edit(index) {
-            $(`#${ this.employees[index].id}`).modal('show');
+            $(`#${ this.cars[index].id}`).modal('show');
         }
     }
 }

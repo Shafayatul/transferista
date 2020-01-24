@@ -17,7 +17,7 @@ class EmployeesController extends Controller
     {
         $employees = Employee::where('company_id', Auth::id())->get();
         return response()->json([
-            'emplyees' => $emplyees
+            'employees' => $employees
         ], 201);
     }
 
@@ -66,7 +66,7 @@ class EmployeesController extends Controller
 
     public function update(Request $request)
     {
-
+        
         $employee         = Employee::findOrFail($request->employee_id);
 
         $user             = User::findOrFail($employee->user_id);

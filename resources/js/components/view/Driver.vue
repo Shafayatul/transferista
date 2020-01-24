@@ -18,17 +18,17 @@
                     <input v-model="form.last_name"   class="form-control md-form">
                     </div>
                     <div class=" model-div">
-                    <span class="md-btn addBtn">Phone Number</span>
-                    <input v-model="form.phone"  class="form-control md-form">
+                    <span class="md-btn addBtn">Email</span>
+                    <input v-model="form.email"  class="form-control md-form">
                     </div>
                     <div class=" model-div">
-                    <span class="md-btn addBtn">E-mail</span>
-                    <input v-model="form.email" class="form-control md-form">
+                        <span class="md-btn addBtn">Phone</span>
+                        <input v-model="form.phone"  class="form-control md-form">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                    <button type="submit" class="btn btn-primary" @click="editEmployee">Save changes</button>
+                    <button type="submit" class="btn btn-primary" @click="editDriver">Save changes</button>
                 </div>
             </form>
         </div>
@@ -36,20 +36,20 @@
 </template>
 <script>
 export default {
-    props:['employee','update'],
+    props:['driver','update'],
     data(){
         return{
             form:{
-                id: this.employee.id,
-                first_name: this.employee.first_name,
-                last_name: this.employee.last_name,
-                email: this.employee.email,
-                phone: this.employee.phone
+                id: this.driver.id,
+                first_name: this.driver.first_name,
+                type: this.driver.last_name,
+                email: this.driver.email,
+                phone: this.driver.phone
             }
         }
     },
     methods: {
-        editEmployee() {
+        editDriver() {
             this.update(this.form)
             // this.$emit('update',{
             //     first_name:this.form.first_name,

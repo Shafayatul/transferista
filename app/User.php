@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\Project;
 use App\Message;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -41,5 +42,8 @@ class User extends Authenticatable
     ];
     public function messages(){
         return $this->hasMany(Message::class);
+    }
+    public function project(){
+        return $this->hasMany(Project::class);
     }
 }

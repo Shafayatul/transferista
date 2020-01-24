@@ -22,17 +22,17 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label class="col-md-4 control-label">Email</label>
+                                    <div class="col-md-8 inputGroupContainer">
+                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                                    <input v-model="form.email" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label class="col-md-4 control-label">Phone Number</label>
                                     <div class="col-md-8 inputGroupContainer">
                                     <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                     <input v-model="form.phone" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-4 control-label">Email</label>
-                                    <div class="col-md-8 inputGroupContainer">
-                                    <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                    <input v-model="form.email" id="city" name="city" placeholder="Email" class="form-control" required="true" type="text"></div>
                                     </div>
                                 </div>
                                 <button type="submit" >Enter</button>
@@ -60,12 +60,20 @@
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
-                        <div v-for="(employee,index) in showed" :key="index">
+                        <div v-for="(driver,index) in showed" :key="index">
                             <li class="list-group-item">
                                 <div class="checkbox">
-                                    <input type="checkbox" id="checkbox" />
                                     <label for="checkbox">
-                                        {{employee.first_name}}
+                                        {{driver.first_name}}
+                                    </label>
+                                    <label for="checkbox">
+                                        {{driver.last_name}}
+                                    </label>
+                                    <label for="checkbox">
+                                        {{driver.email}}
+                                    </label>
+                                    <label for="checkbox">
+                                        {{driver.phone}}
                                     </label>
                                 </div>
                                 <div class="pull-right action-buttons" style="float: right;">
@@ -73,8 +81,8 @@
                                     <a  class="trash" @click="trash(index)"><i class="fa fa-trash-alt"></i></a>
                                 </div>
                             </li>
-                            <div  class="modal fade" :id="employee.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <employee  :update="update" :employee="employee"></employee>
+                            <div  class="modal fade" :id="driver.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <driver  :update="update" :driver="driver"></driver>
                             </div>
                         </div>
                     </ul>
@@ -103,7 +111,7 @@
     </div>
 </template>
 <script>
-import employee from './Employee'
+import driver from './Driver'
 import ProfileLayout from '../layers/ProfileLayout'
 export default {
     data(){
@@ -111,43 +119,43 @@ export default {
             form:{
                 first_name:null,
                 last_name:null,
-                phone: null,
-                email:null
+                emial: null,
+                phone: null
             },
             errors:{},
-            employees:[],
+            driver:[],
             showed:[]
         }
     },
     components:{
-        employee
+        driver
     },
     computed:{
 
     },
     created(){
         this.$emit('update:layout',ProfileLayout)
-        axios.get('/api/employees')
+        axios.get('/api/drivers')
         .then(res=>{
-                this.employees = res.data.employees
-                this.showed = this.employees.reverse()
+                this.drivers = res.data.drivers
+                this.showed = this.drivers.reverse()
             })
     },
     methods: {
-        update(employee) {
-            axios.post('/api/employee-update',employee)
+        update(driver) {
+            axios.post(`/api/drivers/${driver.id}`,driver)
             .then(res=>{
-                 axios.get('/api/employees')
+                 axios.get('/api/drivers')
                     .then(res=>{
-                        this.employees = res.data.employees
-                        this.showed = this.employees.reverse()
+                        this.drivers = res.data.drivers
+                        this.showed = this.drivers.reverse()
                     })
                     .catch(error=>this.errors=error.response.data.errors)
                 }
             ).catch(error=>this.errors=error.response.data.errors)
         },
         create() {
-            axios.post('/api/employees',this.form)
+            axios.post('/api/drivers',this.form)
             .then(res=>{
                     console.log(res)
                     this.showed.unshift(this.form)
@@ -155,19 +163,19 @@ export default {
             ).catch(error=>console.log(error))
         },
         trash(index) {
-            axios.post(`/api/employees/${employees[index].id}`,this.form)
+            axios.post(`/api/drivers/${drivers[index].id}`,this.form)
             .then(res=>{
-                     axios.get('/api/employees')
+                     axios.get('/api/drivers')
                     .then(res=>{
-                        this.employees = res.data.employees
-                        this.showed = this.employees.reverse()
+                        this.drivers = res.data.drivers
+                        this.showed = this.drivers.reverse()
                     })
                     .catch(error=>this.errors=error.response.data.errors)
                 }
             ).catch(error=>this.errors=error.response.data.errors)
         },
          edit(index) {
-            $(`#${ this.employees[index].id}`).modal('show');
+            $(`#${ this.drivers[index].id}`).modal('show');
         }
     }
 }

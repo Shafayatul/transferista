@@ -15,7 +15,6 @@
 						</div>
 					</div>
 				</div>
-	
                 <div class="row">
                     <div class="col-lg-4 order-last order-lg-first">
                         <div class="mr_aside">
@@ -81,19 +80,22 @@
 						</div>
 						<div class="row mamunurrashid_gig_wraper">							
 							<div class="col-md-10">
+								<div v-if="success" class="alert alert-success" role="alert">
+									<h4 class="alert-heading">Successfully bidded!</h4>
+								</div>
 								<div class="mr_card" v-for="(data,index) in projects" :key="index">
 									<div class="mr_card_body">
 										<div class="offset-1">
 											<div class="p-box row ">											
 												<a class="p col-md-9" href="jobDetails.html">
-													<h5 class="fonts-title">{{data.project_title}}<br><small>{{ timeLeft(data.created_at) }} days left</small></h5>
+													<h5 class="fonts-title">{{data.project_title}}<br><small>Posted {{ data.created_at }}</small></h5>
 													<span class="body-color">
 														{{data.project_description}}
 													</span>
 												</a>
 												<ul class="col-md-3 text-center">
 													<li class="mb-2"><small>10 bids</small></li>
-													<li class="mb-2"><button class="btn btn-success "><a class="font-color" href="jobDetails.html">Bid Now</a></button></li>
+													<li class="mb-2"><button class="btn btn-success " @click="modal"><a class="font-color" >Bid Now</a></button></li>
 												</ul>
 
 											</div>
@@ -115,6 +117,10 @@
 											</div>
 										</div>
 										
+									</div>
+									
+									<div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										<employee  :bid="bid" :data="data"></employee>
 									</div>
 								</div>
 							</div>
@@ -159,13 +165,17 @@ export default {
 			query: null,
 			filterBy: null,
 			selectItem: null,
-			projects:[]
+			projects:[],
+			success: false
 		}
 	},
     components:{
         DashboardLayout
 	},
 	methods:{
+		modal(){
+            $(`#${ this.projects[index].id}`).modal('show');
+		},
 		timeLeft(date){
 			let oneDay = 1000*60*60*24; 
 			let today = Date.now();
@@ -178,6 +188,12 @@ export default {
 			
 			return left;
 
+		},
+		bid(bidData){
+			axios.post('/api/bids',bidData)
+			.then(
+				res=>this.success = true
+			)
 		}
 		// itemClicked(){
 		// 	this.seleted = index;
@@ -200,7 +216,7 @@ export default {
 		// console.log('working')
 		this.$emit(`update:layout`,DashboardLayout)
 		Axios.get('/api/project-list')
-		.then(res => this.projects = res.data.projects)
+		.then(res => this.projects = res.data.data.projects)
 		.catch(error=>console.log(error))
     }
 }

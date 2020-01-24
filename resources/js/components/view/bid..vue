@@ -40,17 +40,14 @@ export default {
     data(){
         return{
             form:{
-                id: this.employee.id,
-                first_name: this.employee.first_name,
-                last_name: this.employee.last_name,
-                email: this.employee.email,
-                phone: this.employee.phone
+                id: this.data.id,
+                amount: this.data.amount
             }
         }
     },
     methods: {
-        editEmployee() {
-            this.update(this.form)
+        biding() {
+            this.bid(this.form)
             // this.$emit('update',{
             //     first_name:this.form.first_name,
             //     last_name:this.form.last_name,
@@ -61,3 +58,4 @@ export default {
     }
 }
 </script>
+    

@@ -12,7 +12,7 @@ class User{
         const access_token = res.data.access_token
         const username = res.data.user.name
         const expiration = res.data.expiration
-         role = res.data.user.role
+        //  role = res.data.user.role
         AppStorage.store(username,access_token,expiration)
         window.location = '/role'
     

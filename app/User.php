@@ -10,6 +10,8 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
 use App\UserInformation;
+use App\Bid;
+use App\Employee;
 
 class User extends Authenticatable
 {
@@ -41,9 +43,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    
     public function messages(){
         return $this->hasMany(Message::class);
     }
+
     public function project(){
         return $this->hasMany(Project::class);
     }
@@ -51,5 +55,20 @@ class User extends Authenticatable
     public function userInfo()
     {
         return $this->hasOne(UserInformation::class, 'user_id');
+    }
+
+    public function bids()
+    {
+        return $this->hasMany(Bid::class, 'transferista_id');
+    }
+
+    public function employee()
+    {
+        return $this->hasOne(Employee::class, 'user_id');
+    }
+
+    public function companyEmployee()
+    {
+        return $this->hasMany(Employee::class, 'company_id');
     }
 }

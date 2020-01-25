@@ -215,7 +215,7 @@ export default {
     created(){
 		// console.log('working')
 		this.$emit(`update:layout`,DashboardLayout)
-		Axios.get('/api/project-list')
+		axios.get('/api/project-list')
 		.then(res => this.projects = res.data.data.projects)
 		.catch(error=>console.log(error))
     }

@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Permission\Traits\HasRoles;
+use App\UserInformation;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,10 @@ class User extends Authenticatable
     }
     public function project(){
         return $this->hasMany(Project::class);
+    }
+
+    public function userInfo()
+    {
+        return $this->hasOne(UserInformation::class, 'user_id');
     }
 }

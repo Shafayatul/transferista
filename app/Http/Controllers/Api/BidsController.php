@@ -63,7 +63,10 @@ class BidsController extends Controller
      */
     public function show($id)
     {
-        //
+        $bid = Bid::findOrFail($id);
+        return response()->json([
+            'bid' => $bid
+        ]);
     }
 
     /**

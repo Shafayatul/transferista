@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class UserInformation extends Model
 {
@@ -26,4 +27,9 @@ class UserInformation extends Model
      * @var array
      */
     protected $fillable = [];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'user_id');
+    }
 }

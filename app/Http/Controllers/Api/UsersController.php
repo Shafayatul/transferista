@@ -39,6 +39,16 @@ class UsersController extends Controller
         ], 201);
     }
 
+    public function userDetails()
+    {
+        $user = Auth::user();
+        $user->userInfo;
+        return response()->json([
+            'user' => $user
+        ]);
+
+    }
+
     public function login(Request $request)
     {
         $request->validate([
@@ -64,9 +74,7 @@ class UsersController extends Controller
             'user'         => $user,
             'access_token' => $tokenResult->accessToken,
             'token_type'   => 'Bearer',
-            'expires_at'   => Carbon::parse(
-                $tokenResult->token->expires_at
-            )->toDateTimeString()
+            'expires_at'   =>Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
         ]);
     }
 

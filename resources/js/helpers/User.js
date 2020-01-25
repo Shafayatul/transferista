@@ -11,10 +11,18 @@ class User{
     responseAfterLogin(res){
         const access_token = res.data.access_token
         const username = res.data.user.name
-        const expiration = res.data.expiration
+        const expiration = res.data.expired_at
+        if(res.data.roles[0] != undefined){
+            console.log(res.data.roles[0])
+            const role = res.data.roles 
+            AppStorage.store(username,access_token,expiration,role)
+            window.location = '/'
+        }else{
         //  role = res.data.user.role
-        AppStorage.store(username,access_token,expiration)
-        window.location = '/role'
+            const role= false;
+            AppStorage.store(username,access_token,expiration,role)
+            window.location = '/role'
+        }
     
     }
     hasToken(){
@@ -31,13 +39,41 @@ class User{
         AppStorage.clear()
         window.location = '/'
     }
+    role(){
+        return localStorage.getItem('role');
+    }
     name(){
         if(this.loggedIn()){
             return AppStorage.getUser()
         }
     }
     admin(){
-        return this.role === 'admin'
+        if(this.loggedIn()){
+            if(this.role() === 'admin'){
+                return true;
+            }
+        }
+    }
+    customer(){
+        if(this.loggedIn()){
+            if(this.role() === 'Customer'){
+                return true;
+            }
+        }
+    }
+    transferista(){
+        if(this.loggedIn()){
+            if(this.role() === 'Transferista'){
+                return true;
+            }
+        }
+    }
+    company(){
+        if(this.loggedIn()){
+            if(this.role() === 'Company'){
+                return true;
+            }
+        }
     }
     // id(){
     //     if(this.loggedIn()){

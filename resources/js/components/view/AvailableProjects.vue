@@ -80,8 +80,11 @@
 						</div>
 						<div class="row mamunurrashid_gig_wraper">							
 							<div class="col-md-10">
-								<div v-if="success" class="alert alert-success" role="alert">
-									<h4 class="alert-heading">Successfully bidded!</h4>
+								<div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
+									<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
 								</div>
 								<div class="mr_card" v-for="(data,index) in projects" :key="index">
 									<div class="mr_card_body">
@@ -120,7 +123,7 @@
 									</div>
 									
 									<div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<employee  :bid="bid" :data="data"></employee>
+										<bid  :bid="bid" :data="data"></bid>
 									</div>
 								</div>
 							</div>
@@ -190,6 +193,9 @@ export default {
 
 		},
 		bid(bidData){
+			if(!User.transferista()){
+				window.location('/login')
+			}
 			axios.post('/api/bids',bidData)
 			.then(
 				res=>this.success = true
@@ -212,8 +218,12 @@ export default {
 		// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
 		// }
 	},
+	beforeCreate(){
+		if(!User.transferista()){
+			window.location = '/login'
+		}
+	},
     created(){
-		// console.log('working')
 		this.$emit(`update:layout`,DashboardLayout)
 		axios.get('/api/project-list')
 		.then(res => this.projects = res.data.data.projects)

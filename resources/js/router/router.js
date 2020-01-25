@@ -23,7 +23,7 @@ const routes = [
     {path:'/profile',component: profile},
     {path:'/profile/edit',component: editprofile},
     {path:'/register',component: register},
-    {path:'/login',component: login},
+    {path:'/login',component: login, name: 'login'},
     {path:'/role',component: role, name: 'role'},
     {path:'/role',component: profile, name: 'profile'},
     {path:'/customer/:role',component: UserCustomerForm, name: 'customer'},

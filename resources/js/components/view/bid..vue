@@ -7,36 +7,22 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form @submit.prevent="update">
-                <div class="modal-body">
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">First Name</span>
-                    <input v-model="form.first_name"  class="form-control md-form">
-                    </div>
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">Last Name</span>
-                    <input v-model="form.last_name"   class="form-control md-form">
-                    </div>
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">Phone Number</span>
-                    <input v-model="form.phone"  class="form-control md-form">
-                    </div>
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">E-mail</span>
-                    <input v-model="form.email" class="form-control md-form">
-                    </div>
+            <div class="modal-body">
+                <div class="model-div">
+                    <span class="md-btn addBtn">Amount</span>
+                    <input v-model="form.amount"  class="form-control md-form">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                    <button type="submit" class="btn btn-primary" @click="editEmployee">Save changes</button>
-                </div>
-            </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary"  >Close</button>
+                <button  class="btn btn-primary" data-dismiss="modal" @click="biding">Save changes</button>
+            </div>
         </div>
     </div>
 </template>
 <script>
 export default {
-    props:['employee','update'],
+    props:['data','bid'],
     data(){
         return{
             form:{

@@ -8,30 +8,40 @@ class AppStorage{
     storeExpiration(expiration){
         localStorage.setItem('expiration',expiration); 
     }
-    store(user, token, expiration){
+    storeRole(role){
+        localStorage.setItem('role',role); 
+    }
+    store(user, token, expiration,role){
         this.storeExpiration(expiration);
         this.storeToken(token);
         this.storeUser(user);
+        if(role){
+            this.storeRole(role);
+        }
     }
     clear(){
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         localStorage.removeItem('expiration')
+        localStorage.removeItem('role')
     }
 
     getToken(){
-        var token = this.getToken();
+        var token = localStorage.getItem('token')
         var expiration = this.getExpiration();
 
-        if(! token || !expiration)
-            return null
+        // if(! token || !expiration)
+        //     return null
         
-        if(Date.now() > parseInt(expiraton)){
-            this.clear();
-            return null;
-        }else{
+        // if(Date.now() > parseInt(expiraton)){
+        //     this.clear();
+        //     return null;
+        // }else{
+        if(token){
             return token;
         }
+        return false
+       // }
     }
     getUser(){
         return localStorage.getItem('user')

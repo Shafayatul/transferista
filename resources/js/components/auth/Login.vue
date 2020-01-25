@@ -4,6 +4,10 @@
             <h2 class="title">Login Form</h2>
         </div>
         <div class="card-body">
+            <p>Not signed-up yet?</p>
+            <router-link to="/register">
+                <a>Sign-up</a>
+            </router-link>
             <form @submit.prevent="login">
                 <div class="form-row">
                     <div class="name">Email</div>

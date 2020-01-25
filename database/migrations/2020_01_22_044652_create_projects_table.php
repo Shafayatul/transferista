@@ -34,6 +34,9 @@ class CreateProjectsTable extends Migration
             $table->string('project_size')->nullable();
             $table->string('project_amount')->nullable();
             $table->tinyInteger('project_status')->default(0);
+            $table->string('delivery_date')->nullable();
+            $table->string('time_for_delivery')->nullable();
+            $table->string('estimated_cost')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

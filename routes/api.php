@@ -35,6 +35,7 @@ Route:: post('/map',function (Request $request){
 });
 
 Route::get('project-list', 'Api\FrontendsController@index');
+Route::get('project-detail/{id}', 'Api\FrontendsController@projectDetail');
 Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
 Route::post('login', 'Api\UsersController@login');

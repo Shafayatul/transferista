@@ -50,7 +50,7 @@ class ProjectsController extends Controller
             'project_size'        => 'required',
             'delivery_date'       => 'required',
             'time_for_delivery'   => 'required',
-            'estimated_cost'      => 'required',
+            'distance'            => 'required',
         ]);
 
         $estimated_cost = (float)$request->distance*1.5+(float)$request->project_size;

@@ -11,7 +11,7 @@ class RolesController extends Controller
     public function store(Request $request)
     {
         Role::create([
-            'guard_name' => 'api',
+            'guard_name' => 'web',
             'name' => $request->name
         ]);
         return response()->json([

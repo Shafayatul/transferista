@@ -15,11 +15,11 @@ class ProjectsController extends Controller
     public function index()
     {
         $user = Auth::user();
-        if ($user->hasRole('Company')) {
+        if ($user->hasRole('company')) {
             $projects = Project::where('project_owner_id', Auth::id())->latest()->get();
-        }elseif ($user->hasRole('Customer')) {
+        }elseif ($user->hasRole('customer')) {
             $projects = Project::where('project_owner_id', Auth::id())->latest()->get();
-        }elseif ($user->hasRole('Transferista')) {
+        }elseif ($user->hasRole('transferista')) {
             $projects = Project::where('transferista_id', Auth::id())->latest()->get();
         }else {
             $projects = Project::latest()->get();
@@ -48,7 +48,12 @@ class ProjectsController extends Controller
             'project_title'       => 'required|string',
             'project_description' => 'required',
             'project_size'        => 'required',
+            'delivery_date'       => 'required',
+            'time_for_delivery'   => 'required',
+            'estimated_cost'      => 'required',
         ]);
+
+        $estimated_cost = (float)$request->distance*1.5+(float)$request->project_size;
 
         $project                      = new Project;
         $project->project_owner_id    = Auth::id();
@@ -67,9 +72,13 @@ class ProjectsController extends Controller
         $project->project_title       = $request->project_title;
         $project->project_description = $request->project_description;
         $project->project_size        = $request->project_size;
+        $project->delivery_date       = $request->delivery_date;
+        $project->time_for_delivery   = $request->time_for_delivery;
+        $project->estimated_cost      = $estimated_cost;
         $project->save();
 
         return response()->json([
+            'estimated_cost' => $estimated_cost,
             'message' => 'Successfully created project!'
         ], 201);
     }
@@ -89,6 +98,9 @@ class ProjectsController extends Controller
 
     public function update(Request $request, $id)
     {
+
+        $estimated_cost = (float) $request->distance * 1.5 + (float) $request->project_size;
+
         $project                      = Project::findOrFail($id);
         $project->project_owner_id    = Auth::id();
         $project->origin_address      = $request->origin_address;
@@ -106,6 +118,9 @@ class ProjectsController extends Controller
         $project->project_title       = $request->project_title;
         $project->project_description = $request->project_description;
         $project->project_size        = $request->project_size;
+        $project->delivery_date       = $request->delivery_date;
+        $project->time_for_delivery   = $request->time_for_delivery;
+        $project->estimated_cost      = $estimated_cost;
         $project->save();
 
         return response()->json([

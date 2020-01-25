@@ -183,7 +183,29 @@ export default {
             places: [],
             origin: null,
             destination: null,
-            directionsDisplay : null
+            directionsDisplay : null,
+
+            form:{
+                origin_address: null,
+                origin_zip:null,
+                origin_town:null,
+                origin_country:null,
+                origin_lng:null,
+                origin_lat:null,
+                destination_address:null,
+                destination_zip:null,
+                destination_town:null,
+                destination_country:null,
+                destination_lng:null,
+                destination_lat:null,
+                project_title:null,
+                project_description:null,
+                project_size:null
+            }
+
+
+
+
         }
     },
     computed: {
@@ -192,11 +214,32 @@ export default {
     methods: {
     
         setPlace1(place) {
-        this.origin = place;
+            // let arr = place.split(',');
+            // console.log(arr);
+            // this.form.origin_town =  arr[1];
+            // this.form.origin_country = arr[2];
+            console.log(place)
+            var arr1 = place.formatted_address;
+            var arr2 = place.name
+            arr1 = arr2.concat(arr1)
+            this.form.origin_address = arr1; 
+            var arr = arr1.split(',');
+            this.form.origin_town = arr[arr.length - 2]
+            this.form.origin_country =  arr[arr.length - 1]
+            console.log(this.form.origin_address)
+            this.origin = place;
         
         },
         setPlace2(place) {
-        this.destination = place;
+            var arr1 = place.formatted_address;
+            var arr2 = place.name
+            arr1 = arr2.concat(arr1)
+            this.form.destination_address = arr1; 
+            var arr = arr1.split(',');
+            this.form.destination_town = arr[arr.length - 2]
+            this.form.destination_country =  arr[arr.length - 1]
+            console.log(this.form.origin_address)
+            this.destination = place;
         
         },
         addMarker1() { 
@@ -233,32 +276,32 @@ export default {
         }
         },
         getDirection(){
-        if(this.flag>1){
-            this.directionsDisplay.setDirections(null)
-        }
-        if(this.directionsDisplay== null){
-            this.directionsDisplay = new google.maps.DirectionsRenderer;
-        }
-        var directionsService = new google.maps.DirectionsService;
-        var start = this.center1;
-        var destination = this.center2;
-        this.directionsDisplay.setMap(this.$refs.map.$mapObject);
-        
+            if(this.flag>1){
+                this.directionsDisplay.setDirections(null)
+            }
+            if(this.directionsDisplay== null){
+                this.directionsDisplay = new google.maps.DirectionsRenderer;
+            }
+            var directionsService = new google.maps.DirectionsService;
+            var start = this.center1;
+            var destination = this.center2;
+            this.directionsDisplay.setMap(this.$refs.map.$mapObject);
+            
 
-        //google maps API's direction service
-        function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
-                directionsService.route({
-                    origin: start,
-                    destination: destination,
-                    travelMode: 'DRIVING'
-                }, function(response, status) {
-                if (status === 'OK') {
-                    directionsDisplay.setDirections(response);
-                    
-                } else {
-                    window.alert('Directions request failed due to ' + status);
-                }
-                });
+            //google maps API's direction service
+            function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
+                    directionsService.route({
+                        origin: start,
+                        destination: destination,
+                        travelMode: 'DRIVING'
+                    }, function(response, status) {
+                    if (status === 'OK') {
+                        directionsDisplay.setDirections(response);
+                        
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                    });
         }
 
         calculateAndDisplayRoute(directionsService,this.directionsDisplay, start, destination);
@@ -272,7 +315,12 @@ export default {
         //     };
         //   });
         // }
-  },
+    },
+	beforeCreate(){
+		if(!User.customer()){
+			window.location = '/login'
+		}
+	},
     created(){
         this.$emit(`update:layout`,DashboardLayout)
     }

@@ -41,7 +41,7 @@ Route::post('login', 'Api\UsersController@login');
 Route::group(['middleware' => ['auth:api']], function() {
 
     Route::post('password-update', 'Api\UsersController@passwordUpdate');
-
+    Route::get('user-details', 'Api\UsersController@userDetails');
     Route::get('logout', 'Api\UsersController@logout');
     Route::post('user-info-save', 'Api\UsersController@userInfoSave');
 
@@ -74,7 +74,11 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::get('project/delivered/{project_id}', 'Api\ProjectsController@deliveredProject');
 
         //Bid Section
+        Route::get('bids', 'Api\BidsController@index');
         Route::post('bids', 'Api\BidsController@store');
+        Route::get('bids/{bid_id}', 'Api\BidsController@show');
+        Route::post('bids/{bid_id}', 'Api\BidsController@update');
+        Route::delete('bids/{bid_id}', 'Api\BidsController@destroy');
 
         //Driver Section
         Route::get('drivers', 'Api\DriversController@index');

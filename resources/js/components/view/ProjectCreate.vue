@@ -154,7 +154,8 @@ export default {
                 destination_lat:null,
                 project_title:null,
                 project_description:null,
-                project_size:null
+                project_size:null,
+                distance:null
             },
             success:false
         }
@@ -254,12 +255,13 @@ export default {
                         travelMode: 'DRIVING'
                     }, function(response, status) {
                     if (status === 'OK') {
+                        this.form.distance = response.routes[0].legs[0].distance.value
                         directionsDisplay.setDirections(response);
                         
                     } else {
                         window.alert('Directions request failed due to ' + status);
                     }
-                    });
+                });
         }
 
         calculateAndDisplayRoute(directionsService,this.directionsDisplay, start, destination);
@@ -275,7 +277,7 @@ export default {
         // }
     },
 	beforeCreate(){
-		if(!User.customer()){
+		if(!User.customer() || User.company()){
 			window.location = '/login'
 		}
 	},

@@ -160,6 +160,7 @@
 <script>
 // import Axios from 'axios'
 // Axios.defaults.baseURL = 'http://192.168.0.101:8000'
+import bid from './Bid'
 import DashboardLayout from "../layers/DashboardLayout";
 export default {
 	data(){
@@ -173,7 +174,8 @@ export default {
 		}
 	},
     components:{
-        DashboardLayout
+		DashboardLayout,
+		bid
 	},
 	methods:{
 		modal(){
@@ -194,7 +196,7 @@ export default {
 		},
 		bid(bidData){
 			if(!User.transferista()){
-				window.location('/login')
+				window.location('/register')
 			}
 			axios.post('/api/bids',bidData)
 			.then(
@@ -218,11 +220,11 @@ export default {
 		// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
 		// }
 	},
-	beforeCreate(){
-		if(!User.transferista()){
-			window.location = '/login'
-		}
-	},
+	// beforeCreate(){
+	// 	if(!User.transferista()){
+	// 		window.location = '/login'
+	// 	}
+	// },
     created(){
 		this.$emit(`update:layout`,DashboardLayout)
 		axios.get('/api/project-list')

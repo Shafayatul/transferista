@@ -19,7 +19,10 @@ class BidsController extends Controller
      */
     public function index()
     {
-        //
+        $bids = Bid::where('transferista_id', Auth::id())->get();
+        return response()->json([
+            'bids' => $bids
+        ]);
     }
 
     /**
@@ -63,7 +66,10 @@ class BidsController extends Controller
      */
     public function show($id)
     {
-        //
+        $bid = Bid::findOrFail($id);
+        return response()->json([
+            'bid' => $bid
+        ]);
     }
 
     /**
@@ -86,7 +92,13 @@ class BidsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $bid                  = Bid::findOrFail($id);
+        $bid->amount          = $request->amount;
+        $bid->save();
+
+        return response()->json([
+            'message' => 'Successfully bid updated!'
+        ], 201);
     }
 
     /**
@@ -97,6 +109,9 @@ class BidsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Bid::destroy($id);
+        return response()->json([
+            'message' => 'Successfully bid deleted!'
+        ], 201);
     }
 }

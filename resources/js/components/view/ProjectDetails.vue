@@ -20,152 +20,87 @@
             <!-- =========== mybreadcrumb  Area end =========== -->
 
             <!-- ========== catagoris body content area start ========== -->
-        <section id="jobdetails">
+        <section id="jobdetails" >
             <div class="container">
                 <div class="row">
-                    <div class="gig_details">
-                        <div class="gig_title d-flex justify-content-between">
-                            <a class="p" href="#">
-                                <h3>
-                                    I Will Design 2 Modern Minimalist Logo In 24 Hours
-                                </h3>
-                            </a>
-                            <p class="sr">Open - 6 days left 
+                    <div class="col-md-8">
+                        <div class="gig_details">
+                            <div class="gig_title d-flex justify-content-between">
+                                <a class="p" href="#">
+                                    <h3>
+                                        {{project.title}}
+                                    </h3>
+                                </a>
+                                <p class="sr">Open - 6 days left 
+                                    
+                                </p>
+                            </div>
+                            <span class="hr"></span>
+                            <div class="gig_description">
+                                <h5>Discription</h5>
+                                <p>
+                                    {{project.description}}
+                                </p>
                                 
-                            </p>
+                            </div>
                         </div>
-                        <span class="hr"></span>
-                        <div class="gig_description">
-                            <h5>Discription</h5>
-                            <p>
-                                But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I
-                                will give you a complete account of the system, and expound the actual teachings of the great explorer of the
-                                truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it
-                                is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that
-                                are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself,
-                                because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some
-                                great pleasure. To take a trivial example.
-                            </p>
-                            <ul class="list">
-                                <li>
-                                    <p><i class="fa fa-circle" aria-hidden="true"></i>I will give you a complete Unique Logo.</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa fa-circle" aria-hidden="true"></i>I will give you a complete Unique Logo.</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa fa-circle" aria-hidden="true"></i>I will give you a complete Unique Logo.</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa fa-circle" aria-hidden="true"></i>I will give you a complete Unique Logo.</p>
-                                </li>
-                                <li>
-                                    <p><i class="fa fa-circle" aria-hidden="true"></i>I will give you a complete Unique Logo.</p>
-                                </li>
-                            </ul>
-                            <p>
-                                because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter
-                                consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain
-                                pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can
-                                procure him some great pleasure. To take a trivial example.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="orderand_share">
-                        <a class="order_btn" href="#">Bid Now</a>
+                        <div class="orderand_share">
+                            <a class="order_btn" href="#">Bid Now</a>
 
-                        <div class="socal_link">
-                            <p>Share:</p>
-                            <a href="#"> <i class="fa fa-facebook"></i> </a>
-                            <a href="#"> <i class="fa fa-twitter"></i> </a>
-                            <a href="#"> <i class="fa fa-linkedin"></i> </a>
-                            <a href="#"> <i class="fa fa-google-plus"></i> </a>
+                            <div class="socal_link">
+                                <p>Share:</p>
+                                <a href="#"> <i class="fa fa-facebook"></i> </a>
+                                <a href="#"> <i class="fa fa-twitter"></i> </a>
+                                <a href="#"> <i class="fa fa-linkedin"></i> </a>
+                                <a href="#"> <i class="fa fa-google-plus"></i> </a>
+                            </div>
+                        </div>
+                        <div v-show="noBids" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>No bids has been submitted for this project</strong> 
+                        </div>
+                        <div class="clint_review" v-if="show">
+                            
+                            <div class="review_box" v-for="(bid,index) in bids" :key="bid.id">
+                                <div class="media" >
+                                    <img class="mr-3" src="img/jobdetails/r1.png" alt="">
+                                    <div class="media-body">
+                                        <div class="header d-flex justify-content-between">
+                                            <h4 class="mt-0">{{bid.name}}</h4>
+                                            <p>{{bid.amount}}$</p>
+                                            <div class="stars">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                            </div>
+                                            <button @click="confirm(index)" class="btn btn-success">Accept</button>
+                                            <button class="btn btn-danger">Cancel</button>
+                                            
+                                        </div>
+                                        <p class="p">bid.created_at</p>
+                                    </div>
+                                </div>
+                                <div  class="modal fade" :id="car.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <confirm  :accepted="accepted" :bid="bit"></confirm>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="clint_review">
-                        <div class="top_content d-flex justify-content-between">
-                            <h4>Review (40)</h4>
-                            <a href="#">View All</a>
-                        </div>
-                        <div class="review_box">
-                            <div class="media">
-                                <img class="mr-3" src="img/jobdetails/r1.png" alt="">
-                                <div class="media-body">
-                                    <div class="header d-flex justify-content-between">
-                                        <h4 class="mt-0">Media heading</h4>
-                                        <div class="stars">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                        <button class="btn btn-success">Accept</button>
-                                        <button class="btn btn-danger">Cancel</button>
-                                        
-                                    </div>
-                                    <p class="p">17 Jun, 2018</p>
-                                    <p>because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review_box">
-                            <div class="media">
-                                <img class="mr-3" src="img/jobdetails/r2.png" alt="">
-                                <div class="media-body">
-                                    <div class="header d-flex justify-content-between">
-                                        <h4 class="mt-0">Media heading</h4>
-                                        <div class="stars">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                    </div>
-                                    <p class="p">17 Jun, 2018</p>
-                                    <p>because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review_box">
-                            <div class="media">
-                                <img class="mr-3" src="img/jobdetails/r3.png" alt="">
-                                <div class="media-body">
-                                    <div class="header d-flex justify-content-between">
-                                        <h4 class="mt-0">Media heading</h4>
-                                        <div class="stars">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                    </div>
-                                    <p class="p">17 Jun, 2018</p>
-                                    <p>because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review_box">
-                            <div class="media">
-                                <img class="mr-3" src="img/jobdetails/r4.png" alt="">
-                                <div class="media-body">
-                                    <div class="header d-flex justify-content-between">
-                                            <h4 class="mt-0">Media heading</h4>
-                                        <div class="stars">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star-o"></i>
-                                        </div>
-                                    </div>
-                                    <p class="p">17 Jun, 2018</p>
-                                    <p>because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter.</p>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="col-md-4">
+                    <!--Card-->
+                        <gmap-map
+                        ref="map"
+                        :zoom="12"
+                        style="width:100%;  height: 400px;"
+                        >
+                            <!-- <gmap-marker
+                                :key="index"
+                                v-for="(m, index) in markers"
+                                :position="m.position"
+                                @click="center=m.position"
+                            ></gmap-marker> -->
+                        </gmap-map>
                     </div>
                 </div>
             </div>
@@ -175,8 +110,79 @@
 <script>
 import DashboardLayout from '../layers/DashboardLayout'
 export default {
+    data(){
+        return{
+            project:null,
+            bids: null,            
+            destination: null,
+            directionsDisplay : null,
+            show: false,
+            noBids: false
+        }
+    },
+    computed:{
+         getDirection(){
+            if(this.directionsDisplay== null){
+                this.directionsDisplay = new google.maps.DirectionsRenderer;
+            }
+            var directionsService = new google.maps.DirectionsService;
+            var start = {
+                lat:this.project.origin_lat,
+                lng:this.project.origin_lng
+            };
+            var destination =  {
+                lat:this.project.destination_lat,
+                lng:this.project.destination_lng
+            };
+            this.directionsDisplay.setMap(this.$refs.map.$mapObject);
+            
+
+            //google maps API's direction service
+            function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
+                    directionsService.route({
+                        origin: start,
+                        destination: destination,
+                        travelMode: 'DRIVING'
+                    }, function(response, status) {
+                    if (status === 'OK') {
+                        this.form.distance = response.routes[0].legs[0].distance.value
+                        directionsDisplay.setDirections(response);
+                        
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            }
+        }
+    },
+    methods:{
+
+        confirm(index){
+            $(`#${ this.bids[index].id}`).modal('show');
+        },
+        accepted(p_id,t_id){
+            axios.post(`project/accept/${p_id}/${t_id}`)
+            .then()
+        }
+    },
     created(){
+        id = this.$route.params.id
         this.$emit(`update:layout`,DashboardLayout)
+        axios.get(`/api/projects/${id}`)
+        .then(res =>this.project = res.data.project)
+        .catch(error=>console.log(error))
+        if(User.customer()|| User.company()){
+            this.show = true;
+            axios.get(`/api/bid-list/${id}`)
+            .then(res=>{
+                this.bids = res.data.bids
+                if(this.bids == null){
+                    this.noBids = true
+                }
+            })
+            .catch(error=>this.noBids=true)
+        }
     }
+
 }
 </script>

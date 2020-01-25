@@ -9,7 +9,7 @@
     <meta name="description" content="Colorlib Templates">
     <meta name="author" content="Colorlib">
     <meta name="keywords" content="Colorlib Templates">
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Title Page-->
     <title>register</title>
 

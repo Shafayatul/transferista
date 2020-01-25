@@ -41,11 +41,8 @@
                         <div class="col-md-6">
                             <div class="profile-head">
                                 <h5>
-                                    Kshiti Ghelani
+                                   {{user.name}}
                                 </h5>
-                                <h6>
-                                    Web Developer and Designer
-                                </h6>
                                 <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
@@ -92,7 +89,7 @@
                                             <label>Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Kshiti Ghelani</p>
+                                            <p>{{user.name}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -100,7 +97,7 @@
                                             <label>Email</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>kshitighelani@gmail.com</p>
+                                            <p>{{user.email}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -108,15 +105,7 @@
                                             <label>Phone</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>123 456 7890</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Profession</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Web Developer and Designer</p>
+                                            <p>{{user.phone}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -182,11 +171,21 @@
 <script>
 import ProfileLayout from '../layers/ProfileLayout' 
 export default {
+    data(){
+        return{
+            user:null
+        }
+    },
     components:{
         ProfileLayout
     },
     created(){
         this.$emit(`update:layout`,ProfileLayout)
+        axios.get('/api/user-details')
+        .then(res=>{
+            this.user=res.data
+        })
+        .catch(error=>this.errors=error.response.data.errors)
     }
 }
 </script>

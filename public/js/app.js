@@ -3665,52 +3665,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -3742,11 +3696,21 @@ __webpack_require__.r(__webpack_exports__);
         project_title: null,
         project_description: null,
         project_size: null
-      }
+      },
+      success: false
     };
   },
   computed: {},
   methods: {
+    create: function create() {
+      var _this = this;
+
+      axios.post('/api/projects', this.form).then(function (res) {
+        _this.success = true;
+      })["catch"](function (error) {
+        return errors = error.response.data.errors;
+      });
+    },
     setPlace1: function setPlace1(place) {
       // let arr = place.split(',');
       // console.log(arr);
@@ -52595,7 +52559,27 @@ var render = function() {
                           _vm._v(
                             " You should check in on some of those fields below.\n\t\t\t\t\t\t\t\t\t"
                           ),
-                          _vm._m(3)
+                          _c(
+                            "button",
+                            {
+                              staticClass: "close",
+                              attrs: {
+                                type: "button",
+                                "data-dismiss": "alert",
+                                "aria-label": "Close"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.success = !_vm.success
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("×")
+                              ])
+                            ]
+                          )
                         ]
                       )
                     : _vm._e(),
@@ -52631,7 +52615,7 @@ var render = function() {
                             ),
                             _vm._v(" "),
                             _c("ul", { staticClass: "col-md-3 text-center" }, [
-                              _vm._m(4, true),
+                              _vm._m(3, true),
                               _vm._v(" "),
                               _c("li", { staticClass: "mb-2" }, [
                                 _c(
@@ -52650,7 +52634,7 @@ var render = function() {
                             ])
                           ]),
                           _vm._v(" "),
-                          _vm._m(5, true)
+                          _vm._m(4, true)
                         ])
                       ]),
                       _vm._v(" "),
@@ -52676,7 +52660,7 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(6)
+            _vm._m(5)
           ])
         ])
       ])
@@ -52802,23 +52786,6 @@ var staticRenderFns = [
         ])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "alert",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
   },
   function() {
     var _vm = this
@@ -54458,6 +54425,44 @@ var render = function() {
                 "div",
                 { staticClass: "col-md-6" },
                 [
+                  _vm.success
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "alert alert-warning alert-dismissible fade show",
+                          attrs: { role: "alert" }
+                        },
+                        [
+                          _c("strong", [_vm._v("Holy guacamole!")]),
+                          _vm._v(
+                            " You should check in on some of those fields below.\n                            "
+                          ),
+                          _c(
+                            "button",
+                            {
+                              staticClass: "close",
+                              attrs: {
+                                type: "button",
+                                "data-dismiss": "alert",
+                                "aria-label": "Close"
+                              },
+                              on: {
+                                click: function($event) {
+                                  _vm.success = !_vm.success
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("×")
+                              ])
+                            ]
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("gmap-autocomplete", {
                     on: { place_changed: _vm.setPlace1 }
                   }),
@@ -54513,7 +54518,285 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _vm._m(0)
+            _c(
+              "form",
+              {
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.create($event)
+                  }
+                }
+              },
+              [
+                _c("fieldset", [
+                  _c("div", { staticClass: "section postdetails" }, [
+                    _c("h4", [_vm._v("Post Your Job")]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c("label", { staticClass: "col-sm-3 label-title" }, [
+                        _vm._v("Date of Delivery")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.delivery_date,
+                              expression: "form.delivery_date"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "date", placeholder: "dd/mm/yyyy" },
+                          domProps: { value: _vm.form.delivery_date },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "delivery_date",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c("label", { staticClass: "col-sm-3 label-title" }, [
+                        _vm._v("Time for Delivery")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.time_for_delivery,
+                                expression: "form.time_for_delivery"
+                              }
+                            ],
+                            staticClass: "form-control custom-select",
+                            attrs: { id: "exampleFormControlSelect1" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "time_for_delivery",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "6-8 Hr" } }, [
+                              _vm._v("6 - 8")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "8-10 Hr" } }, [
+                              _vm._v("8 - 10")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10-12 Hr" } }, [
+                              _vm._v("10 - 12")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "12-14 Hr" } }, [
+                              _vm._v("12 - 14")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "14-16 Hr" } }, [
+                              _vm._v("14 - 16")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "16-18 Hr" } }, [
+                              _vm._v("16 - 18")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "18-20 Hr" } }, [
+                              _vm._v("18 - 20")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "20-22 Hr" } }, [
+                              _vm._v("20 - 22")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "22-24 Hr" } }, [
+                              _vm._v("22 - 24")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c("label", { staticClass: "col-sm-3 label-title" }, [
+                        _vm._v("Product Size")
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-9" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.project_size,
+                                expression: "form.project_size"
+                              }
+                            ],
+                            staticClass: "form-control custom-select",
+                            attrs: { id: "exampleFormControlSelect1" },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.form,
+                                  "project_size",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c("option", { attrs: { value: "s" } }, [
+                              _vm._v("S: 100cm")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "m" } }, [
+                              _vm._v("M: 150cm")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "l" } }, [
+                              _vm._v("L: 180cm")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "xl" } }, [
+                              _vm._v("XL: 200cm")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "xxl" } }, [
+                              _vm._v("XXL: 250cm")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "xxxl" } }, [
+                              _vm._v("XXXL: 300cm")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row form-group" }, [
+                      _vm._m(0),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-9" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.form.project_title,
+                              expression: "form.project_title"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            type: "text",
+                            placeholder: "ex, Human Resource Manager"
+                          },
+                          domProps: { value: _vm.form.project_title },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.form,
+                                "project_title",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "row form-group item-description" },
+                      [
+                        _vm._m(1),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-sm-9" }, [
+                          _c("textarea", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.project_description,
+                                expression: "form.project_description"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "textarea",
+                              placeholder: "Write few lines about your jobs",
+                              rows: "8"
+                            },
+                            domProps: { value: _vm.form.project_description },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "project_description",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _vm._m(2)
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(3)
+                ])
+              ]
+            )
           ]),
           _vm._v(" "),
           _c(
@@ -54567,325 +54850,51 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("form", { attrs: { action: "#" } }, [
-      _c("fieldset", [
-        _c("div", { staticClass: "section postdetails" }, [
-          _c("h4", [_vm._v("Post Your Job")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Date of Delivery")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "date", placeholder: "dd/mm/yyyy" }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Time for Delivery")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c(
-                "select",
-                {
-                  staticClass: "form-control custom-select",
-                  attrs: { id: "exampleFormControlSelect1" }
-                },
-                [
-                  _c("option", [_vm._v("6 - 8")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("8 - 10")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("10 - 12")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("12 - 14")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("14 - 16")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("16 - 18")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("18 - 20")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("20 - 22")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("22 - 24")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Product Size")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c(
-                "select",
-                {
-                  staticClass: "form-control custom-select",
-                  attrs: { id: "exampleFormControlSelect1" }
-                },
-                [
-                  _c("option", [_vm._v("S: 100cm")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("M: 150cm")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("L: 180cm")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("XL: 200cm")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("XXL: 250cm")]),
-                  _vm._v(" "),
-                  _c("option", [_vm._v("XXXL: 300cm")])
-                ]
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Title for your job"),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  placeholder: "ex, Human Resource Manager"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group item-description" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Description"),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("textarea", {
-                staticClass: "form-control",
-                attrs: {
-                  id: "textarea",
-                  placeholder: "Write few lines about your jobs",
-                  rows: "8"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row characters" }, [
-            _c("div", { staticClass: "col-sm-9 col-sm-offset-3" }, [
-              _c("p", [_vm._v("5000 characters left")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group add-title location" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Location"),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9 d-flex" }, [
-              _c("div", { staticClass: "dropdown category-dropdown mr-3" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      "data-toggle": "dropdown",
-                      href: "#",
-                      "aria-expanded": "false"
-                    }
-                  },
-                  [
-                    _c("span", { staticClass: "change-text" }, [
-                      _vm._v("Country")
-                    ]),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "fa fa-angle-down pull-right" })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("ul", { staticClass: "dropdown-menu category-change" }, [
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Argentina")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Australia")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Belgium")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Brazil")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("Cambodia")])
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "dropdown category-dropdown " }, [
-                _c(
-                  "a",
-                  {
-                    attrs: {
-                      "data-toggle": "dropdown",
-                      href: "#",
-                      "aria-expanded": "false"
-                    }
-                  },
-                  [
-                    _c("span", { staticClass: "change-text" }, [
-                      _vm._v("State")
-                    ]),
-                    _vm._v(" "),
-                    _c("i", { staticClass: "fa fa-angle-down pull-right" })
-                  ]
-                ),
-                _vm._v(" "),
-                _c("ul", { staticClass: "dropdown-menu category-change" }, [
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("State 1")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("State 2")])
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c("a", { attrs: { href: "#" } }, [_vm._v("State 3")])
-                  ])
-                ])
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Email ID")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "email",
-                  name: "email",
-                  placeholder: "ex, jhondoe@mail.com"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Mobile Number"),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "mobileNumber",
-                  placeholder: "ex, +912457895"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group address" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Address"),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("input", {
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "address",
-                  placeholder: "ex, alekdera House, coprotec, usa"
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row form-group select-price" }, [
-            _c("label", { staticClass: "col-sm-3 label-title" }, [
-              _vm._v("Amount"),
-              _c("span", { staticClass: "required" }, [_vm._v("*")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-sm-9" }, [
-              _c("label", [_vm._v("$USD")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Min" }
-              }),
-              _vm._v(" "),
-              _c("span", [_vm._v("-")]),
-              _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { type: "text", placeholder: "Max" }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                attrs: {
-                  type: "radio",
-                  name: "price",
-                  value: "negotiable",
-                  id: "negotiable"
-                }
-              }),
-              _vm._v(" "),
-              _c("label", { attrs: { for: "negotiable" } }, [
-                _vm._v("Negotiable ")
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "checkbox section agreement" }, [
-          _c("label", { attrs: { for: "send" } }, [
-            _c("input", {
-              attrs: { type: "checkbox", name: "send", id: "send" }
-            }),
-            _vm._v("\n                                You agree to our "),
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Terms of Use")]),
-            _vm._v(" and "),
-            _c("a", { attrs: { href: "#" } }, [_vm._v("Privacy Policy")]),
-            _vm._v(
-              " and acknowledge that you are the rightful owner of this item and using Jobs to find a genuine buyer.\n                            "
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "button",
-            { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_vm._v("Post Your Job")]
-          )
-        ])
+    return _c("label", { staticClass: "col-sm-3 label-title" }, [
+      _vm._v("Title for your job"),
+      _c("span", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { staticClass: "col-sm-3 label-title" }, [
+      _vm._v("Description"),
+      _c("span", { staticClass: "required" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row characters" }, [
+      _c("div", { staticClass: "col-sm-9 col-sm-offset-3" }, [
+        _c("p", [_vm._v("5000 characters left")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "checkbox section agreement" }, [
+      _c("label", { attrs: { for: "send" } }, [
+        _c("input", { attrs: { type: "checkbox", name: "send", id: "send" } }),
+        _vm._v("\n                                You agree to our "),
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Terms of Use")]),
+        _vm._v(" and "),
+        _c("a", { attrs: { href: "#" } }, [_vm._v("Privacy Policy")]),
+        _vm._v(
+          " and acknowledge that you are the rightful owner of this item and using Jobs to find a genuine buyer.\n                            "
+        )
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn btn-primary", attrs: { type: "submit" } },
+        [_vm._v("Post Your Job")]
+      )
     ])
   }
 ]

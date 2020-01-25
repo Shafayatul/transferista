@@ -5,6 +5,12 @@
                 <div class="col-lg-8">
                     <div class="row">
                         <div class="col-md-6">
+                            <div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                                <button @click="success = !success" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
                         <!-- Search form -->
                             <gmap-autocomplete
                                 @place_changed="setPlace1">
@@ -24,112 +30,60 @@
                         </div>
                         <button class="search" @click="getDirection">confirm</button>
                     </div> 
-                    <form action="#">
+                    <form @submit.prevent="create">
                         <fieldset>
                             <div class="section postdetails">
                                 <h4>Post Your Job</h4>
                                     <div class="form-group row">
                                         <label class="col-sm-3 label-title">Date of Delivery</label>
                                         <div class="col-sm-9">
-                                            <input type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                            <input v-model="form.delivery_date" type="date" class="form-control" placeholder="dd/mm/yyyy">
                                         </div>
                                     </div> 
                                 <div class="form-group row">
                                         <label class="col-sm-3 label-title">Time for Delivery</label>
                                         <div class="col-sm-9">						
-                                        <select class="form-control custom-select" id="exampleFormControlSelect1">
-                                            <option>6 - 8</option>
-                                            <option>8 - 10</option>
-                                            <option>10 - 12</option>
-                                            <option>12 - 14</option>
-                                            <option>14 - 16</option>
-                                            <option>16 - 18</option>
-                                            <option>18 - 20</option>
-                                            <option>20 - 22</option>
-                                            <option>22 - 24</option>
+                                        <select v-model="form.time_for_delivery" class="form-control custom-select" id="exampleFormControlSelect1">
+                                            <option value="6-8 Hr" >6 - 8</option>
+                                            <option value="8-10 Hr">8 - 10</option>
+                                            <option value="10-12 Hr" >10 - 12</option>
+                                            <option value="12-14 Hr">12 - 14</option>
+                                            <option value="14-16 Hr">14 - 16</option>
+                                            <option value="16-18 Hr">16 - 18</option>
+                                            <option value="18-20 Hr">18 - 20</option>
+                                            <option value="20-22 Hr">20 - 22</option>
+                                            <option value="22-24 Hr">22 - 24</option>
                                         </select>
                                     </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 label-title">Product Size</label>
                                         <div class="col-sm-9">						
-                                    <select class="form-control custom-select" id="exampleFormControlSelect1">
-                                            <option>S: 100cm</option>
-                                            <option>M: 150cm</option>
-                                            <option>L: 180cm</option>
-                                            <option>XL: 200cm</option>
-                                            <option>XXL: 250cm</option>
-                                            <option>XXXL: 300cm</option>
+                                    <select v-model="form.project_size" class="form-control custom-select" id="exampleFormControlSelect1">
+                                            <option value="s" >S: 100cm</option>
+                                            <option value="m">M: 150cm</option>
+                                            <option value="l">L: 180cm</option>
+                                            <option value="xl">XL: 200cm</option>
+                                            <option value="xxl">XXL: 250cm</option>
+                                            <option value="xxxl">XXXL: 300cm</option>
                                     </select>
                                     </div>
                                     </div>
                                 <div class="row form-group">
                                     <label class="col-sm-3 label-title">Title for your job<span class="required">*</span></label>
                                     <div class="col-sm-9">
-                                        <input type="text" class="form-control" placeholder="ex, Human Resource Manager">
+                                        <input v-model="form.project_title" type="text" class="form-control" placeholder="ex, Human Resource Manager">
                                     </div>
                                 </div>					
                                 <div class="row form-group item-description">
                                     <label class="col-sm-3 label-title">Description<span class="required">*</span></label>
                                     <div class="col-sm-9">
-                                        <textarea class="form-control" id="textarea" placeholder="Write few lines about your jobs" rows="8"></textarea>		
+                                        <textarea v-model="form.project_description" class="form-control" id="textarea" placeholder="Write few lines about your jobs" rows="8"></textarea>		
                                     </div>
                                 </div>
                                 <div class="row characters">
                                     <div class="col-sm-9 col-sm-offset-3">
                                         <p>5000 characters left</p>
-                                    </div>
-                                </div>	
-                                <div class="row form-group add-title location">
-                                    <label class="col-sm-3 label-title">Location<span class="required">*</span></label>
-                                    <div class="col-sm-9 d-flex">
-                                        <div class="dropdown category-dropdown mr-3">
-                                            <a data-toggle="dropdown" href="#" aria-expanded="false"><span class="change-text">Country</span> <i class="fa fa-angle-down pull-right"></i></a>
-                                            <ul class="dropdown-menu category-change">
-                                                <li><a href="#">Argentina</a></li>
-                                                <li><a href="#">Australia</a></li>
-                                                <li><a href="#">Belgium</a></li>
-                                                <li><a href="#">Brazil</a></li>
-                                                <li><a href="#">Cambodia</a></li>
-                                            </ul>								
-                                        </div>
-                                        <div class="dropdown category-dropdown ">
-                                            <a data-toggle="dropdown" href="#" aria-expanded="false"><span class="change-text">State</span> <i class="fa fa-angle-down pull-right"></i></a>
-                                            <ul class="dropdown-menu category-change">
-                                                <li><a href="#">State 1</a></li>
-                                                <li><a href="#">State 2</a></li>
-                                                <li><a href="#">State 3</a></li>
-                                            </ul>								
-                                        </div>
-                                    </div>
-                                </div>								
-                                <div class="row form-group">
-                                    <label class="col-sm-3 label-title">Email ID</label>
-                                    <div class="col-sm-9">
-                                        <input type="email" name="email" class="form-control" placeholder="ex, jhondoe@mail.com">
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <label class="col-sm-3 label-title">Mobile Number<span class="required">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="mobileNumber" class="form-control" placeholder="ex, +912457895">
-                                    </div>
-                                </div>
-                                <div class="row form-group address">
-                                    <label class="col-sm-3 label-title">Address<span class="required">*</span></label>
-                                    <div class="col-sm-9">
-                                        <input type="text" name="address" class="form-control" placeholder="ex, alekdera House, coprotec, usa">
-                                    </div>
-                                </div>
-                                <div class="row form-group select-price">
-                                    <label class="col-sm-3 label-title">Amount<span class="required">*</span></label>
-                                    <div class="col-sm-9">
-                                        <label>$USD</label>
-                                        <input type="text" class="form-control" placeholder="Min">
-                                        <span>-</span>
-                                        <input type="text" class="form-control" placeholder="Max">
-                                        <input type="radio" name="price" value="negotiable" id="negotiable">
-                                        <label for="negotiable">Negotiable </label>
                                     </div>
                                 </div>
                             </div><!-- section -->
@@ -201,17 +155,21 @@ export default {
                 project_title:null,
                 project_description:null,
                 project_size:null
-            }
-
-
-
-
+            },
+            success:false
         }
     },
     computed: {
        
     },
     methods: {
+        create(){
+            axios.post('/api/projects',this.form)
+            .then(res=>{
+                this.success = true
+            })
+            .catch(error=> errors=error.response.data.errors)
+        },
     
         setPlace1(place) {
             // let arr = place.split(',');

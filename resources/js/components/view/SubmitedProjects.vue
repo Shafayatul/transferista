@@ -54,7 +54,7 @@ export default {
     },
     created(){
         axios.get('/api/projects')
-        .then(res=>this.projects = res.data.projects)
+        .then(res=>this.projects = res.data.data)
         .catch(error=> this.success = true)
     }
 }

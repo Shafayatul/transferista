@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     
     Route::group(['middleware' => ['role:company|customer|employee']], function () {
+        
+        Route::get('messages/{conversation_id}', 'ChatsControler@fetchMessages');
+        Route::post('messages', 'ChatsController@sendMessage');
 
         //Project Section
         Route::get('projects', 'Api\ProjectsController@index');

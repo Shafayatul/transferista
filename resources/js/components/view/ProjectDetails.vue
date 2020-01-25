@@ -65,8 +65,8 @@
                                     <img class="mr-3" src="img/jobdetails/r1.png" alt="">
                                     <div class="media-body">
                                         <div class="header d-flex justify-content-between">
-                                            <h4 class="mt-0">{{bid.name}}</h4>
-                                            <p>{{bid.amount}}$</p>
+                                            <h4 class="mt-0">{{bid.bid_transferista_name}}</h4>
+                                            <p>{{bid.bid_amount}}$</p>
                                             <div class="stars">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -74,15 +74,15 @@
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star-o"></i>
                                             </div>
-                                            <button @click="confirm(index)" class="btn btn-success">Accept</button>
+                                            <button v-show="flag" @click="confirm(index)" class="btn btn-success">Accept</button>
                                             <button class="btn btn-danger">Cancel</button>
                                             
                                         </div>
                                         <p class="p">bid.created_at</p>
                                     </div>
                                 </div>
-                                <div  class="modal fade" :id="car.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <confirm  :accepted="accepted" :bid="bit"></confirm>
+                                <div  class="modal fade" :id="bid.bid_id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <confirm  :accepted="accepted" :bid="bid"></confirm>
                                 </div>
                             </div>
                         </div>
@@ -108,6 +108,7 @@
     </div>
 </template>
 <script>
+import confirm from './Confirm'
 import DashboardLayout from '../layers/DashboardLayout'
 export default {
     data(){
@@ -117,8 +118,12 @@ export default {
             destination: null,
             directionsDisplay : null,
             show: false,
-            noBids: false
+            noBids: false,
+            flag: true
         }
+    },
+    components:{
+        confirm , DashboardLayout
     },
     computed:{
          getDirection(){
@@ -139,7 +144,7 @@ export default {
 
             //google maps API's direction service
             function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
-                    directionsService.route({
+                directionsService.route({
                         origin: start,
                         destination: destination,
                         travelMode: 'DRIVING'
@@ -162,25 +167,30 @@ export default {
         },
         accepted(p_id,t_id){
             axios.post(`project/accept/${p_id}/${t_id}`)
-            .then()
+            .then(res=>{
+                this.flag = false;
+            })
         }
     },
     created(){
         id = this.$route.params.id
         this.$emit(`update:layout`,DashboardLayout)
         axios.get(`/api/projects/${id}`)
-        .then(res =>this.project = res.data.project)
+        .then(res =>{
+            this.project = res.data.project
+            this.bids = res.data.bids_data_array
+        })
         .catch(error=>console.log(error))
-        if(User.customer()|| User.company()){
+
+        if(this.bids == null){
+            this.noBids = true
+        } 
+        if(User.customer()|| User.company() ||User.admin()){
             this.show = true;
-            axios.get(`/api/bid-list/${id}`)
-            .then(res=>{
-                this.bids = res.data.bids
-                if(this.bids == null){
-                    this.noBids = true
-                }
-            })
-            .catch(error=>this.noBids=true)
+        }
+        if(User.transferista()){
+            this.show = true
+            this.flag = false
         }
     }
 

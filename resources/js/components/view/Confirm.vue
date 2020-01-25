@@ -7,26 +7,32 @@
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>
-            <form @submit.prevent="update">
-                <div class="modal-body">
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">Brand</span>
-                    <input v-model="form.brand"  class="form-control md-form">
-                    </div>
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">Type</span>
-                    <input v-model="form.type"   class="form-control md-form">
-                    </div>
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">Number Plate</span>
-                    <input v-model="form.plate"  class="form-control md-form">
-                    </div>
+            <div class="modal-body">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Transferista Info</h3>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                    <button type="submit" class="btn btn-primary" @click="editCar">Save changes</button>
-                </div>
-            </form>
+                <ul class="list-group">
+                    <a class="list-group-item">{{bid.bid_transferista_name}}</a>
+                    <a class="list-group-item">{{bid.bid_amount}}</a>
+                </ul>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" @click="confirm">Confirm</button>
+            </div>
         </div>
     </div>    
 </template>
+<script>
+export default {
+    props:['bid','accepted'],
+    methods:{
+        confirm(){
+            this.accepted(this.bid.bid_project_id,this.bid.bid_transferista_id)
+        }
+    }
+}
+
+</script>

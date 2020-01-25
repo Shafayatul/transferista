@@ -13,7 +13,7 @@ class FrontendsController extends Controller
     public function index()
     {
         $projects = Project::latest()->get();
-        return ProjectResource::collection($question);
+        return ProjectResource::collection($projects);
     }
 
     public function projectDetail($id)

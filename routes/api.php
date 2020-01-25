@@ -35,6 +35,7 @@ Route:: post('/map',function (Request $request){
 });
 
 Route::get('project-list', 'Api\FrontendsController@index');
+Route::get('project-detail/{id}', 'Api\FrontendsController@projectDetail');
 Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
 Route::post('login', 'Api\UsersController@login');
@@ -45,7 +46,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('logout', 'Api\UsersController@logout');
     Route::post('user-info-save', 'Api\UsersController@userInfoSave');
 
-    Route::group(['middleware' => ['role:Company']], function () {
+    Route::group(['middleware' => ['role:company']], function () {
         Route::get('employees', 'Api\EmployeesController@index');
         Route::post('employees', 'Api\EmployeesController@store');
         Route::get('employees/{employee_id}', 'Api\EmployeesController@show');
@@ -54,7 +55,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     });
 
     
-    Route::group(['middleware' => ['role:Company|Customer']], function () {
+    Route::group(['middleware' => ['role:company|customer|employee']], function () {
 
         //Project Section
         Route::get('projects', 'Api\ProjectsController@index');
@@ -67,7 +68,7 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::get('project/transfer/{project_id}', 'Api\ProjectsController@transferProject');
     });
 
-    Route::group(['middleware' => ['role:Transferista']], function () {
+    Route::group(['middleware' => ['role:transferista']], function () {
 
         //Project
         Route::get('projects', 'Api\ProjectsController@index');

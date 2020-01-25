@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\driverLoginInfo;
 use Illuminate\Support\Str;
 use App\Driver;
 use App\User;
@@ -67,6 +68,9 @@ class DriversController extends Controller
         $driver->user_id         = $user->id;
         $driver->phone           = $request->phone;
         $driver->save();
+
+        $email = $request->email;
+        Mail::to($email)->send(new employeeLoginInfo($email, $password));
 
         return response()->json([
             'message' => 'Successfully created driver!'

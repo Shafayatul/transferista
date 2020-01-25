@@ -17,6 +17,9 @@ class BidsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    
+
     public function index()
     {
         $bids = Bid::where('transferista_id', Auth::id())->get();

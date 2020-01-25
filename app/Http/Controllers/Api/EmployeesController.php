@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
+use Spatie\Permission\Models\Role;
+use App\Mail\employeeLoginInfo;
 use Illuminate\Support\Str;
 use App\Employee;
 use App\User;
@@ -42,6 +44,11 @@ class EmployeesController extends Controller
         $user->first      = 1;
         $user->save();
 
+        if ($user) {
+            $role = Role::findOrFail(5);
+            $user->syncRoles([$role->name]);
+        }
+
         $employee             = new Employee;
         $employee->user_id    = $user->id;
         $employee->company_id = Auth::id();
@@ -50,6 +57,10 @@ class EmployeesController extends Controller
         $employee->email      = $request->email;
         $employee->phone      = $request->phone;
         $employee->save();
+
+        $email = $request->email;
+
+        Mail::to($email)->send(new employeeLoginInfo($email, $password));
 
         return response()->json([
             'message' => 'Successfully created Employee!'

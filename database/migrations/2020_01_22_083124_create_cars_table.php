@@ -20,6 +20,7 @@ class CreateCarsTable extends Migration
             $table->string('type')->nullable();
             $table->string('plate')->nullable();
             $table->boolean('car_status')->default(1);
+            $table->string('cargo_capacity')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

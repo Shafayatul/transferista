@@ -4,6 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Srmklive\PayPal\Services\ExpressCheckout;
+use Auth;
+use PayPal;
+use App\User;
+use App\Payment;
+use Session;
 
 class PaymentsController extends Controller
 {
@@ -36,6 +42,27 @@ class PaymentsController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function paymentSuccess(Request $request)
+    {
+        $data             = $request->all();
+        $provider         = new ExpressCheckout;
+        // $checkout_details = $provider->getExpressCheckoutDetails($request->token);
+        $response         = $provider->doExpressCheckoutPayment($data, $request->token, $request->PayerID);
+        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
+            $payment                         = new Payment;
+            $payment->company_or_customer_id = $request->user_id;
+            $payment->transferista_id        = $request->transferista_id;
+            $payment->project_id             = $request->project_id;
+            $payment->amount                 = $request->amount;
+            $payment->payment_type           = "paypal";
+            $payment->transaction_id         = $response['PAYMENTINFO_0_TRANSACTIONID'];
+            $payment->save();
+            return response()->json([
+                'message' => 'payment Successful'
+            ], 201);
+        }
     }
 
     /**

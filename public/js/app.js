@@ -11123,7 +11123,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.select2-selection__rendered[data-v-4221c3ad] {\r\n    line-height: 50px;\r\n  padding-left: 0;\r\n  color: #555;\r\n  font-size: 16px;\r\n  font-family: inherit;\r\n  padding-left: 22px;\r\n  padding-right: 50px;\n}\n.btn[data-v-4221c3ad] {\r\n  display: inline-block;\r\n  line-height: 50px;\r\n  padding: 0 50px;\r\n  -webkit-transition: all 0.4s ease;\r\n  transition: all 0.4s ease;\r\n  cursor: pointer;\r\n  font-size: 15px;\r\n  text-transform: uppercase;\r\n  font-weight: 700;\r\n  color: #fff;\r\n  font-family: inherit;\n} \r\n/* .btn--radius {\r\n  -webkit-border-radius: 3px;\r\n  -moz-border-radius: 3px;\r\n  border-radius: 3px;\r\n} */\n.btn .btn--radius-2[data-v-4221c3ad] {\r\n  border-radius: 5px;\n}\n.btn .btn--red[data-v-4221c3ad] {\r\n  background: #ff4b5a;\n}\n.btn .btn--red[data-v-4221c3ad]:hover {\r\n  background: #eb3746;\n}\r\n", ""]);
+exports.push([module.i, "\n.select2-selection__rendered[data-v-4221c3ad] {\n    line-height: 50px;\n  padding-left: 0;\n  color: #555;\n  font-size: 16px;\n  font-family: inherit;\n  padding-left: 22px;\n  padding-right: 50px;\n}\n.btn[data-v-4221c3ad] {\n  display: inline-block;\n  line-height: 50px;\n  padding: 0 50px;\n  -webkit-transition: all 0.4s ease;\n  transition: all 0.4s ease;\n  cursor: pointer;\n  font-size: 15px;\n  text-transform: uppercase;\n  font-weight: 700;\n  color: #fff;\n  font-family: inherit;\n} \n/* .btn--radius {\n  -webkit-border-radius: 3px;\n  -moz-border-radius: 3px;\n  border-radius: 3px;\n} */\n.btn .btn--radius-2[data-v-4221c3ad] {\n  border-radius: 5px;\n}\n.btn .btn--red[data-v-4221c3ad] {\n  background: #ff4b5a;\n}\n.btn .btn--red[data-v-4221c3ad]:hover {\n  background: #eb3746;\n}\n", ""]);
 
 // exports
 
@@ -11161,7 +11161,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.filter-by[data-v-32eee4e4]{\r\n\ttext-align: center;\r\n\tpadding: 27px 0pc;\r\n\tfont-size: 22px;\n}\n.filter-by p[data-v-32eee4e4]{\r\n\tfloat:  left;\r\n\tmargin-left: 50px;\n}\n.filter-by form[data-v-32eee4e4]{\r\n    border: aliceblue;\n}\n.filter-by form select[data-v-32eee4e4]{\r\n\t\r\n    color: #1a8282;\r\n\tborder: white;\n}\n.SectionJobFilter-duration[data-v-32eee4e4] {\r\n    margin-top: 16px;\n}\n.options[data-v-32eee4e4]{\r\n\tmax-height: 100px;\r\n\toverflow-y: scroll;\r\n\tmargin-top: 5px;\n}\n.options ul[data-v-32eee4e4]{\r\n\tlist-style-type: none;\r\n\ttext-align: left;\r\n\tpadding-left: 0px;\n}\n.options ul li[data-v-32eee4e4]{\r\n\tborder-bottom: 1px solid lightgray;\r\n\tpadding: 10px;\r\n\tcursor: pointer;\r\n\tbackground: lightgrey;\n}\n.options ul li .selected[data-v-32eee4e4]{\r\n\r\n\tbackground: green;\r\n\tcolor: white;\r\n\tfont-weight: 600;\n}\n.dropdown.dropdown-lg .dropdown-menu[data-v-32eee4e4] {\r\n    margin-top: -1px;\r\n    padding: 6px 20px;\n}\n.input-group-btn .btn-group[data-v-32eee4e4] {\r\n    display: -webkit-box !important;\r\n    display: flex !important;\n}\n.btn-group .btn[data-v-32eee4e4] {\r\n    border-radius: 0;\r\n    margin-left: -1px;\n}\n.btn-group .btn[data-v-32eee4e4]:last-child {\r\n    border-top-right-radius: 4px;\r\n    border-bottom-right-radius: 4px;\n}\n.btn-group .form-horizontal .btn[type=\"submit\"][data-v-32eee4e4] {\r\n  border-top-left-radius: 4px;\r\n  border-bottom-left-radius: 4px;\n}\n.form-horizontal .form-group[data-v-32eee4e4] {\r\n    margin-left: 0;\r\n    margin-right: 0;\n}\n.form-group .form-control[data-v-32eee4e4]:last-child {\r\n    border-top-left-radius: 4px;\r\n    border-bottom-left-radius: 4px;\n}\n@media screen and (min-width: 768px) {\n#adv-search[data-v-32eee4e4] {   \r\n\t\twidth: 800px;\r\n    \tmargin: 30px auto;\n}\n.dropdown.dropdown-lg[data-v-32eee4e4] {\r\n        position: static !important;\n}\n.dropdown.dropdown-lg .dropdown-menu[data-v-32eee4e4] {\r\n        min-width: 500px;\n}\n}\r\n\r\n/* .catagoris #catagoribody .mamunurrashid_gig_wraper{\r\n  margin-top: 40px;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card {\r\n  margin-bottom: 30px;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img img{\r\n  -webkit-transition: all .4s;\r\n  -moz-transition: all .4s;\r\n  -o-transition: all .4s;\r\n  -ms-transition: all .4s;\r\n  transition: all .4s;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img {\r\n  overflow: hidden;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card:hover .mr_img img{\r\ntransform: scale(1.1) rotate(3deg);\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body {\r\n  background: #ecf6ff;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price{\r\n  margin: 0px 30px;\r\n  position: relative;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price a p{\r\n  font-size: 15px;\r\n  font-weight: 500;\r\n  line-height: 40px;\r\n  color: #707070;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price .p-box{\r\n  width: 100%;\r\n  background: #fff;\r\n  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);\r\n  padding: 10px 15px;\r\n  position: absolute;\r\n  top: -30px;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title{\r\n  padding: 57px 15px 32px;\r\n  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .p{\r\n font-size: 17px;\r\n font-weight: 500;\r\n width: 60%;\r\n color: #707070;\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .sr{\r\n font-size: 16px;\r\n font-weight: 500;\r\n text-align: centerl\r\n}\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title span i{\r\ncolor: #e9be0b;\r\n}\r\n\r\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .review{\r\ndisplay: block;\r\nfont-size: 16px;\r\n} */\r\n", ""]);
+exports.push([module.i, "\n.filter-by[data-v-32eee4e4]{\n\ttext-align: center;\n\tpadding: 27px 0pc;\n\tfont-size: 22px;\n}\n.filter-by p[data-v-32eee4e4]{\n\tfloat:  left;\n\tmargin-left: 50px;\n}\n.filter-by form[data-v-32eee4e4]{\n    border: aliceblue;\n}\n.filter-by form select[data-v-32eee4e4]{\n\t\n    color: #1a8282;\n\tborder: white;\n}\n.SectionJobFilter-duration[data-v-32eee4e4] {\n    margin-top: 16px;\n}\n.options[data-v-32eee4e4]{\n\tmax-height: 100px;\n\toverflow-y: scroll;\n\tmargin-top: 5px;\n}\n.options ul[data-v-32eee4e4]{\n\tlist-style-type: none;\n\ttext-align: left;\n\tpadding-left: 0px;\n}\n.options ul li[data-v-32eee4e4]{\n\tborder-bottom: 1px solid lightgray;\n\tpadding: 10px;\n\tcursor: pointer;\n\tbackground: lightgrey;\n}\n.options ul li .selected[data-v-32eee4e4]{\n\n\tbackground: green;\n\tcolor: white;\n\tfont-weight: 600;\n}\n.dropdown.dropdown-lg .dropdown-menu[data-v-32eee4e4] {\n    margin-top: -1px;\n    padding: 6px 20px;\n}\n.input-group-btn .btn-group[data-v-32eee4e4] {\n    display: -webkit-box !important;\n    display: flex !important;\n}\n.btn-group .btn[data-v-32eee4e4] {\n    border-radius: 0;\n    margin-left: -1px;\n}\n.btn-group .btn[data-v-32eee4e4]:last-child {\n    border-top-right-radius: 4px;\n    border-bottom-right-radius: 4px;\n}\n.btn-group .form-horizontal .btn[type=\"submit\"][data-v-32eee4e4] {\n  border-top-left-radius: 4px;\n  border-bottom-left-radius: 4px;\n}\n.form-horizontal .form-group[data-v-32eee4e4] {\n    margin-left: 0;\n    margin-right: 0;\n}\n.form-group .form-control[data-v-32eee4e4]:last-child {\n    border-top-left-radius: 4px;\n    border-bottom-left-radius: 4px;\n}\n@media screen and (min-width: 768px) {\n#adv-search[data-v-32eee4e4] {   \n\t\twidth: 800px;\n    \tmargin: 30px auto;\n}\n.dropdown.dropdown-lg[data-v-32eee4e4] {\n        position: static !important;\n}\n.dropdown.dropdown-lg .dropdown-menu[data-v-32eee4e4] {\n        min-width: 500px;\n}\n}\n\n/* .catagoris #catagoribody .mamunurrashid_gig_wraper{\n  margin-top: 40px;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card {\n  margin-bottom: 30px;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img img{\n  -webkit-transition: all .4s;\n  -moz-transition: all .4s;\n  -o-transition: all .4s;\n  -ms-transition: all .4s;\n  transition: all .4s;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img {\n  overflow: hidden;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card:hover .mr_img img{\ntransform: scale(1.1) rotate(3deg);\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body {\n  background: #ecf6ff;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price{\n  margin: 0px 30px;\n  position: relative;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price a p{\n  font-size: 15px;\n  font-weight: 500;\n  line-height: 40px;\n  color: #707070;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price .p-box{\n  width: 100%;\n  background: #fff;\n  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);\n  padding: 10px 15px;\n  position: absolute;\n  top: -30px;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title{\n  padding: 57px 15px 32px;\n  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .p{\n font-size: 17px;\n font-weight: 500;\n width: 60%;\n color: #707070;\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .sr{\n font-size: 16px;\n font-weight: 500;\n text-align: centerl\n}\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title span i{\ncolor: #e9be0b;\n}\n\n.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title .review{\ndisplay: block;\nfont-size: 16px;\n} */\n", ""]);
 
 // exports
 
@@ -51810,7 +51810,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                Lorem ipsum dolor sit amet, consectetur\r\n                                            "
+                                  "\n                                                Lorem ipsum dolor sit amet, consectetur\n                                            "
                                 )
                               ]),
                               _vm._v(" "),
@@ -51847,7 +51847,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                    Lorem ipsum dolor sit amet, consectetur\r\n                                                "
+                                  "\n                                                    Lorem ipsum dolor sit amet, consectetur\n                                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -51884,7 +51884,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                    Lorem ipsum dolor sit amet, consectetur\r\n                                                "
+                                  "\n                                                    Lorem ipsum dolor sit amet, consectetur\n                                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -51942,7 +51942,7 @@ var staticRenderFns = [
                       [
                         _c("div", { staticClass: "dropdown-title" }, [
                           _vm._v(
-                            "\r\n                                        Logged in 5 min ago\r\n                                    "
+                            "\n                                        Logged in 5 min ago\n                                    "
                           )
                         ]),
                         _vm._v(" "),
@@ -51955,7 +51955,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "far fa-user" }),
                             _vm._v(
-                              " Profile\r\n                                    "
+                              " Profile\n                                    "
                             )
                           ]
                         ),
@@ -51969,7 +51969,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-bolt" }),
                             _vm._v(
-                              " Activities\r\n                                    "
+                              " Activities\n                                    "
                             )
                           ]
                         ),
@@ -51983,7 +51983,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-cog" }),
                             _vm._v(
-                              " Settings\r\n                                    "
+                              " Settings\n                                    "
                             )
                           ]
                         ),
@@ -51999,7 +51999,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-sign-out-alt" }),
                             _vm._v(
-                              " Logout\r\n                                    "
+                              " Logout\n                                    "
                             )
                           ]
                         )
@@ -52060,7 +52060,7 @@ var staticRenderFns = [
                 _c("li", [
                   _c("p", [
                     _vm._v(
-                      "\r\n                                Khan Jahan Ali Road, Khulna, Bangladesh.\r\n                            "
+                      "\n                                Khan Jahan Ali Road, Khulna, Bangladesh.\n                            "
                     )
                   ])
                 ])
@@ -52311,7 +52311,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                Lorem ipsum dolor sit amet, consectetur\r\n                                            "
+                                  "\n                                                Lorem ipsum dolor sit amet, consectetur\n                                            "
                                 )
                               ]),
                               _vm._v(" "),
@@ -52348,7 +52348,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                    Lorem ipsum dolor sit amet, consectetur\r\n                                                "
+                                  "\n                                                    Lorem ipsum dolor sit amet, consectetur\n                                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -52385,7 +52385,7 @@ var staticRenderFns = [
                               _vm._v(" "),
                               _c("div", [
                                 _vm._v(
-                                  "\r\n                                                    Lorem ipsum dolor sit amet, consectetur\r\n                                                "
+                                  "\n                                                    Lorem ipsum dolor sit amet, consectetur\n                                                "
                                 )
                               ]),
                               _vm._v(" "),
@@ -52443,7 +52443,7 @@ var staticRenderFns = [
                       [
                         _c("div", { staticClass: "dropdown-title" }, [
                           _vm._v(
-                            "\r\n                                        Logged in 5 min ago\r\n                                    "
+                            "\n                                        Logged in 5 min ago\n                                    "
                           )
                         ]),
                         _vm._v(" "),
@@ -52456,7 +52456,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "far fa-user" }),
                             _vm._v(
-                              " Profile\r\n                                    "
+                              " Profile\n                                    "
                             )
                           ]
                         ),
@@ -52470,7 +52470,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-bolt" }),
                             _vm._v(
-                              " Activities\r\n                                    "
+                              " Activities\n                                    "
                             )
                           ]
                         ),
@@ -52484,7 +52484,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-cog" }),
                             _vm._v(
-                              " Settings\r\n                                    "
+                              " Settings\n                                    "
                             )
                           ]
                         ),
@@ -52500,7 +52500,7 @@ var staticRenderFns = [
                           [
                             _c("i", { staticClass: "fas fa-sign-out-alt" }),
                             _vm._v(
-                              " Logout\r\n                                    "
+                              " Logout\n                                    "
                             )
                           ]
                         )
@@ -52620,7 +52620,7 @@ var staticRenderFns = [
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "footer-copyright py-3" }, [
-          _vm._v("\r\n        © 2019 Copyright:\r\n        "),
+          _vm._v("\n        © 2019 Copyright:\n        "),
           _c(
             "a",
             {
@@ -53239,15 +53239,15 @@ var render = function() {
               _c("div", { staticClass: "profile-head" }, [
                 _c("h5", [
                   _vm._v(
-                    "\r\n                                " +
+                    "\n                                " +
                       _vm._s(_vm.name) +
-                      "\r\n                            "
+                      "\n                            "
                   )
                 ]),
                 _vm._v(" "),
                 _c("h6", [
                   _vm._v(
-                    "\r\n                                Web Developer and Designer\r\n                            "
+                    "\n                                Web Developer and Designer\n                            "
                   )
                 ]),
                 _vm._v(" "),
@@ -53438,7 +53438,7 @@ var staticRenderFns = [
           },
           [
             _c("i", { staticClass: "fas fa-chart-pie mr-3" }),
-            _vm._v("Dashboard\r\n        ")
+            _vm._v("Dashboard\n        ")
           ]
         ),
         _vm._v(" "),
@@ -53499,7 +53499,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "file btn btn-lg btn-primary" }, [
           _vm._v(
-            "\r\n                                Change Photo\r\n                                "
+            "\n                                Change Photo\n                                "
           ),
           _c("input", { attrs: { type: "file", name: "file" } })
         ])
@@ -54367,9 +54367,9 @@ var render = function() {
                 _c("div", { staticClass: "profile-head" }, [
                   _c("h5", [
                     _vm._v(
-                      "\r\n                                   " +
+                      "\n                                   " +
                         _vm._s(_vm.user.name) +
-                        "\r\n                                "
+                        "\n                                "
                     )
                   ]),
                   _vm._v(" "),
@@ -54465,7 +54465,7 @@ var staticRenderFns = [
           },
           [
             _c("i", { staticClass: "fas fa-chart-pie mr-3" }),
-            _vm._v("Dashboard\r\n        ")
+            _vm._v("Dashboard\n        ")
           ]
         ),
         _vm._v(" "),
@@ -54526,7 +54526,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "file btn btn-lg btn-primary" }, [
           _vm._v(
-            "\r\n                                    Change Photo\r\n                                    "
+            "\n                                    Change Photo\n                                    "
           ),
           _c("input", { attrs: { type: "file", name: "file" } })
         ])

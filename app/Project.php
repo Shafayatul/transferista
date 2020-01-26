@@ -5,6 +5,7 @@ use App\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Bid;
+use App\Rating;
 
 class Project extends Model
 {
@@ -17,5 +18,10 @@ class Project extends Model
     public function bids()
     {
         return $this->hasMany(Bid::class, 'project_id');
+    }
+
+    public function rating()
+    {
+        return $this->hasOne(Rating::class, 'project_id');
     }
 }

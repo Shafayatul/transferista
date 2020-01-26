@@ -71,4 +71,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Employee::class, 'company_id');
     }
+
+    public function ratingCompanyCustomer()
+    {
+        return $this->hasMany(Rating::class, 'company_or_customer_id');
+    }
+
+    public function ratingrTransaferista()
+    {
+        return $this->hasMany(Rating::class, 'transferista_id');
+    }
 }

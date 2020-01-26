@@ -36,6 +36,7 @@ Route:: post('/map',function (Request $request){
 
 Route::get('project-list', 'Api\FrontendsController@index');
 Route::get('project-detail/{id}', 'Api\FrontendsController@projectDetail');
+Route::post('project-rating/{project_id}', 'Api\FrontendsController@projectRating');
 Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
 Route::post('login', 'Api\UsersController@login');
@@ -69,6 +70,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 
         Route::get('project/accept/{project_id}/{transferista_id}', 'Api\ProjectsController@acceptProject');
         Route::get('project/transfer/{project_id}', 'Api\ProjectsController@transferProject');
+        Route::get('payment/success', 'Api\PaymentsController@paymentSuccess');
     });
 
     Route::group(['middleware' => ['role:transferista']], function () {
@@ -99,5 +101,8 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::delete('cars/{car_id}', 'Api\CarsController@destroy');
     });
 
+    Route::group(['middleware' => ['role:company|customer|employee|transferista']], function () {
+        Route::post('ratings', 'Api\RatingsController@store');
+    });
 
 });

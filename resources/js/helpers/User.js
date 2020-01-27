@@ -56,21 +56,35 @@ class User{
     }
     customer(){
         if(this.loggedIn()){
-            if(this.role() === 'Customer'){
+            if(this.role() === 'customer'){
                 return true;
             }
         }
     }
     transferista(){
         if(this.loggedIn()){
-            if(this.role() === 'Transferista'){
+            if(this.role() === 'transferista'){
                 return true;
             }
         }
     }
     company(){
         if(this.loggedIn()){
-            if(this.role() === 'Company'){
+            if(this.role() === 'company'){
+                return true;
+            }
+        }
+    }
+    driver(){
+        if(this.loggedIn()){
+            if(this.role() === 'driver'){
+                return true;
+            }
+        }
+    }
+    employee(){
+        if(this.loggedIn()){
+            if(this.role() === 'employee'){
                 return true;
             }
         }

@@ -33,7 +33,7 @@ export default {
     },
     methods: {
         biding() {
-            this.bid(this.form)
+            this.bid(this.form , this.data)
             // this.$emit('update',{
             //     first_name:this.form.first_name,
             //     last_name:this.form.last_name,

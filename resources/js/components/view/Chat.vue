@@ -10,7 +10,7 @@
                 </div>
                 <div class="panel-footer">
                     <chat-form
-                        v-on:messagesent="addMessage"
+                        :addMessage="addMessage"
                         :user="user"
                     ></chat-form>
                 </div>
@@ -20,23 +20,47 @@
 </div>
 </template>
 <script>
+import chatform from './chat/ChatForm'
+import message from './chat/ChatMessages'
 export default {
     data(){
-        user:localStorage.getItem('name')
+        return{
+            
+            user:localStorage.getItem('name'),
+            messages:[],
+            project_id:[]
+        }
+
+    },
+    components:{
+        'chat-messages': message,
+        'chat-form': chatform
     },
     created(){
-        axios.get('/messages/' + user_id).then(response => {
+        this.project_id = this.$route.params('p_id')
+        // this.fetchMessages;
+        axios.get('/messages/' + project_id).then(response => {
+            this.messages = response.data;
             this.conversation = response.data;
-            Echo.private('chat.' + this.conversation.conversation_id)
+            Echo.private('chat.' + this.project_id)
                 .listen('MessageSent', (e) => {
-                    this.conversation.messages.push({
-                    conversation_id: e.message.conversation_id,
-                    message: e.message.message,
-                    name: e.user.firstname
+                    this.messages.push({
+                     message: e.message,
+                     user: e.user
+                    });
                 });
-                });
-});
+            });
+    },
+    methods:{
+        addMessage(message) {
+            this.messages.push(message);
+
+            axios.post('/api/message', message).then(response => {
+              console.log(response.data);
+            });
+        }
     }
+
 }
 </script>
 <style lang="stylus" scoped>

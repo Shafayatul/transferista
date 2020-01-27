@@ -186,7 +186,6 @@ export default {
 			let today = Date.now();
 			let date1 = date.getTime();
 
-
 			let date2 = date1 + (7*1000*60*60*24);
 
 			let left = Math.round((date2 - today.getTime()/oneDay));
@@ -194,13 +193,13 @@ export default {
 			return left;
 
 		},
-		bid(bidData){
+		bid(bidData ){
 			if(!User.transferista()){
 				window.location('/register')
 			}
 			axios.post('/api/bids',bidData)
 			.then(
-				res=>this.success = true
+				
 			)
 		}
 		// itemClicked(){
@@ -228,7 +227,7 @@ export default {
     created(){
 		this.$emit(`update:layout`,DashboardLayout)
 		axios.get('/api/project-list')
-		.then(res => this.projects = res.data.data.projects)
+		.then(res => this.projects = res.data.data)
 		.catch(error=>console.log(error))
     }
 }

@@ -15,6 +15,9 @@ import ProjectCreate from '../components/view/ProjectCreate'
 import UserCustomerForm from '../components/view/UserCustomerForm'
 import UserCompanyTransferistaForm from '../components/view/UserCompanyTransferistaForm'
 import Employee from '../components/view/EmployeeList'
+import Car from '../components/view/CarsList'
+import Driver from '../components/view/DriversList'
+import show from '../components/view/Show'
 const routes = [
     {path:'/',component: AvailableProjects},
     {path:'/position',component: google},
@@ -25,10 +28,16 @@ const routes = [
     {path:'/register',component: register},
     {path:'/login',component: login, name: 'login'},
     {path:'/role',component: role, name: 'role'},
-    {path:'/role',component: profile, name: 'profile'},
+    {path:'/profile', component: profile ,children:[
+        {path:'',component: userInfo},
+        {path:'cars',component: Car},
+        {path:'employees',component: Employee},
+        {path:'drivers',component: Driver},
+    ]},
     {path:'/customer/:role',component: UserCustomerForm, name: 'customer'},
     {path:'/form/:role',component: UserCompanyTransferistaForm, name: 'form'},
-    {path:'/employee',component: Employee, name: 'employee'}
+    {path:'/employee',component: Employee, name: 'employee'},
+    {path:'/show',component: show},
 ];
 
 const router = new VueRouter({

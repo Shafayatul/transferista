@@ -14,8 +14,16 @@
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+Broadcast::channel('location.{id}', function ($employee, $id) {
+    return (int) $employee->id === (int) $id;
+});
 
 
-Broadcast::channel('chat', function (){
-    return Auth::check();
+Broadcast::channel('chat.{id}', function ($id){
+    $bid = \App\Bid::where('project_id',$id)->where('bid_status',1)->first();
+    if($bid){
+        return  true;
+    } else{
+        return false;
+    }
 });

@@ -2,9 +2,6 @@
 
 namespace App\Events;
 
-use App\User;
-use App\Message;
-use App\Project;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -13,7 +10,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent implements ShouldBroadcast
+class GetLocation implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -22,14 +19,14 @@ class MessageSent implements ShouldBroadcast
      *
      * @return void
      */
-    public $message;
-    public $user;
-    public $project;
-    public function __construct(User $user,Message $message,Project $project)
+
+    public $employee;
+
+
+    public function __construct(Employee $employee)
     {
-        $this->user = $user;
-        $this->message = $message;
-        $this->project = $project;
+        $this->employee = $employee;
+        
         $this->dontBroadcastToCurrentUser();
     }
 
@@ -40,6 +37,6 @@ class MessageSent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat.'.$this->project->id);
+        return new PrivateChannel('location.'.$this->employee->id);
     }
 }

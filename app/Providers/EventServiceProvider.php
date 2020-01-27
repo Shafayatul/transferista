@@ -21,6 +21,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MessageSent' => [
             'App\Listeners\ChatListener',
         ],
+        'App\Events\GetLocation' => [
+            'App\Listeners\LocationListener',
+        ],
     ];
 
     /**

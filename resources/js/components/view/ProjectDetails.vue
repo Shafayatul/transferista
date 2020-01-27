@@ -169,6 +169,10 @@ export default {
             axios.post(`project/accept/${p_id}/${t_id}`)
             .then(res=>{
                 this.flag = false;
+                this.$router.push({
+					name: 'chat',
+					params: p_id
+				})
             })
         }
     },

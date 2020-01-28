@@ -5051,6 +5051,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.post('/api/user-info-save', this.form).then(function (res) {
+        alert(11111);
         var role;
 
         if (_this.form.role_id == 2) {
@@ -5071,6 +5072,7 @@ __webpack_require__.r(__webpack_exports__);
           name: 'userInfo'
         });
       })["catch"](function (error) {
+        alert(222);
         _this.errors = error.response.data.errors;
         console.log(error);
       });
@@ -5207,12 +5209,13 @@ __webpack_require__.r(__webpack_exports__);
     userInfo: function userInfo() {
       var _this = this;
 
+      console.log(this.form);
       axios.post('/api/user-info-save', this.form).then(function (res) {
         return _this.$router.push({
           name: 'userInfo'
         });
       })["catch"](function (error) {
-        return _this.errors = error.response.data.errors;
+        return console.log(error);
       });
     }
   },
@@ -12047,7 +12050,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.select2-selection__rendered[data-v-d4f9cbe2] {\n    line-height: 50px;\n  padding-left: 0;\n  color: #555;\n  font-size: 16px;\n  font-family: inherit;\n  padding-left: 22px;\n  padding-right: 50px;\n}\n.btn[data-v-d4f9cbe2] {\n  display: inline-block;\n  line-height: 50px;\n  padding: 0 50px;\n  -webkit-transition: all 0.4s ease;\n  transition: all 0.4s ease;\n  cursor: pointer;\n  font-size: 15px;\n  text-transform: uppercase;\n  font-weight: 700;\n  color: #fff;\n  font-family: inherit;\n} \n/* .btn--radius {\n  -webkit-border-radius: 3px;\n  -moz-border-radius: 3px;\n  border-radius: 3px;\n} */\n.btn .btn--radius-2[data-v-d4f9cbe2] {\n  border-radius: 5px;\n}\n.btn .btn--red[data-v-d4f9cbe2] {\n  background: #ff4b5a;\n}\n.btn .btn--red[data-v-d4f9cbe2]:hover {\n  background: #eb3746;\n}\n", ""]);
+exports.push([module.i, "\n.select2-selection__rendered[data-v-d4f9cbe2] {\r\n    line-height: 50px;\r\n  padding-left: 0;\r\n  color: #555;\r\n  font-size: 16px;\r\n  font-family: inherit;\r\n  padding-left: 22px;\r\n  padding-right: 50px;\n}\n.btn[data-v-d4f9cbe2] {\r\n  display: inline-block;\r\n  line-height: 50px;\r\n  padding: 0 50px;\r\n  -webkit-transition: all 0.4s ease;\r\n  transition: all 0.4s ease;\r\n  cursor: pointer;\r\n  font-size: 15px;\r\n  text-transform: uppercase;\r\n  font-weight: 700;\r\n  color: #fff;\r\n  font-family: inherit;\n} \r\n/* .btn--radius {\r\n  -webkit-border-radius: 3px;\r\n  -moz-border-radius: 3px;\r\n  border-radius: 3px;\r\n} */\n.btn .btn--radius-2[data-v-d4f9cbe2] {\r\n  border-radius: 5px;\n}\n.btn .btn--red[data-v-d4f9cbe2] {\r\n  background: #ff4b5a;\n}\n.btn .btn--red[data-v-d4f9cbe2]:hover {\r\n  background: #eb3746;\n}\r\n", ""]);
 
 // exports
 

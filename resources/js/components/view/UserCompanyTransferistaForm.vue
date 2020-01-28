@@ -161,6 +161,7 @@ export default{
         userInfo(){
             axios.post('/api/user-info-save',this.form)
             .then(res=>{
+                alert(11111)
                 let role; 
                 if(this.form.role_id == 2){
                     role = 'company'
@@ -174,8 +175,11 @@ export default{
                 localStorage.setItem('role', role) 
                 this.$router.push({name:'userInfo'})
             })
-            .catch(error=> {this.errors = error.response.data.errors
-                console.log(error)}
+            .catch(error=> {
+                alert(222)
+                this.errors = error.response.data.errors
+                console.log(error)
+                }
             )
         }
     },

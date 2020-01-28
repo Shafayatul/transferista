@@ -42,9 +42,10 @@ class UsersController extends Controller
     public function userDetails()
     {
         $user = Auth::user();
-        $user->userInfo;
+        $user_info = $user->userInfo;
         return response()->json([
-            'user' => $user
+            'user' => $user,
+            'user_info' => $user_info
         ]);
 
     }

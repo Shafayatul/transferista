@@ -110,9 +110,11 @@ export default{
     },
     methods:{
         userInfo(){
+
+            console.log(this.form)
             axios.post('/api/user-info-save',this.form)
             .then(res=> this.$router.push({name: 'userInfo'}))
-            .catch(error=> this.errors = error.response.data.errors)
+            .catch(error=> console.log(error))
         }
     },
     created(){

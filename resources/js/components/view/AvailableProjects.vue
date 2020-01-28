@@ -250,7 +250,7 @@ export default {
 		.catch(error=>console.log(error))
 
 		if(User.customer() || User.company() ){
-			//console.log(User.customer())
+			
 			this.flag = false
 		}
     }

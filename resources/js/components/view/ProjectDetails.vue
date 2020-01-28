@@ -78,6 +78,7 @@
                                                 <i class="fa fa-star-o"></i>
                                             </div>
                                             <button v-show="flag" @click="confirm(index)" class="btn btn-success">Accept</button>
+                                            <button v-show="chatShow" @click="chat(index)" class="btn btn-success">Chatt</button>
                                             <button class="btn btn-danger">Cancel</button>
                                             
                                         </div>
@@ -130,7 +131,8 @@ export default {
             flag: true,
             center: { lat: 45.508, lng: -73.587 },
             project_title: null,
-            project_description: null
+            project_description: null,
+            chatShow: false
         }
     },
     components:{
@@ -152,6 +154,17 @@ export default {
         
     },
     methods:{
+        chat(index){
+            this.$router.push({
+					name: 'chat',
+					params:{
+                        p_id: p_id,
+                        u_name: project.user,
+                        t_id: bid.bid_transferista_id,
+                        t_name: bid.bid_transferista_name
+                    }
+				})
+        },
          getDirection(){
             if(this.directionsDisplay== null){
                 this.directionsDisplay = new google.maps.DirectionsRenderer;
@@ -192,14 +205,7 @@ export default {
             axios.post(`project/accept/${p_id}/${bid.bid_transferista_id}`)
             .then(res=>{
                 this.flag = false;
-                this.$router.push({
-					name: 'chat',
-					params:{
-                        p_id: p_id,
-                        t_id: bid.bid_transferista_id,
-                        t_name: bid.bid_transferista_name
-                    }
-				})
+                
             })
             .catch(error => this.notTransferista = true)
         }
@@ -210,18 +216,21 @@ export default {
         axios.get(`/api/project-detail/${this.id}`)
         .then(res =>{
             this.project = res.data.project
-            this.bids = res.data.bids_data_array
+            this.bids = res.data.bids_data_array 
+            if(!this.bids){
+                this.noBids = true
+            } 
             this.project_title = this.project.project_title;
             this.project_description = this.project.project_description;
             this.getDirection()
         })
         .catch(error=>console.log(error))
 
-        if(this.bids == null){
-            this.noBids = true
-        } 
+       
         if(User.customer()|| User.company() ||User.admin()){
-            this.show = true;
+            if(User.name() == this.project.user)
+                this.show = true;
+                this.chatShow = true;
         }
         if(User.transferista()){
             this.show = true

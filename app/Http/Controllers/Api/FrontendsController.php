@@ -19,6 +19,7 @@ class FrontendsController extends Controller
     public function projectDetail($id)
     {
         $project = Project::findOrFail($id);
+        $project = new ProjectResource($project);
         $bids = Bid::where('project_id', $id)->get();
         $bids_data_array = [];
         foreach($bids as $bid){
@@ -30,7 +31,7 @@ class FrontendsController extends Controller
             $single_data_arr['bid_transferista_name'] = $bid->user->name;
             $single_data_arr['bid_status'] = $bid->bid_status;
             array_push($bids_data_array, $single_data_arr);
-        }
+        };
         return response()->json([
             'project' => $project,
             'bids_data_array' => $bids_data_array

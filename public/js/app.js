@@ -2961,7 +2961,6 @@ __webpack_require__.r(__webpack_exports__);
     });
 
     if (User.customer() || User.company()) {
-      //console.log(User.customer())
       this.flag = false;
     }
   }
@@ -4553,6 +4552,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4572,7 +4572,8 @@ __webpack_require__.r(__webpack_exports__);
         lng: -73.587
       },
       project_title: null,
-      project_description: null
+      project_description: null,
+      chatShow: false
     };
   },
   components: {
@@ -4589,6 +4590,17 @@ __webpack_require__.r(__webpack_exports__);
     // }
   },
   methods: {
+    chat: function chat(index) {
+      this.$router.push({
+        name: 'chat',
+        params: {
+          p_id: p_id,
+          u_name: project.user,
+          t_id: bid.bid_transferista_id,
+          t_name: bid.bid_transferista_name
+        }
+      });
+    },
     getDirection: function getDirection() {
       if (this.directionsDisplay == null) {
         this.directionsDisplay = new google.maps.DirectionsRenderer();
@@ -4630,15 +4642,6 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post("project/accept/".concat(p_id, "/").concat(bid.bid_transferista_id)).then(function (res) {
         _this.flag = false;
-
-        _this.$router.push({
-          name: 'chat',
-          params: {
-            p_id: p_id,
-            t_id: bid.bid_transferista_id,
-            t_name: bid.bid_transferista_name
-          }
-        });
       })["catch"](function (error) {
         return _this.notTransferista = true;
       });
@@ -4652,6 +4655,11 @@ __webpack_require__.r(__webpack_exports__);
     axios.get("/api/project-detail/".concat(this.id)).then(function (res) {
       _this2.project = res.data.project;
       _this2.bids = res.data.bids_data_array;
+
+      if (!_this2.bids) {
+        _this2.noBids = true;
+      }
+
       _this2.project_title = _this2.project.project_title;
       _this2.project_description = _this2.project.project_description;
 
@@ -4660,12 +4668,9 @@ __webpack_require__.r(__webpack_exports__);
       return console.log(error);
     });
 
-    if (this.bids == null) {
-      this.noBids = true;
-    }
-
     if (User.customer() || User.company() || User.admin()) {
-      this.show = true;
+      if (User.name() == this.project.user) this.show = true;
+      this.chatShow = true;
     }
 
     if (User.transferista()) {
@@ -57355,6 +57360,27 @@ var render = function() {
                                     }
                                   },
                                   [_vm._v("Accept")]
+                                ),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "show",
+                                        rawName: "v-show",
+                                        value: _vm.chatShow,
+                                        expression: "chatShow"
+                                      }
+                                    ],
+                                    staticClass: "btn btn-success",
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.chat(index)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Chatt")]
                                 ),
                                 _vm._v(" "),
                                 _c(

@@ -30,7 +30,7 @@ export default {
     props:['bid','accepted'],
     methods:{
         confirm(){
-            this.accepted(this.bid.bid_project_id,this.bid.bid_transferista_id)
+            this.accepted(this.bid.bid_project_id,this.bid)
         }
     }
 }

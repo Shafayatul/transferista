@@ -22,8 +22,8 @@ class AppStorage{
     clear(){
         localStorage.removeItem('token');
         localStorage.removeItem('user');
-        localStorage.removeItem('expiration')
-        localStorage.removeItem('role')
+        localStorage.removeItem('expiration');
+        localStorage.removeItem('role');
     }
 
     getToken(){

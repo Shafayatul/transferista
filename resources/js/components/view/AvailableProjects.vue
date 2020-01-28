@@ -3,6 +3,12 @@
         <section id="catagoribody">
             <div class="container">
 				<div class="row">
+					<div v-show="bidded" class="alert alert-warning alert-dismissible fade show" role="alert">
+					Successfully Bidded
+						<button @click="bidded =!bidded" type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
 					<div class="col-md-12">
 						<div class="input-group" id="adv-search">
 							<input type="text" class="form-control" placeholder="Search for snippets" />
@@ -33,8 +39,8 @@
 							<div class="filter-by">
 								<p>Duration :</p>
 								<form action="#">
-									<select class="mr_select">
-										<option value="1">Best Selling</option>
+									<select  class="mr_select" @change="sortBy">
+										<option value="latest">Latest</option>
 										<option value="2">New</option>
 										<option value="3">Popular</option>
 										<option value="4">Tranding</option>
@@ -90,7 +96,7 @@
 									<div class="mr_card_body">
 										<div class="offset-1">
 											<div class="p-box row ">											
-												<a class="p col-md-9" href="jobDetails.html">
+												<a @click=singleProject(data.id) class="p col-md-9">
 													<h5 class="fonts-title">{{data.project_title}}<br><small>Posted {{ data.created_at }}</small></h5>
 													<span class="body-color">
 														{{data.project_description}}
@@ -98,7 +104,7 @@
 												</a>
 												<ul class="col-md-3 text-center">
 													<li class="mb-2"><small>10 bids</small></li>
-													<li class="mb-2"><button class="btn btn-success " @click="modal"><a class="font-color" >Bid Now</a></button></li>
+													<li class="mb-2"><button v-show="flag" class="btn btn-success " @click="modal(index)"><a class="font-color" >Bid Now</a></button></li>
 												</ul>
 
 											</div>
@@ -170,7 +176,9 @@ export default {
 			filterBy: null,
 			selectItem: null,
 			projects:[],
-			success: false
+			success: false,
+			flag:true,
+			bidded: false
 		}
 	},
     components:{
@@ -178,29 +186,37 @@ export default {
 		bid
 	},
 	methods:{
-		modal(){
+		singleProject(d){
+			console.log(d)
+			const id = d
+			this.$router.push({name: 'singleProject',params:{
+				id: id
+				} 
+			})
+		},
+		modal(index){
             $(`#${ this.projects[index].id}`).modal('show');
-		},
-		timeLeft(date){
-			let oneDay = 1000*60*60*24; 
-			let today = Date.now();
-			let date1 = date.getTime();
-
-			let date2 = date1 + (7*1000*60*60*24);
-
-			let left = Math.round((date2 - today.getTime()/oneDay));
-			
-			return left;
-
-		},
+		}
+		,
 		bid(bidData ){
 			if(!User.transferista()){
 				window.location('/register')
 			}
 			axios.post('/api/bids',bidData)
-			.then(
-				
+			.then(res=>{
+				this.bidded = true
+			}
 			)
+		},
+		sortBy(value){
+			if(value == "latest"){
+				this.sortByDate()
+			}
+		},
+		sortByDate(){
+			this.showed.sort((a,b)=>{
+				return a.getTime() - b.getTime();
+			})
 		}
 		// itemClicked(){
 		// 	this.seleted = index;
@@ -227,8 +243,16 @@ export default {
     created(){
 		this.$emit(`update:layout`,DashboardLayout)
 		axios.get('/api/project-list')
-		.then(res => this.projects = res.data.data)
+		.then(res =>{ 
+			this.projects = res.data.data
+			this.showed = res.data.data
+			})
 		.catch(error=>console.log(error))
+
+		if(User.customer() || User.company() ){
+			//console.log(User.customer())
+			this.flag = false
+		}
     }
 }
 </script>

@@ -160,9 +160,20 @@ export default{
     methods:{
         userInfo(){
             axios.post('/api/user-info-save',this.form)
-            .then(res=> 
-            this.$router.push({name:'profile'})
-            )
+            .then(res=>{
+                let role; 
+                if(this.form.role_id == 2){
+                    role = 'company'
+                }
+                if(this.form.role_id == 3){
+                    role = 'transferista'
+                }
+                if(this.form.role_id == 1){
+                    role = 'customer'
+                }
+                localStorage.setItem('role', role) 
+                this.$router.push({name:'userInfo'})
+            })
             .catch(error=> {this.errors = error.response.data.errors
                 console.log(error)}
             )

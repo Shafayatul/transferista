@@ -9,6 +9,8 @@ use App\User;
 use App\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Srmklive\PayPal\Services\ExpressCheckout;
+use Srmklive\PayPal\Services\AdaptivePayments;
 
 class ProjectsController extends Controller
 {
@@ -135,9 +137,14 @@ class ProjectsController extends Controller
             $bid->bid_status = 1;
             $bid->save();
 
+            $transferista             = User::findOrFail($transferista_id);
+            $vat                      = $transferista->userInfo->vat;
+            $vat_amount               = ($vat/100)* $bid->amount;
+            $net_amount               = $bid->amount + $vat_amount;
+            
             $project                  = Project::findOrFail($project_id);
             $project->transferista_id = $bid->transferista_id;
-            $project->project_amount  = $bid->amount;
+            $project->project_amount  = $net_amount;
             $project->project_status  = 1;
             $project->save();
 

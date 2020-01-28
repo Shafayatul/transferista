@@ -18,7 +18,7 @@ Vue.use(VueGoogleMaps, {
 });
 Vue.component('google-map', VueGoogleMaps.Map);
 
-window.Bus = new Vue();
+window.EventBus = new Vue();
 
 Vue.component('app-home', require('./components/AppHome.vue').default);
 

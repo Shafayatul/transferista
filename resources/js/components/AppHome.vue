@@ -1,12 +1,11 @@
 <template>
-    <show></show>
-    <!-- <component :is="layout" >
+    <component :is="layout" >
         <router-view :layout.sync="layout"></router-view>
-    </component> -->
+    </component>
 </template>
 
 <script>
-import show from './view/Show'
+// import show from './view/Show'
 import AvailableProjects from './view/AvailableProjects'
 export default {
     data(){
@@ -16,11 +15,10 @@ export default {
     },
     components:{
         AvailableProjects
-        ,show
     },
     created() {
                     
-        }
+    }
 }
 </script>
 <style scoped >

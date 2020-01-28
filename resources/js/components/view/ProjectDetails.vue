@@ -26,9 +26,12 @@
                     <div class="col-md-8">
                         <div class="gig_details">
                             <div class="gig_title d-flex justify-content-between">
+                                <div v-show="notTransferista" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Please log in first</strong> 
+                                </div>
                                 <a class="p" href="#">
                                     <h3>
-                                        {{project.title}}
+                                        {{project_title}}
                                     </h3>
                                 </a>
                                 <p class="sr">Open - 6 days left 
@@ -39,7 +42,7 @@
                             <div class="gig_description">
                                 <h5>Discription</h5>
                                 <p>
-                                    {{project.description}}
+                                    {{project_description}}
                                 </p>
                                 
                             </div>
@@ -92,6 +95,7 @@
                         <gmap-map
                         ref="map"
                         :zoom="12"
+                        :center="center"
                         style="width:100%;  height: 400px;"
                         >
                             <!-- <gmap-marker
@@ -107,42 +111,63 @@
         </section>
     </div>
 </template>
+
+<script src="vue-google-maps.js"></script>
 <script>
 import confirm from './Confirm'
 import DashboardLayout from '../layers/DashboardLayout'
 export default {
     data(){
         return{
+            notTransferista:false,
+            id:null,
             project:null,
             bids: null,            
             destination: null,
             directionsDisplay : null,
             show: false,
             noBids: false,
-            flag: true
+            flag: true,
+            center: { lat: 45.508, lng: -73.587 },
+            project_title: null,
+            project_description: null
         }
     },
     components:{
         confirm , DashboardLayout
     },
     computed:{
+        // timeLeft(date){
+		// 	let oneDay = 1000*60*60*24; 
+		// 	let today = Date.now();
+		// 	let date1 = date.getTime;
+
+		// 	let date2 = date1 + (7*1000*60*60*24);
+
+		// 	let left = Math.round((date2 - today.getTime/oneDay));
+			
+		// 	return left;
+
+		// }
+        
+    },
+    methods:{
          getDirection(){
             if(this.directionsDisplay== null){
                 this.directionsDisplay = new google.maps.DirectionsRenderer;
             }
             var directionsService = new google.maps.DirectionsService;
             var start = {
-                lat:this.project.origin_lat,
-                lng:this.project.origin_lng
+                lat: parseFloat(this.project.origin_lat),
+                lng: parseFloat(this.project.origin_lng)
             };
             var destination =  {
-                lat:this.project.destination_lat,
-                lng:this.project.destination_lng
+                lat: parseFloat(this.project.destination_lat),
+                lng: parseFloat(this.project.destination_lng)
             };
             this.directionsDisplay.setMap(this.$refs.map.$mapObject);
             
-
-            //google maps API's direction service
+            // google maps API's direction service
             function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
                 directionsService.route({
                         origin: start,
@@ -158,31 +183,37 @@ export default {
                     }
                 });
             }
-        }
-    },
-    methods:{
-
+            calculateAndDisplayRoute(directionsService,this.directionsDisplay,start,destination)
+        },
         confirm(index){
             $(`#${ this.bids[index].id}`).modal('show');
         },
-        accepted(p_id,t_id){
-            axios.post(`project/accept/${p_id}/${t_id}`)
+        accepted(p_id,bid){
+            axios.post(`project/accept/${p_id}/${bid.bid_transferista_id}`)
             .then(res=>{
                 this.flag = false;
                 this.$router.push({
 					name: 'chat',
-					params: p_id
+					params:{
+                        p_id: p_id,
+                        t_id: bid.bid_transferista_id,
+                        t_name: bid.bid_transferista_name
+                    }
 				})
             })
+            .catch(error => this.notTransferista = true)
         }
     },
     created(){
-        id = this.$route.params.id
+        this.id = this.$route.params.id
         this.$emit(`update:layout`,DashboardLayout)
-        axios.get(`/api/projects/${id}`)
+        axios.get(`/api/project-detail/${this.id}`)
         .then(res =>{
             this.project = res.data.project
             this.bids = res.data.bids_data_array
+            this.project_title = this.project.project_title;
+            this.project_description = this.project.project_description;
+            this.getDirection()
         })
         .catch(error=>console.log(error))
 
@@ -196,6 +227,7 @@ export default {
             this.show = true
             this.flag = false
         }
+        
     }
 
 }

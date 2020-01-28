@@ -111,7 +111,7 @@ export default{
     methods:{
         userInfo(){
             axios.post('/api/user-info-save',this.form)
-            .then(res=> this.$router.push({name: 'profile'}))
+            .then(res=> this.$router.push({name: 'userInfo'}))
             .catch(error=> this.errors = error.response.data.errors)
         }
     },

@@ -18,21 +18,26 @@ import Employee from '../components/view/EmployeeList'
 import Car from '../components/view/CarsList'
 import Driver from '../components/view/DriversList'
 import show from '../components/view/Show'
+import logout from '../components/layers/Logout'
+import userInfo from '../components/view/UserInfo'
+import ChangePassword from '../components/view/ChangePassword'
 const routes = [
     {path:'/',component: AvailableProjects},
     {path:'/position',component: google},
-    {path:'/project_details',component: ProjectDetails},
+    {path:'/project_details/:id',component: ProjectDetails,name:'singleProject'},
     {path:'/project/create',component: ProjectCreate},    
     {path:'/profile',component: profile},
     {path:'/profile/edit',component: editprofile},
     {path:'/register',component: register},
     {path:'/login',component: login, name: 'login'},
+    {path:'/logout',component: logout},
     {path:'/role',component: role, name: 'role'},
-    {path:'/profile', component: profile ,children:[
-        {path:'',component: userInfo},
+    {path:'/profile', component: profile,  children:[
+        {path:'user',component: userInfo , name: 'userInfo'},
         {path:'cars',component: Car},
         {path:'employees',component: Employee},
         {path:'drivers',component: Driver},
+        {path:'credentials',component: ChangePassword},
     ]},
     {path:'/customer/:role',component: UserCustomerForm, name: 'customer'},
     {path:'/form/:role',component: UserCompanyTransferistaForm, name: 'form'},

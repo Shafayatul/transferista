@@ -1,6 +1,6 @@
 //import Token from "./Token"
 import AppStorage from "./AppStorage"
-let role;
+
 class User{
      
     login(data){       
@@ -36,7 +36,10 @@ class User{
         return this.hasToken()
     }
     logout(){
-        AppStorage.clear()
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+        localStorage.removeItem('expiration');
+        localStorage.removeItem('role');
         window.location = '/'
     }
     role(){

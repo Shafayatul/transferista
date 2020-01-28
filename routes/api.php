@@ -36,6 +36,7 @@ Route:: post('/map',function (Request $request){
 
 Route::get('project-list', 'Api\FrontendsController@index');
 Route::get('project-detail/{id}', 'Api\FrontendsController@projectDetail');
+Route::post('project-rating/{project_id}', 'Api\FrontendsController@projectRating');
 Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
 Route::post('login', 'Api\UsersController@login');
@@ -57,9 +58,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     
     Route::group(['middleware' => ['role:company|customer|employee']], function () {
         
-        Route::get('messages/{conversation_id}', 'ChatsControler@fetchMessages');
-        Route::post('messages', 'ChatsController@sendMessage');
-
+   
         //Project Section
         Route::get('projects', 'Api\ProjectsController@index');
         Route::post('projects', 'Api\ProjectsController@store');
@@ -69,6 +68,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 
         Route::get('project/accept/{project_id}/{transferista_id}', 'Api\ProjectsController@acceptProject');
         Route::get('project/transfer/{project_id}', 'Api\ProjectsController@transferProject');
+        Route::get('payment/success', 'Api\PaymentsController@paymentSuccess');
     });
 
     Route::group(['middleware' => ['role:transferista']], function () {
@@ -97,6 +97,16 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::get('cars/{car_id}', 'Api\CarsController@show');
         Route::post('cars/{car_id}', 'Api\CarsController@update');
         Route::delete('cars/{car_id}', 'Api\CarsController@destroy');
+    });
+
+    Route::group(['middleware' => ['role:company|customer|employee|transferista']], function () {
+        Route::post('ratings', 'Api\RatingsController@store');
+    });
+
+    Route::group(['middleware' => ['role:company|customer|transferista']], function () {
+        
+        Route::get('messages/{conversation_id}', 'ChatsController@fetchMessages');
+        Route::post('messages', 'ChatsController@sendMessage');
     });
 
 

@@ -22,7 +22,8 @@ export default {
         }
     },
     components:{
-        'side-bar':Sidebar
+        'side-bar':Sidebar,
+        ProfileLayout
     },
     methods:{
         location(){
@@ -39,9 +40,6 @@ export default {
             }
     
         }
-    },
-    components:{
-        ProfileLayout
     },
     created(){
         if(User.employee() || User.driver()){

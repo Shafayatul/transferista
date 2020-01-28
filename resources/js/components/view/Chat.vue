@@ -28,7 +28,10 @@ export default {
             
             user:localStorage.getItem('name'),
             messages:[],
-            project_id:[]
+            user:null,
+            project_id:null,
+            t_id:null,
+            t_name:null
         }
 
     },
@@ -37,16 +40,18 @@ export default {
         'chat-form': chatform
     },
     created(){
+        this.user = User.get
         this.project_id = this.$route.params('p_id')
+        this.t_id = this.$route.params('t_id')
+        this.t_name = this.$route.params('t_name')
         // this.fetchMessages;
         axios.get('/messages/' + project_id).then(response => {
             this.messages = response.data;
-            this.conversation = response.data;
             Echo.private('chat.' + this.project_id)
                 .listen('MessageSent', (e) => {
                     this.messages.push({
-                     message: e.message,
-                     user: e.user
+                        message: e.message,
+                        user: e.user
                     });
                 });
             });

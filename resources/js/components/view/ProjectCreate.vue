@@ -255,7 +255,7 @@ export default {
                         travelMode: 'DRIVING'
                     }, function(response, status) {
                     if (status === 'OK') {
-                        this.form.distance = response.routes[0].legs[0].distance.value
+                        // this.form.distance = response.routes[0].legs[0].distance.value
                         directionsDisplay.setDirections(response);
                         
                     } else {
@@ -277,9 +277,9 @@ export default {
         // }
     },
 	beforeCreate(){
-		if(!User.customer() || User.company()){
-			window.location = '/login'
-		}
+		// if(!User.customer() || !User.company()){
+		// 	window.location = '/login'
+		// }
 	},
     created(){
         this.$emit(`update:layout`,DashboardLayout)

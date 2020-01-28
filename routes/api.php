@@ -46,6 +46,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('user-details', 'Api\UsersController@userDetails');
     Route::get('logout', 'Api\UsersController@logout');
     Route::post('user-info-save', 'Api\UsersController@userInfoSave');
+    Route::post('user-info-update', 'Api\UsersController@userInfoUpdate');
 
     Route::group(['middleware' => ['role:company']], function () {
         Route::get('employees', 'Api\EmployeesController@index');

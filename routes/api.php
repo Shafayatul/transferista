@@ -104,11 +104,11 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::post('ratings', 'Api\RatingsController@store');
     });
 
-    Route::group(['middleware' => ['role:company|customer|transferista']], function () {
+    // Route::group(['middleware' => ['role:company|customer|transferista']], function () {
         
-        Route::get('messages/{conversation_id}', 'ChatsController@fetchMessages');
-        Route::post('messages', 'ChatsController@sendMessage');
-    });
+    //     Route::get('messages/{conversation_id}', 'ChatsController@fetchMessages');
+    //     Route::post('messages', 'ChatsController@sendMessage');
+    // });
 
 
 });

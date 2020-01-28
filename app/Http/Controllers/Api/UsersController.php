@@ -115,11 +115,37 @@ class UsersController extends Controller
             $user = Auth::user();
             $user->syncRoles([$role->name]);
         }
-        
-
         return response()->json([
             'user'    => $user_info,
             'message' => 'Successfully Saved user Information!'
+        ], 201);
+    }
+
+    public function userInfoUpdate(Request $request)
+    {
+        $user             = User::findOrFail(Auth::id());
+        $user->name       = $request->first_name.''.$request->last_name;
+        $user->first_name = $request->first_name;
+        $user->last_name  = $request->last_name;
+        $user->save();
+
+        $user_info                = UserInformation::where('user_id', $user->id)->first();
+        $user_info->address       = $request->address;
+        $user_info->zip           = $request->zip;
+        $user_info->town          = $request->town;
+        $user_info->country       = $request->country;
+        $user_info->company       = $request->company;
+        $user_info->phone         = $request->phone;
+        $user_info->email_company = $request->email_company;
+        $user_info->vat           = $request->vat;
+        $user_info->iban          = $request->iban;
+        $user_info->bic           = $request->bic;
+        $user_info->url           = $request->url;
+        $user_info->paypal        = $request->paypal;
+        $user_info->save();
+        return response()->json([
+            'user'    => $user_info,
+            'message' => 'Successfully Updated user Information!'
         ], 201);
     }
 

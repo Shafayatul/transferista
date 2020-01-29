@@ -218,7 +218,7 @@
         return null;
       }
 
-      return Util.findShadowRoot(element.parentNode);
+      return Util.findShadowRoot(element.parentNode);pp
     }
   };
   setTransitionEndSupport();

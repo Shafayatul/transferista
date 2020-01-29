@@ -33,7 +33,7 @@ class ProjectsController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $this->validate($request,[
             'origin_address'      => 'required|string',
             'origin_zip'          => 'required|string',
             'origin_town'         => 'required|string',

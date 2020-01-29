@@ -132,8 +132,14 @@ export default {
     data(){
         return{
             center: { lat: 45.508, lng: -73.587 },
-            center1: {},
-            center2: {},
+            center1: {
+                lat:null,
+                lng:null
+            },
+            center2:  {
+                lat:null,
+                lng:null
+            },
             markers: [],
             places: [],
             origin: null,
@@ -237,22 +243,22 @@ export default {
         },
         getDistance(){
 
-                var radlat1 = Math.PI * this.origin.lat/180;
-                var radlat2 = Math.PI * this.destination.lat/180;
-                var theta = this.origin.lon-this.destination.lon;
-                var radtheta = Math.PI * theta/180;
-                var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-                if (dist > 1) {
-                    dist = 1;
-                }
-                dist = Math.acos(dist);
-                dist = dist * 180/Math.PI;
-                dist = dist * 60 * 1.1515;
-                if (unit=="K") { dist = dist * 1.609344 }
-                if (unit=="N") { dist = dist * 0.8684 }
-                return dist;
+            var radlat1 = Math.PI * this.center1.lat/180;
+            var radlat2 = Math.PI * this.center2.lat/180;
+            var theta = this.center1.lng-this.center2.lng;
+            var radtheta = Math.PI * theta/180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
             }
-        },
+            dist = Math.acos(dist);
+            dist = dist * 180/Math.PI;
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344 
+            console.log(dist)
+            return dist;
+        }
+        ,
         
         getDirection(){
 
@@ -286,9 +292,9 @@ export default {
                         window.alert('Directions request failed due to ' + status);
                     }
                 });
-        }
-
-        calculateAndDisplayRoute(directionsService,this.directionsDisplay, start, destination);
+        
+            }
+            calculateAndDisplayRoute(directionsService,this.directionsDisplay, start, destination);
         
         },
         // geolocate: function() {
@@ -299,7 +305,7 @@ export default {
         //     };
         //   });
         // }
-   
+    },
 	beforeCreate(){
 		// if(!User.customer() || !User.company()){
 		// 	window.location = '/login'

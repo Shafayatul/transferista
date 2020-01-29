@@ -768,3 +768,14 @@ input {
     padding-bottom: 50px;
   }
 }
+.router-link-active{
+  z-index: 2;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+}
+.pass-input{
+  margin: 2% 0% 2% 0%;
+}

@@ -37,4 +37,8 @@ class FrontendsController extends Controller
             'bids_data_array' => $bids_data_array
         ]);
     }
+
+    public function position(){
+        
+    }
 }

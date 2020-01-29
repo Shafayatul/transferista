@@ -63,40 +63,20 @@
                     	</div>
                     </div>
 					<div class="col-lg-8 order-first order-lg-last">
-						<div class="row filter">
-							<div class="range">
-								<p>Price Range</p>
-								<form action="#">
-									<!-- <input v-model="query" v-text="selectedItem ? selectedItem[filterBy] : ''" type="text" class="mr-price">
-									<div class="options">
-										<ul>
-											<li 
-											:key="match[index]" 
-											v-for="(match,index) in matches"
-											:class="{'seleted': (seleted == index)}"
-											v-text="match[filterBy]"
-											@click="itemClicked(index)"
-											></li>
-										</ul>
-									</div> -->
-									<button type="submit" class="mr-price_btn"><i class="fa fa-angle-right"></i>
-									</button>
-								</form>
-							</div>
-						</div>
+						
 						<div class="row mamunurrashid_gig_wraper">							
 							<div class="col-md-10">
 								<div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
-									<strong>Holy guacamole!</strong> You should check in on some of those fields below.
+									 You should check in on some of those fields below.
 									<button @click="success = !success" type="button" class="close" data-dismiss="alert" aria-label="Close">
 										<span aria-hidden="true">&times;</span>
 									</button>
 								</div>
 								<div class="mr_card" v-for="(data,index) in projects" :key="index">
-									<div class="mr_card_body">
+									<div class="mr_card_body p-3">
 										<div class="offset-1">
 											<div class="p-box row ">											
-												<a @click=singleProject(data.id) class="p col-md-9">
+												<a @click=singleProject(data.id) class="p col-md-9" href="">
 													<h5 class="fonts-title">{{data.project_title}}<br><small>Posted {{ data.created_at }}</small></h5>
 													<span class="body-color">
 														{{data.project_description}}
@@ -108,7 +88,7 @@
 												</ul>
 
 											</div>
-											<div class=" d-flex ">											
+											<div class=" d-flex  ">											
 												<p class="sr col-md-4">
 													<!-- <span class="stars">
 														<i class="fa fa-star"></i>

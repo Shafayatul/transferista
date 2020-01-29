@@ -3,10 +3,10 @@
         <div class="container">
             <div class="row">	
                 <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col-md-6">
+                    <div class="row mb-2">
+                        <div class="col-md-5">
                             <div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                                <strong>Created Successfully</strong> 
                                 <button @click="success = !success" type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -19,7 +19,7 @@
                                 <i class="fas fa-search btn-info" aria-hidden="true"></i>
                             </button>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-5">
                             
                             <gmap-autocomplete
                                 @place_changed="setPlace2">
@@ -60,12 +60,12 @@
                                         <label class="col-sm-3 label-title">Product Size</label>
                                         <div class="col-sm-9">						
                                     <select v-model="form.project_size" class="form-control custom-select" id="exampleFormControlSelect1">
-                                            <option value="s" >S: 100cm</option>
-                                            <option value="m">M: 150cm</option>
-                                            <option value="l">L: 180cm</option>
-                                            <option value="xl">XL: 200cm</option>
-                                            <option value="xxl">XXL: 250cm</option>
-                                            <option value="xxxl">XXXL: 300cm</option>
+                                            <option value="5" >S: 100cm</option>
+                                            <option value="7.5">M: 150cm</option>
+                                            <option value="10">L: 180cm</option>
+                                            <option value="15">XL: 200cm</option>
+                                            <option value="20">XXL: 250cm</option>
+                                            <option value="25">XXXL: 300cm</option>
                                     </select>
                                     </div>
                                     </div>
@@ -95,6 +95,7 @@
                                 <button type="submit" class="btn btn-primary">Post Your Job</button>
                             </div><!-- section -->
                         </fieldset>
+                        <input type="hidden" v-model="form.distance">
                     </form><!-- form -->
                 </div>                 
                 <div class="col-lg-4">
@@ -131,8 +132,8 @@ export default {
     data(){
         return{
             center: { lat: 45.508, lng: -73.587 },
-            center1: null,
-            center2: null,
+            center1: {},
+            center2: {},
             markers: [],
             places: [],
             origin: null,
@@ -202,21 +203,21 @@ export default {
         
         },
         addMarker1() { 
-        if( this.markers[0]) {
-                this.center = null;
-            }
+            if( this.markers[0]) {
+                    this.center = null;
+                }
 
-        if (this.origin) {
-            const marker = {
-            lat: this.origin.geometry.location.lat(),
-            lng: this.origin.geometry.location.lng()
-            };
-            this.center1 = marker;
-            this.markers[0]= this.center1;
-            this.places[0] = this.origin;
-            this.center = this.center1;
-            this.origin = null;
-        }
+            if (this.origin) {
+                const marker = {
+                lat: this.origin.geometry.location.lat(),
+                lng: this.origin.geometry.location.lng()
+                };
+                this.center1 = marker;
+                this.markers[0]= this.center1;
+                this.places[0] = this.origin;
+                this.center = this.center1;
+                this.origin = null;
+            }
         },
         addMarker2() {
         if( this.markers[1]) {
@@ -234,7 +235,30 @@ export default {
             this.destination = null;
         }
         },
+        getDistance(){
+
+                var radlat1 = Math.PI * this.origin.lat/180;
+                var radlat2 = Math.PI * this.destination.lat/180;
+                var theta = this.origin.lon-this.destination.lon;
+                var radtheta = Math.PI * theta/180;
+                var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+                if (dist > 1) {
+                    dist = 1;
+                }
+                dist = Math.acos(dist);
+                dist = dist * 180/Math.PI;
+                dist = dist * 60 * 1.1515;
+                if (unit=="K") { dist = dist * 1.609344 }
+                if (unit=="N") { dist = dist * 0.8684 }
+                return dist;
+            }
+        },
+        
         getDirection(){
+
+            this.form.distance = this.getDistance();
+
+
             if(this.flag>1){
                 this.directionsDisplay.setDirections(null)
             }
@@ -275,7 +299,7 @@ export default {
         //     };
         //   });
         // }
-    },
+   
 	beforeCreate(){
 		// if(!User.customer() || !User.company()){
 		// 	window.location = '/login'

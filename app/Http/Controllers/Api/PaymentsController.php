@@ -46,9 +46,13 @@ class PaymentsController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        $data             = $request->all();
+        // \Log::debug('88888dasdf');
+        // dd('dksjhfdskj');
+        $data = $request->all();
+        // \Log::debug($data);
+        dd($data);
         $provider         = new ExpressCheckout;
-        // $checkout_details = $provider->getExpressCheckoutDetails($request->token);
+        $checkout_details = $provider->getExpressCheckoutDetails($request->token);
         $response         = $provider->doExpressCheckoutPayment($data, $request->token, $request->PayerID);
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
             $payment                         = new Payment;

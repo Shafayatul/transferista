@@ -4,7 +4,7 @@
     <side-bar></side-bar>
     <!-- Sidebar -->
     <!--Main layout-->
-    <router-view></router-view>
+    <router-view ></router-view>
   <!--Main layout-->
 
 </div>
@@ -16,9 +16,12 @@ import ProfileLayout from '../layers/ProfileLayout'
 export default {
     data(){
         return{
-            lat:null,
-            lng:null,
-            user:null
+            user_id:null,
+            form:{
+                transferista_id:null,
+                lat:null,
+                lng:null
+            }
         }
     },
     components:{
@@ -34,7 +37,16 @@ export default {
                     this.form.lng = position.coords.longitude;
                     // document.getElementById("result").innerHTML = positionInfo;
                 }.bind(this));
-
+                axios.get('api/user-details')
+                .then(res=>{
+                    this.user_id = res.data.user.id
+                })
+                .catch(eror=>console.log(error))
+                axios.get(`api/drivers/${this.user_id}`)
+                .then(res=>this.form.transferista_id = res.data.driver.transferista_id)
+                .catch(eror=>console.log(error))
+                 
+                axios.post('/api/position',this.form)
             } else {
                 alert("Sorry, your browser does not support HTML5 geolocation.");
             }
@@ -42,6 +54,9 @@ export default {
         }
     },
     created(){
+        // axios.get('/api/user-details')
+        // .then(res=> this.user=res.data.user)
+        // .catch(error =>console.log(error))
         if(User.employee() || User.driver()){
             this.location()
         }
@@ -55,3 +70,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+#profile-body{
+ background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
+}
+</style>

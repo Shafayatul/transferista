@@ -16,7 +16,7 @@ use App\Events\SendPosition;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
-
+Route::post('payment/success', 'Api\PaymentsController@paymentSuccess');
 Route::group([
     'prefix' => 'password'
 ], function () {
@@ -69,7 +69,10 @@ Route::group(['middleware' => ['auth:api']], function() {
 
         Route::get('project/accept/{project_id}/{transferista_id}', 'Api\ProjectsController@acceptProject');
         Route::get('project/transfer/{project_id}', 'Api\ProjectsController@transferProject');
-        Route::get('payment/success', 'Api\PaymentsController@paymentSuccess');
+        // Route::get('payment/success', 'Api\PaymentsController@paymentSuccess');
+    });
+    Route::group(['middleware' => ['role:employee|driver']], function () {
+        Route::post('position', 'PositionsController@sendPosition');
     });
 
     Route::group(['middleware' => ['role:transferista']], function () {

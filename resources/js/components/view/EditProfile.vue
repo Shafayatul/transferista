@@ -1,27 +1,9 @@
+
+
+
 <template>
+
 <div>
-    <!-- Sidebar -->
-    <div class="sidebar-fixed position-fixed">
-
-        <a class="logo-wrapper waves-effect">
-        <img src="img/TransferistaC22b-A00aT03a-Z.png" class="img-fluid" alt="">
-        </a>
-
-        <div class="list-group list-group-flush">
-            <a href="dashbard.html" class="list-group-item active waves-effect">
-            <i class="fas fa-chart-pie mr-3"></i>Dashboard
-        </a>
-        <a href="profile.html" class="list-group-item list-group-item-action waves-effect">
-            <i class="fas fa-user mr-3"></i>Profile</a>
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
-            <i class="fas fa-table mr-3"></i>Tables</a>
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
-            <i class="fas fa-map mr-3"></i>Maps</a>
-        <a href="#" class="list-group-item list-group-item-action waves-effect">
-            <i class="fas fa-money-bill-alt mr-3"></i>Orders</a>
-        </div>
-
-    </div>
     <!-- Sidebar -->
     <!--Main layout-->
     <main class="pt-5 mx-lg-5">
@@ -38,14 +20,14 @@
                         </div>
                     </div>
                     <div class="col-md-6">
+                        <div v-show="success" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            Paassword changed successfully
+                            <button @click="success =!success" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                         <div class="profile-head">
-                            <h5>
-                                {{name}}
-                            </h5>
-                            <h6>
-                                Web Developer and Designer
-                            </h6>
-                            <p class="proile-rating">RANKINGS : <span>{{rank}}</span></p>
+                                {{user.first_name}} {{user.last_name}}
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -76,115 +58,217 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="tab-content profile-tab" id="myTabContent">
-                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                <div class="form-group row">
-                                    <label class="col-3 control-label">Last name </label>
-                                    <div class="col-9">
-                                        <input :disabled="flag" class="form-control" placeholder="Last name" data-type="string" data-original="islam" name="last_name" type="text" value="islam">
+                        <form>
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">First Name</label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model ="user.first_name" class="form-control" placeholder="First Name" data-type="string" data-original="islam" name="last_name" type="text">
+                                        </div>
                                     </div>
-                                </div>
-    
-                                <div class="form-group row">
-                                    <label class="col-3 control-label">Last name </label>
-                                    <div class="col-9">
-                                        <input :disabled="flag" class="form-control" placeholder="Last name" data-type="string" data-original="islam" name="last_name" type="text" value="islam">
+        
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Last name </label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.last_name" class="form-control" placeholder="Last name" data-type="string" data-original="islam" name="last_name" type="text" >
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-3 control-label">Last name </label>
-                                    <div class="col-9">
-                                        <input :disabled="flag" class="form-control" placeholder="Last name" data-type="string" data-original="islam" name="last_name" type="text" value="islam">
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Email</label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.email" class="form-control" placeholder="Email" data-type="string" data-original="islam" name="last_name" type="text" >
+                                        </div>
                                     </div>
-                                </div>
-    
-                                <div class="form-group row">
-                                    <label class="col-3 control-label">Last name </label>
-                                    <div class="col-9">
-                                        <input :disabled="flag" class="form-control" placeholder="Last name" data-type="string" data-original="islam" name="last_name" type="text" value="islam">
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Address</label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.user_info.address" class="form-control" placeholder="Address " data-type="string" data-original="islam" name="last_name" type="text">
+                                        </div>
                                     </div>
-                                </div>
-    
-                                <div class="form-group row">
-                                    <label class="col-3 control-label">Last name </label>
-                                    <div class="col-9">
-                                        <input :disabled="flag" class="form-control" placeholder="Last name" data-type="string" data-original="islam" name="last_name" type="text" value="islam">
+        
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Town </label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.user_info.town" class="form-control" placeholder="Town" data-type="string" data-original="islam" name="last_name" type="text">
+                                        </div>
                                     </div>
-                                </div>
-    
-                            </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Experience</label>
+        
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Country</label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.user_info.country" class="form-control" placeholder="Country" data-type="string" data-original="islam" name="last_name" type="text">
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
+        
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Company</label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.user_info.company" class="form-control" placeholder="Company" data-type="string" data-original="islam" name="last_name" type="text">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Hourly Rate</label>
+        
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Zip</label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.user_info.zip" class="form-control" placeholder="ZIP" data-type="string" data-original="islam" name="last_name" type="text">
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p>10$/hr</p>
+        
+        
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Phone</label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.user_info.phone" class="form-control" placeholder="Phone" data-type="string" data-original="islam" name="last_name" type="text">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Total Projects</label>
+        
+        
+                                    <div class="form-group row">
+                                        <label class="col-3 control-label">Paypal Account No:</label>
+                                        <div class="col-9">
+                                            <input :disabled="flag" v-model="user.user_info.paypal" class="form-control" placeholder="Account no" data-type="string" data-original="islam" name="last_name" type="text">
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <p>230</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>English Level</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>Expert</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Availability</label>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p>6 months</p>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <label>Your Bio</label><br/>
-                                        <p>Your detail description</p>
-                                    </div>
+                                    <button type="button" class="btn" @click="submit">Update</button>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </div> 
-    </main>
+        </div>
+    </main> 
   <!--Main layout-->
 
 </div>
 </template>
 <script>
-import ProfileLayout from '../layers/ProfileLayout'
+
+
+
+
 export default {
+
     data(){
         return {
-            flag: true
+            success:false,
+            flag: true,
+            user: {
+                user_info: {}
+            }
         }
     },
-    components:{
-        ProfileLayout 
+    methods:{
+        submit(){
+            axios.post('/api/user-info-update',this.user)
+            .then(res=>this.success=true )
+        }
     },
-    created(){
-        
-        this.$emit(`update:layout`, ProfileLayout)
+    beforeCreate(){
+        axios.get('/api/user-details')
+        .then(res=> {
+            this.user = res.data.user
+            })
+        .catch(error=> console.log(error))
     }
 }
 </script>
+
+<style scoped>
+body{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
+}
+.emp-profile{
+    padding: 3%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+}
+.profile-img{
+    text-align: center;
+}
+.profile-img img{
+    width: 70%;
+    height: 100%;
+}
+.profile-img .file {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+.profile-img .file input {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+.profile-head h5{
+    color: #333;
+}
+.profile-head h6{
+    color: #0062cc;
+}
+.profile-edit-btn{
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+.proile-rating{
+    font-size: 12px;
+    color: #818182;
+    margin-top: 5%;
+}
+.proile-rating span{
+    color: #495057;
+    font-size: 15px;
+    font-weight: 600;
+}
+.profile-head .nav-tabs{
+    margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+    font-weight:600;
+    border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+    border: none;
+    border-bottom:2px solid #0062cc;
+}
+.profile-work{
+    padding: 14%;
+    margin-top: -15%;
+}
+.profile-work p{
+    font-size: 12px;
+    color: #818182;
+    font-weight: 600;
+    margin-top: 10%;
+}
+.profile-work a{
+    text-decoration: none;
+    color: #495057;
+    font-weight: 600;
+    font-size: 14px;
+}
+.profile-work ul{
+    list-style: none;
+}
+.profile-tab label{
+    font-weight: 600;
+}
+.profile-tab p{
+    font-weight: 600;
+    color: #0062cc;
+}
+</style>

@@ -17,6 +17,9 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('location.{id}', function ($employee, $id) {
     return (int) $employee->id === (int) $id;
 });
+Broadcast::channel('positions', function () {
+    return true;
+});
 
 
 Broadcast::channel('chat.{id}', function ($id){

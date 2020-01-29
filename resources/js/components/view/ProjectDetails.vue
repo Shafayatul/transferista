@@ -48,8 +48,6 @@
                             </div>
                         </div>
                         <div class="orderand_share">
-                            <a class="order_btn" href="#">Bid Now</a>
-
                             <div class="socal_link">
                                 <p>Share:</p>
                                 <a href="#"> <i class="fa fa-facebook"></i> </a>
@@ -82,7 +80,7 @@
                                             <button class="btn btn-danger">Cancel</button>
                                             
                                         </div>
-                                        <p class="p">bid.created_at</p>
+                                    <p class="p">{{bid.created_at}}</p>
                                     </div>
                                 </div>
                                 <div  class="modal fade" :id="bid.bid_id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -113,7 +111,6 @@
     </div>
 </template>
 
-<script src="vue-google-maps.js"></script>
 <script>
 import confirm from './Confirm'
 import DashboardLayout from '../layers/DashboardLayout'
@@ -165,39 +162,39 @@ export default {
                     }
 				})
         },
-         getDirection(){
-            if(this.directionsDisplay== null){
-                this.directionsDisplay = new google.maps.DirectionsRenderer;
-            }
-            var directionsService = new google.maps.DirectionsService;
-            var start = {
-                lat: parseFloat(this.project.origin_lat),
-                lng: parseFloat(this.project.origin_lng)
-            };
-            var destination =  {
-                lat: parseFloat(this.project.destination_lat),
-                lng: parseFloat(this.project.destination_lng)
-            };
-            this.directionsDisplay.setMap(this.$refs.map.$mapObject);
+        //  getDirection(){
+        //     if(this.directionsDisplay== null){
+        //         this.directionsDisplay = new google.maps.DirectionsRenderer;
+        //     }
+        //     var directionsService = new google.maps.DirectionsService;
+        //     var start = {
+        //         lat: parseFloat(this.project.origin_lat),
+        //         lng: parseFloat(this.project.origin_lng)
+        //     };
+        //     var destination =  {
+        //         lat: parseFloat(this.project.destination_lat),
+        //         lng: parseFloat(this.project.destination_lng)
+        //     };
+        //     this.directionsDisplay.setMap(this.$refs.map.$mapObject);
             
-            // google maps API's direction service
-            function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
-                directionsService.route({
-                        origin: start,
-                        destination: destination,
-                        travelMode: 'DRIVING'
-                    }, function(response, status) {
-                    if (status === 'OK') {
-                        this.form.distance = response.routes[0].legs[0].distance.value
-                        directionsDisplay.setDirections(response);
+        //     // google maps API's direction service
+        //     function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
+        //         directionsService.route({
+        //                 origin: start,
+        //                 destination: destination,
+        //                 travelMode: 'DRIVING'
+        //             }, function(response, status) {
+        //             if (status === 'OK') {
+        //                 this.form.distance = response.routes[0].legs[0].distance.value
+        //                 directionsDisplay.setDirections(response);
                         
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                });
-            }
-            calculateAndDisplayRoute(directionsService,this.directionsDisplay,start,destination)
-        },
+        //             } else {
+        //                 window.alert('Directions request failed due to ' + status);
+        //             }
+        //         });
+        //     }
+        //     calculateAndDisplayRoute(directionsService,this.directionsDisplay,start,destination)
+        // },
         confirm(index){
             $(`#${ this.bids[index].id}`).modal('show');
         },
@@ -211,8 +208,8 @@ export default {
         }
     },
     created(){
-        this.id = this.$route.params.id
         this.$emit(`update:layout`,DashboardLayout)
+        this.id = this.$route.params.id
         axios.get(`/api/project-detail/${this.id}`)
         .then(res =>{
             this.project = res.data.project
@@ -222,7 +219,7 @@ export default {
             } 
             this.project_title = this.project.project_title;
             this.project_description = this.project.project_description;
-            this.getDirection()
+            // this.getDirection()
         })
         .catch(error=>console.log(error))
 

@@ -1,49 +1,48 @@
 <template>
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
-            <div class="container emp-profile">
-                <table class="table table-striped">
-                    <tbody>
-                        <tr>
-                            <td colspan="1">
+            <div class="container emp-profile">               
                             <form class="well form-horizontal" @submit.prevent="create">
                                 <fieldset>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">First Name</label>
-                                        <div class="col-md-8 inputGroupContainer">
+                                    <div class="form-group d-flex">
+                                        <label class="col-md-3 control-label">First Name</label>
+                                        <div class="col-md-9 inputGroupContainer">
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input v-model="form.first_name" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">Last Name</label>
-                                        <div class="col-md-8 inputGroupContainer">
+                                    <div class="form-group d-flex">
+                                        <label class="col-md-3 control-label">Last Name</label>
+                                        <div class="col-md-9 inputGroupContainer">
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <input v-model="form.last_name" id="addressLine1" name="addressLine1" placeholder="Last name" class="form-control" required="true"  type="text"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">Email</label>
-                                        <div class="col-md-8 inputGroupContainer">
+                                    <div class="form-group d-flex">
+                                        <label class="col-md-3 control-label">Email</label>
+                                        <div class="col-md-9 inputGroupContainer">
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <input v-model="form.email" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-md-4 control-label">Phone Number</label>
-                                        <div class="col-md-8 inputGroupContainer">
+                                    <div class="form-group d-flex">
+                                        <label class="col-md-3 control-label">Phone Number</label>
+                                        <div class="col-md-9 inputGroupContainer">
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <input v-model="form.phone" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
                                         </div>
                                     </div>
-                                    <button type="submit" >Enter</button>
+                                     <div class="form-group d-flex">
+                                        <label class="col-md-3 control-label">
+                                        </label>
+                                        <div class="col-md-9">   
+                                       <button class="btn btn-primary " type="submit" >Enter</button>
+                                     </div>
+                                     </div>
                                 </fieldset>
                             </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="panel panel-primary">
+                           
+                <div class="panel panel-primary m-2">
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-list"></span>Sortable Lists
                         <div class="pull-right action-buttons">
@@ -59,7 +58,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel-body">
+                    <div class="panel-body m-2">
                         <ul class="list-group">
                             <div v-for="(driver,index) in showed" :key="index">
                                 <li class="list-group-item">
@@ -88,7 +87,7 @@
                             </div>
                         </ul>
                     </div>
-                    <div class="panel-footer">
+                    <div class="panel-footer m-2">
                         <div class="row">
                             <div class="col-md-6">
                                 <h6>
@@ -161,6 +160,10 @@ export default {
             .then(res=>{
                     console.log(res)
                     this.showed.unshift(this.form)
+                    this.form.first_name = '';
+                    this.form.last_name = '';
+                    this.form.email = '';
+                    this.form.phone = '';
                 }
             ).catch(error=>console.log(error))
         },

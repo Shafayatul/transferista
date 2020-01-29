@@ -3,6 +3,9 @@
     <nav class="navbar navbar-expand-md  navbar-light">
         <div class="container">
             
+            <a class="navbar-brand" href="index.html">
+                <img src="localhost:8000/img/TransferistaC22b-A00aT03a-Z.png">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -18,7 +21,7 @@
                 
                 <!-- Right -->
                 <ul class="navbar-nav nav-flex-icons"> 
-                    <li class="nav-item dropdown dropper">
+                    <!-- <li class="nav-item dropdown dropper">
                         <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell">Notifications</i>
                         </a>
@@ -77,15 +80,17 @@
                                 <a href="" class="text-light">View All</a>
                             </li>
                         </ul>
-                    </li>
+                    </li> -->
+                    <!-- <li>{{process.env.MIX_APP_NAME}}</li> -->
+
                     <li class="dropdown  nav-item">
                             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user" aria-expanded="true">
-                        <img alt="image" src="img/avatar-1.png" class="rounded-circle mr-1">
-                        <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
+                        <!-- <img alt="image" src="http:://localhost:8000/img/avatar-1.png" class="rounded-circle mr-1"> -->
+                        <div class="d-sm-none d-lg-inline-block">{{name}}</div></a>
                         <div class="dropdown-menu dropdown-menu-right ">
-                            <div class="dropdown-title">
+                            <!-- <div class="dropdown-title">
                                 Logged in 5 min ago
-                            </div>
+                            </div> -->
                             <router-link v-for="item in items" :key="item.title" :to="item.to" v-show="item.show">
                                 <a href="#" class="dropdown-item has-icon text-danger">
                                     <i class="fas fa-sign-out-alt"></i> {{item.title}}
@@ -116,9 +121,9 @@ export default {
         }
     },
     computed:{
-        // logout(){
-        //     return User.loggedIn();
-        // }
+        name(){
+            return localStorage.getItem('user')
+        }
     },
     methods:{
         // loggedout(){

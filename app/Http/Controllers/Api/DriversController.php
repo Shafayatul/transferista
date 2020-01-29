@@ -70,7 +70,7 @@ class DriversController extends Controller
         $driver->save();
 
         $email = $request->email;
-        Mail::to($email)->send(new employeeLoginInfo($email, $password));
+        // Mail::to($email)->send(new driverLoginInfo($email, $password));
 
         return response()->json([
             'message' => 'Successfully created driver!'

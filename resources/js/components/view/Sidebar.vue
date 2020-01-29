@@ -6,10 +6,10 @@
         </a>
 
         <div class="list-group list-group-flush">
-            <router-link v-for="item in items" :key="item.title" :to="item.to" v-show="item.show">
-                <a href="dashbard.html" class="list-group-item active waves-effect">
+            <router-link class="list-group-item  waves-effect" v-for="item in items" :key="item.title" :to="item.to" v-show="item.show">
+                
                     <i class="fas fa-chart-pie mr-3"></i>{{item.title}}
-                </a>
+               
             </router-link>
         </div>
 
@@ -22,13 +22,14 @@ export default {
             items:[
                 {title: 'Profile',to:'/profile/user',show: true},
                 {title: 'Change Password',to:'/profile/credentials',show: true},
-                {title: 'Emplyees',to:'/profile/employees',show: (User.company() || User.transferista())},
+                {title: 'Employees',to:'/profile/employees',show: (User.company() || User.transferista())},
+                {title: 'Add Project',to:'/project/create',show: (User.company() ||User.customer())},
+                {title: 'My Projects',to:'/profile/projects',show: (User.company() || User.transferista() ||User.customer())},
                 {title: 'Drivers',to:'/profile/drivers',show: (User.company() || User.transferista())},
                 {title: 'Cars',to:'/profile/cars',show: (User.company() || User.transferista())},
-                {title: 'My Projects',to:'/profile/cars',show: (User.company() || User.customer())},
-                {title: 'Active Members',to:'/profile/cars',show: (User.company() || User.transferista())},
+                {title: 'Active Drivers',to:'/profile/positions',show: (User.transferista())},
                 {title: 'Login',to:'/login',show: !User.loggedIn()},
-
+                {title: 'Edit',to:'/profile/edit-customer',show: User.loggedIn()},
                 
             ]
         }

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\AdaptivePayments;
+use App\Http\Resources\ProjectResource;
 
 class ProjectsController extends Controller
 {
@@ -27,9 +28,7 @@ class ProjectsController extends Controller
             $projects = Project::latest()->get();
         }
         
-        return response()->json([
-            'projects' => $projects
-        ]);
+        return ProjectResource::collection($projects);
     }
 
     public function store(Request $request)

@@ -131,18 +131,18 @@ class UsersController extends Controller
         $user->save();
 
         $user_info                = UserInformation::where('user_id', $user->id)->first();
-        $user_info->address       = $request->address;
-        $user_info->zip           = $request->zip;
-        $user_info->town          = $request->town;
-        $user_info->country       = $request->country;
-        $user_info->company       = $request->company;
-        $user_info->phone         = $request->phone;
-        $user_info->email_company = $request->email_company;
-        $user_info->vat           = $request->vat;
-        $user_info->iban          = $request->iban;
-        $user_info->bic           = $request->bic;
-        $user_info->url           = $request->url;
-        $user_info->paypal        = $request->paypal;
+        $user_info->address       = $request->user_info['address'];
+        $user_info->zip           = $request->user_info['zip'];
+        $user_info->town          = $request->user_info['town'];
+        $user_info->country       = $request->user_info['country'];
+        $user_info->company       = $request->user_info['company'];
+        $user_info->phone         = $request->user_info['phone'];
+        $user_info->email_company = $request->user_info['email_company'];
+        $user_info->vat           = $request->user_info['vat'];
+        $user_info->iban          = $request->user_info['iban'];
+        $user_info->bic           = $request->user_info['bic'];
+        $user_info->url           = $request->user_info['url'];
+        $user_info->paypal        = $request->user_info['paypal'];
         $user_info->save();
         return response()->json([
             'user'    => $user_info,

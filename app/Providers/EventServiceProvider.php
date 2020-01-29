@@ -24,6 +24,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\GetLocation' => [
             'App\Listeners\LocationListener',
         ],
+        'App\Events\Positions' => [
+            'App\Listeners\PositionsListener',
+        ],
     ];
 
     /**

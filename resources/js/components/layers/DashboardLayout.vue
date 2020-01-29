@@ -26,14 +26,14 @@
                             <a href="tel:+8812345678">+88 012 345 678</a>
                         </li>
                         <li>
-                            <a href="mailto:support@rixio.com">support@rixio.com</a>
+                            <a href="mailto:support@rixio.com">support@mail.com</a>
                         </li>
                         <li>
-                            <a href="mailto:info@rixio.com">info@rixio.com</a>
+                            <a href="mailto:info@rixio.com">info@mail.com</a>
                         </li>
                         <li>
                             <p>
-                                Khan Jahan Ali Road, Khulna, Bangladesh.
+                                dhaka bangladesh , Bangladesh.
                             </p>
                         </li>
                     </ul>

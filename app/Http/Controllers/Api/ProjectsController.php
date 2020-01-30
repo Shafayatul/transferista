@@ -224,6 +224,9 @@ class ProjectsController extends Controller
         $project                 = Project::findOrFail($project_id);
         $project->project_status = 3;
         $project->save();
+
+        
+
         return response()->json([
             'message' => 'Project delivered..!'
         ], 201);

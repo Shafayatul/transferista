@@ -20,8 +20,10 @@ class SendPosition implements ShouldBroadcast
      * @return void
      */
     public $location;
-    public function __construct($location)
+    public $project_id;
+    public function __construct($location,$project_id)
     {
+        $this->project_id = $project_id;
         $this->location = $location;
     }
 
@@ -32,6 +34,6 @@ class SendPosition implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('location');
+        return new PrivateChannel('location');
     }
 }

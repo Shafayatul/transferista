@@ -23,6 +23,7 @@
 
 import DashboardLayout from './layers/DashboardLayout'
 export default {
+    props:['project_id'],
     data(){
         return{
             center: { lat: 45.508, lng: -73.587 },
@@ -31,24 +32,40 @@ export default {
                 lng: null
             },
             center2: {
-                lat: 23.8103,
-                lng: 90.4125
+                lat: null,
+                lng: null
             },
             marker: null,
             places: [],
-            origin: null,
-            destination: null,
+            origin: {},
+            destination: {},
             directionsDisplay : null
         }
     },
-    computed:{
-        // markerSet(){
-        // Echo.channel('location')
-        // .listen('SendPosition', (e) => {
-        //     this.center1.lng  = e.location.lng
-        //     this.center.lat = e.location.lat
-        // });
-        // }
+    computed:{ 
+        location(){
+             if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    console.log(position);
+                    this.form.lat = position.coords.latitude; 
+                    this.form.lng = position.coords.longitude;
+                    // document.getElementById("result").innerHTML = positionInfo;
+                }.bind(this));
+                axios.get('api/user-details')
+                .then(res=>{
+                    this.user_id = res.data.user.id
+                })
+                .catch(eror=>console.log(error))
+                axios.get(`api/drivers/${this.user_id}`)
+                .then(res=>this.form.transferista_id = res.data.driver.transferista_id)
+                .catch(error=>console.log(error))
+                 
+                axios.post('/api/position',this.form)
+            } else {
+                alert("Sorry, your browser does not support HTML5 geolocation.");
+            }
+    
+        }
     },
     methods:{
         updatePath(e){
@@ -89,18 +106,22 @@ export default {
             calculateAndDisplayRoute(directionsService,this.directionsDisplay, start, destination);
         
         }
+
     },
     created(){
-        // this.$emit(`update:layout`,DashboardLayout)
-        // Echo.channel('location')
-        // .listen('SendPosition', (e) => {
-        //     this.center1  = e.location
-        // });
+        axios.post(`/api/projects/${this.project_id}`)
+        .then(res=>{
+                this.center2.lat = res.data.destination_lat
+                this.center2.lng = res.data.destination_lng
+        })
     },
     mounted(){
-        Echo.channel('location')
+        Echo.private('location')
         .listen('SendPosition', (e) => {
-            this.updatePath(e)
+            if(this.project_id == e.project_id ){
+                this.updatePath(e)
+                
+            }
         });
         // this.$refs.map.$mapPromise.then((map) => {
         //     map.panTo(this.center)

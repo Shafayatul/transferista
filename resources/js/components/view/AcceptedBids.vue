@@ -1,15 +1,14 @@
 <template>
-    
     <main class="pt-5 mx-lg-5 " style="height:100vh;">
         <div class="container-fluid mt-5">
             <div class="container emp-profile">
                 <div v-show="noBids" class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>You haven't submitted any project</strong> 
+                    <strong>No bids has been accepted yet</strong> 
                 </div>
                 <div class="mr_card" v-for="(data,index) in projects" :key="index">
-                    <div class="mr_card_body">
+                    <div  class="mr_card_body">
                         <div class="offset-1">
-                            <div class="p-box row ">											
+                            <div class="p-box row">											
                                 <a @click=singleProject(data.id) class="p col-md-9">
                                     <h5 class="fonts-title">{{data.project_title}}<br><small>Posted {{ data.created_at }}</small></h5>
                                     <span class="body-color">
@@ -18,9 +17,8 @@
                                 </a>
                                 <ul class="col-md-3 text-center">
                                     <li class="mb-2"><small>10 bids</small></li>
-                                    <li class="mb-2"><button v-show="flag" class="btn btn-success " @click="modal(index)"><a class="font-color" >Bid Now</a></button></li>
+                                    <!-- <li class="mb-2"><button v-show="flag" class="btn btn-success " @click="modal(index)"><a class="font-color" >Bid Now</a></button></li> -->
                                 </ul>
-
                             </div>
                             <div class=" d-flex ">											
                                 <p class="sr col-md-4">
@@ -39,12 +37,10 @@
                                 <p class="col-md-4">Review</p>
                             </div>
                         </div>
-                        
                     </div>
-                    
-                    <div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <bid  :bid="bid" :data="data"></bid>
-                    </div>
+                    <!-- <div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <SetDriver  :bid="bid" :data="data"></SetDriver>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -62,7 +58,6 @@ export default {
     ,
     methods:{
         singleProject(d){
-			console.log(d)
 			const id = d
 			this.$router.push({name: 'singleProject',params:{
 				id: id
@@ -76,9 +71,9 @@ export default {
         
     },
     created(){
-		axios.get('/api/projects')
+		axios.get('/api/bids')
 		.then(res =>{ 
-            this.projects = res.data.data
+            this.projects = res.data.bids.project
             if(this.projects.length == 0){
                 this.noBids = true
             }
@@ -93,6 +88,3 @@ export default {
     }
 }
 </script>
-<style scoped>
-
-</style>

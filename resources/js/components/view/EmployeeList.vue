@@ -2,45 +2,57 @@
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
             <div class="container emp-profile">               
-                            <form class="well form-horizontal" @submit.prevent="create">
-                                <fieldset>
-                                    <div class="form-group d-flex">
-                                        <label class="col-md-3 control-label">First Name</label>
-                                        <div class="col-md-9 inputGroupContainer">
-                                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input v-model="form.first_name" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group  d-flex">
-                                        <label class="col-md-3 control-label">Last Name</label>
-                                        <div class="col-md-9 inputGroupContainer">
-                                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                        <input v-model="form.last_name" id="addressLine1" name="addressLine1" placeholder="Last name" class="form-control" required="true"  type="text"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex">
-                                        <label class="col-md-3 control-label">Phone Number</label>
-                                        <div class="col-md-9 inputGroupContainer">
-                                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                        <input v-model="form.phone" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex">
-                                        <label class="col-md-3 control-label">Email</label>
-                                        <div class="col-md-9 inputGroupContainer">
-                                        <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                        <input v-model="form.email" id="city" name="city" placeholder="Email" class="form-control" required="true" type="text"></div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group d-flex">
-                                        <label class="col-md-3 control-label"></label>
-                                        <div class="col-md-9">
-                                       <button class="btn btn-primary" type="submit" >Enter</button>
-                                        </div>
-                                    </div>   
-                                </fieldset>
-                            </form>
-                        
+                <form class="well form-horizontal" @submit.prevent="create">
+                    <fieldset>
+                        <div class="form-group d-flex">
+                            <label class="col-md-3 control-label">First Name</label>
+                            <div class="col-md-9 inputGroupContainer">
+                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input v-model="form.first_name" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
+                            </div>
+                        <span v-if="errors.password" class="help-block" role="alert">
+                            <strong>{{errors.password[0]}}</strong>
+                        </span>
+                        </div>
+                        <div class="form-group  d-flex">
+                            <label class="col-md-3 control-label">Last Name</label>
+                            <div class="col-md-9 inputGroupContainer">
+                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input v-model="form.last_name" id="addressLine1" name="addressLine1" placeholder="Last name" class="form-control" required="true"  type="text"></div>
+                            </div>
+                            <span v-if="errors.last_name" class="help-block" role="alert">
+                                <strong>{{errors.last_name[0]}}</strong>
+                            </span>
+                        </div>
+                        <div class="form-group d-flex">
+                            <label class="col-md-3 control-label">Phone Number</label>
+                            <div class="col-md-9 inputGroupContainer">
+                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input v-model="form.phone" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
+                            </div>
+                            <span v-if="errors.phone" class="help-block" role="alert">
+                                <strong>{{errors.phone[0]}}</strong>
+                            </span>
+                        </div>
+                        <div class="form-group d-flex">
+                            <label class="col-md-3 control-label">Email</label>
+                            <div class="col-md-9 inputGroupContainer">
+                            <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                            <input v-model="form.email" id="city" name="city" placeholder="Email" class="form-control" required="true" type="text"></div>
+                            </div>
+                            <span v-if="errors.email" class="help-block" role="alert">
+                                <strong>{{errors.email[0]}}</strong>
+                            </span>
+                        </div>
+                        <div class="form-group d-flex">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="col-md-9">
+                            <button class="btn btn-primary" type="submit" >Enter</button>
+                            </div>
+                        </div>   
+                    </fieldset>
+                </form>
+            
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <span class="glyphicon glyphicon-list"></span>Sortable Lists
@@ -116,7 +128,8 @@ export default {
             },
             errors:{},
             employees:[],
-            showed:[]
+            showed:[],
+            first:{}
         }
     },
     components:{
@@ -130,7 +143,12 @@ export default {
         axios.get('/api/employees')
         .then(res=>{
                 this.employees = res.data.employees
-                this.showed = this.employees.reverse()
+                this.showed = this.employees.slice()
+                for(var i=0;i<this.showed.length;i++){
+                    var obj = Object.assign({},this.showed[i])
+                    this.showed[i]=obj
+                }
+                this.showed = this.showed.reverse()
             })
     },
     methods: {
@@ -140,7 +158,12 @@ export default {
                  axios.get('/api/employees')
                     .then(res=>{
                         this.employees = res.data.employees
-                        this.showed = this.employees.reverse()
+                        this.showed = this.employees.slice()
+                        for(var i=0;i<this.showed.length;i++){
+                            var obj = Object.assign({},this.showed[i])
+                            this.showed[i]=obj
+                        }
+                        this.showed = this.showed.reverse()
                     })
                     .catch(error=>this.errors=error.response.data.errors)
                 }
@@ -149,8 +172,10 @@ export default {
         create() {
             axios.post('/api/employees',this.form)
             .then(res=>{
-                    console.log(res)
-                    this.showed.unshift(this.form)
+                    // console.log(res)
+                    this.first = Object.assign({},this.form)
+                    console.log(this.first)
+                    this.showed.unshift(this.first)
                     this.form.first_name ='';
                     this.form.last_name ='';
                     this.form.email ='';
@@ -159,15 +184,15 @@ export default {
             ).catch(error=>console.log(error))
         },
         trash(index) {
-            axios.post(`/api/employees/${employees[index].id}`,this.form)
+            if(this.showed[index].id==null){
+                // console.log(this.showed[index].length)
+                this.showed.splice(index,1)
+            }
+            // console.log(this.employees[index].id)
+            axios.post(`/api/employees/${this.showed[index].id}`,this.form)
             .then(res=>{
-                     axios.get('/api/employees')
-                    .then(res=>{
-                        this.employees = res.data.employees
-                        this.showed = this.employees.reverse()
-                    })
-                    .catch(error=>this.errors=error.response.data.errors)
-                }
+                this.showed.splice(index,1)
+            }
             ).catch(error=>this.errors=error.response.data.errors)
         },
          edit(index) {

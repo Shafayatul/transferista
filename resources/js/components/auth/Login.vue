@@ -18,6 +18,9 @@
                                 <strong>{{errors.email[0]}}</strong>
                             </span>
                         </div>
+                        <span v-if="errors.email" class="help-block" role="alert">
+                            <strong>{{errors.email[0]}}</strong>
+                        </span>
                     </div>
                 </div>
                 
@@ -27,6 +30,9 @@
                         <div class="input-group">
                             <input v-model="form.password" class="input--style-5" type="password" name="password">
                         </div>
+                        <span v-if="errors.password" class="help-block" role="alert">
+                            <strong>{{errors.password[0]}}</strong>
+                        </span>
                     </div>
                 </div>
                 <div class="form-row">
@@ -66,6 +72,7 @@ export default {
     methods:{
         login(){
             User.login(this.form)
+            .catch(error=>this.errors= error.data.response.errors)
         }
         
     },

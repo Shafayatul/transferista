@@ -3,7 +3,7 @@
 
 <template>
 
-<div>
+<div id="profile-design">
     <!-- Sidebar -->
     <!--Main layout-->
     <main class="pt-5 mx-lg-5">
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-6">
                         <div v-show="success" class="alert alert-warning alert-dismissible fade show" role="alert">
-                            Paassword changed successfully
+                            Profile Updated Successfully
                             <button @click="success =!success" type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -176,8 +176,11 @@ export default {
 </script>
 
 <style scoped>
-body{
+#profile-design{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
+}
+main{
+    padding-left: 270px;
 }
 .emp-profile{
     padding: 3%;

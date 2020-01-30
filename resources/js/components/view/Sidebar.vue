@@ -1,15 +1,14 @@
 <template>
     <div class="sidebar-fixed position-fixed">
 
-        <a class="logo-wrapper waves-effect">
-        <img src="img/TransferistaC22b-A00aT03a-Z.png" class="img-fluid" alt="">
-        </a>
+        <div class="logo-wrapper waves-effect">
+            <img :src="'/img/TransferistaC22b-A00aT03a-Z.png'" class="img-fluid" alt="">
+        </div>
 
         <div class="list-group list-group-flush">
             <router-link class="list-group-item  waves-effect" v-for="item in items" :key="item.title" :to="item.to" v-show="item.show">
                 
                     <i class="fas fa-chart-pie mr-3"></i>{{item.title}}
-               
             </router-link>
         </div>
 
@@ -25,11 +24,12 @@ export default {
                 {title: 'Employees',to:'/profile/employees',show: (User.company() || User.transferista())},
                 {title: 'Add Project',to:'/project/create',show: (User.company() ||User.customer())},
                 {title: 'My Projects',to:'/profile/projects',show: (User.company() || User.transferista() ||User.customer())},
-                {title: 'Drivers',to:'/profile/drivers',show: (User.company() || User.transferista())},
-                {title: 'Cars',to:'/profile/cars',show: (User.company() || User.transferista())},
+                {title: 'Drivers',to:'/profile/drivers',show: ( User.transferista())},
+                {title: 'Cars',to:'/profile/cars',show: ( User.transferista())},
                 {title: 'Active Drivers',to:'/profile/positions',show: (User.transferista())},
                 {title: 'Login',to:'/login',show: !User.loggedIn()},
                 {title: 'Edit',to:'/profile/edit-customer',show: User.loggedIn()},
+                // {title: 'Accepted Bids',to:'/profile/edit-customer',show: User.transferista()},
                 
             ]
         }

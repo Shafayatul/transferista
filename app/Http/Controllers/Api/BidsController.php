@@ -22,7 +22,7 @@ class BidsController extends Controller
 
     public function index()
     {
-        $bids = Bid::where('transferista_id', Auth::id())->get();
+        $bids = Bid::where('transferista_id', Auth::id())->with('project')->where('bid_status',0)->get();
         return response()->json([
             'bids' => $bids
         ]);

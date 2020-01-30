@@ -10,6 +10,10 @@
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input v-model="form.first_name" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
                                         </div>
+                                        
+                                        <span v-if="errors.first_name" class="help-block" role="alert">
+                                            <strong>{{errors.first_name[0]}}</strong>
+                                        </span>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label class="col-md-3 control-label">Last Name</label>
@@ -17,6 +21,10 @@
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <input v-model="form.last_name" id="addressLine1" name="addressLine1" placeholder="Last name" class="form-control" required="true"  type="text"></div>
                                         </div>
+                                        
+                                        <span v-if="errors.last_name" class="help-block" role="alert">
+                                            <strong>{{errors.last_name[0]}}</strong>
+                                        </span>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label class="col-md-3 control-label">Email</label>
@@ -24,6 +32,10 @@
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <input v-model="form.email" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
                                         </div>
+                                        
+                                        <span v-if="errors.email" class="help-block" role="alert">
+                                            <strong>{{errors.email[0]}}</strong>
+                                        </span>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label class="col-md-3 control-label">Phone Number</label>
@@ -31,6 +43,10 @@
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <input v-model="form.phone" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
                                         </div>
+                                        
+                                        <span v-if="errors.phone" class="help-block" role="alert">
+                                            <strong>{{errors.phone[0]}}</strong>
+                                        </span>
                                     </div>
                                      <div class="form-group d-flex">
                                         <label class="col-md-3 control-label">
@@ -138,18 +154,23 @@ export default {
         this.$emit('update:layout',ProfileLayout)
         axios.get('/api/drivers')
         .then(res=>{
-                this.drivers = res.data.drivers
-                this.showed = this.drivers.reverse()
-            })
+            this.drivers = res.data.drivers
+            this.showed = this.drivers.reverse()
+        })
     },
     methods: {
         update(driver) {
-            axios.post(`/api/drivers/${driver.id}`,driver)
+            axios.post('/api/driver-update',driver)
             .then(res=>{
                  axios.get('/api/drivers')
                     .then(res=>{
                         this.drivers = res.data.drivers
-                        this.showed = this.drivers.reverse()
+                        this.showed = this.drivers.slice()
+                        for(var i=0;i<this.showed.length;i++){
+                            var obj = Object.assign({},this.showed[i])
+                            this.showed[i]=obj
+                        }
+                        this.showed = this.showed.reverse()
                     })
                     .catch(error=>this.errors=error.response.data.errors)
                 }
@@ -158,25 +179,27 @@ export default {
         create() {
             axios.post('/api/drivers',this.form)
             .then(res=>{
-                    console.log(res)
-                    this.showed.unshift(this.form)
-                    this.form.first_name = '';
-                    this.form.last_name = '';
-                    this.form.email = '';
-                    this.form.phone = '';
+                    // console.log(res)
+                    this.first = Object.assign({},this.form)
+                    console.log(this.first)
+                    this.showed.unshift(this.first)
+                    this.form.first_name ='';
+                    this.form.last_name ='';
+                    this.form.email ='';
+                    this.form.phone ='';
                 }
             ).catch(error=>console.log(error))
         },
         trash(index) {
-            axios.post(`/api/drivers/${drivers[index].id}`,this.form)
+            if(this.showed[index].id==null){
+                // console.log(this.showed[index].length)
+                this.showed.splice(index,1)
+            }
+            // console.log(this.drivers[index].id)
+            axios.post(`/api/drivers/${this.showed[index].id}`,this.form)
             .then(res=>{
-                     axios.get('/api/drivers')
-                    .then(res=>{
-                        this.drivers = res.data.drivers
-                        this.showed = this.drivers.reverse()
-                    })
-                    .catch(error=>this.errors=error.response.data.errors)
-                }
+                this.showed.splice(index,1)
+            }
             ).catch(error=>this.errors=error.response.data.errors)
         },
          edit(index) {

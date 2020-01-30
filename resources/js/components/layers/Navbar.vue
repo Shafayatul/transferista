@@ -3,8 +3,8 @@
     <nav class="navbar navbar-expand-md  navbar-light">
         <div class="container">
             
-            <a class="navbar-brand" href="index.html">
-                <img src="localhost:8000/img/TransferistaC22b-A00aT03a-Z.png">
+            <a class="navbar-brand"  >
+                <img :src="'/img/TransferistaC22b-A00aT03a-Z.png'">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,7 +85,7 @@
 
                     <li class="dropdown  nav-item">
                             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user" aria-expanded="true">
-                        <!-- <img alt="image" src="http:://localhost:8000/img/avatar-1.png" class="rounded-circle mr-1"> -->
+                        <img alt="image" :src="'/img/avatar-1.png'" class="rounded-circle mr-1">
                         <div class="d-sm-none d-lg-inline-block">{{name}}</div></a>
                         <div class="dropdown-menu dropdown-menu-right ">
                             <!-- <div class="dropdown-title">

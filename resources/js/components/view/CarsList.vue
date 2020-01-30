@@ -10,6 +10,10 @@
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                                         <input v-model="form.brand" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
                                         </div>
+                                        
+                                        <span v-if="errors.brand" class="help-block" role="alert">
+                                            <strong>{{errors.brand[0]}}</strong>
+                                        </span>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label class="col-md-3 control-label">Type</label>
@@ -17,6 +21,10 @@
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <input v-model="form.type" id="addressLine1" name="addressLine1" placeholder="Last name" class="form-control" required="true"  type="text"></div>
                                         </div>
+                                        
+                                        <span v-if="errors.type" class="help-block" role="alert">
+                                            <strong>{{errors.type[0]}}</strong>
+                                        </span>
                                     </div>
                                     <div class="form-group d-flex">
                                         <label class="col-md-3 control-label">Number Plate</label>
@@ -24,6 +32,10 @@
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
                                         <input v-model="form.plate" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
                                         </div>
+                                        
+                                        <span v-if="errors.plate" class="help-block" role="alert">
+                                            <strong>{{errors.plate[0]}}</strong>
+                                        </span>
                                     </div>
                                      <div class="form-group d-flex">
                                        <div class="col-md-3"></div>
@@ -127,7 +139,13 @@ export default {
         axios.get('/api/cars')
         .then(res=>{
                 this.cars = res.data.cars
-                this.showed = this.cars.reverse()
+                this.showed = this.cars.slice()
+                for(var i=0;i<this.showed.length;i++){
+                    var obj = Object.assign({},this.showed[i])
+                    this.showed[i] = obj
+                }
+                this.showed = this.showed.reverse()
+
             })
     },
     methods: {
@@ -137,7 +155,12 @@ export default {
                  axios.get('/api/cars')
                     .then(res=>{
                         this.cars = res.data.cars
-                        this.showed = this.cars.reverse()
+                        this.showed = this.cars.slice()
+                        for(var i=0;i<this.showed.length;i++){
+                            var obj = Object.assign({},this.showed[i])
+                            this.showed[i] = obj
+                        }
+                        this.showed = this.showed.reverse()
                     })
                     .catch(error=>this.errors=error.response.data.errors)
                 }
@@ -146,8 +169,13 @@ export default {
         create() {
             axios.post('/api/cars',this.form)
             .then(res=>{
-                    console.log(res)
-                    this.showed.unshift(this.form)
+                    // console.log(res)
+                    this.first = Object.assign({},this.form)
+                    console.log(this.first)
+                    this.showed.unshift(this.first)
+                    this.form.brand ='';
+                    this.form.type ='';
+                    this.form.plate ='';
                 }
             ).catch(error=>console.log(error))
         },

@@ -24,6 +24,7 @@ import CustomerEdit from '../components/view/EditProfile'
 import ChangePassword from '../components/view/ChangePassword'
 import PaypalData from '../components/view/Paypal'
 import MyProjects from '../components/view/MyProjects'
+import TransferistaList from '../components/view/TransferistaList'
 const routes = [
     {path:'/',component: AvailableProjects,meta: { auth: false, title: 'Project Details' }},
     {path:'/position',component: google},
@@ -42,12 +43,13 @@ const routes = [
         {path:'edit-customer',component: CustomerEdit, meta: { auth: true, title: 'Profile' }},
         {path:'credentials',component: ChangePassword, meta: { auth: true, title: 'Profile' }},    
         {path:'positions',component: markers,name:'list', meta: { auth: true, title: 'Profile' }},    
-        {path:'projects',component: MyProjects}
+        {path:'projects',component: MyProjects},
+        {path:'transferista',component: TransferistaList}
     ]},
     {path:'/customer/:role',component: UserCustomerForm, name: 'customer'},
     {path:'/form/:role',component: UserCompanyTransferistaForm, name: 'form'},
     {path:'/show',component: show},
-    {path:'/paypal',component: PaypalData}
+    {path:'/paypal',component: PaypalData},
 ];
 
 const router = new VueRouter({

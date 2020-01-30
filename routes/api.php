@@ -104,7 +104,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::group(['middleware' => ['role:company|customer|employee|transferista']], function () {
         Route::post('ratings', 'Api\RatingsController@store');
         Route::get('projects', 'Api\ProjectsController@index');
-        Route::get('transferista-detaiils-by-project-status', 'Api\ProjectsController@transferistaDetails');
+        Route::get('transferista-details-by-project-status', 'Api\ProjectsController@transferistaDetails');
     });
 
     // Route::group(['middleware' => ['role:company|customer|transferista']], function () {

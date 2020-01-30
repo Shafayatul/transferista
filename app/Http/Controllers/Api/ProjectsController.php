@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 
 use Auth;
 use App\Bid;
+use App\DriverToProject;
 use App\User;
 use App\Project;
 use Illuminate\Http\Request;
@@ -148,7 +149,6 @@ class ProjectsController extends Controller
             $project->save();
 
             return response()->json([
-                'transferista'=>$bid->user,
                 'vat' => $vat,
                 'vat_amount'=> $vat_amount
             ], 201);
@@ -158,6 +158,55 @@ class ProjectsController extends Controller
             ], 201);
         }
         
+    }
+
+    public function transferistaDetails()
+    {
+        $projects = Project::where('project_status', 1)->with('transferista')->get();
+        return response()->json([
+            'projects' => $projects
+        ]);
+    }
+
+    public function assignDriverToProject(Request $request)
+    {
+        $this->validate($request, [
+            'project_id' => 'required',
+            'driver_id' => 'required',
+            'car_id' => 'required',
+        ]);
+        
+        $driver_to_project                  = new DriverToProject;
+        $driver_to_project->transferista_id = Auth::id();
+        $driver_to_project->project_id      = $request->project_id;
+        $driver_to_project->driver_id       = $request->driver_id;
+        $driver_to_project->car_id          = $request->car_id;
+        $driver_to_project->save();
+
+        return response()->json([
+            'message' => 'Assign Completed'
+        ]);
+    }
+
+    public function getAssignDriverToProject()
+    {
+        $driver_to_projects = DriverToProject::where('transferista_id', Auth::id())->with('project', 'driver', 'car')->get();
+        return response()->json([
+            'driver_to_projects' => $driver_to_projects
+        ]);
+    }
+
+    public function updateAssignDriverToProject(Request $request, $id)
+    {
+        $driver_to_project                  = DriverToProject::findOrFail($id);
+        $driver_to_project->transferista_id = Auth::id();
+        $driver_to_project->driver_id       = $request->driver_id;
+        $driver_to_project->car_id          = $request->car_id;
+        $driver_to_project->save();
+
+        return response()->json([
+            'message' => 'Assign Updated'
+        ]);
     }
 
     public function transferProject($project_id)

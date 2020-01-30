@@ -15,6 +15,11 @@ class Project extends Model
         return $this->belongsTo(User::class,'project_owner_id');
     }
 
+    public function transferista()
+    {
+        return $this->belongsTo(User::class, 'transferista_id');
+    }
+
     public function bids()
     {
         return $this->hasMany(Bid::class, 'project_id');
@@ -23,5 +28,10 @@ class Project extends Model
     public function rating()
     {
         return $this->hasOne(Rating::class, 'project_id');
+    }
+
+    public function driverToProject()
+    {
+        return $this->hasOne(\App\DriverToProject::class, 'project_id');
     }
 }

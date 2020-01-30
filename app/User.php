@@ -81,4 +81,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Rating::class, 'transferista_id');
     }
+
+    public function driverToProject()
+    {
+        return $this->hasMany(\App\DriverToProject::class, 'transferista_id');
+    }
 }

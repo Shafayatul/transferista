@@ -2544,11 +2544,12 @@ __webpack_require__.r(__webpack_exports__);
     //     window.location = '/'
     // }
   },
-  beforeCreate: function beforeCreate() {// EventBus.$on('logout',()=>{
-    //     console.log('here')
-    //     User.logout()
-    //     window.location = '/'
-    // })
+  beforeCreate: function beforeCreate() {
+    EventBus.$on('logout', function () {
+      console.log('here');
+      User.logout();
+      window.location = '/';
+    });
   }
 });
 
@@ -2883,9 +2884,11 @@ __webpack_require__.r(__webpack_exports__);
       _this3.showed = res.data.data;
     })["catch"](function (error) {
       return console.log(error);
-    }); // if(User.customer() || User.company() ){
-    // 	this.flag = false
-    // }
+    });
+
+    if (User.customer() || User.company()) {
+      this.flag = false;
+    }
   }
 });
 

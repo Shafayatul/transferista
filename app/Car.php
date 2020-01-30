@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Car extends Model
 {
     use SoftDeletes;
+
+    public function driverToProject()
+    {
+        return $this->hasOne(\App\DriverToProject::class, 'car_id');
+    }
 }

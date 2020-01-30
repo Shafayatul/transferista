@@ -133,11 +133,11 @@ export default {
         // }
     },
     beforeCreate(){
-        // EventBus.$on('logout',()=>{
-        //     console.log('here')
-        //     User.logout()
-        //     window.location = '/'
-        // })
+        EventBus.$on('logout',()=>{
+            console.log('here')
+            User.logout()
+            window.location = '/'
+        })
     }
 }
 </script>

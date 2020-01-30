@@ -226,10 +226,10 @@ export default {
 			})
 		.catch(error=>console.log(error))
 
-		// if(User.customer() || User.company() ){
+		if(User.customer() || User.company() ){
 			
-		// 	this.flag = false
-		// }
+			this.flag = false
+		}
 		
     }
 }

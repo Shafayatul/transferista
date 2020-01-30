@@ -23,15 +23,19 @@ window.EventBus = new Vue();
 Vue.component('app-home', require('./components/AppHome.vue').default);
 
 import router from './router/router'
-
+// router.beforeEach((to, from, next) => {
+//   document.title = to.meta.title
+//   next()
+// })
 
 const app = new Vue({
     el: '#app',
     router,
     watch: {
       '$route' (to, from) {
-        document.title = to.meta.title || 'Your Website'
+        document.title = to.meta.title || 'Home'
       },
-      // immediate: true
+       deep: true,
+       immediate: true
     },
 });

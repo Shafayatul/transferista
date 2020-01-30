@@ -11,7 +11,8 @@
             <div class="panel panel-info">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Transferista Info</h3>
+                        Transferista Info
+                    </h3>
                 </div>
                 <ul class="list-group">
                     <a class="list-group-item">{{bid.bid_transferista_name}}</a>

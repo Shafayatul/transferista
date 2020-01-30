@@ -188,16 +188,16 @@ export default {
 			}
 			)
 		},
-		sortBy(value){
-			if(value == "latest"){
-				this.sortByDate()
-			}
-		},
-		sortByDate(){
-			this.showed.sort((a,b)=>{
-				return a.getTime() - b.getTime();
-			})
-		}
+		// sortBy(value){
+		// 	if(value == "latest"){
+		// 		this.sortByDate()
+		// 	}
+		// },
+		// sortByDate(){
+		// 	this.showed.sort((a,b)=>{
+		// 		return a.getTime() - b.getTime();
+		// 	})
+		// }
 		// itemClicked(){
 		// 	this.seleted = index;
 		// 	this.selectItem();
@@ -207,25 +207,22 @@ export default {
 		// 	this.visible = null;
 		// }
 	},
-	computed:{
-		// matches(){
-		// 	if(this.query == ''){
-		// 		return [];
-		// 	}
-		// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
-		// }
-	},
-	// beforeCreate(){
-	// 	if(!User.transferista()){
-	// 		window.location = '/login'
-	// 	}
+	// computed:{
+	// 	// matches(){
+	// 	// 	if(this.query == ''){
+	// 	// 		return [];
+	// 	// 	}
+	// 	// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
+	// 	// }
 	// },
+	
     created(){
-		this.$emit(`update:layout`,DashboardLayout)
+		// this.$emit(`update:layout`,DashboardLayout)
+		
 		axios.get('/api/project-list')
 		.then(res =>{ 
 			this.projects = res.data.data
-			this.showed = res.data.data
+			// this.showed = res.data.data
 			})
 		.catch(error=>console.log(error))
 

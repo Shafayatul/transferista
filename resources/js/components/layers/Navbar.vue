@@ -13,10 +13,7 @@
             
             <!-- Links -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left -->
-                <ul class="navbar-nav mr-auto">
                 
-                </ul>
                 
                 
                 <!-- Right -->
@@ -97,10 +94,10 @@
                                 </a>
                                 
                             </router-link>
-<!--                             
-                                <button @click="loggedout" href="#" v-if="logout" class="dropdown-item has-icon text-danger">
+                            
+                                <button  @click="loggedout" href="#" v-if="name" class="dropdown-item has-icon text-danger">
                                     <i class="fas fa-sign-out-alt"></i> Log-out
-                                </button> -->
+                                </button>
                                 
                         </div>
                     </li>
@@ -116,7 +113,6 @@ export default {
             items:[
                 {title:'Profile',to:'/profile/user',show: User.loggedIn()},
                 {title:'Login',to:'/login',show: !User.loggedIn()},
-                {title:'Log-out',to:'/logout',show: User.loggedIn()}
             ]
         }
     },
@@ -126,18 +122,18 @@ export default {
         }
     },
     methods:{
-        // loggedout(){
-        //     console.log('here')
-        //     User.logout();
-        //     window.location = '/'
-        // }
-    },
-    beforeCreate(){
-        EventBus.$on('logout',()=>{
+        loggedout(){
             console.log('here')
-            User.logout()
+            User.logout();
             window.location = '/'
-        })
-    }
+        }
+    },
+    // beforeCreate(){
+    //     // EventBus.$on('logout',()=>{
+    //     //     console.log('here')
+    //     //     User.logout()
+    //     //     window.location = '/'
+    //     // })
+    // }
 }
 </script>

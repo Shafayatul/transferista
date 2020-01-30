@@ -2,7 +2,7 @@
 <div>
     <header id="header">
         <div id="main-menu">
-            <nav-bar></nav-bar>
+            <navbar></navbar>
         </div>
         <!-- Navbar -->
     </header>
@@ -118,7 +118,7 @@
 import navbar from './Navbar'
 export default{
     components:{
-        'nav-bar':navbar
+        navbar
     }
 }
 </script>

@@ -13,6 +13,12 @@ use App\Http\Controllers\Controller;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Srmklive\PayPal\Services\AdaptivePayments;
 use App\Http\Resources\ProjectResource;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Credits;
+use App\Mail\Invoices;
+use App\Invoice;
+use App\Credit;
+use PDF;
 
 class ProjectsController extends Controller
 {
@@ -221,11 +227,40 @@ class ProjectsController extends Controller
 
     public function deliveredProject($project_id)
     {
-        $project                 = Project::findOrFail($project_id);
+        $project                 = Project::where('id', $project_id)->first();
         $project->project_status = 3;
         $project->save();
 
-        
+        $invoice                         = new Invoice;
+        $invoice->company_or_customer_id = $project->project_owner_id;
+        $invoice->transferista_id        = $project->transferista_id;
+        $invoice->project_id             = $project->id;
+        $invoice->amount                 = $project->project_amount;
+        $invoice->save();
+
+        $credit                         = new Credit;
+        $credit->company_or_customer_id = $project->project_owner_id;
+        $credit->transferista_id        = $project->transferista_id;
+        $credit->project_id             = $project->id;
+        $credit->amount                 = $project->project_amount;
+        $credit->save();
+        $data = [];
+        $company_or_customer = $project->user->email;
+        $transferista = $project->transferista->email;
+        $pdf_invoice = PDF::loadView('emails.invoices', $project);
+        $pdf_credit = PDF::loadView('emails.credits', $project);
+        Mail::send('emails.invoice_mail', $data, function($message) use ($project)
+        {
+            $message->to('skkundu32@gmail.com');
+            $message->from('skkundu32@gmail.com');
+            $message->subject('Welcome to Laravel');
+            $message->attach('email.invoices', array(
+                'as' => 'pdf-report.zip', 
+                'mime' => 'application/pdf')
+            );
+        });
+        // Mail::to($company_or_customer)->send(new Invoices($pdf_invoice, $project));
+        // Mail::to($transferista)->send(new Credits($pdf_credit, $project));
 
         return response()->json([
             'message' => 'Project delivered..!'

@@ -30,7 +30,7 @@ const routes = [
     {path:'/project_details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate, meta: { auth: false, title: 'Create' }},    
     {path:'/profile',component: profile},
-    {path:'/register',component: register, meta: { auth: false, title: 'Register' }},
+    {path:'/register',component: register},
     {path:'/login',component: login, name: 'login', meta: { auth: false, title: 'Login' }},
     {path:'/logout',component: logout},
     {path:'/role',component: role, name: 'role'},

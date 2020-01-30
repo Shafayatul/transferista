@@ -154,7 +154,7 @@ export default {
 			seleted: 0,
 			query: null,
 			filterBy: null,
-			selectItem: null,
+			// selectItem: null,
 			projects:[],
 			success: false,
 			flag:true,
@@ -178,7 +178,7 @@ export default {
             $(`#${ this.projects[index].id}`).modal('show');
 		}
 		,
-		bid(bidData ){
+		bid(bidData){
 			if(!User.transferista()){
 				window.location('/register')
 			}
@@ -198,26 +198,26 @@ export default {
 		// 		return a.getTime() - b.getTime();
 		// 	})
 		// }
-		// itemClicked(){
-		// 	this.seleted = index;
-		// 	this.selectItem();
-		// },
-		// selectItem(){
-		// 	this.selectItem = this.matches[this.seleted];
-		// 	this.visible = null;
+		itemClicked(){
+			this.seleted = index;
+			this.selectItem();
+		},
+		selectItem(){
+			this.selectItem = this.matches[this.seleted];
+			this.visible = null;
+		}
+	},
+	computed:{
+		// matches(){
+		// 	if(this.query == ''){
+		// 		return [];
+		// 	}
+		// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
 		// }
 	},
-	// computed:{
-	// 	// matches(){
-	// 	// 	if(this.query == ''){
-	// 	// 		return [];
-	// 	// 	}
-	// 	// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
-	// 	// }
-	// },
 	
     created(){
-		// this.$emit(`update:layout`,DashboardLayout)
+		this.$emit(`update:layout`,DashboardLayout)
 		
 		axios.get('/api/project-list')
 		.then(res =>{ 
@@ -230,6 +230,7 @@ export default {
 			
 			this.flag = false
 		}
+		
     }
 }
 </script>

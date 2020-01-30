@@ -14,14 +14,5 @@ Route::view('/', 'home');
 Route::view('/{any}', 'home');
 Route::view('/{any}/{any1}', 'home');
 Route::view('/{any}/{any1}/{any2}', 'home');
-// Route::get('/', function(){
-//     return view('welcome');
-// });
 Auth::routes();
-
-// Route::get('messages', 'ChatsControler@fetchMessages');
-// Route::post('messages', 'ChatsController@sendMessage');
-
-// Route::get('projects/create', 'ProjectController@create');
-// Route::post('projects', 'ProjectController@store')->name('project');
 

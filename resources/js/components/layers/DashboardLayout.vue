@@ -117,6 +117,7 @@
 <script>
 import navbar from './Navbar'
 export default{
+    name : "DashboardLayout",
     components:{
         navbar
     }

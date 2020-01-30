@@ -47,21 +47,7 @@
                             </form>
                           
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <span class="glyphicon glyphicon-list"></span>Sortable Lists
-                        <div class="pull-right action-buttons">
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                    <span class="glyphicon glyphicon-cog" style="margin-right: 0px;"></span>
-                                </button>
-                                <ul class="dropdown-menu slidedown">
-                                    <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-pencil"></span>Edit</a></li>
-                                    <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-trash"></span>Delete</a></li>
-                                    <li><a href="http://www.jquery2dotnet.com"><span class="glyphicon glyphicon-flag"></span>Flag</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="panel-body">
                         <ul class="list-group">
                             <div v-for="(car,index) in showed" :key="index">

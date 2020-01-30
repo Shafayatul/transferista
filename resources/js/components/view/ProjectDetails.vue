@@ -200,7 +200,6 @@ export default {
         accepted(p_id,bid){
             axios.post(`project/accept/${p_id}/${bid.bid_transferista_id}`)
             .then(res=>{
-
                 this.transferista = res.data.transferista
                 $(`#${ this.bids[index].id}`).modal('show');
                 this.flag = false;

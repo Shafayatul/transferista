@@ -39,7 +39,7 @@
 							<div class="filter-by">
 								<p>Duration :</p>
 								<form action="#">
-									<select  class="mr_select" @change="sortBy">
+									<select  class="mr_select" >
 										<option value="latest">Latest</option>
 										<option value="2">New</option>
 										<option value="3">Popular</option>

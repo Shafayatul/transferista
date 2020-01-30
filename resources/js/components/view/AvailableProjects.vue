@@ -154,7 +154,7 @@ export default {
 			seleted: 0,
 			query: null,
 			filterBy: null,
-			selectItem: null,
+			// selectItem: null,
 			projects:[],
 			success: false,
 			flag:true,
@@ -178,7 +178,7 @@ export default {
             $(`#${ this.projects[index].id}`).modal('show');
 		}
 		,
-		bid(bidData ){
+		bid(bidData){
 			if(!User.transferista()){
 				window.location('/register')
 			}
@@ -197,31 +197,28 @@ export default {
 			this.showed.sort((a,b)=>{
 				return a.getTime() - b.getTime();
 			})
+		},
+		itemClicked(){
+			this.seleted = index;
+			this.selectItem();
+		},
+		selectItem(){
+			this.selectItem = this.matches[this.seleted];
+			this.visible = null;
 		}
-		// itemClicked(){
-		// 	this.seleted = index;
-		// 	this.selectItem();
-		// },
-		// selectItem(){
-		// 	this.selectItem = this.matches[this.seleted];
-		// 	this.visible = null;
-		// }
 	},
 	computed:{
-		// matches(){
-		// 	if(this.query == ''){
-		// 		return [];
-		// 	}
-		// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
-		// }
+		matches(){
+			if(this.query == ''){
+				return [];
+			}
+			return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
+		}
 	},
-	// beforeCreate(){
-	// 	if(!User.transferista()){
-	// 		window.location = '/login'
-	// 	}
-	// },
-    created(){
+	beforeCreate(){
 		this.$emit(`update:layout`,DashboardLayout)
+	},
+    created(){
 		axios.get('/api/project-list')
 		.then(res =>{ 
 			this.projects = res.data.data
@@ -229,10 +226,11 @@ export default {
 			})
 		.catch(error=>console.log(error))
 
-		if(User.customer() || User.company() ){
+		// if(User.customer() || User.company() ){
 			
-			this.flag = false
-		}
+		// 	this.flag = false
+		// }
+		
     }
 }
 </script>

@@ -2367,6 +2367,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  name: "DashboardLayout",
   components: {
     'nav-bar': _Navbar__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
@@ -2543,12 +2544,11 @@ __webpack_require__.r(__webpack_exports__);
     //     window.location = '/'
     // }
   },
-  beforeCreate: function beforeCreate() {
-    EventBus.$on('logout', function () {
-      console.log('here');
-      User.logout();
-      window.location = '/';
-    });
+  beforeCreate: function beforeCreate() {// EventBus.$on('logout',()=>{
+    //     console.log('here')
+    //     User.logout()
+    //     window.location = '/'
+    // })
   }
 });
 
@@ -2804,7 +2804,7 @@ __webpack_require__.r(__webpack_exports__);
       seleted: 0,
       query: null,
       filterBy: null,
-      selectItem: null,
+      // selectItem: null,
       projects: [],
       success: false,
       flag: true,
@@ -2849,42 +2849,43 @@ __webpack_require__.r(__webpack_exports__);
       this.showed.sort(function (a, b) {
         return a.getTime() - b.getTime();
       });
-    } // itemClicked(){
-    // 	this.seleted = index;
-    // 	this.selectItem();
-    // },
-    // selectItem(){
-    // 	this.selectItem = this.matches[this.seleted];
-    // 	this.visible = null;
-    // }
-
+    },
+    itemClicked: function itemClicked() {
+      this.seleted = index;
+      this.selectItem();
+    },
+    selectItem: function selectItem() {
+      this.selectItem = this.matches[this.seleted];
+      this.visible = null;
+    }
   },
-  computed: {// matches(){
-    // 	if(this.query == ''){
-    // 		return [];
-    // 	}
-    // 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
-    // }
-  },
-  // beforeCreate(){
-  // 	if(!User.transferista()){
-  // 		window.location = '/login'
-  // 	}
-  // },
-  created: function created() {
-    var _this2 = this;
+  computed: {
+    matches: function matches() {
+      var _this2 = this;
 
+      if (this.query == '') {
+        return [];
+      }
+
+      return this.items.filter(function (item) {
+        return item[_this2.filterBy].toLowerCase.includes(_this2.query.toLowerCase());
+      });
+    }
+  },
+  beforeCreate: function beforeCreate() {
     this.$emit("update:layout", _layers_DashboardLayout__WEBPACK_IMPORTED_MODULE_1__["default"]);
+  },
+  created: function created() {
+    var _this3 = this;
+
     axios.get('/api/project-list').then(function (res) {
-      _this2.projects = res.data.data;
-      _this2.showed = res.data.data;
+      _this3.projects = res.data.data;
+      _this3.showed = res.data.data;
     })["catch"](function (error) {
       return console.log(error);
-    });
-
-    if (User.customer() || User.company()) {
-      this.flag = false;
-    }
+    }); // if(User.customer() || User.company() ){
+    // 	this.flag = false
+    // }
   }
 });
 
@@ -4285,7 +4286,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_paypal_checkout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-paypal-checkout */ "./node_modules/vue-paypal-checkout/dist/vue-paypal-checkout.esm.js");
-//
 //
 //
 //
@@ -66839,8 +66839,7 @@ var render = function() {
           env: "sandbox",
           "invoice-number": _vm.randdomStrGenerate,
           items: _vm.myItems,
-          experience: _vm.experienceOptions,
-          "notify-url": "http://localhost:8000/api/payment/success"
+          experience: _vm.experienceOptions
         }
       })
     ],
@@ -89134,14 +89133,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************************!*\
   !*** ./resources/js/components/view/Paypal.vue ***!
   \*************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Paypal_vue_vue_type_template_id_b1e28b7c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Paypal.vue?vue&type=template&id=b1e28b7c& */ "./resources/js/components/view/Paypal.vue?vue&type=template&id=b1e28b7c&");
 /* harmony import */ var _Paypal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Paypal.vue?vue&type=script&lang=js& */ "./resources/js/components/view/Paypal.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Paypal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Paypal_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -89171,7 +89171,7 @@ component.options.__file = "resources/js/components/view/Paypal.vue"
 /*!**************************************************************************!*\
   !*** ./resources/js/components/view/Paypal.vue?vue&type=script&lang=js& ***!
   \**************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -90103,8 +90103,6 @@ function () {
 
       if (storedToken) {
         return true;
-      } else {
-        this.logout();
       }
 
       return false;
@@ -90265,8 +90263,8 @@ var routes = [{
   path: '/',
   component: _components_view_AvailableProjects__WEBPACK_IMPORTED_MODULE_2__["default"],
   meta: {
-    auth: false,
-    title: 'Home'
+    auth: true,
+    title: 'Project'
   }
 }, {
   path: '/position',
@@ -90291,11 +90289,7 @@ var routes = [{
   component: _components_view_Profile__WEBPACK_IMPORTED_MODULE_9__["default"]
 }, {
   path: '/register',
-  component: _components_auth_Register__WEBPACK_IMPORTED_MODULE_6__["default"],
-  meta: {
-    auth: false,
-    title: 'Register'
-  }
+  component: _components_auth_Register__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
   path: '/login',
   component: _components_auth_Login__WEBPACK_IMPORTED_MODULE_7__["default"],

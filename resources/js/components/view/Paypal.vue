@@ -7,8 +7,7 @@
             env="sandbox"
             :invoice-number="randdomStrGenerate"
             :items="myItems"
-            :experience="experienceOptions"
-            notify-url="http://localhost:8000/api/payment/success">
+            :experience="experienceOptions">
         </PayPal>
         
     </div>

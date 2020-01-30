@@ -25,12 +25,12 @@ import ChangePassword from '../components/view/ChangePassword'
 import PaypalData from '../components/view/Paypal'
 import MyProjects from '../components/view/MyProjects'
 const routes = [
-    {path:'/',component: AvailableProjects, meta: { auth: false, title: 'Home' }},
+    { path: '/', component: AvailableProjects, meta: { auth: true, title: 'Project' }},
     {path:'/position',component: google},
     {path:'/project_details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate, meta: { auth: true, title: 'Create' }},    
     {path:'/profile',component: profile},
-    {path:'/register',component: register, meta: { auth: false, title: 'Register' }},
+    {path:'/register',component: register},
     {path:'/login',component: login, name: 'login', meta: { auth: false, title: 'Login' }},
     {path:'/logout',component: logout},
     {path:'/role',component: role, name: 'role'},

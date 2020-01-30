@@ -58,10 +58,6 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     
     Route::group(['middleware' => ['role:company|customer|employee']], function () {
-        
-   
-        //Project Section
-        Route::get('projects', 'Api\ProjectsController@index');
         Route::post('projects', 'Api\ProjectsController@store');
         Route::get('projects/{project_id}', 'Api\ProjectsController@show');
         Route::post('projects/{project_id}', 'Api\ProjectsController@update');
@@ -76,9 +72,6 @@ Route::group(['middleware' => ['auth:api']], function() {
     });
 
     Route::group(['middleware' => ['role:transferista']], function () {
-
-        //Project
-        Route::get('projects', 'Api\ProjectsController@index');
         Route::get('project/delivered/{project_id}', 'Api\ProjectsController@deliveredProject');
 
         //Bid Section
@@ -105,6 +98,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     Route::group(['middleware' => ['role:company|customer|employee|transferista']], function () {
         Route::post('ratings', 'Api\RatingsController@store');
+        Route::get('projects', 'Api\ProjectsController@index');
     });
 
     // Route::group(['middleware' => ['role:company|customer|transferista']], function () {

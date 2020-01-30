@@ -1,4 +1,5 @@
 <template>
+<div id="profile-design">
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
             <div class="container emp-profile">
@@ -140,6 +141,7 @@
             </div>
         </div> 
     </main>
+</div>
 </template>
 <script>
 export default {
@@ -160,8 +162,15 @@ export default {
 </script>
 
 <style scoped>
-body{
+
+#profile-design{
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
+}
+/* body{
  background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
+} */
+main{
+    padding-left: 270px;
 }
 .emp-profile{
     padding: 3%;

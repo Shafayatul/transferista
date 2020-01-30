@@ -16,6 +16,8 @@
                 <ul class="list-group">
                     <a class="list-group-item">{{bid.bid_transferista_name}}</a>
                     <a class="list-group-item">{{bid.bid_amount}}</a>
+                    <a class="list-group-item">{{bid.bid_transferista_vat}}</a>
+                    <a class="list-group-item">{{total}}</a>
                 </ul>
             </div>
             </div>
@@ -31,6 +33,11 @@ export default {
     methods:{
         confirm(){
             this.accepted(this.bid.bid_project_id,this.bid)
+        }
+    },
+    computed:{
+        total(){
+            return (this.bid.bid_transferista_amount +(this.bid.bid_transferista_amount * (this.bid.bid_transferista_vat / 100)))
         }
     }
 }

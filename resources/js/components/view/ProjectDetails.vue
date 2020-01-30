@@ -63,7 +63,7 @@
                             
                             <div class="review_box" v-for="(bid,index) in bids" :key="bid.id">
                                 <div class="media" >
-                                    <img class="mr-3" src="img/jobdetails/r1.png" alt="">
+                                    <img class="mr-3" :src="'img/jobdetails/r1.png'" alt="">
                                     <div class="media-body">
                                         <div class="header d-flex justify-content-between">
                                             <h4 class="mt-0">{{bid.bid_transferista_name}}</h4>
@@ -76,7 +76,6 @@
                                                 <i class="fa fa-star-o"></i>
                                             </div>
                                             <button v-show="flag" @click="confirm(index)" class="btn btn-success">Accept</button>
-                                            <button v-show="chatShow" @click="chat(index)" class="btn btn-success">Chatt</button>
                                             <button class="btn btn-danger">Cancel</button>
                                             
                                         </div>
@@ -151,17 +150,17 @@ export default {
         
     },
     methods:{
-        chat(index){
-            this.$router.push({
-					name: 'chat',
-					params:{
-                        p_id: p_id,
-                        u_name: project.user,
-                        t_id: bid.bid_transferista_id,
-                        t_name: bid.bid_transferista_name
-                    }
-				})
-        },
+        // chat(index){
+        //     this.$router.push({
+		// 			name: 'chat',
+		// 			params:{
+        //                 p_id: p_id,
+        //                 u_name: project.user,
+        //                 t_id: bid.bid_transferista_id,
+        //                 t_name: bid.bid_transferista_name
+        //             }
+		// 		})
+        // },
         //  getDirection(){
         //     if(this.directionsDisplay== null){
         //         this.directionsDisplay = new google.maps.DirectionsRenderer;
@@ -201,6 +200,9 @@ export default {
         accepted(p_id,bid){
             axios.post(`project/accept/${p_id}/${bid.bid_transferista_id}`)
             .then(res=>{
+
+                this.transferista = res.data.transferista
+                $(`#${ this.bids[index].id}`).modal('show');
                 this.flag = false;
                 
             })

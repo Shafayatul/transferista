@@ -19,11 +19,11 @@ class ProjectsController extends Controller
     {
         $user = Auth::user();
         if ($user->hasRole('company')) {
-            $projects = Project::where('project_owner_id', Auth::id())->latest()->get();
+            $projects = Project::where('project_owner_id', Auth::id())->with('bids')->latest()->get();;
         }elseif ($user->hasRole('customer')) {
             $projects = Project::where('project_owner_id', Auth::id())->latest()->get();
         }elseif ($user->hasRole('transferista')) {
-            $projects = Project::where('transferista_id', Auth::id())->latest()->get();
+            $projects = Project::where('transferista_id', Auth::id())->with('bids')->latest()->get();
         }else {
             $projects = Project::latest()->get();
         }
@@ -38,14 +38,14 @@ class ProjectsController extends Controller
             'origin_zip'          => 'required|string',
             'origin_town'         => 'required|string',
             'origin_country'      => 'required|string',
-            'origin_lng'          => 'required|string',
-            'origin_lat'          => 'required|string',
+            'origin_lng'          => 'required',
+            'origin_lat'          => 'required',
             'destination_address' => 'required|string',
             'destination_zip'     => 'required|string',
             'destination_town'    => 'required|string',
             'destination_country' => 'required|string',
-            'destination_lng'     => 'required|string',
-            'destination_lat'     => 'required|string',
+            'destination_lng'     => 'required',
+            'destination_lat'     => 'required',
             'project_title'       => 'required|string',
             'project_description' => 'required',
             'project_size'        => 'required',
@@ -148,7 +148,9 @@ class ProjectsController extends Controller
             $project->save();
 
             return response()->json([
-                'message' => 'Successfully bid accepted!'
+                'transferista'=>$bid->user,
+                'vat' => $vat,
+                'vat_amount'=> $vat_amount
             ], 201);
         }else {
             return response()->json([

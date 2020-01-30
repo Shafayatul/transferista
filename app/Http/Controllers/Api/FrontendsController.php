@@ -26,6 +26,7 @@ class FrontendsController extends Controller
             $single_data_arr = [];
             $single_data_arr['bid_id'] = $bid->id;
             $single_data_arr['bid_transferista_id'] = $bid->transferista_id;
+            $single_data_arr['bid_transferista_vat'] = $bid->user->vat;
             $single_data_arr['bid_project_id'] = $bid->project_id;
             $single_data_arr['bid_amount'] = $bid->amount;
             $single_data_arr['bid_transferista_name'] = $bid->user->name;

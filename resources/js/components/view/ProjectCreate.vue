@@ -39,6 +39,9 @@
                                         <div class="col-sm-9">
                                             <input v-model="form.delivery_date" type="date" class="form-control" placeholder="dd/mm/yyyy">
                                         </div>
+                                        <span v-if="errors.delivery_date" class="help-block" role="alert">
+                                            <strong>{{errors.delivery_date[0]}}</strong>
+                                        </span>
                                     </div> 
                                 <div class="form-group row">
                                         <label class="col-sm-3 label-title">Time for Delivery</label>
@@ -54,32 +57,62 @@
                                             <option value="20-22 Hr">20 - 22</option>
                                             <option value="22-24 Hr">22 - 24</option>
                                         </select>
-                                    </div>
+                                        </div>
+                                        <span v-if="errors.time_for_delivery" class="help-block" role="alert">
+                                            <strong>{{errors.time_for_delivery[0]}}</strong>
+                                        </span>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-sm-3 label-title">Product Size</label>
                                         <div class="col-sm-9">						
-                                    <select v-model="form.project_size" class="form-control custom-select" id="exampleFormControlSelect1">
-                                            <option value="5" >S: 100cm</option>
-                                            <option value="7.5">M: 150cm</option>
-                                            <option value="10">L: 180cm</option>
-                                            <option value="15">XL: 200cm</option>
-                                            <option value="20">XXL: 250cm</option>
-                                            <option value="25">XXXL: 300cm</option>
-                                    </select>
+                                        <select v-model="form.project_size" class="form-control custom-select" id="exampleFormControlSelect1">
+                                                <option value="5" >S: 100cm</option>
+                                                <option value="7.5">M: 150cm</option>
+                                                <option value="10">L: 180cm</option>
+                                                <option value="15">XL: 200cm</option>
+                                                <option value="20">XXL: 250cm</option>
+                                                <option value="25">XXXL: 300cm</option>
+                                        </select>
+                                        </div>
+                                        <span v-if="errors.project_size" class="help-block" role="alert">
+                                            <strong>{{errors.project_size[0]}}</strong>
+                                        </span>
                                     </div>
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Zip Code of Origin<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input v-model="form.origin_zip" type="text" class="form-control" placeholder="Ex. 1234">
                                     </div>
+                                        <span v-if="errors.origin_zip" class="help-block" role="alert">
+                                            <strong>{{errors.origin_zip[0]}}</strong>
+                                        </span>
+                                </div>				
+                                <div class="row form-group">
+                                    <label class="col-sm-3 label-title">Zip Code of Destination<span class="required">*</span></label>
+                                    <div class="col-sm-9">
+                                        <input v-model="form.destination_zip" type="text" class="form-control" placeholder="Ex. 2343">
+                                    </div>
+                                        <span v-if="errors.destination_zip" class="help-block" role="alert">
+                                            <strong>{{errors.destination_zip[0]}}</strong>
+                                        </span>
+                                </div>					
                                 <div class="row form-group">
                                     <label class="col-sm-3 label-title">Title for your job<span class="required">*</span></label>
                                     <div class="col-sm-9">
                                         <input v-model="form.project_title" type="text" class="form-control" placeholder="ex, Human Resource Manager">
                                     </div>
-                                </div>					
+                                        <span v-if="errors.project_title" class="help-block" role="alert">
+                                            <strong>{{errors.project_title[0]}}</strong>
+                                        </span>
+                                </div>
                                 <div class="row form-group item-description">
                                     <label class="col-sm-3 label-title">Description<span class="required">*</span></label>
                                     <div class="col-sm-9">
                                         <textarea v-model="form.project_description" class="form-control" id="textarea" placeholder="Write few lines about your jobs" rows="8"></textarea>		
                                     </div>
+                                    <span v-if="errors.project_description" class="help-block" role="alert">
+                                        <strong>{{errors.project_description[0]}}</strong>
+                                    </span>
                                 </div>
                                 <div class="row characters">
                                     <div class="col-sm-9 col-sm-offset-3">
@@ -136,7 +169,7 @@ export default {
                 lat:null,
                 lng:null
             },
-            center2:  {
+            center2: {
                 lat:null,
                 lng:null
             },
@@ -164,6 +197,7 @@ export default {
                 project_size:null,
                 distance:null
             },
+            errors:{},
             success:false
         }
     },
@@ -175,8 +209,17 @@ export default {
             axios.post('/api/projects',this.form)
             .then(res=>{
                 this.success = true
+                this.$router.push({name:'list'})
             })
-            .catch(error=> errors=error.response.data.errors)
+            .catch(error=> console.log(error)
+            )
+            // this.setAll(this.form,null)
+        }, 
+        setAll(obj, val) {
+        
+            Object.keys(obj).forEach(function(index) {
+                obj[index] = val
+            });
         },
     
         setPlace1(place) {
@@ -222,6 +265,8 @@ export default {
                 this.markers[0]= this.center1;
                 this.places[0] = this.origin;
                 this.center = this.center1;
+                this.form.origin_lng=this.center1.lng;
+                this.form.origin_lat=this.center1.lat;
                 this.origin = null;
             }
         },
@@ -238,6 +283,8 @@ export default {
             this.markers[1]= this.center2;
             this.places[1] = this.destination;
             this.center = this.center2;
+            this.form.destination_lng=this.center2.lng;
+            this.form.destination_lat=this.center2.lat;
             this.destination = null;
         }
         },

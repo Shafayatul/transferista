@@ -27,5 +27,11 @@ import router from './router/router'
 
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    watch: {
+      '$route' (to, from) {
+        document.title = to.meta.title || 'Your Website'
+      },
+      // immediate: true
+    },
 });

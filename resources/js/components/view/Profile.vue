@@ -6,7 +6,6 @@
     <!--Main layout-->
     <router-view ></router-view>
   <!--Main layout-->
-
 </div>
 </template>
 <script>
@@ -71,7 +70,8 @@ export default {
 }
 </script>
 <style scoped>
-#profile-body{
- background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
+
+main{
+    padding-left: 270px;
 }
 </style>

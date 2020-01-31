@@ -91,17 +91,15 @@
                     <div class="col-md-4">
                     <!--Card-->
                         <gmap-map
-                        ref="map"
-                        :zoom="12"
+                        ref ="map1"
                         :center="center"
+                        :zoom="7"
                         style="width:100%;  height: 400px;"
                         >
-                            <!-- <gmap-marker
-                                :key="index"
-                                v-for="(m, index) in markers"
-                                :position="m.position"
-                                @click="center=m.position"
-                            ></gmap-marker> -->
+                            <gmap-marker v-show="center1" :position="center1">
+                            </gmap-marker>
+                            <gmap-marker v-show="center2" :position="center2">
+                            </gmap-marker>
                         </gmap-map>
                     </div>
                 </div>
@@ -109,7 +107,7 @@
         </section>
     </div>
 </template>
-
+<script src="vue-google-maps.js"></script>
 <script>
 import confirm from './Confirm'
 import DashboardLayout from '../layers/DashboardLayout'
@@ -119,16 +117,28 @@ export default {
             notTransferista:false,
             id:null,
             project:null,
-            bids: null,            
-            destination: null,
-            directionsDisplay : null,
-            show: false,
+            bids: null,
             noBids: false,
-            flag: true,
-            center: { lat: 45.508, lng: -73.587 },
+            // flag: true,
             project_title: null,
             project_description: null,
-            chatShow: false
+            chatShow: false,
+            show: false,
+            center: {
+                lat : 45.508, lng : -73.587
+            },
+            center1: {
+                lat: null,
+                lng: null,
+            },
+            center2: {
+                lat: null,
+                lng: null,
+            },
+            markers: [],
+            origin : null,
+            destination: {},
+            directionsDisplay : {},
         }
     },
     components:{
@@ -147,6 +157,7 @@ export default {
 		// 	return left;
 
 		// }
+
         
     },
     methods:{
@@ -161,39 +172,46 @@ export default {
         //             }
 		// 		})
         // },
-        //  getDirection(){
-        //     if(this.directionsDisplay== null){
-        //         this.directionsDisplay = new google.maps.DirectionsRenderer;
-        //     }
-        //     var directionsService = new google.maps.DirectionsService;
-        //     var start = {
-        //         lat: parseFloat(this.project.origin_lat),
-        //         lng: parseFloat(this.project.origin_lng)
-        //     };
-        //     var destination =  {
-        //         lat: parseFloat(this.project.destination_lat),
-        //         lng: parseFloat(this.project.destination_lng)
-        //     };
-        //     this.directionsDisplay.setMap(this.$refs.map.$mapObject);
+         getDirection(){
+
+            if(this.flag>1){
+                this.directionsDisplay.setDirections(null)
+            }
+            var directionsService = new google.maps.DirectionsService;
+            if(this.directionsDisplay == null){
+                this.directionsDisplay = new google.maps.DirectionsRenderer;
+                
+                this.directionsDisplay.setMap(this.$refs.map1.$mapObject);
+            }
             
-        //     // google maps API's direction service
-        //     function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
-        //         directionsService.route({
-        //                 origin: start,
-        //                 destination: destination,
-        //                 travelMode: 'DRIVING'
-        //             }, function(response, status) {
-        //             if (status === 'OK') {
-        //                 this.form.distance = response.routes[0].legs[0].distance.value
-        //                 directionsDisplay.setDirections(response);
+            this.center1.lat = parseFloat(this.project.origin_lat)
+            this.center1.lng = parseFloat(this.project.origin_lng)
+
+            this.center2.lat = parseFloat(this.project.destination_lat)
+            this.center2.lng = parseFloat(this.project.destination_lng)
+
+            var start = this.center1;
+            var destination =  this.center2;
+            
+            
+            // google maps API's direction service
+            function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
+                directionsService.route({
+                        origin: start,
+                        destination: destination,
+                        travelMode: 'DRIVING'
+                    }, function(response, status) {
+                    if (status === 'OK') {
+                        // this.project.distance = response.routes[0].legs[0].distance.value
+                        this.directionsDisplay.setDirections();
                         
-        //             } else {
-        //                 window.alert('Directions request failed due to ' + status);
-        //             }
-        //         });
-        //     }
-        //     calculateAndDisplayRoute(directionsService,this.directionsDisplay,start,destination)
-        // },
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            }
+            calculateAndDisplayRoute(directionsService,this.directionsDisplay,start,destination)
+        },
         confirm(index){
             $(`#${ this.bids[index].id}`).modal('show');
         },
@@ -206,7 +224,7 @@ export default {
                 
             })
             .catch(error => this.notTransferista = true)
-        }
+        },
     },
     created(){
         this.$emit(`update:layout`,DashboardLayout)
@@ -220,7 +238,7 @@ export default {
             } 
             this.project_title = this.project.project_title;
             this.project_description = this.project.project_description;
-            // this.getDirection()
+            this.getDirection()
         })
         .catch(error=>console.log(error))
 
@@ -235,7 +253,10 @@ export default {
             this.flag = false
         }
         
-    }
+    },
+    // afterCreate(){
+    //     this.getDirection()
+    // }
 
 }
 </script>

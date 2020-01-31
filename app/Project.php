@@ -34,4 +34,9 @@ class Project extends Model
     {
         return $this->hasOne(\App\DriverToProject::class, 'project_id');
     }
+
+    public function invoice()
+    {
+        return $this->hasOne(\App\Invoice::class, 'project_id');
+    }
 }

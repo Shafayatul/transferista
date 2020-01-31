@@ -6,20 +6,21 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use File;
+use PDF;
 
 class Credits extends Mailable
 {
     use Queueable, SerializesModels;
-    public $pdf_credit, $project;
+    public $project;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($pdf_credit, $project)
+    public function __construct( $project)
     {
-        $this->pdf_credit = $pdf_credit;
         $this->project = $project;
     }
 
@@ -30,9 +31,12 @@ class Credits extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.credit_mail')->attach('emails.credits', [
-                    'as' => '5.pdf',
-                    'mime' => 'application/pdf',
-                ]);
+        $project = $this->project;
+        $company = $this->project->user->userInfo;
+        // dd($company);
+        $transferista = $this->project->transferista;
+        $transferista_info = $this->project->transferista->userInfo;
+        $pdf = PDF::loadView('emails.credits', compact('project', 'company', 'transferista', 'transferista_info'))->setPaper('A4');
+        return $this->from(env('INFO_MAIL'), 'Transferista')->subject('Credits')->view('emails.credit_mail')->attachData($pdf->output(), $this->project->id.".pdf");
     }
 }

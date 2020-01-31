@@ -28,7 +28,7 @@ import TransferistaList from '../components/view/TransferistaList'
 const routes = [
     {path:'/',component: AvailableProjects,meta: { auth: false, title: 'Project Details' }},
     {path:'/position',component: google},
-    {path:'/project_details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
+    {path:'/project-details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate, meta: { auth: false, title: 'Create' }},    
     {path:'/profile',component: profile},
     {path:'/register',component: register},
@@ -55,7 +55,7 @@ const routes = [
 const router = new VueRouter({
     routes,
     hashbang:false,
-    mode:'history'
+    mode:'history',
 });
 
 export default router

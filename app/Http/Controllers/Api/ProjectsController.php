@@ -244,23 +244,12 @@ class ProjectsController extends Controller
         $credit->project_id             = $project->id;
         $credit->amount                 = $project->project_amount;
         $credit->save();
-        $data = [];
+        
         $company_or_customer = $project->user->email;
         $transferista = $project->transferista->email;
-        $pdf_invoice = PDF::loadView('emails.invoices', $project);
-        $pdf_credit = PDF::loadView('emails.credits', $project);
-        Mail::send('emails.invoice_mail', $data, function($message) use ($project)
-        {
-            $message->to('skkundu32@gmail.com');
-            $message->from('skkundu32@gmail.com');
-            $message->subject('Welcome to Laravel');
-            $message->attach('email.invoices', array(
-                'as' => 'pdf-report.zip', 
-                'mime' => 'application/pdf')
-            );
-        });
-        // Mail::to($company_or_customer)->send(new Invoices($pdf_invoice, $project));
-        // Mail::to($transferista)->send(new Credits($pdf_credit, $project));
+
+        Mail::to($company_or_customer)->send(new Invoices($project));
+        Mail::to($transferista)->send(new Credits($project));
 
         return response()->json([
             'message' => 'Project delivered..!'

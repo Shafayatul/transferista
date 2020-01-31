@@ -13,7 +13,7 @@ window.User = User
 Vue.use(VueGoogleMaps, {
     load: {
       key: 'AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo',
-      libraries: 'places'
+      libraries: 'places',
     },
 });
 Vue.component('google-map', VueGoogleMaps.Map);

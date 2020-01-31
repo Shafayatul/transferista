@@ -91,15 +91,21 @@
                     <div class="col-md-4">
                     <!--Card-->
                         <gmap-map
-                        ref ="map1"
+                        ref="map"
+                        :zoom="12"
                         :center="center"
-                        :zoom="7"
                         style="width:100%;  height: 400px;"
                         >
-                            <gmap-marker v-show="center1" :position="center1">
+                            <gmap-marker v-show="this.center1" :position="this.center1">
                             </gmap-marker>
-                            <gmap-marker v-show="center2" :position="center2">
+                            <gmap-marker v-show="this.center2" :position="this.center2">
                             </gmap-marker>
+                            <!-- <gmap-marker
+                                :key="index"
+                                v-for="(m, index) in markers"
+                                :position="m.position"
+                                @click="center=m.position"
+                            ></gmap-marker> -->
                         </gmap-map>
                     </div>
                 </div>
@@ -107,7 +113,7 @@
         </section>
     </div>
 </template>
-<script src="vue-google-maps.js"></script>
+
 <script>
 import confirm from './Confirm'
 import DashboardLayout from '../layers/DashboardLayout'
@@ -117,34 +123,25 @@ export default {
             notTransferista:false,
             id:null,
             project:null,
-            bids: null,
-            noBids: false,
-            // flag: true,
-            project_title: null,
-            project_description: null,
-            chatShow: false,
-            show: false,
-            center: {
-                lat : 45.508, lng : -73.587
-            },
-            center1: {
-                lat: null,
-                lng: null,
-            },
-            center2: {
-                lat: null,
-                lng: null,
-            },
-            markers: [],
-            origin : null,
+            bids: null,            
             destination: {},
             directionsDisplay : {},
+            show: false,
+            noBids: false,
+            flag: true,
+            center: { lat: 45.508, lng: -73.587 },
+            center1: { lat: 0.0, lng: 0.0 },
+            center2: { lat: 0.0, lng: 0.0 },
+            project_title: null,
+            project_description: null,
+            chatShow: false
         }
     },
     components:{
         confirm , DashboardLayout
     },
     computed:{
+        
         // timeLeft(date){
 		// 	let oneDay = 1000*60*60*24; 
 		// 	let today = Date.now();
@@ -157,60 +154,43 @@ export default {
 		// 	return left;
 
 		// }
-
         
     },
     methods:{
-        // chat(index){
-        //     this.$router.push({
-		// 			name: 'chat',
-		// 			params:{
-        //                 p_id: p_id,
-        //                 u_name: project.user,
-        //                 t_id: bid.bid_transferista_id,
-        //                 t_name: bid.bid_transferista_name
-        //             }
-		// 		})
-        // },
          getDirection(){
-
-            if(this.flag>1){
-                this.directionsDisplay.setDirections(null)
-            }
+             
+            this.directionsDisplay = new google.maps.DirectionsRenderer;
+            
             var directionsService = new google.maps.DirectionsService;
-            if(this.directionsDisplay == null){
-                this.directionsDisplay = new google.maps.DirectionsRenderer;
-                
-                this.directionsDisplay.setMap(this.$refs.map1.$mapObject);
-            }
+
             
-            this.center1.lat = parseFloat(this.project.origin_lat)
+            this.center1.lat= parseFloat(this.project.origin_lat)
             this.center1.lng = parseFloat(this.project.origin_lng)
-
-            this.center2.lat = parseFloat(this.project.destination_lat)
-            this.center2.lng = parseFloat(this.project.destination_lng)
-
+            
+            this.center2.lat= parseFloat(this.project.destination_lat)
+            this.center2.lng =parseFloat(this.project.destination_lng)
+            
             var start = this.center1;
-            var destination =  this.center2;
-            
-            
+             
+            var destination = this.center2;
+            this.directionsDisplay.setMap(this.$refs.map.$mapObject)
+            console.log(this.project)
             // google maps API's direction service
-            function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
-                directionsService.route({
-                        origin: start,
-                        destination: destination,
-                        travelMode: 'DRIVING'
-                    }, function(response, status) {
-                    if (status === 'OK') {
-                        // this.project.distance = response.routes[0].legs[0].distance.value
-                        this.directionsDisplay.setDirections();
-                        
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                });
-            }
-            calculateAndDisplayRoute(directionsService,this.directionsDisplay,start,destination)
+                              
+            directionsService.route({
+                    origin: start,
+                    destination: destination,
+                    travelMode: 'DRIVING'
+                }, (response, status)=> {
+                if (status === 'OK') {
+                    // this.form.distance = response.routes[0].legs[0].distance.value
+                    console.log(response)
+                    this.directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
+
         },
         confirm(index){
             $(`#${ this.bids[index].id}`).modal('show');
@@ -224,7 +204,7 @@ export default {
                 
             })
             .catch(error => this.notTransferista = true)
-        },
+        }
     },
     created(){
         this.$emit(`update:layout`,DashboardLayout)
@@ -233,7 +213,7 @@ export default {
         .then(res =>{
             this.project = res.data.project
             this.bids = res.data.bids_data_array 
-            if(!this.bids){
+            if(this.bids.length == 0){
                 this.noBids = true
             } 
             this.project_title = this.project.project_title;
@@ -244,9 +224,8 @@ export default {
 
        
         if(User.customer()|| User.company() ||User.admin()){
-            if(User.name() == this.project.user)
+            if(User.name() == this.project.name)
                 this.show = true;
-                this.chatShow = true;
         }
         if(User.transferista()){
             this.show = true
@@ -254,9 +233,43 @@ export default {
         }
         
     },
-    // afterCreate(){
-    //     this.getDirection()
-    // }
+    mounted(){
+            //         this.directionsDisplay = new google.maps.DirectionsRenderer;
+            
+            // var directionsService = new google.maps.DirectionsService;
+
+            
+            // this.center1.lat= parseFloat(this.project.origin_lat)
+            // this.center1.lng = parseFloat(this.project.origin_lng)
+            
+            // this.center2.lat= parseFloat(this.project.destination_lat)
+            // this.center2.lng =parseFloat(this.project.destination_lng)
+            
+            // var start = this.center1;
+            // console.log(start)
+            // var destination = this.center2;
+            // this.directionsDisplay.setMap(this.$refs.map.$mapObject)
+            // console.log(this.project)
+            // // google maps API's direction service
+            // function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
+            //         console.log(start)
+            //         console.log(this.directionsDisplay)               
+            //         directionsService.route({
+            //             origin: start,
+            //             destination: destination,
+            //             travelMode: 'DRIVING'
+            //         }, (response, status)=> {
+            //         if (status === 'OK') {
+            //             // this.form.distance = response.routes[0].legs[0].distance.value
+            //             console.log(response)
+            //             directionsDisplay.setDirections(response);
+            //         } else {
+            //             window.alert('Directions request failed due to ' + status);
+            //         }
+            //     });
+            // }
+            // calculateAndDisplayRoute(directionsService,directionsDisplay,start,destination)
+    }
 
 }
 </script>

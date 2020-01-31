@@ -2,7 +2,7 @@
     <main class="pt-5 mx-lg-5">
         <div class="container-fluid mt-5">
             <div class="container emp-profile">               
-                <form class="well form-horizontal" @submit.prevent="create">
+                <form class="well form-horizontal" @submit.prevent="submit">
                     <fieldset>
                         <div class="form-group d-flex">
                             <label class="col-md-3 control-label">First Name</label>
@@ -10,8 +10,8 @@
                             <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
                             <input v-model="form.first_name" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
                             </div>
-                        <span v-if="errors.password" class="help-block" role="alert">
-                            <strong>{{errors.password[0]}}</strong>
+                        <span v-if="errors.first_name" class="help-block" role="alert">
+                            <strong>{{errors.first_name[0]}}</strong>
                         </span>
                         </div>
                         <div class="form-group  d-flex">
@@ -47,7 +47,9 @@
                         <div class="form-group d-flex">
                             <label class="col-md-3 control-label"></label>
                             <div class="col-md-9">
-                            <button class="btn btn-primary" type="submit" >Enter</button>
+                            <button v-if="edit" class="btn btn-primary" type="submit" >Update</button>
+                            
+                            <button v-else class="btn btn-primary" type="submit" >Create</button>
                             </div>
                         </div>   
                     </fieldset>
@@ -57,7 +59,7 @@
                     
                     <div class="panel-body">
                         <ul class="list-group">
-                            <div v-for="(employee,index) in showed" :key="index">
+                            <div v-for="(employee,index) in employees" :key="index">
                                 <li class="list-group-item">
                                     <div class="checkbox">
                                         <input type="checkbox" id="checkbox" />
@@ -67,10 +69,10 @@
                                     </div>
                                     <div class="pull-right action-buttons" style="float: right;">
                                         <a  class="flag" @click="edit(index)"><i class="fa fa-edit"></i></a>
-                                        <a  class="trash" @click="trash(index)"><i class="fa fa-trash-alt"></i></a>
+                                        <a  class="trash" @click="trash(employee.id)"><i class="fa fa-trash-alt"></i></a>
                                     </div>
                                 </li>
-                                <div  class="modal fade" :id="employee.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div  class="modal fade" :id="index"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <employee  :update="update" :employee="employee"></employee>
                                 </div>
                             </div>
@@ -113,9 +115,10 @@ export default {
                 email:null
             },
             errors:{},
-            employees:[],
-            showed:[],
-            first:{}
+            employees:{},
+            showed:{},
+            first:{},
+            edit:null
         }
     },
     components:{
@@ -134,34 +137,58 @@ export default {
                     var obj = Object.assign({},this.showed[i])
                     this.showed[i]=obj
                 }
-                this.showed = this.showed.reverse()
+                // this.showed = this.showed.reverse()
             })
     },
     methods: {
-        update(employee) {
-            axios.post('/api/employee-update',employee)
-            .then(res=>{
-                 axios.get('/api/employees')
-                    .then(res=>{
-                        this.employees = res.data.employees
-                        this.showed = this.employees.slice()
-                        for(var i=0;i<this.showed.length;i++){
-                            var obj = Object.assign({},this.showed[i])
-                            this.showed[i]=obj
-                        }
-                        this.showed = this.showed.reverse()
-                    })
-                    .catch(error=>this.errors=error.response.data.errors)
-                }
-            ).catch(error=>this.errors=error.response.data.errors)
+        edit(index){
+            this.form.first_name = this.employees[index].first_name
+            this.form.last_name = this.employees[index].last_name
+            this.form.email = this.employees[index].email
+            this.form.phone = this.employees[index].phone
+            this.edit=true
+
         },
-        create() {
+        // update(employee) {
+        //     console.log(employee.id)
+        //     axios.post('/api/employee-update',employee)
+        //     .then(res=>{
+        //          axios.get('/api/employees')
+        //             .then(res=>{
+        //                 this.employees = res.data.employees
+        //                 this.showed = this.employees.slice()
+        //                 for(var i=0;i<this.showed.length;i++){
+        //                     var obj = Object.assign({},this.showed[i])
+        //                     this.showed[i]=obj
+        //                 }
+        //                 // this.showed = this.showed.reverse()
+        //             })
+        //             .catch(error=>this.errors=error.response.data.errors)
+        //         }
+        //     ).catch(error=>console.log(this.errors=error.response.data.errors))
+        // },
+        submit() {
+            this.edit ? this.newInsert() :this.create()
+            
+        },
+        newInsert(){
+            axios.post('/api/employee-update',this.form)
+            
+            .then(res=>{
+                this.employees.unshift(res.data)
+                this.form.first_name = null
+                this.form.last_name = null
+                this.form.email = null
+                this.form.phone = null
+            })
+        },
+        create(){
             axios.post('/api/employees',this.form)
             .then(res=>{
                     // console.log(res)
-                    this.first = Object.assign({},this.form)
-                    console.log(this.first)
-                    this.showed.unshift(this.first)
+                    // this.first = Object.assign({},this.form)
+                    console.log(res.data.employee)
+                    this.employees.unshift(res.data.employee)
                     this.form.first_name ='';
                     this.form.last_name ='';
                     this.form.email ='';
@@ -169,21 +196,22 @@ export default {
                 }
             ).catch(error=>console.log(error))
         },
-        trash(index) {
-            if(this.showed[index].id==null){
-                // console.log(this.showed[index].length)
-                this.showed.splice(index,1)
-            }
+        trash(id) {
+            
             // console.log(this.employees[index].id)
-            axios.post(`/api/employees/${this.showed[index].id}`,this.form)
-            .then(res=>{
-                this.showed.splice(index,1)
-            }
-            ).catch(error=>this.errors=error.response.data.errors)
+            axios.delete(`/api/employees/${id}`)
+            .catch(error=>console.log(error))
+
+            var index = this.showed.findIndex(obj=>
+                obj.id === id
+            )
+            console.log(index)
+            this.showed.splice(index,1)
         },
-         edit(index) {
-            $(`#${ this.employees[index].id}`).modal('show');
-        }
+        //  edit(i) {
+        //      console.log(i)
+        //     $(`#${i}`).modal('show');
+        // }
     }
 }
 </script>

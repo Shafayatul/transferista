@@ -63,7 +63,7 @@ class EmployeesController extends Controller
         // Mail::to($email)->send(new employeeLoginInfo($email, $password));
 
         return response()->json([
-            'message' => 'Successfully created Employee!'
+            'employee' => $employee
         ], 201);
     }
 
@@ -78,7 +78,7 @@ class EmployeesController extends Controller
     public function update(Request $request)
     {
         
-        $employee         = Employee::findOrFail($request->employee_id);
+        $employee         = Employee::findOrFail($request->id);
 
         $user             = User::findOrFail($employee->user_id);
         $user->name       = $request->first_name.' '.$request->last_name;

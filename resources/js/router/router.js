@@ -28,7 +28,7 @@ import TransferistaList from '../components/view/TransferistaList'
 const routes = [
     {path:'/',component: AvailableProjects,meta: { auth: false, title: 'Project Details' }},
     {path:'/position',component: google},
-    {path:'/project_details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
+    {path:'/project-details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate, meta: { auth: false, title: 'Create' }},    
     {path:'/profile',component: profile},
     {path:'/register',component: register},

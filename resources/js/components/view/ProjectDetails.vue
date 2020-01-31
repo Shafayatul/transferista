@@ -126,6 +126,8 @@ export default {
             noBids: false,
             flag: true,
             center: { lat: 45.508, lng: -73.587 },
+            center1: { lat: null, lng: null },
+            center2: { lat: null, lng: null },
             project_title: null,
             project_description: null,
             chatShow: false
@@ -161,39 +163,41 @@ export default {
         //             }
 		// 		})
         // },
-        //  getDirection(){
-        //     if(this.directionsDisplay== null){
-        //         this.directionsDisplay = new google.maps.DirectionsRenderer;
-        //     }
-        //     var directionsService = new google.maps.DirectionsService;
-        //     var start = {
-        //         lat: parseFloat(this.project.origin_lat),
-        //         lng: parseFloat(this.project.origin_lng)
-        //     };
-        //     var destination =  {
-        //         lat: parseFloat(this.project.destination_lat),
-        //         lng: parseFloat(this.project.destination_lng)
-        //     };
-        //     this.directionsDisplay.setMap(this.$refs.map.$mapObject);
+         getDirection(){
+            if(this.directionsDisplay== null){
+                this.directionsDisplay = new google.maps.DirectionsRenderer;
+            }
+            var directionsService = new google.maps.DirectionsService;
+            this.center1 = {
+                lat: parseFloat(this.project.origin_lat),
+                lng: parseFloat(this.project.origin_lng)
+            };
+            this.center2 =  {
+                lat: parseFloat(this.project.destination_lat),
+                lng: parseFloat(this.project.destination_lng)
+            };
+            var start = this.center1;
+            var destination = this.center2;
+            this.directionsDisplay.setMap(this.$refs.map.$mapObject);
             
-        //     // google maps API's direction service
-        //     function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
-        //         directionsService.route({
-        //                 origin: start,
-        //                 destination: destination,
-        //                 travelMode: 'DRIVING'
-        //             }, function(response, status) {
-        //             if (status === 'OK') {
-        //                 this.form.distance = response.routes[0].legs[0].distance.value
-        //                 directionsDisplay.setDirections(response);
+            // google maps API's direction service
+            function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
+                directionsService.route({
+                        origin: start,
+                        destination: destination,
+                        travelMode: 'DRIVING'
+                    }, function(response, status) {
+                    if (status === 'OK') {
+                        this.form.distance = response.routes[0].legs[0].distance.value
+                        directionsDisplay.setDirections(response);
                         
-        //             } else {
-        //                 window.alert('Directions request failed due to ' + status);
-        //             }
-        //         });
-        //     }
-        //     calculateAndDisplayRoute(directionsService,this.directionsDisplay,start,destination)
-        // },
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+            }
+            calculateAndDisplayRoute(directionsService,this.directionsDisplay,start,destination)
+        },
         confirm(index){
             $(`#${ this.bids[index].id}`).modal('show');
         },

@@ -1,7 +1,7 @@
 <template>
     <main class="pt-5 mx-lg-5 " style="height:100vh;">
         <div class="container-fluid mt-5">
-            <div class="container emp-profile">
+            <div class="container emp-profile col-md-6">
                 <div v-show="noBids" class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>No bids has been accepted yet</strong> 
                 </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\BidResource;
 
 use App\Bid;
 use App\User;
@@ -18,14 +19,11 @@ class BidsController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    
 
     public function index()
     {
-        $bids = Bid::where('transferista_id', Auth::id())->with('project')->where('bid_status',0)->get();
-        return response()->json([
-            'bids' => $bids
-        ]);
+        $bids = Bid::where('transferista_id', Auth::id())->where('bid_status',0)->get();
+        return BidResource::collection($bids);
     }
 
     /**

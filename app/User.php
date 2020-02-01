@@ -86,4 +86,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(\App\DriverToProject::class, 'transferista_id');
     }
+
+    public function driver(){
+        return $this->hasOne(\App\Driver::class,'user_id');
+    }
 }

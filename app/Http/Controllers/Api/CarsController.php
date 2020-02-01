@@ -18,7 +18,7 @@ class CarsController extends Controller
      */
     public function index()
     {
-        $cars = Car::where('transferista_id', Auth::id())->latest()->get();
+        $cars = Car::where('transferista_id', Auth::id())->where('car_status', 1)->get();
         return response()->json([
             'cars' => $cars
         ]);
@@ -53,9 +53,10 @@ class CarsController extends Controller
         $car->brand           = $request->brand;
         $car->type            = $request->type;
         $car->plate           = $request->plate;
+        $car->cargo_capacity           = $request->cargo_capacity;
         $car->save();
         return response()->json([
-            'message' => 'Successfully created car!'
+            'car' => $car
         ], 201);
     }
 
@@ -98,9 +99,10 @@ class CarsController extends Controller
         $car->brand           = $request->brand;
         $car->type            = $request->type;
         $car->plate           = $request->plate;
+        $car->cargo_capacity  = $request->cargo_capacity;
         $car->save();
         return response()->json([
-            'message' => 'Successfully updated car!'
+            'car' => $car
         ], 201);
     }
 

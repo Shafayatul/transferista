@@ -13,4 +13,7 @@ class Driver extends Model
     {
         return $this->hasOne(\App\DriverToProject::class, 'driver_id');
     }
+    public function user(){
+       return  $this->belongsTo(\App\User::class,'user_id');
+    }
 }

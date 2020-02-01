@@ -26,9 +26,9 @@
                     <div class="col-md-8">
                         <div class="gig_details">
                             <div class="gig_title d-flex justify-content-between">
-                                <div v-show="notTransferista" class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <!-- <div v-show="notTransferista" class="alert alert-warning alert-dismissible fade show" role="alert">
                                     <strong>Please log in first</strong> 
-                                </div>
+                                </div> -->
                                 <a class="p" href="#">
                                     <h3>
                                         {{project_title}}
@@ -126,7 +126,7 @@ export default {
             bids: null,            
             destination: {},
             directionsDisplay : {},
-            show: false,
+            show: true,
             noBids: false,
             flag: true,
             center: { lat: 45.508, lng: -73.587 },
@@ -134,7 +134,7 @@ export default {
             center2: { lat: 0.0, lng: 0.0 },
             project_title: null,
             project_description: null,
-            chatShow: false
+            
         }
     },
     components:{
@@ -158,7 +158,6 @@ export default {
     },
     methods:{
          getDirection(){
-             console.log(11111)
              
             this.directionsDisplay = new google.maps.DirectionsRenderer;
             
@@ -172,35 +171,32 @@ export default {
             this.center2.lng =parseFloat(this.project.destination_lng)
             
             var start = this.center1;
-             console.log(22222)
-            console.log(start)
+             
             var destination = this.center2;
             this.directionsDisplay.setMap(this.$refs.map.$mapObject)
             console.log(this.project)
             // google maps API's direction service
-                console.log(333333)
-                    console.log(start)
-                    console.log(this.directionsDisplay)               
-                    directionsService.route({
-                        origin: start,
-                        destination: destination,
-                        travelMode: 'DRIVING'
-                    }, (response, status)=> {
-                    if (status === 'OK') {
-                        // this.form.distance = response.routes[0].legs[0].distance.value
-                        console.log(response)
-                        this.directionsDisplay.setDirections(response);
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                });
+                              
+            directionsService.route({
+                    origin: start,
+                    destination: destination,
+                    travelMode: 'DRIVING'
+                }, (response, status)=> {
+                if (status === 'OK') {
+                    // this.form.distance = response.routes[0].legs[0].distance.value
+                    console.log(response)
+                    this.directionsDisplay.setDirections(response);
+                } else {
+                    window.alert('Directions request failed due to ' + status);
+                }
+            });
 
         },
         confirm(index){
-            $(`#${ this.bids[index].id}`).modal('show');
+            $(`#${ this.bids[index].bid_id}`).modal('show');
         },
         accepted(p_id,bid){
-            axios.post(`project/accept/${p_id}/${bid.bid_transferista_id}`)
+            axios.post(`/project/accept/${p_id}/${bid.bid_transferista_id}`)
             .then(res=>{
                 this.transferista = res.data.transferista
                 $(`#${ this.bids[index].id}`).modal('show');
@@ -217,7 +213,7 @@ export default {
         .then(res =>{
             this.project = res.data.project
             this.bids = res.data.bids_data_array 
-            if(!this.bids){
+            if(this.bids.length == 0){
                 this.noBids = true
             } 
             this.project_title = this.project.project_title;
@@ -228,52 +224,14 @@ export default {
 
        
         // if(User.customer()|| User.company() ||User.admin()){
-        //     if(User.name() == this.project)
+        //     if(User.name() == this.project.name)
         //         this.show = true;
-        //         this.chatShow = true;
         // }
-        if(User.transferista()){
-            this.show = true
-            this.flag = false
-        }
+        // if(User.transferista()){
+        //     this.show = true
+        //     this.flag = false
+        // }
         
-    },
-    mounted(){
-            //         this.directionsDisplay = new google.maps.DirectionsRenderer;
-            
-            // var directionsService = new google.maps.DirectionsService;
-
-            
-            // this.center1.lat= parseFloat(this.project.origin_lat)
-            // this.center1.lng = parseFloat(this.project.origin_lng)
-            
-            // this.center2.lat= parseFloat(this.project.destination_lat)
-            // this.center2.lng =parseFloat(this.project.destination_lng)
-            
-            // var start = this.center1;
-            // console.log(start)
-            // var destination = this.center2;
-            // this.directionsDisplay.setMap(this.$refs.map.$mapObject)
-            // console.log(this.project)
-            // // google maps API's direction service
-            // function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
-            //         console.log(start)
-            //         console.log(this.directionsDisplay)               
-            //         directionsService.route({
-            //             origin: start,
-            //             destination: destination,
-            //             travelMode: 'DRIVING'
-            //         }, (response, status)=> {
-            //         if (status === 'OK') {
-            //             // this.form.distance = response.routes[0].legs[0].distance.value
-            //             console.log(response)
-            //             directionsDisplay.setDirections(response);
-            //         } else {
-            //             window.alert('Directions request failed due to ' + status);
-            //         }
-            //     });
-            // }
-            // calculateAndDisplayRoute(directionsService,directionsDisplay,start,destination)
     }
 
 }

@@ -3,7 +3,7 @@
     <main class="pt-5 mx-lg-5 " style="height:100vh;">
         <div class="container-fluid mt-5">
             <div class="container emp-profile">
-                <div v-show="noBids" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div v-show="noProject" class="alert alert-warning alert-dismissible fade show" role="alert">
                     <strong>You haven't submitted any project</strong> 
                 </div>
                 <div class="mr_card" v-for="(data,index) in projects" :key="index">
@@ -18,7 +18,7 @@
                                 </a>
                                 <ul class="col-md-3 text-center">
                                     <li class="mb-2"><small>10 bids</small></li>
-                                    <li class="mb-2"><button v-show="flag" class="btn btn-success " @click="modal(index)"><a class="font-color" >Bid Now</a></button></li>
+                                    <li class="mb-2"><button  class="btn btn-success " ><a class="font-color" ></a></button></li>
                                 </ul>
 
                             </div>
@@ -54,7 +54,7 @@
 export default {
     data(){
         return{
-            noBids:false,
+            noProject:false,
             flag:true,
             projects:{}
         }
@@ -69,10 +69,6 @@ export default {
 				} 
 			})
         }
-        ,
-		modal(index){
-            $(`#${ this.projects[index].id}`).modal('show');
-        },
         
     },
     created(){
@@ -80,7 +76,7 @@ export default {
 		.then(res =>{ 
             this.projects = res.data.data
             if(this.projects.length == 0){
-                this.noBids = true
+                this.noProject = true
             }
 			})
         .catch(error=>{

@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -11,6 +10,7 @@ use App\Driver;
 use App\User;
 use Auth;
 use Hash;
+use App\Http\Resources\DriverResource;
 
 class DriversController extends Controller
 {
@@ -22,9 +22,7 @@ class DriversController extends Controller
     public function index()
     {
         $drivers = Driver::where('transferista_id', Auth::id())->where('driver_status', 1)->get();
-        return response()->json([
-            'drivers' => $drivers
-        ]);
+        return DriverResource::collection($drivers);
     }
 
     /**
@@ -72,9 +70,7 @@ class DriversController extends Controller
         $email = $request->email;
         // Mail::to($email)->send(new driverLoginInfo($email, $password));
 
-        return response()->json([
-            'message' => 'Successfully created driver!'
-        ], 201);
+        return new  DriverResource($driver);
     }
 
     /**
@@ -123,9 +119,7 @@ class DriversController extends Controller
         $driver->phone           = $request->phone;
         $driver->save();
 
-        return response()->json([
-            'message' => 'Successfully Updated Driver!'
-        ], 201);
+        return new DriverResource($driver);
     }
 
     /**

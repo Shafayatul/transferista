@@ -93,7 +93,7 @@ class EmployeesController extends Controller
         $employee->save();
 
         return response()->json([
-            'message' => 'Successfully Updated Employee!'
+            'employee' => $employee,
         ], 201);
     }
 

@@ -24,7 +24,7 @@ class ProjectsController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $user = Auth::user();   
         if ($user->hasRole('company')) {
             $projects = Project::where('project_owner_id', Auth::id())->with('bids')->latest()->get();;
         }elseif ($user->hasRole('customer')) {

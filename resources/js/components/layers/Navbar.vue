@@ -3,9 +3,9 @@
     <nav class="navbar navbar-expand-md  navbar-light">
         <div class="container">
             
-            <a class="navbar-brand"  >
+            <router-link to="/" class="navbar-brand">
                 <img :src="'/img/TransferistaC22b-A00aT03a-Z.png'">
-            </a>
+            </router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -116,13 +116,18 @@ export default {
             items:[
                 {title:'Profile',to:'/profile/user',show: User.loggedIn()},
                 {title:'Login',to:'/login',show: !User.loggedIn()},
+                {title:'Register',to:'/register',show: !User.loggedIn()},
                 {title:'Log-out',to:'/logout',show: User.loggedIn()}
-            ]
+            ],
+            activeClass: 'active'
         }
     },
     computed:{
         name(){
             return localStorage.getItem('user')
+        },
+        currentPage(){
+            return this.$route.path;
         }
     },
     methods:{
@@ -141,3 +146,14 @@ export default {
     }
 }
 </script>
+<style scoped>
+    .router-link-active{
+        opacity: 1;
+        visibility: visible;
+        border-left-color: #4DB6AC;
+        margin: 6px;
+        transition: all 0.25s;
+        background: none!important;
+        box-shadow: none;
+    }
+</style>

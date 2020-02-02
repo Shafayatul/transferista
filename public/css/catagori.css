@@ -9,6 +9,7 @@ a:hover{
 .fonts-title{
   font-weight: bolder;
   font-size: 1.25rem;
+  overflow: hidden;
 }
 .body-color{
   color:#707070;
@@ -166,6 +167,7 @@ catagoris body content area start
 }
 .catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card {
   margin-bottom: 30px;
+  padding: 10px 2px 0px 10px;
 }
 .catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_img img{
   -webkit-transition: all .4s;
@@ -183,26 +185,20 @@ transform: scale(1.1) rotate(3deg);
 .catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body {
   background: #ecf6ff;
 }
-.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price{
+.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body {
   margin: 0px 30px;
   position: relative;
 }
-.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price a p{
+.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  a p{
   font-size: 15px;
   font-weight: 500;
   line-height: 40px;
   color: #707070;
 }
-.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price span{
+
+.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .p-box{
+ padding: 2%;
   
-}
-.catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body .price .p-box{
-  width: 100%;
-  background: #fff;
-  box-shadow: 0px 0px 30px solid rgba(0, 0, 0, 0.2);
-  padding: 10px 15px;
-  position: absolute;
-  top: -30px;
 }
 .catagoris #catagoribody .mamunurrashid_gig_wraper .mr_card .mr_card_body  .title{
   padding: 57px 15px 32px;
@@ -244,4 +240,66 @@ font-size: 16px;
   border: 1px solid #0d73e6;
   background: #0d73e6;
   color: #fff;
+}
+.card-text{
+  overflow: hidden;
+}
+.basic-search {
+  box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  border-radius: 34px;
+  margin-bottom: 5px;
+}
+
+ .basic-search .input-field {
+  width: 100%;
+}
+
+ .basic-search .input-field input {
+  padding: 10px 80px 10px 40px;
+}
+
+ .basic-search .input-field .icon-wrap {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  width: 60px;
+  height: 100%;
+}
+
+ .basic-search .input-field .icon-wrap svg {
+  width: 34px;
+  height: 34px;
+  fill: #fff;
+}
+.input-field input {
+  height: 100%;
+  border: 0;
+  display: block;
+  width: 100%;
+  padding: 10px 32px 10px 70px;
+  font-size: 18px;
+  height: 70px;
+  color: #fff;
+  background: linear-gradient(to right, #2c6dd5 0%, #2c6dd5 28%, #ff4b5a 91%, #ff4b5a 100%);
+  font-family: 'Lato', sans-serif;
+}
+::-webkit-input-placeholder { /* Edge */
+  color: #fff;
+}
+
+:-ms-input-placeholder { /* Internet Explorer */
+  color: #fff;
+}
+
+::placeholder {
+  color: #fff;
+}
+.mr_select{
+  padding-top: 2%;
+  padding-bottom: 2%;
 }

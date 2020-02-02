@@ -159,7 +159,7 @@ export default {
             this.form.type = this.cars[index].type
             this.form.plate = this.cars[index].plate
             this.form.id = this.cars[index].id
-            this.form.id = this.cars[index].cargo_capacity
+            this.form.cargo_capacity = this.cars[index].cargo_capacity
             this.editFlag = true
         },
         // update(car) {
@@ -207,11 +207,11 @@ export default {
                 this.form.cargo_capacity = null
                 this.editFlag= false
                 this.i=null
-                    this.errors = {}
+                this.errors = {}
             }).then(error=>console.log(this.errors=error.response.data.errors))
         },
         trash(index) {
-            axios.post(`/api/cars/${this.cars[index].id}`,this.form)
+            axios.delete(`/api/cars/${this.cars[index].id}`)
             .then(res=>{
                     this.cars.splice(index,1)
                     this.form.brand=null

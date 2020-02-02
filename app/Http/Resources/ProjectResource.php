@@ -18,7 +18,7 @@ class ProjectResource extends JsonResource
             'id'=> $this->id,
             'title'=>$this->title,
             'origin_address'=>$this->origin_address,
-
+            
             'origin_town'=> $this->origin_town,
             'origin_country'=>$this->origin_country,
             'origin_lng'=>$this->origin_lng,

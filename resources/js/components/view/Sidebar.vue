@@ -25,7 +25,7 @@ export default {
                 {title: 'Employees',to:'/profile/employees',show: (User.company() )},
                 {title: 'Add Project',to:'/project/create',show: (User.company() ||User.customer())},
                 {title: 'My Projects',to:'/profile/projects',show: (User.company()  ||User.customer())},
-                {title: 'Accepted Projects',to:'/profile/projects',show: (User.transferista())},
+                {title: 'Accepted Projects',to:'/profile/accepted-projects',show: (User.transferista())},
                 {title: 'Drivers',to:'/profile/drivers',show: ( User.transferista())},
                 {title: 'Cars',to:'/profile/cars',show: ( User.transferista())},
                 {title: 'Active Drivers',to:'/profile/positions',show: (User.transferista())},

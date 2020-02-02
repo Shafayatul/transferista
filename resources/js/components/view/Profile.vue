@@ -74,4 +74,7 @@ export default {
 main{
     padding-left: 270px;
 }
+.navbar-brand img{
+display: none;
+}
 </style>

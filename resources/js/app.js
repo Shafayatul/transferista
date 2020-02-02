@@ -5,7 +5,7 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 
 // require('@/assets/css/style.css')
 
-
+// Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 import User from './helpers/User'
 
 window.User = User

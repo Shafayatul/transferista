@@ -10,6 +10,8 @@
     <meta name="author" content="Colorlib">
     <meta name="keywords" content="Colorlib Templates">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
+
     <!-- Title Page-->
     <!-- <title>register</title> -->
 
@@ -44,9 +46,10 @@
       
     <link rel="stylesheet" type="text/css" href="{{asset('css/jobdetails.css')}}">
     <link href="{{asset('css/project.css')}}" rel="stylesheet" media="all">
-    
+    @if(Auth::check()) <meta name="user-id" content= {{ Auth::user()->id }}> @endif
 
 </head>
+
 <body id="profile-body">
   <div id="app" >
     <app-home></app-home>

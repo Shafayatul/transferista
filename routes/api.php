@@ -35,7 +35,7 @@ Route:: post('/map',function (Request $request){
 });
 
 Route::get('project-list', 'Api\FrontendsController@index');
-Route::get('project-detail/{id}', 'Api\FrontendsController@projectDetail');
+Route::get('visitor-project-detail/{id}', 'Api\FrontendsController@visitorProjectDetail');
 Route::post('project-rating/{project_id}', 'Api\FrontendsController@projectRating');
 Route::post('register', 'Api\UsersController@register');
 Route::post('roles', 'Api\RolesController@store');
@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('logout', 'Api\UsersController@logout');
     Route::post('user-info-save', 'Api\UsersController@userInfoSave');
     Route::post('user-info-update', 'Api\UsersController@userInfoUpdate');
+
+    Route::get('project-detail/{id}', 'Api\FrontendsController@projectDetail');
 
     Route::group(['middleware' => ['role:company']], function () {
         Route::get('employees', 'Api\EmployeesController@index');

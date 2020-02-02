@@ -75,9 +75,10 @@
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star-o"></i>
                                             </div>
-                                            <button v-show="flag" @click="confirm(index)" class="btn btn-success">Accept</button>
-                                            <button class="btn btn-danger">Cancel</button>
-                                            
+                                            <div v-if="isOwner">
+                                                <button  @click="confirm(index)" class="btn btn-success">Accept</button>
+                                                <button class="btn btn-danger">Cancel</button>
+                                            </div>
                                         </div>
                                     <p class="p">{{bid.created_at}}</p>
                                     </div>
@@ -122,18 +123,20 @@ export default {
         return{
             notTransferista:false,
             id:null,
-            project:null,
-            bids: null,            
+            project:{},
+            bids: {},            
+            isOwner: false,
             destination: {},
             directionsDisplay : {},
             show: true,
             noBids: false,
-            flag: true,
+            flag: false,
             center: { lat: 45.508, lng: -73.587 },
             center1: { lat: 0.0, lng: 0.0 },
             center2: { lat: 0.0, lng: 0.0 },
             project_title: null,
             project_description: null,
+            url: null,
             
         }
     },
@@ -156,8 +159,24 @@ export default {
 		// }
         
     },
-    methods:{
-         getDirection(){
+    methods:
+        {getPosition(marker){
+        return {
+            lat: parseFloat(marker.lat),
+            lng: parseFloat(marker.lng)
+        };
+        },
+        toggleInfo(marker, key) {
+        this.infoPosition = this.getPosition(marker)
+        this.infoContent = marker.full_name
+        if (this.infoCurrentKey == key) {
+            this.infoOpened = !this.infoOpened
+        } else {
+            this.infoOpened = true
+            this.infoCurrentKey = key
+        }
+        },
+        getDirection(){
              
             this.directionsDisplay = new google.maps.DirectionsRenderer;
             
@@ -198,9 +217,9 @@ export default {
         accepted(p_id,bid){
             axios.post(`/project/accept/${p_id}/${bid.bid_transferista_id}`)
             .then(res=>{
-                this.transferista = res.data.transferista
-                $(`#${ this.bids[index].id}`).modal('show');
-                this.flag = false;
+                // this.transferista = res.data.transferista
+                // $(`#${ this.bids[index].id}`).modal('show');
+                // this.flag = false;
                 
             })
             .catch(error => this.notTransferista = true)
@@ -209,10 +228,18 @@ export default {
     created(){
         this.$emit(`update:layout`,DashboardLayout)
         this.id = this.$route.params.id
-        axios.get(`/api/project-detail/${this.id}`)
+        if(User.loggedIn()){
+            this.url = `/api/project-detail/${this.id}`
+        }else{
+            this.url = `/api/visitor-project-detail/${this.id}`
+        }
+        axios.get(this.url)
         .then(res =>{
+            console.log(res)
             this.project = res.data.project
             this.bids = res.data.bids_data_array 
+            this.isOwner = res.data.is_owner
+             
             if(this.bids.length == 0){
                 this.noBids = true
             } 
@@ -222,6 +249,11 @@ export default {
         })
         .catch(error=>console.log(error))
 
+        //  console.log(this.$userId)
+        // $http.get('api/user')
+        // .then(res=>{
+        //     console.log(res.body)
+        // })
        
         // if(User.customer()|| User.company() ||User.admin()){
         //     if(User.name() == this.project.name)
@@ -231,8 +263,13 @@ export default {
         //     this.show = true
         //     this.flag = false
         // }
+        // if(User.company()){
+        //     if(this.$userId === this.project.project_owner_id)
+        //     {
+        //         this.flag = true
+        //     }
+        // }
         
     }
-
 }
 </script>

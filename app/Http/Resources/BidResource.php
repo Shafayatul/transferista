@@ -15,7 +15,7 @@ class BidResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id'=>$this->id,
+            'id'=>$this->project->id,
             'project_title'=>$this->project->project_title,
             'project_description'=>$this->project->project_description,
             'time_for_delivery'=>$this->project->time_for_delivery,

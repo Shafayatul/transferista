@@ -91,11 +91,9 @@
                             <!-- <div class="dropdown-title">
                                 Logged in 5 min ago
                             </div> -->
-                            <router-link v-for="item in items" :key="item.title" :to="item.to" v-show="item.show">
-                                <a href="#" class="dropdown-item has-icon text-danger">
-                                    <i class="fas fa-sign-out-alt"></i> {{item.title}}
-                                </a>
-                                
+                            <router-link v-for="item in items" class="dropdown-item" :key="item.title" :to="item.to" v-show="item.show">
+                               
+                                  {{item.title}}
                             </router-link>
 <!--                             
                                 <button @click="loggedout" href="#" v-if="logout" class="dropdown-item has-icon text-danger">

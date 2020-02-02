@@ -1,62 +1,62 @@
 <template>
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Employee</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+    
+    <main class=" mx-lg-5 catagoris" >
+       <section  id="catagoribody">
+            <div class="container mamunurrashid_gig_wraper">
+                <div v-show="noProject" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>You haven't bidded any project</strong> 
+                </div>
+                <div class="mr_card" v-for="(data,index) in projects" :key="index">
+                    <div class="mr_card_body">
+                            <div class="p-box  ">											
+                                <a href="" @click=singleProject(data.id) class="p ">
+                                    <h5 class="fonts-title">{{data.project_title}}<br><small>Bidded {{ data.created_at }}</small></h5>
+                                   <div class="project-body pt-2">
+                                        <span class="body-color">
+                                            {{data.project_description}}
+                                        </span>
+                                    </div>
+                                </a>
+                                <ul class="col-md-3 text-center">
+                                    <li class="mb-2"><small></small></li>
+                                </ul>
+                            </div>
+                            <div class=" d-flex ">											
+                                <p class="sr col-md-4">
+                                    <!-- <span class="stars">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                    </span><br> -->
+                                    <span class="review">
+                                       Total bidded with: {{data.estimated_cost}}$
+                                    </span>
+                                </p>
+                                <p class="col-md-4"><i class="fas fa-google-map"></i>From: {{data.origin_address}}</p>
+                                <p class="col-md-4">To: {{data.destination_address}}</p>
+                            </div>
+                      
+                    </div>
+                </div>
             </div>
-            <form @submit.prevent="update">
-                <div class="modal-body">
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">First Name</span>
-                    <input v-model="form.first_name"  class="form-control md-form">
-                    </div>
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">Last Name</span>
-                    <input v-model="form.last_name"   class="form-control md-form">
-                    </div>
-                    <div class=" model-div">
-                    <span class="md-btn addBtn">Email</span>
-                    <input v-model="form.email"  class="form-control md-form">
-                    </div>
-                    <div class=" model-div">
-                        <span class="md-btn addBtn">Phone</span>
-                        <input v-model="form.phone"  class="form-control md-form">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
-                    <button type="submit" class="btn btn-primary" @click="editDriver">Save changes</button>
-                </div>
-            </form>
-        </div>
-    </div>
+        
+       </section>
+    </main>
+
 </template>
 <script>
 export default {
     props:['driver','update'],
     data(){
         return{
-            form:{
-                id: this.driver.id,
-                first_name: this.driver.first_name,
-                type: this.driver.last_name,
-                email: this.driver.email,
-                phone: this.driver.phone
-            }
+            
         }
     },
     methods: {
         editDriver() {
             this.update(this.form)
-            // this.$emit('update',{
-            //     first_name:this.form.first_name,
-            //     last_name:this.form.last_name,
-            //     email: this.form.email,
-            //     phone:this.form.phone
-            // });
         }
     }
 }

@@ -11,6 +11,7 @@ class User{
     responseAfterLogin(res){
         const access_token = res.data.access_token
         const username = res.data.user.name
+      
         const expiration = res.data.expired_at
         if(res.data.roles[0] != undefined){
             console.log(res.data.roles[0])

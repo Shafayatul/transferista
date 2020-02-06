@@ -110,7 +110,6 @@ export default{
     },
     methods:{
         userInfo(){
-
             console.log(this.form)
             axios.post('/api/user-info-save',this.form)
             .then(res=> this.$router.push({name: 'userInfo'}))
@@ -118,6 +117,8 @@ export default{
         }
     },
     created(){
+        let role = 'customer'
+        localStorage.setItem('role', role) 
         this.form.role_id = this.$route.params.role
         this.$emit(`update:layout`,AuthLayout)
     }

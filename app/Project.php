@@ -11,6 +11,26 @@ class Project extends Model
 {
     use SoftDeletes;
 
+    /**
+     * Status
+     * 0 = available
+     * 1 = accepted
+     * 2 = on_going
+     * 3 = delivered
+     * 4 = deleted
+     */
+
+    public function status(){
+        return $status = [
+            'available' => '0',
+            'accepted'  => '1',
+            'on_going'  => '2',
+            'delivered' => '3',
+            'deleted'    => '4'
+        ];
+    }
+
+
     public function user(){
         return $this->belongsTo(User::class,'project_owner_id');
     }

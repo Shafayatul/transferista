@@ -51,5 +51,10 @@ window.Echo = new Echo({
     broadcaster: 'pusher',
     key: 'ac11347c5fd2b32684fa',
     cluster: 'ap2',
-    forceTLS: true
+    forceTLS: true,
+    auth: {
+        headers: {
+            Authorization:  passportToken
+        },
+    },
 });

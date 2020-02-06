@@ -77,6 +77,17 @@
                     </div>
                 </div>
                 <div class="form-row">
+                    <div class="name">VAT</div>
+                    <div class="value">
+                        <div class="input-group" :class="{error: errors.vat}">
+                            <input v-model="form.vat" class="input--style-5" type="text" name="country">
+                        </div>
+                        <span v-if="errors.vat" class="help-block" role="alert">
+                            <strong>{{errors.vat[0]}}</strong>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-row">
                     <div class="name">IBAN</div>
                     <div class="value">
                         <div class="input-group" :class="{error: errors.iban}">
@@ -141,6 +152,7 @@ export default{
                country:null,
                phone:null,
                company:null,
+               vat:null,
                email_company:null, 
                iban:null,
                bic:null,
@@ -161,7 +173,7 @@ export default{
         userInfo(){
             axios.post('/api/user-info-save',this.form)
             .then(res=>{
-                alert(11111)
+                // alert(11111)
                 let role; 
                 if(this.form.role_id == 2){
                     role = 'company'
@@ -176,7 +188,7 @@ export default{
                 this.$router.push({name:'userInfo'})
             })
             .catch(error=> {
-                alert(222)
+                
                 this.errors = error.response.data.errors
                 console.log(error)
                 }

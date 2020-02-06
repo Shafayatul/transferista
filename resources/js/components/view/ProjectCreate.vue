@@ -114,11 +114,6 @@
                                         <strong>{{errors.project_description[0]}}</strong>
                                     </span>
                                 </div>
-                                <div class="row characters">
-                                    <div class="col-sm-9 col-sm-offset-3">
-                                        <p>5000 characters left</p>
-                                    </div>
-                                </div>
                             </div><!-- section -->
                             <div class="checkbox section agreement">
                                 <label for="send">
@@ -208,11 +203,13 @@ export default {
         create(){
             axios.post('/api/projects',this.form)
             .then(res=>{
-                this.success = true
-                this.$router.push({name:'list'})
+                    this.success = true
+                    this.$router.push({name: 'singleProject',params:{
+                    id: res.data.id
+                    } 
+                })
             })
-            .catch(error=> console.log(error)
-            )
+            .catch(error=> console.log(error))
             // this.setAll(this.form,null)
         }, 
         setAll(obj, val) {

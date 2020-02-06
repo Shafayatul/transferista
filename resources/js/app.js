@@ -14,9 +14,15 @@ Vue.use(VueGoogleMaps, {
     load: {
       key: 'AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo',
       libraries: 'places',
-    },
+    }
 });
+
+// Vue.component('pulse-loader', require('vue-spinner/src/PulseLoader.vue'));
+
 Vue.component('google-map', VueGoogleMaps.Map);
+import StarRating from 'vue-star-rating'
+
+Vue.component('star-rating', StarRating);
 
 window.EventBus = new Vue();
 

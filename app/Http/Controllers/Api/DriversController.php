@@ -11,6 +11,7 @@ use App\User;
 use Auth;
 use Hash;
 use App\Http\Resources\DriverResource;
+use Spatie\Permission\Models\Role;
 
 class DriversController extends Controller
 {
@@ -23,6 +24,31 @@ class DriversController extends Controller
     {
         $drivers = Driver::where('transferista_id', Auth::id())->where('driver_status', 1)->get();
         return DriverResource::collection($drivers);
+    }
+
+    public function driverProjects()
+    {
+        $driver_projects = Auth::user()->driver->driverAssignProject;
+        $project_data = [];
+        $car_data = [];
+        foreach($driver_projects as $driver_project){
+            array_push($project_data, $driver_project->projects);
+            array_push($car_data, $driver_project->cars);
+        }
+        return response()->json([
+            'projects' => $project_data,
+            'cars' => $car_data
+        ]);
+    }
+
+
+
+    public function email(){
+        $driver = Driver::where('user_id', Auth::id())->first();
+        $email = $driver->transferista->email;
+        return response()->json([
+            'email'=>$email
+        ]);
     }
 
     /**
@@ -57,9 +83,14 @@ class DriversController extends Controller
         $user->first_name = $request->first_name;
         $user->last_name  = $request->last_name;
         $user->email      = $request->email;
-        $user->password   = Hash::make($password);
+        $user->password   = Hash::make('12345678');
         $user->first      = 1;
         $user->save();
+
+        if ($user) {
+            $role = Role::findOrFail(6);
+            $user->syncRoles([$role->name]);
+        }
 
         $driver                  = new Driver;
         $driver->transferista_id = Auth::id();

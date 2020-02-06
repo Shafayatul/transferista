@@ -27,7 +27,7 @@
                             </button>
                         </div>
                         <div class="profile-head">
-                                {{user.first_name}} {{user.last_name}}
+                                <!-- {{User.name()}} -->
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -45,7 +45,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="profile-work">
-                            <p>WORK LINK</p>
+                            <!-- <p>WORK LINK</p>
                             <a href="">Website Link</a><br/>
                             <a href="">Bootsnipp Profile</a><br/>
                             <a href="">Bootply Profile</a>
@@ -54,7 +54,7 @@
                             <a href="">Web Developer</a><br/>
                             <a href="">WordPress</a><br/>
                             <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/>
+                            <a href="">PHP, .Net</a><br/> -->
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -116,7 +116,7 @@
                                     </div>
         
         
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <label class="col-3 control-label">Phone</label>
                                         <div class="col-9">
                                             <input :disabled="flag" v-model="user.user_info.phone" class="form-control" placeholder="Phone" data-type="string" data-original="islam" name="last_name" type="text">
@@ -129,8 +129,15 @@
                                         <div class="col-9">
                                             <input :disabled="flag" v-model="user.user_info.paypal" class="form-control" placeholder="Account no" data-type="string" data-original="islam" name="last_name" type="text">
                                         </div>
+                                    </div> -->
+                                    <div class="form-group row">
+                                        <div class="col-md-5 offset-3">         
+                                            <button type="button" class="btn btn-info btn-sm" @click="submit">Update</button>
+                                       <!-- </div>  
+                                        <div class="col-md-4 offset-3">          -->
+                                            <button type="button" class="btn btn-danger btn-sm" @click="cancel">Cancel</button>
+                                       </div>  
                                     </div>
-                                    <button type="button" class="btn" @click="submit">Update</button>
                                 </div>
                             </div>
                         </form>
@@ -163,12 +170,17 @@ export default {
         submit(){
             axios.post('/api/user-info-update',this.user)
             .then(res=>this.success=true )
+        },
+        cancel(){
+            // axios.post('/api/user-info-update',this.user)
+            // .then(res=>this.success=true )
+            this.$router.push('user')
         }
     },
     beforeCreate(){
         axios.get('/api/user-details')
         .then(res=> {
-            this.user = res.data.user
+                this.user = res.data.user
             })
         .catch(error=> console.log(error))
     }
@@ -185,7 +197,7 @@ main{
 .emp-profile{
     padding: 3%;
     margin-top: 3%;
-    margin-bottom: 3%;
+   
     border-radius: 0.5rem;
     background: #fff;
 }

@@ -15,25 +15,25 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"  >Close</button>
-                <button  class="btn btn-primary" data-dismiss="modal" @click="biding">Save changes</button>
+                <button  class="btn btn-primary" data-dismiss="modal" @click="biding">Submit</button>
             </div>
         </div>
     </div>
 </template>
 <script>
 export default {
-    props:['data','bid'],
+    props:['id','bid'],
     data(){
         return{
             form:{
-                id: this.data.id,
-                amount: this.data.amount
+                id: this.id,
+                amount: null
             }
         }
     },
     methods: {
         biding() {
-            this.bid(this.form , this.data)
+            this.bid(this.form)
             // this.$emit('update',{
             //     first_name:this.form.first_name,
             //     last_name:this.form.last_name,

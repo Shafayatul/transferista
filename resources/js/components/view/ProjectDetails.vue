@@ -24,6 +24,12 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
+                        <div v-show="bidded" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        Successfully Bidded
+                            <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                         <div class="gig_details">
                             <div class="gig_title d-flex justify-content-between">
                                 <!-- <div v-show="notTransferista" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -34,30 +40,68 @@
                                         {{project_title}}
                                     </h3>
                                 </a>
-                                <p class="sr">Open - 6 days left 
+                                <p class="sr">
+                                    <!-- Open - 6 days left  -->
                                     
                                 </p>
                             </div>
                             <span class="hr"></span>
                             <div class="gig_description">
-                                <h5>Discription</h5>
+                                <h5><b>Description</b></h5>
                                 <p>
                                     {{project_description}}
                                 </p>
+                            </div>
+                            <div class = "row address-row">
+                                <div class="col-md-6">
+
+                                    <p><b>From:</b></p>
+                                    <p>{{project.origin_address}}</p>
+
+                                    <p>City: {{project.origin_town}}</p>
+
+                                    <p>State Zip: {{project.origin_zip}}</p>
+
+                                    <p>Country: {{project.origin_country}}</p>
+
+
+                                </div>
+                                <div class="col-md-6">
+                                   <p><b>Destination:</b></p>
+                                   <p>{{project.destination_address}}</p>
                                 
+                                   <p> City: {{project.destination_town}}</p>
+                                
+                                    <p>State Zip: {{project.destination_zip}}</p>
+                                
+                                     <p>   Country: {{project.destination_country}}</p>
+                                </div>
+                        
                             </div>
                         </div>
                         <div class="orderand_share">
-                            <div class="socal_link">
+                            <button :disabled="hasBidded" v-show="isShowBidButton" class="order_btn" v-if="!accept" data-toggle="modal" data-target="#one" @click=modal()>Bid Now</button>
+                            <!-- <div class="socal_link">
                                 <p>Share:</p>
                                 <a href="#"> <i class="fa fa-facebook"></i> </a>
                                 <a href="#"> <i class="fa fa-twitter"></i> </a>
                                 <a href="#"> <i class="fa fa-linkedin"></i> </a>
                                 <a href="#"> <i class="fa fa-google-plus"></i> </a>
-                            </div>
+                            </div> -->
                         </div>
+                        <div v-if="accept1" class="alert alert-warning alert-dismissible fade show" role="alert">
+                        Transferista has been selected for this project
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <br>
+                        <br>
                         <div v-show="noBids" class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>No bids has been submitted for this project</strong> 
+                            <strong>No bid has been submitted for this project.</strong> 
+                        </div>
+                        <div v-if="accept" class=" alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>{{transferista}} has been accepted for this project</strong> 
                         </div>
                         <div class="clint_review" v-if="show">
                             
@@ -76,18 +120,40 @@
                                                 <i class="fa fa-star-o"></i>
                                             </div>
                                             <div v-if="isOwner">
-                                                <button  @click="confirm(index)" class="btn btn-success">Accept</button>
-                                                <button class="btn btn-danger">Cancel</button>
+                                                <button  @click="confirm(index)" :disabled="accept1" class="btn btn-success">Accept</button>
+                                                <!-- <button class="btn btn-danger">Cancel</button> -->
                                             </div>
                                         </div>
-                                    <p class="p">{{bid.created_at}}</p>
+                                        <p class="p">{{bid.created_at}}</p>
                                     </div>
                                 </div>
-                                <div  class="modal fade" :id="bid.bid_id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div  class="modal fade" :id="bid.bid_id"  tabindex="-1" role="dialog" aria-labelledby="bid.bid_idLabel" aria-hidden="true">
                                     <confirm  :accepted="accepted" :bid="bid"></confirm>
                                 </div>
                             </div>
                         </div>
+                        <!-- <div v-show="isOwner">
+                            <gmap-map
+                        ref="map"
+                        :zoom="12"
+                        :center="center"
+                        style="width:100%;  height: 400px;"
+                        >
+                            <gmap-marker v-show="this.center1" :position="this.center1">
+                            </gmap-marker>
+                            <gmap-marker v-show="this.center2" :position="this.center2">
+                            </gmap-marker> -->
+                            <!-- <gmap-marker
+                                :key="index"
+                                v-for="(m, index) in markers"
+                                :position="m.position"
+                                @click="center=m.position"
+                            ></gmap-marker> -->
+                        <!-- </gmap-map> -->
+                        <!-- </div> -->
+                    </div>
+                    <div  class="modal fade" id="one"  tabindex="-1" role="dialog" aria-labelledby="oneModalLabel" aria-hidden="true">
+                        <bid  :bid="bid" :id="id"></bid>
                     </div>
                     <div class="col-md-4">
                     <!--Card-->
@@ -95,6 +161,15 @@
                         ref="map"
                         :zoom="12"
                         :center="center"
+                        :options="{
+                        zoomControl: true,
+                        mapTypeControl: false,
+                        scaleControl: false,
+                        streetViewControl: false,
+                        rotateControl: false,
+                        fullscreenControl: true,
+                        disableDefaultUi: false
+                        }"
                         style="width:100%;  height: 400px;"
                         >
                             <gmap-marker v-show="this.center1" :position="this.center1">
@@ -116,18 +191,25 @@
 </template>
 
 <script>
+import bid from './Bid'
 import confirm from './Confirm'
 import DashboardLayout from '../layers/DashboardLayout'
 export default {
     data(){
         return{
+            isShowBidButton: false,
+            accept1:null,
+            accept:null,
+            transferista:null,
             notTransferista:false,
             id:null,
             project:{},
-            bids: {},            
+            bids: {},    
+            bidded:false,        
             isOwner: false,
             destination: {},
-            directionsDisplay : {},
+            data:{},
+            directionsDisplay : null,
             show: true,
             noBids: false,
             flag: false,
@@ -137,11 +219,11 @@ export default {
             project_title: null,
             project_description: null,
             url: null,
-            
+            hasBidded:false
         }
     },
     components:{
-        confirm , DashboardLayout
+        confirm , DashboardLayout, bid
     },
     computed:{
         
@@ -159,29 +241,81 @@ export default {
 		// }
         
     },
-    methods:
-        {getPosition(marker){
-        return {
-            lat: parseFloat(marker.lat),
-            lng: parseFloat(marker.lng)
-        };
+    methods:{
+		modal(){
+            if(!User.transferista()){
+				this.$router.push('../register')
+			}
+            $('#modal').modal('show');
         },
-        toggleInfo(marker, key) {
-        this.infoPosition = this.getPosition(marker)
-        this.infoContent = marker.full_name
-        if (this.infoCurrentKey == key) {
-            this.infoOpened = !this.infoOpened
-        } else {
-            this.infoOpened = true
-            this.infoCurrentKey = key
-        }
+        updatePath(e){
+            this.center1.lat  =  e.lat
+            this.center1.lng  =  e.lng
+            this.center = this.center1
+            if(this.directionsDisplay === null){
+                this.directionsDisplay = new google.maps.DirectionsRenderer;
+            }
+            var directionsService = new google.maps.DirectionsService;
+
+            
+            // this.center1.lat= parseFloat(this.project.origin_lat)
+            // this.center1.lng = parseFloat(this.project.origin_lng)
+            this.center2.lat= parseFloat(this.project.destination_lat);
+            this.center2.lng= parseFloat(this.project.destination_lng);
+            
+            var start = this.center1;
+             
+            var destination = this.center2;
+
+            if(this.$refs['map'] != undefined){
+                this.directionsDisplay.setMap(this.$refs['map'].$mapObject)
+            }
+            // console.log(this.project)
+            // google maps API's direction service
+                    directionsService.route({
+                            origin: start,
+                            destination: destination,
+                            travelMode: 'DRIVING'
+                        }, (response, status)=> {
+                        if (status === 'OK') {
+                            // this.form.distance = response.routes[0].legs[0].distance.value
+                            this.directionsDisplay.setDirections(response);
+                        } else {
+                            console.log(status)
+
+                            window.alert('Directions request failed due to ' + status);
+                        }
+                    });
+
+        },
+		bid(bidData){
+			axios.post('/api/bids',bidData)
+                .then(res=>{
+                    this.bidded = false
+                }
+			)
+		},
+        getPosition(marker){
+
+            return {
+                lat: parseFloat(marker.lat),
+                lng: parseFloat(marker.lng)
+            };
+            },
+            toggleInfo(marker, key) {
+            this.infoPosition = this.getPosition(marker)
+            this.infoContent = marker.full_name
+            if (this.infoCurrentKey == key) {
+                this.infoOpened = !this.infoOpened
+            } else {
+                this.infoOpened = true
+                this.infoCurrentKey = key
+            }
         },
         getDirection(){
              
             this.directionsDisplay = new google.maps.DirectionsRenderer;
-            
-            var directionsService = new google.maps.DirectionsService;
-
+            var directionsService = new google.maps.DirectionsService();
             
             this.center1.lat= parseFloat(this.project.origin_lat)
             this.center1.lng = parseFloat(this.project.origin_lng)
@@ -192,8 +326,9 @@ export default {
             var start = this.center1;
              
             var destination = this.center2;
-            this.directionsDisplay.setMap(this.$refs.map.$mapObject)
-            console.log(this.project)
+            if(this.$refs['map'] != undefined){
+                this.directionsDisplay.setMap(this.$refs.map.$mapObject)
+            }
             // google maps API's direction service
                               
             directionsService.route({
@@ -203,20 +338,21 @@ export default {
                 }, (response, status)=> {
                 if (status === 'OK') {
                     // this.form.distance = response.routes[0].legs[0].distance.value
-                    console.log(response)
                     this.directionsDisplay.setDirections(response);
                 } else {
                     window.alert('Directions request failed due to ' + status);
                 }
             });
 
+
         },
         confirm(index){
             $(`#${ this.bids[index].bid_id}`).modal('show');
         },
         accepted(p_id,bid){
-            axios.post(`/project/accept/${p_id}/${bid.bid_transferista_id}`)
+            axios.get(`/api/project/accept/${p_id}/${bid.bid_transferista_id}`)
             .then(res=>{
+                this.accept1 = true
                 // this.transferista = res.data.transferista
                 // $(`#${ this.bids[index].id}`).modal('show');
                 // this.flag = false;
@@ -226,8 +362,10 @@ export default {
         }
     },
     created(){
-        this.$emit(`update:layout`,DashboardLayout)
-        this.id = this.$route.params.id
+        if(User.transferista()){
+            this.isShowBidButton = true
+        }
+        this.id = this.$route.params.id;
         if(User.loggedIn()){
             this.url = `/api/project-detail/${this.id}`
         }else{
@@ -237,14 +375,23 @@ export default {
         .then(res =>{
             console.log(res)
             this.project = res.data.project
-            this.bids = res.data.bids_data_array 
-            this.isOwner = res.data.is_owner
-             
+            this.bids = res.data.bids_data_array
+            this.hasBidded = res.data.has_bidded
+            if(this.project.transferista_name === null){
+                this.isOwner = res.data.is_owner
+            }else{
+                this.transferista = this.project.transferista_name
+                this.accept = true
+                this.bidded = false
+            }
+
             if(this.bids.length == 0){
                 this.noBids = true
             } 
+
             this.project_title = this.project.project_title;
             this.project_description = this.project.project_description;
+            
             this.getDirection()
         })
         .catch(error=>console.log(error))
@@ -270,6 +417,27 @@ export default {
         //     }
         // }
         
+        this.$emit(`update:layout`,DashboardLayout)
+        
+    },
+    mounted(){
+            
+         Echo.private('positions')
+             .listen('Positions', (e) => {
+            if(this.id == e.project_id){
+                    this.updatePath(e);
+                }
+            }
+            
+        )
+       
     }
 }
 </script>
+
+<style scoped>
+.address-row{
+    margin-top: 10px;
+    padding-top: 10px;
+}
+</style>

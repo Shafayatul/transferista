@@ -4,49 +4,47 @@
             <h2 class="title">Login Form</h2>
         </div>
         <div class="card-body">
-            <p>Not signed-up yet?</p>
-            <router-link to="/register">
-                <a>Sign-up</a>
-            </router-link>
+            
             <form @submit.prevent="login">
                 <div class="form-row">
-                    <div class="name">Email</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.email}">
+                    <div class="name col-md-3">Email</div>
+                    <div class="value col-md-9">
+                        <div class="input-group" >
                             <input v-model="form.email" class="input--style-5"  name="email">
-                            <span v-if="errors.email" class="help-block" role="alert">
-                                <strong>{{errors.email[0]}}</strong>
-                            </span>
+                            <!-- <span v-if="errors.email" class="help-block" role="alert">
+                                <strong>{{errors}}</strong>
+                            </span> -->
                         </div>
-                        <span v-if="errors.email" class="help-block" role="alert">
-                            <strong>{{errors.email[0]}}</strong>
-                        </span>
                     </div>
                 </div>
                 
                 <div class="form-row">
-                    <div class="name">Password</div>
-                    <div class="value" >
+                    <div class="name col-md-3">Password</div>
+                    <div class="value col-md-9" >
                         <div class="input-group">
                             <input v-model="form.password" class="input--style-5" type="password" name="password">
                         </div>
-                        <span v-if="errors.password" class="help-block" role="alert">
-                            <strong>{{errors.password[0]}}</strong>
+                        <span v-if="errors" class="help-block" role="alert">
+                            <strong>{{errors}}</strong>
                         </span>
                     </div>
                 </div>
-                <div class="form-row">
-                    <div class="value" >
-                        <div class="input-group">
+                <div class="form-row input-group ">
+
+                    <div class="col-lg-9 offset-3 ">
                              <input class="form-check-input" type="checkbox" name="remember" id="remember" v-model="form.remember_me">
-                            <label class="form-check-label" for="remember">
+                            <label class="form-check-label pt-1" for="remember">
                                 Remember Me
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <button class="btn btn--radius-2 btn--red" type="submit">Login</button>
+                            </label><br>
+                     <button class="btn btn--radius-2 btn--red" type="submit">Login</button>
                 
+                        <p class="pt-1">Not signed-up yet? 
+                            <router-link to="/register">
+                                <a>Sign-up</a>
+                            </router-link>
+                        </p>
+                </div>
+                </div>
             </form>
         </div>
     </div>             
@@ -61,7 +59,7 @@ export default {
                 password: null,
                 remember_me:false
             },
-            errors:{}
+            errors:null
         }
     },
     computed:{
@@ -71,8 +69,12 @@ export default {
     },
     methods:{
         login(){
-            User.login(this.form)
-            .catch(error=>this.errors= error.data.response.errors)
+            // User.login(this.form)
+            axios.post('/api/login',this.form)
+            .then(res=>{
+                User.responseAfterLogin(res)
+            })
+            .catch(error=>console.log(this.errors= error.response.data.message))
         }
         
     },
@@ -82,6 +84,10 @@ export default {
 }
 </script>
 <style scoped>
+.card-5{
+    max-width: 70%;
+    margin: 0 auto; 
+}
 .select2-selection__rendered {
     line-height: 50px;
   padding-left: 0;

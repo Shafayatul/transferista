@@ -14,7 +14,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center footer-logo">
-                <img :src="'img/TransferistaC22b-A00aT03a-Z.png'"><br>
+                <img :src="'/img/TransferistaC22b-A00aT03a-Z.png'"><br>
                     <span class="f-bar"></span>
                 </div>
             </div>

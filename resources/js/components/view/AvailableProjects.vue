@@ -3,13 +3,8 @@
         <section id="catagoribody">
 			<div class="container">
 			<div class="row">
-					<div v-show="bidded" class="alert alert-warning alert-dismissible fade show" role="alert">
-					Successfully Bidded
-						<button @click="bidded =!bidded" type="button" class="close" data-dismiss="alert" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="col-md-12">
+					
+					<!-- <div class="col-md-12">
 						 <div class="basic-search">
 							<div class="input-field">
 							<input id="search" type="text" placeholder="Type Keywords" />
@@ -20,12 +15,12 @@
 							</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 				</div>
 		</div>	
             <div class="container">
 				<div class="row mamunurrashid_gig_wraper">
-					<div class="col-lg-3 order-last order-lg-first">
+					<!-- <div class="col-lg-3 order-last order-lg-first">
                         <div class="mr_aside">
                             <h3>Filters</h3>
 							<div class="filter-by m-4">
@@ -52,8 +47,8 @@
 							</div>
 						
                     	</div>
-                    </div>
-					<div class="col-lg-9 order-first order-lg-last">
+                    </div> -->
+					<div class="col-lg-12 order-first order-lg-last">
 						<div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
 								You should check in on some of those fields below.
 							<button @click="success = !success" type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -71,29 +66,32 @@
 												</span>
 											</div>
 										</a>
-										<div class=" m-2 d-flex">
+										<br>
+										<button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button>
+										<br>
+										<!-- <div class=" m-2 d-flex">
 											<p class="col-md-4">$10</p>
 											<p class="col-md-4">10 bid</p>
-											<p class="col-md-4"><button v-show="flag" class="btn btn-success " @click="modal(index)"><a class="font-color" >Bid Now</a></button></p>
-										</div>
+											<p class="col-md-4"><button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button></p>
+										</div> -->
 
 								
-									<div class=" d-flex  ">											
+									<!-- <div class=" d-flex  ">											
 										<p class="sr col-md-4">
-											<!-- <span class="stars">
+											<span class="stars">
 												<i class="fa fa-star"></i>
 												<i class="fa fa-star"></i>
 												<i class="fa fa-star"></i>
 												<i class="fa fa-star"></i>
 												<i class="fa fa-star-o"></i>
-											</span><br> -->
+											</span><br>
 											<span class="review">
 												23 Review
 											</span>
 										</p>
 										<p class="col-md-4"><i class="fas fa-google-map"></i>Location</p>
 										<p class="col-md-4">Review</p>
-									</div>
+									</div> -->
 								</div>
 							<div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<bid  :bid="bid" :data="data"></bid>
@@ -104,16 +102,19 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
 										<li class="page-item">
-											<a class="page-link" href="#" aria-label="Previous">
+											<a class="page-link" aria-label="Previous" :disabled="meta.current_page == meta.from" @click="getResults(meta.current_page-1)">
 												<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
 												<span class="sr-only">Previous</span>
 											</a>
 										</li>
-										<li class="page-item"><a class="page-link" href="#">1</a></li>
-										<li class="page-item"><a class="page-link" href="#">2</a></li>
-										<li class="page-item"><a class="page-link" href="#">3</a></li>
+										<li v-if="meta.current_page-2 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-2)">{{meta.current_page-2}}</a></li>
+										<li v-if="meta.current_page-1 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-1)">{{meta.current_page-1}}</a></li>
+										<li class="page-item active"><a class="page-link">{{meta.current_page}}</a></li>
+										<li v-if="meta.current_page+1 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+1)">{{meta.current_page+1}}</a></li>
+										<li v-if="meta.current_page+2 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+2)">{{meta.current_page+2}}</a></li>
+										
 										<li class="page-item">
-											<a class="page-link" href="#" aria-label="Next">
+											<a class="page-link" aria-label="Next" :disabled="meta.current_page == meta.total" @click="getResults(meta.current_page+1)">
 												<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
 												<span class="sr-only">Next</span>
 											</a>
@@ -122,12 +123,13 @@
 								</nav>
 							</div>
 						</div>
-							
-						</div>
+
 						
 					</div>
             	
+				</div>
             </div>
+															
         </section>
     </div>
 </template>
@@ -143,7 +145,8 @@ export default {
 			query: null,
 			filterBy: null,
 			// selectItem: null,
-			projects:[],
+			projects:{},
+			meta: {},
 			success: false,
 			flag:true,
 			bidded: false
@@ -193,26 +196,34 @@ export default {
 		selectItem(){
 			this.selectItem = this.matches[this.seleted];
 			this.visible = null;
+		},
+		// Our method to GET results from a Laravel endpoint
+		getResults(page = 1) {
+			console.log('1111111111111');
+			// axios.get('example/results?page=' + page)
+			// 	.then(response => {
+				// 		this.laravelData = response.data;
+			// 	});
+			axios.get('/api/project-list/available?page=' + page)
+			.then(res =>{ 
+				this.projects = res.data.data
+				console.log('2312321');
+				this.meta = res.data.meta;
+				console.log(res.data.meta);
+				})
+			.catch(error=>console.log(error))
 		}
 	},
-	computed:{
-		// matches(){
-		// 	if(this.query == ''){
-		// 		return [];
-		// 	}
-		// 	return this.items.filter((item)=>item[this.filterBy].toLowerCase.includes(this.query.toLowerCase()))
-		// }
+	mounted() {
+			console.log('44444444444');
+		// Fetch initial results
+		this.getResults();
 	},
 	
     created(){
 		this.$emit(`update:layout`,DashboardLayout)
 		
-		axios.get('/api/project-list')
-		.then(res =>{ 
-			this.projects = res.data.data
-			// this.showed = res.data.data
-			})
-		.catch(error=>console.log(error))
+
 
 		if(User.customer() || User.company() || !User.loggedIn()){
 			
@@ -223,4 +234,10 @@ export default {
 }
 </script>
 <style scoped>
+.page-item.active .page-link {
+    z-index: 3 !important;
+    color: #fff !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}
 </style>

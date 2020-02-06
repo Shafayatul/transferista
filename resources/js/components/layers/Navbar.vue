@@ -3,7 +3,7 @@
     <nav class="navbar navbar-expand-md  navbar-light">
         <div class="container">
             
-            <router-link to="/" class="navbar-brand">
+            <router-link to="/" class="navbar-brand" :class="{no : currentPage}">
                 <img :src="'/img/TransferistaC22b-A00aT03a-Z.png'">
             </router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -21,6 +21,22 @@
                 
                 <!-- Right -->
                 <ul class="navbar-nav nav-flex-icons"> 
+
+                    <li class="nav-item" v-for="(item,index) in item1" :key="index">
+                        <router-link style=""  class="nav-link list-group-item  waves-effect"  :to="item.to" v-show="item.show">
+                            {{item.title}}
+                        </router-link>
+                        
+                        <!-- <a  href="#banner"></a> -->
+                    </li>
+
+                    <li class="nav-item" v-for="(item,index) in item2" :key="item.title">
+                        <router-link style=""  class="nav-link list-group-item  waves-effect"  :to="item.to" v-show="item.show">
+                            {{item.title}}
+                        </router-link>
+                    </li>
+
+
                     <!-- <li class="nav-item dropdown dropper">
                         <a class="nav-link text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bell">Notifications</i>
@@ -83,7 +99,7 @@
                     </li> -->
                     <!-- <li>{{process.env.MIX_APP_NAME}}</li> -->
 
-                    <li class="dropdown  nav-item">
+                    <li class="dropdown  nav-item" v-show="loggedIn">
                             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user" aria-expanded="true">
                         <img alt="image" :src="'/img/avatar-1.png'" class="rounded-circle mr-1">
                         <div class="d-sm-none d-lg-inline-block">{{name}}</div></a>
@@ -109,13 +125,24 @@
 </template>
 <script>
 export default {
+    
     data(){
         return{
+            loggedIn: false,
+            item1:[
+                {title: 'Add Project',to:'/project/create',show: (User.company() ||User.customer())},
+                {title: 'My Projects',to:'/profile/projects',show: (User.company()  || User.customer())}
+                // {title: 'Accepted Bids',to:'/profile/edit-customer',show: User.transferista()},
+                
+            ],
+        
             items:[
                 {title:'Profile',to:'/profile/user',show: User.loggedIn()},
-                {title:'Login',to:'/login',show: !User.loggedIn()},
-                {title:'Register',to:'/register',show: !User.loggedIn()},
                 {title:'Log-out',to:'/logout',show: User.loggedIn()}
+            ],
+            item2:[
+                {title:'Login',to:'/login',show: !User.loggedIn()},
+                {title:'Register',to:'/register',show: !User.loggedIn()}
             ],
             activeClass: 'active'
         }
@@ -125,7 +152,7 @@ export default {
             return localStorage.getItem('user')
         },
         currentPage(){
-            return this.$route.path;
+            return this.$route.path.includes("profile");
         }
     },
     methods:{
@@ -141,6 +168,9 @@ export default {
             User.logout()
             window.location = '/'
         })
+    },
+    created(){
+        this.loggedIn = User.loggedIn()
     }
 }
 </script>
@@ -153,5 +183,11 @@ export default {
         transition: all 0.25s;
         background: none!important;
         box-shadow: none;
+    }
+    .no{
+        display: none;
+    }
+    #header .nav-item a{
+        border: none;
     }
 </style>

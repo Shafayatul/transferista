@@ -24,7 +24,7 @@
                 <strong>{{errors.project_size[0]}}</strong>
             </span> -->
         </div>
-        <button type="submit" >Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
     </form>
 </template>
 <script>

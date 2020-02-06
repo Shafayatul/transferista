@@ -15,10 +15,10 @@
                     </h3>
                 </div>
                 <ul class="list-group">
-                    <a class="list-group-item">{{bid.bid_transferista_name}}</a>
-                    <a class="list-group-item">{{bid.bid_amount}}</a>
-                    <a class="list-group-item">{{bid.bid_transferista_vat}}</a>
-                    <a class="list-group-item">{{total}}</a>
+                    <a class="list-group-item">Name:        {{bid.bid_transferista_name}}</a>
+                    <a class="list-group-item">Bidded With: {{bid.bid_amount}}</a>
+                    <a class="list-group-item">Vat:         {{bid.bid_transferista_vat}}</a>
+                    <a class="list-group-item">Total:             {{totalAmount}}</a>
                 </ul>
             </div>
             </div>
@@ -31,14 +31,19 @@
 <script>
 export default {
     props:['bid','accepted'],
+    data(){
+        return{
+            total:null
+        }
+    },
     methods:{
         confirm(){
             this.accepted(this.bid.bid_project_id,this.bid)
         }
     },
     computed:{
-        total(){
-            return (this.bid.bid_transferista_amount +(this.bid.bid_transferista_amount * (this.bid.bid_transferista_vat / 100)))
+        totalAmount(){
+            return (parseFloat(this.bid.bid_amount) +(parseFloat(this.bid.bid_amount) * (parseFloat(this.bid.bid_transferista_vat) / 100)))
         }
     }
 }

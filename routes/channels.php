@@ -11,22 +11,17 @@
 |
 */
 
+
+Broadcast::channel('positions', function () {
+    // return Auth::check();
+    return true;
+});
+Broadcast::channel('location', function () {
+    // return Auth::check();
+    return true;
+});
+
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
-Broadcast::channel('location', function ($employee, $id) {
-    return true;
-});
-Broadcast::channel('positions', function () {
-    return true;
-});
 
-
-Broadcast::channel('chat.{id}', function ($id){
-    $bid = \App\Bid::where('project_id',$id)->where('bid_status',1)->first();
-    if($bid){
-        return  true;
-    } else{
-        return false;
-    }
-});

@@ -32,8 +32,8 @@ class SendPosition implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
-    {
-        return new PrivateChannel('location');
-    }
+    // public function broadcastOn()
+    // {
+    //     return new PrivateChannel('location');
+    // }
 }

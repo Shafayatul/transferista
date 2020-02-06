@@ -27,13 +27,17 @@ import MyProjects from '../components/view/MyProjects'
 import TransferistaList from '../components/view/TransferistaList'
 import BiddedProjects from '../components/view/BiddedProjects'
 import AcceptedBids from '../components/view/AcceptedBids'
+import DriverProject from '../components/view/Driver'
+import SingleProject from '../components/view/SingleProject'
+import review from '../components/view/rating/MyReview'
+import reviewed from '../components/view/rating/Review'
 const routes = [
-    {path:'/',component: AvailableProjects,meta: { auth: false, title: 'Project Details' }},
+    {path:'/',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Project Details' }},
     {path:'/position',component: google},
     {path:'/project-details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate, meta: { auth: false, title: 'Create' }},    
     {path:'/profile',component: profile},
-    {path:'/register',component: register},
+    {path:'/register',component: register, name: 'register'},
     {path:'/login',component: login, name: 'login', meta: { auth: false, title: 'Login' }},
     {path:'/logout',component: logout},
     {path:'/role',component: role, name: 'role'},
@@ -48,12 +52,18 @@ const routes = [
         {path:'projects',component: MyProjects},
         {path:'transferista',component: TransferistaList},
         {path:'bidded-projects',component: BiddedProjects},
-        {path:'accepted-projects',component: AcceptedBids}
+        {path:'accepted-projects',component: AcceptedBids},
+        {path:'my-projects',component: DriverProject}
     ]},
+    
     {path:'/customer/:role',component: UserCustomerForm, name: 'customer'},
+    {path:'/driver/project/:id',component: SingleProject, name: 'driver'},
     {path:'/form/:role',component: UserCompanyTransferistaForm, name: 'form'},
+    {path:'/review',component: review},
+    {path:'/reviewed',component: reviewed},
     {path:'/show',component: show},
     {path:'/paypal',component: PaypalData},
+    {path:'/test',component: test},
 ];
 
 const router = new VueRouter({

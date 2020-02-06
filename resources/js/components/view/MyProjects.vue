@@ -14,29 +14,38 @@
                                 <span class="body-color">
                                     {{data.project_description}}
                                 </span>
+                                <div v-show="data.project_status == 2" class="badge badge-pill badge-info ml-2">On going</div>
                             </a>
-                            <ul class="col-md-3 text-center">
-                                <li class="mb-2"><small>10 bids</small></li>
-                            </ul>
-                        </div>
-                        <div class=" d-flex ">											
-                            <p class="sr col-md-4">
-                                <!-- <span class="stars">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </span><br> -->
-                                <span class="review">
-                                    23 Review
-                                </span>
-                            </p>
-                            <p class="col-md-4"><i class="fas fa-google-map"></i>Location</p>
-                            <p class="col-md-4">Review</p>
                         </div>
                     </div>
                 </div>
+						  <div class="paginationsarea">
+							<div class=" d-flex justify-content-end">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+										<li class="page-item">
+											<a class="page-link" aria-label="Previous" :disabled="meta.current_page == meta.from" @click="getResults(meta.current_page-1)">
+												<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+												<span class="sr-only">Previous</span>
+											</a>
+										</li>
+										<li v-if="meta.current_page-2 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-2)">{{meta.current_page-2}}</a></li>
+										<li v-if="meta.current_page-1 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-1)">{{meta.current_page-1}}</a></li>
+										<li class="page-item active"><a class="page-link">{{meta.current_page}}</a></li>
+										<li v-if="meta.current_page+1 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+1)">{{meta.current_page+1}}</a></li>
+										<li v-if="meta.current_page+2 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+2)">{{meta.current_page+2}}</a></li>
+										
+										<li class="page-item">
+											<a class="page-link" aria-label="Next" :disabled="meta.current_page == meta.total" @click="getResults(meta.current_page+1)">
+												<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+												<span class="sr-only">Next</span>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+                
             </div>
         </section>
     </main>
@@ -47,11 +56,32 @@ export default {
         return{
             noProject:false,
             flag:true,
-            projects:{}
+            arr:new Array(10000).fill(null),
+            projects:{},
+            center1:{
+                project_id:null,
+                lat:0.0,
+                lng:0.0
+            },
+            center2:{
+                lat:0.0,
+                lng:0.0
+            },
+            directionsDisplay: null,
         }
     }
     ,
+    computed:{
+         index1(i){
+            return this.arr[i]
+        }
+    },
     methods:{
+       
+        onTheWay(i){
+            console.log(i)
+            this.arr[i] = true
+        },
         singleProject(d){
 			console.log(d)
 			const id = d
@@ -59,27 +89,47 @@ export default {
 				id: id
 				} 
 			})
-        }
+        },
+		// Our method to GET results from a Laravel endpoint
+		getResults(page = 1) {
+            axios.get('/api/projects?page='+page)
+            .then(res =>{ 
+                this.projects = res.data.data
+                if(this.projects.length == 0){
+                    this.noProject = true
+                }
+                this.meta = res.data.meta;
+                })
+            .catch(error=>{
+                console.log(error)
+            })
+
+            if(User.customer() || User.company() ){
+                this.flag = false
+            }
+		}
         
     },
-    created(){
-		axios.get('/api/projects')
-		.then(res =>{ 
-            this.projects = res.data.data
-            if(this.projects.length == 0){
-                this.noProject = true
+    mounted(){
+        this.getResults();
+    
+         Echo.private('positions')
+             .listen('Positions', (e) => {
+                 console.log(e.project_id)
+                var i = this.projects.findIndex(obj=>obj.id === e.project_id)
+                console.log(i)
+                this.onTheWay(i)
             }
-			})
-        .catch(error=>{
-            console.log(error)
-        })
-
-		if(User.customer() || User.company() ){
-			this.flag = false
-		}
+            
+        )
     }
 }
 </script>
 <style scoped>
-
+.page-item.active .page-link {
+    z-index: 3 !important;
+    color: #fff !important;
+    background-color: #007bff !important;
+    border-color: #007bff !important;
+}
 </style>

@@ -11,9 +11,12 @@ class Driver extends Model
 
     public function driverAssignProject()
     {
-        return $this->hasOne(\App\DriverToProject::class, 'driver_id');
+        return $this->hasMany(\App\DriverToProject::class, 'driver_id');
     }
     public function user(){
        return  $this->belongsTo(\App\User::class,'user_id');
+    }
+    public function transferista(){
+       return  $this->belongsTo(\App\User::class,'transferista_id');
     }
 }

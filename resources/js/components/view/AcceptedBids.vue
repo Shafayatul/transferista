@@ -62,35 +62,37 @@
                             </div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card-header" id="headingTwo">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                Collapsible Group Item #2
-                                </button>
-                            </h2>
-                            </div>
-                            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-                            <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                            </div>
+   
                         </div>
-                        <div class="card">
-                            <div class="card-header" id="headingThree">
-                            <h2 class="mb-0">
-                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                Collapsible Group Item #3
-                                </button>
-                            </h2>
-                            </div>
-                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                            <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                            </div>
-                            </div>
-                        </div>
-                        </div>
+
+
+						  <div class="paginationsarea">
+							<div class=" d-flex justify-content-end">
+								<nav aria-label="Page navigation example">
+									<ul class="pagination">
+										<li class="page-item">
+											<a class="page-link" aria-label="Previous" :disabled="meta.current_page == meta.from" @click="getResults(meta.current_page-1)">
+												<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
+												<span class="sr-only">Previous</span>
+											</a>
+										</li>
+										<li v-if="meta.current_page-2 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-2)">{{meta.current_page-2}}</a></li>
+										<li v-if="meta.current_page-1 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-1)">{{meta.current_page-1}}</a></li>
+										<li class="page-item active"><a class="page-link">{{meta.current_page}}</a></li>
+										<li v-if="meta.current_page+1 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+1)">{{meta.current_page+1}}</a></li>
+										<li v-if="meta.current_page+2 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+2)">{{meta.current_page+2}}</a></li>
+										
+										<li class="page-item">
+											<a class="page-link" aria-label="Next" :disabled="meta.current_page == meta.total" @click="getResults(meta.current_page+1)">
+												<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
+												<span class="sr-only">Next</span>
+											</a>
+										</li>
+									</ul>
+								</nav>
+							</div>
+						</div>
+
                 </div>    
              <div class="col-md-6">
                     
@@ -177,18 +179,18 @@ export default {
             lat: 10.3157,
             lng: 123.8854
             },
-            coordinates: {
-                0: {
-                    full_name: 'Erich  Kunze',
-                    lat: '10.31',
-                    lng: '123.89'
+            coordinates: [
+                {
+                    name: 'Erich  Kunze',
+                    lat: '23.55',
+                    lng: '93.40'
                 },
-                1: {
-                    full_name: 'Delmer Olson',
-                    lat: '10.32',
-                    lng: '123.89'
+                 {
+                    name: 'Delmer Olson',
+                    lat: '23.32',
+                    lng: '93.89'
                 }
-            },
+            ],
             infoPosition: null,
             infoContent: null,
             infoOpened: false,
@@ -213,58 +215,79 @@ export default {
 			})
         },
         getPosition(marker){
-        return {
-            lat: parseFloat(marker.lat),
-            lng: parseFloat(marker.lng)
-        };
+            return {
+                lat: parseFloat(marker.lat),
+                lng: parseFloat(marker.lng)
+            };
         },
         toggleInfo(marker, key) {
-        this.infoPosition = this.getPosition(marker)
-        this.infoContent = marker.full_name
-        if (this.infoCurrentKey == key) {
-            this.infoOpened = !this.infoOpened
-        } else {
-            this.infoOpened = true
-            this.infoCurrentKey = key
-        }
+            this.infoPosition = this.getPosition(marker)
+            this.infoContent = marker.full_name
+            if (this.infoCurrentKey == key) {
+                this.infoOpened = !this.infoOpened
+            } else {
+                this.infoOpened = true
+                this.infoCurrentKey = key
+            }
         }
         ,
 		modal(index){
             $(`#${ this.projects[index].id}`).modal('show');
         },
+		// Our method to GET results from a Laravel endpoint
+		getResults(page = 1) {
+            axios.get('/api/projects')
+            .then(res =>{ 
+                this.meta = res.data.meta;
+                this.projects = res.data.data
+                if(this.projects.length === 0){
+                    this.noProject = true
+                }
+                    axios.get('/api/cars')
+                    .then(res=>{
+                        this.cars = res.data.cars
+                    })
+                    .catch(error=>errors=error.response.data.errors) 
+                    axios.get('/api/drivers')
+                    .then(res=>{
+                        this.drivers = res.data.data
+                    })
+                    .catch(error=>errors=error.response.data.errors)
+                })
+            .catch(error=>{
+                console.log(error)
+            })
+		}
         
     },
     created(){
-		axios.get('/api/projects')
-		.then(res =>{ 
-            this.projects = res.data.data
-            if(this.projects.length === 0){
-                this.noProject = true
-            }
-                axios.get('/api/cars')
-                .then(res=>{
-                    this.cars = res.data.cars
-                })
-                .catch(error=>errors=error.response.data.errors) 
-                axios.get('/api/drivers')
-                .then(res=>{
-                    this.drivers = res.data.data
-                })
-                .catch(error=>errors=error.response.data.errors)
-			})
-        .catch(error=>{
-            console.log(error)
-        })
 
-
-		// if(User.customer() || User.company() ){
-		// 	this.flag = false
-		// }
     },
     mounted(){
+
+        this.getResults();
+
         EventBus.$on('driver-assiged',()=>{
             this.success = true
         })
+        
+        Echo.private('location')
+        .listen('GetLocation', (e) => {
+            console.log('-----')
+            console.log(e.transferista_email)
+            if(this.drivers[0].transferista_email === e.transferista_email){
+                this.coordinates.push({
+                    name:e.name,
+                    
+                    lat:e.lat,
+                    
+                    lng:e.lng,
+                    
+                })
+                console.log(this.coordinates)
+            }
+        });
+    
     }
 }
 </script>

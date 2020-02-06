@@ -90,4 +90,5 @@ class User extends Authenticatable
     public function driver(){
         return $this->hasOne(\App\Driver::class,'user_id');
     }
+
 }

@@ -734,6 +734,8 @@ input {
   -moz-border-radius: 3px;
   border-radius: 3px;
   background: #fff;
+
+  margin: 0 auto;
 }
 
 .card-5 {

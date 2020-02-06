@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class DriverToProject extends Model
 {
     use SoftDeletes;
-    public function project()
+    public function projects()
     {
         return $this->belongsTo(\App\Project::class, 'project_id');
     }
@@ -18,7 +18,7 @@ class DriverToProject extends Model
         return $this->belongsTo(\App\Driver::class, 'driver_id');
     }
 
-    public function car()
+    public function cars()
     {
         return $this->belongsTo(\App\Car::class, 'car_id');
     }

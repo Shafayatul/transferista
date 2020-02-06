@@ -62,7 +62,6 @@
                             <div v-for="(employee,index) in employees" :key="index">
                                 <li class="list-group-item">
                                     <div class="checkbox">
-                                        <input type="checkbox" id="checkbox" />
                                         <label for="checkbox">
                                             {{employee.first_name}}
                                         </label>

@@ -20,13 +20,18 @@ class GetLocation implements ShouldBroadcast
      * @return void
      */
 
-    public $employee;
+    public $transferista_email;
+    public $name;
+    public $lat;
+    public $lng;
 
 
-    public function __construct(Employee $employee)
+    public function __construct($transferista_email,$name,$lat,$lng)
     {
-        $this->employee = $employee;
-        
+        $this->transferista_email = $transferista_email;
+        $this->name = $name;
+        $this->lat = $lat;
+        $this->lng = $lng;
         $this->dontBroadcastToCurrentUser();
     }
 
@@ -37,6 +42,6 @@ class GetLocation implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('location.'.$this->employee->id);
+        return new PrivateChannel('location');
     }
 }

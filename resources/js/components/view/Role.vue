@@ -1,5 +1,9 @@
 <template>
     <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <br>
+        <br>
+        <br>
+        <br>
         <div class="basic-from">
             <div class="card card-5">
                 <div class="card-heading">

@@ -21,7 +21,7 @@ class RatingsController extends Controller
             $rating->rating = $request->rating;
             $rating->rating_text = $request->rating_text;
             $rating->save();
-        }elseif ($user->hasRole('transferista')) {
+        }elseif ($user->hasRole('driver')) {
             $rating = new Rating;
             $rating->transferista_id = Auth::id();
             $rating->company_or_customer_id = null;

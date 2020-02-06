@@ -17,9 +17,8 @@
                         <div class="col-md-6">
                             <div class="profile-head">
                                 <h5>
-                                   {{user.name}}
+                                   {{name}}
                                 </h5>
-                                <p class="proile-rating">RANKINGS : <span>8/10</span></p>
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
@@ -38,7 +37,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="profile-work">
-                                <p>WORK LINK</p>
+                                <!-- <p>WORK LINK</p>
                                 <a href="">Website Link</a><br/>
                                 <a href="">Bootsnipp Profile</a><br/>
                                 <a href="">Bootply Profile</a>
@@ -47,20 +46,12 @@
                                 <a href="">Web Developer</a><br/>
                                 <a href="">WordPress</a><br/>
                                 <a href="">WooCommerce</a><br/>
-                                <a href="">PHP, .Net</a><br/>
+                                <a href="">PHP, .Net</a><br/> -->
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="tab-content profile-tab" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>User Id</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Kshiti123</p>
-                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Name</label>
@@ -79,14 +70,54 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <label>Phone</label>
+                                            <label>Address</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>{{user.phone}}</p>
+                                            <p>{{userInfo.address}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Town</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{userInfo.town}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Country</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{userInfo.country}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Company Email</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{userInfo.email_company}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Vat</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{userInfo.vat}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Url</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p>{{userInfo.url}}</p>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Experience</label>
@@ -133,7 +164,7 @@
                                             <p>Your detail description</p>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -147,14 +178,19 @@
 export default {
     data(){
         return{
-            user:{}
+            user:{},
+            userInfo:{},
+            name:null
         }
     }
     ,
     created(){
+        this.name = User.name()
         axios.get(`/api/user-details`)
         .then(res=>{
             this.user=res.data.user
+            this.userInfo=res.data.user.user_info
+
         })
         .catch(error=>this.errors=error.response.data.errors)
     }
@@ -162,7 +198,12 @@ export default {
 </script>
 
 <style scoped>
-
+.profile-head h5[data-v-4941e4b0] {
+    color: red;
+}
+#profile-body {
+    background: -webkit-linear-gradient(left, #3931af, #00c6ff);
+}
 #profile-design{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
 }
@@ -171,11 +212,12 @@ export default {
 } */
 main{
     padding-left: 270px;
+    padding-bottom: 15%;
+    height:auto ;
 }
 .emp-profile{
     padding: 3%;
-    margin-top: 3%;
-    margin-bottom: 3%;
+    margin-top: 3%;    
     border-radius: 0.5rem;
     background: #fff;
 }
@@ -221,6 +263,7 @@ main{
     font-size: 12px;
     color: #818182;
     margin-top: 5%;
+    margin-bottom: -2%;
 }
 .proile-rating span{
     color: #495057;

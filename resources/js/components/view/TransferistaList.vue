@@ -1,30 +1,32 @@
 
 <template>
-    <div id="profile-design">
-        <!-- Sidebar -->
-        <!--Main layout-->
-        <main class="pt-5 mx-lg-5">
-            <div class="container-fluid mt-5">
-                <div class="container emp-profile">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <div class="list list-row block" v-for="(data,index)  in  projects" :key="index" >
+    <main class=" mx-lg-5 catagoris" >  
+       <section  id="catagoribody">
+            <div class="container mamunurrashid_gig_wraper">
+                <div class="mr_card" v-for="(data,index)  in  projects" :key="index">
+                    <div class="mr_card_body">
+                        <div class="p-box  ">	
+                            <div class="list list-row block"  >
                                 <div class="list-item" data-id="19">
                                     
                                     <div class="flex"> <a href="#" class="item-author text-color" data-abc="true"></a>
                                    
                                         <div class="item-except text-muted text-sm h-1x">{{data.transferista.name}}</div>
                                         <div class="item-except text-muted text-sm h-1x">{{data.transferista.email}}</div>
+                                        <button @click="modal(index)" v-if="data.project_status == 3">Give Review</button>
                                     </div>
-                                    
+                                     <div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="oneModalLabel" aria-hidden="true">
+                                        <MyRating>  :id="data.id"></MyRating>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
-    </div>
+       </section>
+    </main>
+    
 </template>
 <script>
 export default {
@@ -35,7 +37,9 @@ export default {
         }
     },
     methods:{
-
+        modal(index){
+            $(`#${this.projects[index].id}`).modal('show');
+        }
     },
     created(){
         axios.get('/api/transferista-details-by-project-status')

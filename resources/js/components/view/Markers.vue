@@ -47,16 +47,16 @@ export default {
   }
   },
   created(){
-    Echo.private('positions')
-    .listen('Positions',(e)=>{
-      if(this.user_id == e.transferista_id){
-        this.coordinates.push({
-          name: e.user_name,
-          lat: e.lat,
-          lng: e.lng
-        })
-      }
-    })
+    // Echo.private('positions')
+    // .listen('Positions',(e)=>{
+    //   if(this.user_id == e.transferista_id){
+    //     this.coordinates.push({
+    //       name: e.user_name,
+    //       lat: e.lat,
+    //       lng: e.lng
+    //     })
+    //   }
+    // })
   },
   methods:{
     getPosition(marker){

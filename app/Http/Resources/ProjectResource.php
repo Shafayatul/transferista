@@ -14,11 +14,16 @@ class ProjectResource extends JsonResource
      */
     public function toArray($request)
     {
+        if($this->transferista_id != null){
+           $transferita_name =  $this->transferista->name;
+        }else{
+            $transferita_name = null;
+        }
         return [
             'id'=> $this->id,
             'title'=>$this->title,
             'origin_address'=>$this->origin_address,
-            
+            'transferista_name'=> $transferita_name,
             'origin_town'=> $this->origin_town,
             'origin_country'=>$this->origin_country,
             'origin_lng'=>$this->origin_lng,
@@ -32,6 +37,7 @@ class ProjectResource extends JsonResource
             'project_title'=> $this->project_title,
             'project_description'=>$this->project_description,
             'project_size'=>$this->project_size,
+            'project_status'=>$this->project_status,
             'created_at'=>$this->created_at->diffForHumans(),
             'user'=>$this->user->name
         ];

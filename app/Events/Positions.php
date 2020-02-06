@@ -19,19 +19,18 @@ class Positions implements ShouldBroadcast
      *
      * @return void
      */
-    public $transferista_id;
+    public $project_id;
     public $lat;
     public $lng;
-    public $user_name;
 
 
 
-    public function __construct($user_name,$transferista_is,$lat,$lng)
+    public function __construct($project_id, $lat, $lng)
     {
-        $this->user_name = $user_name;
-        $this->transferista_id = $transferista_id;
+        $this->project_id = $project_id;
         $this->lat = $lat;
         $this->lng = $lng;
+        $this->dontBroadcastToCurrentUser();
     }
 
     /**

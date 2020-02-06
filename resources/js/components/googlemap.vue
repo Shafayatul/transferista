@@ -116,13 +116,13 @@ export default {
         })
     },
     mounted(){
-        Echo.private('location')
-        .listen('SendPosition', (e) => {
-            if(this.project_id == e.project_id ){
-                this.updatePath(e)
+        // Echo.private('location')
+        // .listen('SendPosition', (e) => {
+        //     if(this.project_id == e.project_id ){
+        //         this.updatePath(e)
                 
-            }
-        });
+        //     }
+        // });
         // this.$refs.map.$mapPromise.then((map) => {
         //     map.panTo(this.center)
         // })

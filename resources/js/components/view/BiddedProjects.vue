@@ -1,6 +1,6 @@
 <template>
     
-    <main class=" mx-lg-5 catagoris" >
+    <main class=" mx-lg-5 catagoris" >  
        <section  id="catagoribody">
             <div class="container mamunurrashid_gig_wraper">
                 <div v-show="noProject" class="alert alert-warning alert-dismissible fade show" role="alert">

@@ -34,7 +34,7 @@ Route:: post('/map',function (Request $request){
     return response()->json(['status'=>'success', 'data'=> $location]);
 });
 
-Route::get('project-list', 'Api\FrontendsController@index');
+Route::get('project-list/{status}', 'Api\FrontendsController@index');
 Route::get('visitor-project-detail/{id}', 'Api\FrontendsController@visitorProjectDetail');
 Route::post('project-rating/{project_id}', 'Api\FrontendsController@projectRating');
 Route::post('register', 'Api\UsersController@register');
@@ -59,7 +59,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     });
 
     
-    Route::group(['middleware' => ['role:company|customer|employee']], function () {
+    Route::group(['middleware' => ['role:company|customer|employee|driver']], function () {
         Route::post('projects', 'Api\ProjectsController@store');
         Route::get('projects/{project_id}', 'Api\ProjectsController@show');
         Route::post('projects/{project_id}', 'Api\ProjectsController@update');
@@ -69,11 +69,10 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::get('project/transfer/{project_id}', 'Api\ProjectsController@transferProject');
         // Route::get('payment/success', 'Api\PaymentsController@paymentSuccess');
     });
-    Route::group(['middleware' => ['role:employee|driver']], function () {
-        Route::post('position', 'PositionsController@sendPosition');
-    });
-
-    Route::group(['middleware' => ['role:transferista']], function () {
+    // Route::group(['middleware' => ['role:employee|driver']], function () {
+    //     Route::post('position', 'PositionsController@sendPosition');
+    // });
+    Route::group(['middleware' => ['role:transferista|driver']], function () {
         Route::get('project/delivered/{project_id}', 'Api\ProjectsController@deliveredProject');
 
         //Bid Section
@@ -103,10 +102,14 @@ Route::group(['middleware' => ['auth:api']], function() {
         Route::post('assign-driver-to-project/{id}', 'Api\ProjectsController@updateAssignDriverToProject');
     });
 
-    Route::group(['middleware' => ['role:company|customer|employee|transferista']], function () {
+    Route::group(['middleware' => ['role:company|customer|employee|transferista|driver']], function () {
         Route::post('ratings', 'Api\RatingsController@store');
         Route::get('projects', 'Api\ProjectsController@index');
         Route::get('transferista-details-by-project-status', 'Api\ProjectsController@transferistaDetails');
+    });
+
+    Route::group(['middleware' => ['role:transferista|driver']], function () {
+        Route::get('driver-projects', 'Api\DriversController@driverProjects');
     });
 
     // Route::group(['middleware' => ['role:company|customer|transferista']], function () {
@@ -114,6 +117,7 @@ Route::group(['middleware' => ['auth:api']], function() {
     //     Route::get('messages/{conversation_id}', 'ChatsController@fetchMessages');
     //     Route::post('messages', 'ChatsController@sendMessage');
     // });
-
-
+    Route::get('transferista','Api\DriversController@email');
+    Route::post('position', 'PositionsController@sendPosition');
+    Route::post('send-position', 'PositionsController@location');
 });

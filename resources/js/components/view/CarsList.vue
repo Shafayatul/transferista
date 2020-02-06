@@ -64,8 +64,8 @@
                     <div class="panel-body">
                         <ul class="list-group">
                             <div v-for="(car,index) in cars" :key="index">
-                                <li class="list-group-item">
-                                    <div class="checkbox">
+                                <li class="list-group-item row">
+                                    <div class="col-md-10 count-label">
                                         <label>
                                             {{car.brand}}
                                         </label>
@@ -79,7 +79,7 @@
                                             {{car.cargo_capacity}}
                                         </label>
                                     </div>
-                                    <div class="pull-right action-buttons" style="float: right;">
+                                    <div class="pull-right action-buttons col-md-2" >
                                         <a  class="flag" @click="edit(index)"><i class="fa fa-edit"></i></a>
                                         <a  class="trash" @click="trash(index)"><i class="fa fa-trash-alt"></i></a>
                                     </div>
@@ -87,25 +87,6 @@
                                 
                             </div>
                         </ul>
-                    </div>
-                    <div class="panel-footer">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h6>
-                                    Total Count <span class="label label-info">25</span></h6>
-                            </div>
-                            <div class="col-md-6">
-                                <ul class="pagination pagination-sm pull-right">
-                                    <li class="disabled"><a href="javascript:void(0)">«</a></li>
-                                    <li class="active"><a href="javascript:void(0)">1 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="http://www.jquery2dotnet.com">2</a></li>
-                                    <li><a href="http://www.jquery2dotnet.com">3</a></li>
-                                    <li><a href="http://www.jquery2dotnet.com">4</a></li>
-                                    <li><a href="http://www.jquery2dotnet.com">5</a></li>
-                                    <li><a href="javascript:void(0)">»</a></li>
-                                </ul>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -238,5 +219,18 @@ export default {
     .panel-body .radio, .checkbox { display:inline-block;margin:0px; }
     .panel-body input[type=checkbox]:checked + label { text-decoration: line-through;color: rgb(128, 144, 160); }
     .list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
-    .list-group { margin-bottom:0px; }
+    .list-group[data-v-1a65dcec] {
+    margin-bottom: 2%;
+     }
+    .label{
+         max-width: 100%;
+
+    }
+    .count-label label{
+       margin-left:4%;
+    }
+    .panel-primary{
+        margin-bottom:60px;
+        margin-top:60px;
+    }
 </style>

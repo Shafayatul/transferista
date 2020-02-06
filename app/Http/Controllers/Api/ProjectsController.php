@@ -22,17 +22,18 @@ use PDF;
 
 class ProjectsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $per_page = 2;
         $user = Auth::user();   
         if ($user->hasRole('company')) {
-            $projects = Project::where('project_owner_id', Auth::id())->with('bids')->latest()->get();;
+            $projects = Project::where('project_owner_id', Auth::id())->with('bids')->paginate($per_page);
         }elseif ($user->hasRole('customer')) {
-            $projects = Project::where('project_owner_id', Auth::id())->latest()->get();
+            $projects = Project::where('project_owner_id', Auth::id())->paginate($per_page);
         }elseif ($user->hasRole('transferista')) {
-            $projects = Project::where('transferista_id', Auth::id())->with('bids')->latest()->get();
+            $projects = Project::where('transferista_id', Auth::id())->with('bids')->paginate($per_page);
         }else {
-            $projects = Project::latest()->get();
+            $projects = Project::paginate($per_page);
         }
         
         return ProjectResource::collection($projects);
@@ -86,7 +87,7 @@ class ProjectsController extends Controller
         $project->save();
 
         return response()->json([
-            'estimated_cost' => $estimated_cost,
+            'id'=>$project->id,
             'message' => 'Successfully created project!'
         ], 201);
     }
@@ -168,7 +169,7 @@ class ProjectsController extends Controller
 
     public function transferistaDetails()
     {
-        $projects = Project::where('project_status', 1)->with('transferista')->get();
+        $projects = Project::where('project_status', 1)->where('project_owner_id', Auth::id())->with('transferista')->get();
         return response()->json([
             'projects' => $projects
         ]);

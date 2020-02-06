@@ -4,29 +4,22 @@
             <h2 class="title">Registration Form</h2>
         </div>
         <div class="card-body">
-            <form @submit.prevent="register">
-                <div class="form-row m-b-55">
-                    <div class="name">Name</div>
+            <form @submit.prevent="register">               
+                <div class="form-row">
+                    <div class="name">Frist Name</div>
                     <div class="value">
-                        <div class="row row-space">
-                            <div class="col-6">
-                                <div class="input-group-desc" :class="{error: errors.first_name}">
-                                    <input v-model="form.first_name" class="input--style-5" type="text" name="first_name">
-                                    <span v-if="errors.first_name" class="help-block" role="alert">
-                                        <strong>{{errors.first_name[0]}}</strong>
-                                    </span>
-                                    <label class="label--desc">first name</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="input-group-desc">
-                                    <input v-model="form.last_name" :class="{error: errors.name}" class="input--style-5" type="text" name="last_name">
-                                    <span v-if="errors.last_name" class="help-block" role="alert">
-                                        <strong>{{errors.last_name[0]}}</strong>
-                                    </span>
-                                    <label class="label--desc">last name</label>
-                                </div>
-                            </div>
+                        <div class="input-group" :class="{error: errors.email}">
+                            <input v-model="form.first_name" class="input--style-5" type="text" placeholder="Frist Name" name="first_name">                                   
+                              <strong> <label v-if="errors.first_name" class="help-block p-2" role="alert" >{{errors.first_name[0]}}</label></strong>
+                        </div>
+                    </div>
+                </div>
+                 <div class="form-row">
+                    <div class="name">Last Name</div>
+                    <div class="value">
+                        <div class="input-group" :class="{error: errors.email}">
+                             <input v-model="form.last_name" :class="{error: errors.name}" class="input--style-5" type="text" placeholder="Frist Name" name="last_name">
+                             <strong><label  v-if="errors.last_name" class="help-block p-2" role="alert">{{errors.last_name[0]}}</label></strong>
                         </div>
                     </div>
                 </div>
@@ -34,8 +27,8 @@
                     <div class="name">Email</div>
                     <div class="value">
                         <div class="input-group" :class="{error: errors.email}">
-                            <input v-model="form.email" class="input--style-5"  name="email">
-                            <span v-if="errors.email" class="help-block" role="alert">
+                            <input v-model="form.email" class="input--style-5" placeholder="Email" name="email">
+                            <span v-if="errors.email" class="help-block p-2" role="alert">
                                 <strong>{{errors.email[0]}}</strong>
                             </span>
                         </div>
@@ -46,7 +39,10 @@
                     <div class="name">Password</div>
                     <div class="value" >
                         <div class="input-group">
-                            <input v-model="form.password" class="input--style-5" type="password" name="password">
+                            <input v-model="form.password" class="input--style-5" type="password" name="password" placeholder="Password">
+                             <span v-if="errors.password" class="help-block p-2" role="alert">
+                            <strong>{{errors.password[0]}}</strong>
+                             </span>
                         </div>
                     </div>
                 </div>
@@ -54,11 +50,9 @@
                     <div class="name">Confirm Password</div>
                     <div class="value">
                         <div class="input-group" :class="{error: errors.password}">
-                            <input v-model="form.password_confirmation" class="input--style-5" type="password" name="password_confirmation">
+                            <input v-model="form.password_confirmation" class="input--style-5" type="password" name="password_confirmation" placeholder="Confirm Password">
                         </div>
-                        <span v-if="errors.password" class="help-block" role="alert">
-                            <strong>{{errors.password[0]}}</strong>
-                        </span>
+                       
                     </div>
                 </div>
                 <div>
@@ -103,6 +97,9 @@ export default {
 }
 </script>
 <style scoped>
+.card-5 {
+   max-width: 70%;
+}
 .select2-selection__rendered {
     line-height: 50px;
   padding-left: 0;

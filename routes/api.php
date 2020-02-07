@@ -42,6 +42,9 @@ Route::post('roles', 'Api\RolesController@store');
 Route::post('login', 'Api\UsersController@login');
 Route::group(['middleware' => ['auth:api']], function() {
 
+    Route::get('current-user-email', 'Api\UsersController@currentUserEmail');
+    Route::post('send-email', 'PositionsController@sendMailAddress');
+
     Route::post('password-update', 'Api\UsersController@passwordUpdate');
     Route::get('user-details', 'Api\UsersController@userDetails');
     Route::get('logout', 'Api\UsersController@logout');

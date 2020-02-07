@@ -37,81 +37,60 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button @click="flag = !flag" type="submit" class="profile-edit-btn" name="btnAddMore" >Edit Profile</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-work">
-                            <!-- <p>WORK LINK</p>
-                            <a href="">Website Link</a><br/>
-                            <a href="">Bootsnipp Profile</a><br/>
-                            <a href="">Bootply Profile</a>
-                            <p>SKILLS</p>
-                            <a href="">Web Designer</a><br/>
-                            <a href="">Web Developer</a><br/>
-                            <a href="">WordPress</a><br/>
-                            <a href="">WooCommerce</a><br/>
-                            <a href="">PHP, .Net</a><br/> -->
-                        </div>
-                    </div>
-                    <div class="col-md-8">
                         <form>
                             <div class="tab-content profile-tab" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <div class="form-group row">
                                         <label class="col-3 control-label">First Name</label>
                                         <div class="col-9">
-                                            <input :disabled="flag" v-model ="user.first_name" class="form-control" placeholder="First Name" data-type="string" data-original="islam" name="last_name" type="text">
+                                            <input required v-model ="user.first_name" class="form-control" placeholder="First Name" data-type="string" data-original="islam" name="last_name" type="text">
                                         </div>
                                     </div>
         
                                     <div class="form-group row">
                                         <label class="col-3 control-label">Last name </label>
                                         <div class="col-9">
-                                            <input :disabled="flag" v-model="user.last_name" class="form-control" placeholder="Last name" data-type="string" data-original="islam" name="last_name" type="text" >
+                                            <input required v-model="user.last_name" class="form-control" placeholder="Last name" data-type="string" data-original="islam" name="last_name" type="text" >
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-3 control-label">Email</label>
                                         <div class="col-9">
-                                            <input :disabled="flag" v-model="user.email" class="form-control" placeholder="Email" data-type="string" data-original="islam" name="last_name" type="text" >
+                                            <input required v-model="user.email" class="form-control" placeholder="Email" data-type="string" data-original="islam" name="last_name" type="text" >
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label class="col-3 control-label">Address</label>
                                         <div class="col-9">
-                                            <input :disabled="flag" v-model="user.user_info.address" class="form-control" placeholder="Address " data-type="string" data-original="islam" name="last_name" type="text">
+                                            <input required v-model="user.user_info.address" class="form-control" placeholder="Address " data-type="string" data-original="islam" name="last_name" type="text">
                                         </div>
                                     </div>
         
                                     <div class="form-group row">
                                         <label class="col-3 control-label">Town </label>
                                         <div class="col-9">
-                                            <input :disabled="flag" v-model="user.user_info.town" class="form-control" placeholder="Town" data-type="string" data-original="islam" name="last_name" type="text">
+                                            <input required  v-model="user.user_info.town" class="form-control" placeholder="Town" data-type="string" data-original="islam" name="last_name" type="text">
                                         </div>
                                     </div>
         
                                     <div class="form-group row">
                                         <label class="col-3 control-label">Country</label>
                                         <div class="col-9">
-                                            <input :disabled="flag" v-model="user.user_info.country" class="form-control" placeholder="Country" data-type="string" data-original="islam" name="last_name" type="text">
+                                            <input required v-model="user.user_info.country" class="form-control" placeholder="Country" data-type="string" data-original="islam" name="last_name" type="text">
                                         </div>
                                     </div>
         
                                     <div class="form-group row">
                                         <label class="col-3 control-label">Company</label>
                                         <div class="col-9">
-                                            <input :disabled="flag" v-model="user.user_info.company" class="form-control" placeholder="Company" data-type="string" data-original="islam" name="last_name" type="text">
+                                            <input required v-model="user.user_info.company" class="form-control" placeholder="Company" data-type="string" data-original="islam" name="last_name" type="text">
                                         </div>
                                     </div>
         
                                     <div class="form-group row">
                                         <label class="col-3 control-label">Zip</label>
                                         <div class="col-9">
-                                            <input :disabled="flag" v-model="user.user_info.zip" class="form-control" placeholder="ZIP" data-type="string" data-original="islam" name="last_name" type="text">
+                                            <input required v-model="user.user_info.zip" class="form-control" placeholder="ZIP" data-type="string" data-original="islam" name="last_name" type="text">
                                         </div>
                                     </div>
         
@@ -141,6 +120,8 @@
                                 </div>
                             </div>
                         </form>
+
+
                     </div>
                 </div>
             </div>
@@ -160,7 +141,6 @@ export default {
     data(){
         return {
             success:false,
-            flag: true,
             user: {
                 user_info: {}
             }

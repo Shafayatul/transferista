@@ -24,8 +24,8 @@
                           </label>
                         </div>
                         <div class="form-check">
-                          <input v-model="role" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="3">
-                          <label class="form-check-label" for="exampleRadios2">
+                          <input v-model="role" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="3">
+                          <label class="form-check-label" for="exampleRadios3">
                             Transferista
                           </label>
                         </div>

@@ -200,6 +200,9 @@ export default {
                     width: 0,
                     height: -35
                 }
+            },
+            form : {
+                email: null
             }
         }
     },
@@ -264,7 +267,20 @@ export default {
 
     },
     mounted(){
-
+        if(User.transferista()){
+            axios.get('/api/current-user-email')
+            .then(res=>{
+                console.log(res)
+                 this.form.email = res.data.email 
+                console.log(this.form.email)
+                
+                axios.post('/api/send-email', {
+                    'email': this.form.email
+                })
+                .then(res=> console.log(res.data))
+            })
+            .catch(error => console.log(error.response.data))
+        }
         this.getResults();
 
         EventBus.$on('driver-assiged',()=>{

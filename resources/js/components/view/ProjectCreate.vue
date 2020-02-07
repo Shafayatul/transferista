@@ -2,42 +2,54 @@
     <div id="mainblog" class="job-postdetails">
         <div class="container">
             <div class="row">	
+                <div class="col-md-12 top-header">
+                    <h1>Post A Job</h1>
+                </div>
                 <div class="col-lg-8">
-                    <div class="row mb-2">
+                    <div class="row">
                         <div class="col-md-5">
-                            <div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
-                                <strong>Created Successfully</strong> 
-                                <button @click="success = !success" type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                            <!-- Search form -->
+                            <div class="row">
+                                <div class="col-md-9 padding-zero">
+                                    <gmap-autocomplete
+                                        @place_changed="setPlace1">
+                                    </gmap-autocomplete>
+                                </div>
+                                <div class="col-md-3 padding-zero">
+                                    <button  @click="addMarker1" class="btn btn-info btn-search no-border-radius-left" aria-label="Search">
+                                        <i class="fas fa-search btn-info" aria-hidden="true"></i>
+                                    </button>
+                                </div>
+                            </div>                           
+                        </div>
+                        <div class="col-md-5">
+                            <div class="row">
+                                <div class="col-md-9 padding-zero">
+                                    <gmap-autocomplete
+                                        @place_changed="setPlace2">
+                                    </gmap-autocomplete>
+                                </div>
+                                <div class="col-md-3 padding-zero">
+                                    <button @click="addMarker2" class="btn btn-info btn-search no-border-radius-left" aria-label="Search">
+                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                    </button>
+                                </div>
                             </div>
-                        <!-- Search form -->
-                            <gmap-autocomplete
-                                @place_changed="setPlace1">
-                            </gmap-autocomplete>
-                            <button  @click="addMarker1" class="btn btn-info btn-search" aria-label="Search">
-                                <i class="fas fa-search btn-info" aria-hidden="true"></i>
-                            </button>
                         </div>
-                        <div class="col-md-5">
-                            
-                            <gmap-autocomplete
-                                @place_changed="setPlace2">
-                            </gmap-autocomplete>
-                            <button @click="addMarker2" class="btn btn-info btn-search" aria-label="Search">
-                                <i class="fas fa-search" aria-hidden="true"></i>
-                            </button>
+                        <div class="col-md-2">
+                            <button class="btn btn-success search btn-block" @click="getDirection">confirm</button>
                         </div>
-                        <button class="search" @click="getDirection">confirm</button>
                     </div> 
-                    <form @submit.prevent="create">
+                    <form @submit.prevent="create" class="main-form">
                         <fieldset>
                             <div class="section postdetails">
-                                <h4>Post Your Job</h4>
                                     <div class="form-group row">
                                         <label class="col-sm-3 label-title">Date of Delivery</label>
                                         <div class="col-sm-9">
-                                            <input v-model="form.delivery_date" type="date" class="form-control" placeholder="dd/mm/yyyy">
+                                            <!-- <date-picker  :config="options"></date-picker> -->
+                                            <datepicker :format="customFormatter" class="form-control"  name="uniquename"  v-model="form.delivery_date" >
+                                                
+                                            </datepicker>
                                         </div>
                                         <span v-if="errors.delivery_date" class="help-block" role="alert">
                                             <strong>{{errors.delivery_date[0]}}</strong>
@@ -46,7 +58,7 @@
                                 <div class="form-group row">
                                         <label class="col-sm-3 label-title">Time for Delivery</label>
                                         <div class="col-sm-9">						
-                                        <select v-model="form.time_for_delivery" class="form-control custom-select" id="exampleFormControlSelect1">
+                                        <select required v-model="form.time_for_delivery" class="form-control custom-select" id="exampleFormControlSelect1">
                                             <option value="6-8 Hr" >6 - 8</option>
                                             <option value="8-10 Hr">8 - 10</option>
                                             <option value="10-12 Hr" >10 - 12</option>
@@ -65,7 +77,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-3 label-title">Product Size</label>
                                         <div class="col-sm-9">						
-                                        <select v-model="form.project_size" class="form-control custom-select" id="exampleFormControlSelect1">
+                                        <select required v-model="form.project_size" class="form-control custom-select" id="exampleFormControlSelect1">
                                                 <option value="5" >S: 100cm</option>
                                                 <option value="7.5">M: 150cm</option>
                                                 <option value="10">L: 180cm</option>
@@ -81,7 +93,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-3 label-title">Zip Code of Origin<span class="required">*</span></label>
                                     <div class="col-sm-9">
-                                        <input v-model="form.origin_zip" type="text" class="form-control" placeholder="Ex. 1234">
+                                        <input required v-model="form.origin_zip" type="text" class="form-control" placeholder="Ex. 1234">
                                     </div>
                                         <span v-if="errors.origin_zip" class="help-block" role="alert">
                                             <strong>{{errors.origin_zip[0]}}</strong>
@@ -90,7 +102,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-3 label-title">Zip Code of Destination<span class="required">*</span></label>
                                     <div class="col-sm-9">
-                                        <input v-model="form.destination_zip" type="text" class="form-control" placeholder="Ex. 2343">
+                                        <input required v-model="form.destination_zip" type="text" class="form-control" placeholder="Ex. 2343">
                                     </div>
                                         <span v-if="errors.destination_zip" class="help-block" role="alert">
                                             <strong>{{errors.destination_zip[0]}}</strong>
@@ -99,7 +111,7 @@
                                 <div class="row form-group">
                                     <label class="col-sm-3 label-title">Title for your job<span class="required">*</span></label>
                                     <div class="col-sm-9">
-                                        <input v-model="form.project_title" type="text" class="form-control" placeholder="ex, Human Resource Manager">
+                                        <input required v-model="form.project_title" type="text" class="form-control" placeholder="ex, Human Resource Manager">
                                     </div>
                                         <span v-if="errors.project_title" class="help-block" role="alert">
                                             <strong>{{errors.project_title[0]}}</strong>
@@ -108,7 +120,7 @@
                                 <div class="row form-group item-description">
                                     <label class="col-sm-3 label-title">Description<span class="required">*</span></label>
                                     <div class="col-sm-9">
-                                        <textarea v-model="form.project_description" class="form-control" id="textarea" placeholder="Write few lines about your jobs" rows="8"></textarea>		
+                                        <textarea required v-model="form.project_description" class="form-control" id="textarea" placeholder="Write few lines about your jobs" rows="8"></textarea>		
                                     </div>
                                     <span v-if="errors.project_description" class="help-block" role="alert">
                                         <strong>{{errors.project_description[0]}}</strong>
@@ -117,10 +129,10 @@
                             </div><!-- section -->
                             <div class="checkbox section agreement">
                                 <label for="send">
-                                    <input type="checkbox" name="send" id="send">
+                                    <input required v-model="check" type="checkbox" name="send" id="send">
                                     You agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a> and acknowledge that you are the rightful owner of this item and using Jobs to find a genuine buyer.
                                 </label>
-                                <button type="submit" class="btn btn-primary">Post Your Job</button>
+                                <button :disabled="!check" type="submit" class="btn btn-primary">Post Your Job</button>
                             </div><!-- section -->
                         </fieldset>
                         <input type="hidden" v-model="form.distance">
@@ -155,11 +167,17 @@
 <script src="vue-google-maps.js"></script>
 <script>
 import DashboardLayout from '../layers/DashboardLayout'
- 
+import Datepicker from 'vuejs-datepicker';
+import moment from 'moment'
 export default {
+    
     data(){
         return{
+            state : {
+               date: new Date(16 , 9, 2016)
+            },
             center: { lat: 45.508, lng: -73.587 },
+            check:false,
             center1: {
                 lat:null,
                 lng:null
@@ -173,9 +191,9 @@ export default {
             origin: null,
             destination: null,
             directionsDisplay : null,
-
             form:{
                 origin_address: null,
+                delivery_date: new Date(),
                 origin_zip:null,
                 origin_town:null,
                 origin_country:null,
@@ -196,10 +214,14 @@ export default {
             success:false
         }
     },
-    computed: {
-       
-    },
+    components: {
+        Datepicker
+    }
+    ,
     methods: {
+        customFormatter(date) {
+            return moment(date).format('DD/MM/YYYY');
+            },
         create(){
             axios.post('/api/projects',this.form)
             .then(res=>{
@@ -365,12 +387,28 @@ export default {
 
 <style scoped>
  .search{
-     width: 82px;
+     /* width: 82px; */
     background: #29aabf;
-    border-color: 29aabf;
-    height: 35px;
-    border-radius: 13px;
-    box-shadow: black;
-    margin: auto;
+    /* border-color: 29aabf; */
+    /* height: 35px; */
+    /* border-radius: 13px; */
+    /* box-shadow: black; */
+    /* margin: auto; */
+ }
+ .padding-zero{
+     padding: 0;
+ }
+ .no-border-radius-right{
+     border-radius: 5px 0 0 5px;
+ }
+ 
+ .no-border-radius-left{
+     border-radius: 0 5px 5px 0;
+ }
+ .top-header{
+    margin: 0 0 40px 0;
+ }
+ .main-form{
+     margin-top: 35px;
  }
 </style>

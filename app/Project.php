@@ -26,8 +26,19 @@ class Project extends Model
             'accepted'  => '1',
             'on_going'  => '2',
             'delivered' => '3',
-            'deleted'    => '4'
+            'deleted'   => '4'
         ];
+    }
+
+    public function statusIdToName($id){
+        $status = [
+            '0'    => 'Available',
+            '1'    => 'Accepted',
+            '2'    => 'On Going',
+            '3'    => 'Delivered',
+            '4'    => 'Deleted'
+        ];
+        return $status[$id];
     }
 
 

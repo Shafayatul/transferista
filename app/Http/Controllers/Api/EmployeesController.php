@@ -60,7 +60,7 @@ class EmployeesController extends Controller
 
         $email = $request->email;
 
-        // Mail::to($email)->send(new employeeLoginInfo($email, $password));
+        Mail::to($email)->send(new employeeLoginInfo($email, $password));
 
         return response()->json([
             'employee' => $employee

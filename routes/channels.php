@@ -20,6 +20,10 @@ Broadcast::channel('location', function () {
     // return Auth::check();
     return true;
 });
+Broadcast::channel('CheckActiveDriver', function () {
+   
+    return true;
+});
 
 Broadcast::channel('App.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;

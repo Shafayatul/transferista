@@ -74,12 +74,17 @@ export default {
         
         this.$emit(`update:layout`,ProfileLayout)
     },
-    // mounted(){
-    //     Echo.channel('location')
-    //     .listen('SendPosition', (e) => {
-    //         this.updatePath(e)
-    //     });
-    // }
+    mounted(){
+        
+        Echo.private('CheckActiveDriver')
+            .listen('SendEmail', (e) => {
+                console.log('-----')
+                console.log(e.email)
+                if(this.info.transferista_email === e.email){
+                    this.location()
+                }
+            });
+    }
 }
 </script>
 <style scoped>

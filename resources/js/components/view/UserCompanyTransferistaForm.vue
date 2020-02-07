@@ -166,7 +166,7 @@ export default{
     },
     computed:{
         phoneNumber(){
-          return  this.form.phone = this.area_code + this.number
+            this.form.phone = this.area_code + this.number
         }
     },
     methods:{

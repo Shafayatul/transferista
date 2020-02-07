@@ -55,27 +55,30 @@
 								<span aria-hidden="true">&times;</span>
 							</button>
 						</div>
+						<div class="mr_card" v-if="count==0">
+							<div class="mr_card_body card-body p-3">
+								<h2>There is no available project at this moment.</h2>	
+							</div>								
+						</div>
 						<div class="mr_card" v-for="(data,index) in projects" :key="index">
 							<div class="mr_card_body card-body p-3">									
 																		
-										<a @click=singleProject(data.id) class="p " href="">
-											<h5 class="fonts-title">{{data.project_title}}<br><small>Posted {{ data.created_at }}</small></h5>
-											<div class="card-text">
-												<span class="body-color">
-													{{data.project_description}}
-												</span>
-											</div>
-										</a>
-										<br>
-										<button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button>
-										<br>
-										<!-- <div class=" m-2 d-flex">
-											<p class="col-md-4">$10</p>
-											<p class="col-md-4">10 bid</p>
-											<p class="col-md-4"><button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button></p>
-										</div> -->
-
-								
+									<a @click=singleProject(data.id) class="p " href="">
+										<h5 class="fonts-title">{{data.project_title}}<br><small>Posted {{ data.created_at }}</small></h5>
+										<div class="card-text">
+											<span class="body-color">
+												{{data.project_description}}
+											</span>
+										</div>
+									</a>
+									<br>
+									<button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button>
+									<br>
+									<!-- <div class=" m-2 d-flex">
+										<p class="col-md-4">$10</p>
+										<p class="col-md-4">10 bid</p>
+										<p class="col-md-4"><button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button></p>
+									</div> -->
 									<!-- <div class=" d-flex  ">											
 										<p class="sr col-md-4">
 											<span class="stars">
@@ -142,6 +145,7 @@ export default {
 	data(){
 		return{
 			seleted: 0,
+			count: 0,
 			query: null,
 			filterBy: null,
 			// selectItem: null,
@@ -207,6 +211,7 @@ export default {
 			axios.get('/api/project-list/available?page=' + page)
 			.then(res =>{ 
 				this.projects = res.data.data
+				this.count = this.projects.length;
 				console.log('2312321');
 				this.meta = res.data.meta;
 				console.log(res.data.meta);

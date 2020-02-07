@@ -30,7 +30,7 @@
                         <!-- <a  href="#banner"></a> -->
                     </li>
 
-                    <li class="nav-item" v-for="(item,index) in item2" :key="item.title">
+                    <li class="nav-item" v-for="item in item2" :key="item.title">
                         <router-link style=""  class="nav-link list-group-item  waves-effect"  :to="item.to" v-show="item.show">
                             {{item.title}}
                         </router-link>

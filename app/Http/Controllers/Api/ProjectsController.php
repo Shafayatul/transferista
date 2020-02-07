@@ -169,7 +169,9 @@ class ProjectsController extends Controller
 
     public function transferistaDetails()
     {
-        $projects = Project::where('project_status', 1)->where('project_owner_id', Auth::id())->with('transferista')->get();
+        $projects = Auth::user()->project()->with(['transferista'  => function ($query) {
+            $query->with(['userInfo']);
+        }])->get();
         return response()->json([
             'projects' => $projects
         ]);

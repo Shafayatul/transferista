@@ -27,6 +27,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\Positions' => [
             'App\Listeners\PositionsListener',
         ],
+        'App\Events\SendEmail' => [
+            'App\Listeners\EmailListener',
+        ],
     ];
 
     /**

@@ -31,6 +31,7 @@ import DriverProject from '../components/view/Driver'
 import SingleProject from '../components/view/SingleProject'
 import review from '../components/view/rating/MyReview'
 import reviewed from '../components/view/rating/Review'
+import test from '../components/view/test'
 const routes = [
     {path:'/',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Project Details' }},
     {path:'/position',component: google},

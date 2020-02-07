@@ -40,9 +40,9 @@
                                         {{project_title}}
                                     </h3>
                                 </a>
-                                <p class="sr">Open - 6 days left 
+                                <!-- <p class="sr">Open - 6 days left 
                                     
-                                </p>
+                                </p> -->
                             </div>
                             <span class="hr"></span>
                             <div class="gig_description">
@@ -78,9 +78,11 @@
                         
                             </div>
                             <br>
-                            <button @click=sendPosition :disabled="completed" v-if="project.project_status == 1" class="btn btn-success" ><a class="font-color" >Start</a></button>
+                            <button @click=sendPosition :disabled="started" v-if="project.project_status == 1" class="btn btn-success" ><a class="font-color" >Start</a></button>
                         
-                            <button @click="modal" v-if="project.project_status == 2" class="btn btn-danger" ><a class="font-color" >End</a></button>
+                            <button v-show="completed || project.project_status==2" @click=finish class="btn btn-danger" ><a class="font-color" >End</a></button>
+                        
+                            <button @click="modal" v-show="project.project_status==3"  class="btn btn-danger" ><a class="font-color" >Reviw</a></button>
                         
                         </div>
                     </div>
@@ -117,7 +119,7 @@
             </div>
         </section>
          <div  class="modal fade" id="modal"  tabindex="-1" role="dialog" aria-labelledby="oneModalLabel" aria-hidden="true">
-            <MyRating>:id="id"></MyRating>
+            <MyRating :project =project  :id="id"></MyRating>
         </div>
     </div>
 
@@ -139,6 +141,7 @@ export default {
             id:null,
             project:{},
             bids: {},    
+            completed:false,
             bidded:false,        
             isOwner: false,
             destination: {},
@@ -147,6 +150,7 @@ export default {
             show: true,
             noBids: false,
             flag: false,
+            review:false,
             form:{
                 project_id:null,
                 lat:null,
@@ -162,7 +166,7 @@ export default {
             project_description: null,
             url: null,
             hasBidded:false,
-            completed:false,
+            started:false,
             marker:null, 
             
             center: {lat:23.8103, lng: 90.4125},
@@ -172,8 +176,7 @@ export default {
                 {lat: 22.3569, lng:  91.7832},
             ],
             mvcPath: null,
-            errorMessage: null,
-            polylineGeojson: '',
+            errorMessage: null
 
         }
      },
@@ -276,26 +279,25 @@ export default {
             });
         },
         finish(){
-            axios.get(`/api/project/delivered/${this.projects[i].id}`)
+            axios.get(`/api/project/delivered/${this.id}`)
             .then(res=>{
-                axios.get('/api/driver-projects')
-                .then(res=>{
-                    console.log(res.data.projects)
-                    this.projects = res.data.projects
-                    this.cars = res.data.cars
-                })
-                .catch(error=>console.log(error))}
-            )
+                    this.completed = false
+                    this.project.project_status = 3
+                    this.review = true
+            })
+            .catch(error=>console.log(error))}
+        
         },
         sendPosition(){    
-            this.completed = true
+            this.started = true
             this.flag = false
             axios.get(`/api/project/transfer/${this.project.id}`)
             .then(res => {
+                this.completed = true
                 // EventBus.$emit('onTheWay',this.project.id)
             })
             this.intervalid1 = setInterval(()=>{
-                console.log ('success');
+                // console.log ('success');
 
                 /* Get direction */
                 this.directionsDisplay = new google.maps.DirectionsRenderer;
@@ -357,13 +359,10 @@ export default {
                     axios.post('/api/position',this.form)
                     // document.getElementById("result").innerHTML = positionInfo;
                 }.bind(this));
-                 
-                // 
             } else {
                 alert("Sorry, your browser does not support HTML5 geolocation.");
             }
     
-         },
     },
     created(){
         this.$emit(`update:layout`,DashboardLayout)
@@ -419,6 +418,12 @@ export default {
         
     },
     mounted(){
+        
+        EventBus.$on('reviewed',()=>{
+            console.log('------')
+            this.project.project_status = 4
+        })
+
          Echo.private('positions')
              .listen('Positions', (e) => {
             if(this.id == e.project_id){

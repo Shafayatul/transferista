@@ -1,18 +1,34 @@
 <template> 
-    <form @submit.prevent ="submit">   
+    <!-- -->
+
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Review</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form @submit.prevent="submit">   
         <star-rating v-model="form.rating"></star-rating>      
-        <div class="form-group">
-            <textarea v-model="form.rating_text" class="form-control col-5" name="review" required rows="5" cols="5"></textarea>
+        <div class="form-group my-text">
+            <textarea v-model="form.rating_text" class="form-control" name="review" required rows="5" width="100%"></textarea>
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+            <button type="submit" @click="submit" class="btn btn-success btn-lg btn-block" data-dismiss="modal">Submit</button>
         </div>
-    </form>
+    </form> 
+      </div>
+
+    </div>
+  </div>
+
 </template>
 <script>
 import StarRating from 'vue-star-rating'
 export default {
-    props:['id'],
+    props:['id','project'],
     data(){
         return{
             form:{
@@ -28,7 +44,14 @@ export default {
     },
     methods:{
         submit(){
+            console.log('---')
+            console.log(this.form)
             axios.post('/api/ratings',this.form)
+            .then(res=>{
+                console.log('-----')
+                EventBus.$emit('reviewed')
+            })
+            .catch(error=>console.log(error))
         }
     },
     mounted(){
@@ -40,5 +63,9 @@ export default {
     .form-horizontal .form-group {
     margin-right: 15px !important;
     margin-left: 15px !important;
+}
+.my-text{
+    margin-top: 15px !important;
+
 }
 </style>

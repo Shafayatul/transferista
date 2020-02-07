@@ -3,6 +3,20 @@
     <main class=" mx-lg-5 catagoris" >  
        <section  id="catagoribody">
             <div class="container mamunurrashid_gig_wraper">
+                <div v-show="noProject" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>You haven't submitted any project</strong> 
+                </div>
+
+                <div class="mr_card" v-if="count == 0">
+                    <div class="mr_card_body">
+                        <div class="p-box  ">	
+                            <div class="list list-row block"  >
+                                <h2>There is no active project now.</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mr_card" v-for="(data,index)  in  projects" :key="index">
                     <div class="mr_card_body">
                         <div class="p-box  ">	
@@ -13,6 +27,16 @@
                                    
                                         <div class="item-except text-muted text-sm h-1x">{{data.transferista.name}}</div>
                                         <div class="item-except text-muted text-sm h-1x">{{data.transferista.email}}</div>
+                                   
+                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.address}}</div>
+                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.zip}}</div>
+                                   
+                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.country}}</div>
+                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.phone}}</div>
+                                   
+                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.vat}}</div>
+                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.iban}}</div>
+                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.bic}}</div>
                                         <button @click="modal(index)" v-if="data.project_status == 3">Give Review</button>
                                     </div>
                                      <div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="oneModalLabel" aria-hidden="true">
@@ -32,6 +56,7 @@
 export default {
     data(){
         return{
+            count:null,
             projects:{},
             showed:{}
         }
@@ -44,7 +69,10 @@ export default {
     created(){
         axios.get('/api/transferista-details-by-project-status')
         .then(res=>{
-            this.projects=res.data.projects
+            console.log(res.data.projects)
+            this.projects = res.data.projects
+            // this.projects=res.data.projects
+            // this.count = this.projects.length
             // this.projects = this.projects.slice()
             // console.log(this.projects.length)
             

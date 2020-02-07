@@ -34,6 +34,7 @@ class FrontendsController extends Controller
         }
 
         $project = new ProjectResource($project);
+        $status = $project->statusIdToName($project->project_status);
         $bids = Bid::where('project_id', $id)->get();
 
         $bids_data_array = [];
@@ -42,21 +43,22 @@ class FrontendsController extends Controller
             if($bid->transferista_id == $user_id){
                 $has_bidded = true;
             }
-            $single_data_arr = [];
-            $single_data_arr['bid_id'] = $bid->id;
-            $single_data_arr['bid_transferista_id'] = $bid->transferista_id;
-            $single_data_arr['bid_transferista_vat'] = $bid->user->userInfo->vat;
-            $single_data_arr['bid_project_id'] = $bid->project_id;
-            $single_data_arr['bid_amount'] = $bid->amount;
+            $single_data_arr                          = [];
+            $single_data_arr['bid_id']                = $bid->id;
+            $single_data_arr['bid_transferista_id']   = $bid->transferista_id;
+            $single_data_arr['bid_transferista_vat']  = $bid->user->userInfo->vat;
+            $single_data_arr['bid_project_id']        = $bid->project_id;
+            $single_data_arr['bid_amount']            = $bid->amount;
             $single_data_arr['bid_transferista_name'] = $bid->user->name;
-            $single_data_arr['bid_status'] = $bid->bid_status;
+            $single_data_arr['bid_status']            = $bid->bid_status;
             array_push($bids_data_array, $single_data_arr);
         };
         return response()->json([
-            'project' => $project,
+            'project'         => $project,
             'bids_data_array' => $bids_data_array,
-            'is_owner'=> $is_owner,
-            'has_bidded'=> $has_bidded
+            'is_owner'        => $is_owner,
+            'has_bidded'      => $has_bidded,
+            'status'          => $status,
         ]);
     }
 

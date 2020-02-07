@@ -83,7 +83,7 @@ class DriversController extends Controller
         $user->first_name = $request->first_name;
         $user->last_name  = $request->last_name;
         $user->email      = $request->email;
-        $user->password   = Hash::make('12345678');
+        $user->password   = Hash::make($password);
         $user->first      = 1;
         $user->save();
 
@@ -99,7 +99,7 @@ class DriversController extends Controller
         $driver->save();
 
         $email = $request->email;
-        // Mail::to($email)->send(new driverLoginInfo($email, $password));
+        Mail::to($email)->send(new driverLoginInfo($email, $password));
 
         return new  DriverResource($driver);
     }

@@ -31,22 +31,24 @@
                             </button>
                         </div>
                         <div class="gig_details">
-                            <div class="gig_title d-flex justify-content-between">
-                                <!-- <div v-show="notTransferista" class="alert alert-warning alert-dismissible fade show" role="alert">
-                                    <strong>Please log in first</strong> 
-                                </div> -->
-                                <a class="p" href="#">
-                                    <h3>
-                                        {{project_title}}
-                                    </h3>
-                                </a>
-                                <p class="sr">
-                                    <!-- Open - 6 days left  -->
-                                    
-                                </p>
+                            <div class="gig_title justify-content-between">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>
+                                            {{project_title}}
+                                        </h3>
+                                    </div>
+                                    <div class="col-md-6 pull-right text-right">
+                                        <h3>
+                                            {{status}}
+                                        </h3>
+                                        
+                                    </div>
+                                </div>
                             </div>
                             <span class="hr"></span>
                             <div class="gig_description">
+
                                 <h5><b>Description</b></h5>
                                 <p>
                                     {{project_description}}
@@ -101,7 +103,7 @@
                             <strong>No bid has been submitted for this project.</strong> 
                         </div>
                         <div v-if="accept" class=" alert alert-warning alert-dismissible fade show" role="alert">
-                            <strong>{{transferista}} has been accepted for this project</strong> 
+                            <strong>{{transferista}} has been selected for this project</strong> 
                         </div>
                         <div class="clint_review" v-if="show">
                             
@@ -113,18 +115,13 @@
                                             <h4 class="mt-0">{{bid.bid_transferista_name}}</h4>
                                             <p>{{bid.bid_amount}}$</p>
                                             <div class="stars">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
                                             </div>
                                             <div v-if="isOwner">
-                                                <button  @click="confirm(index)" :disabled="accept1" class="btn btn-success">Accept</button>
+                                                <button  @click="confirm(index)" :disabled="accept1" class="btn btn-success">Details</button>
                                                 <!-- <button class="btn btn-danger">Cancel</button> -->
                                             </div>
                                         </div>
-                                        <p class="p">{{bid.created_at}}</p>
+                                        <!-- <p class="p">{{bid.created_at}}</p> -->
                                     </div>
                                 </div>
                                 <div  class="modal fade" :id="bid.bid_id"  tabindex="-1" role="dialog" aria-labelledby="bid.bid_idLabel" aria-hidden="true">
@@ -197,6 +194,7 @@ import DashboardLayout from '../layers/DashboardLayout'
 export default {
     data(){
         return{
+            status: null,
             isShowBidButton: false,
             accept1:null,
             accept:null,
@@ -292,6 +290,8 @@ export default {
 			axios.post('/api/bids',bidData)
                 .then(res=>{
                     this.bidded = false
+                    this.bids.unshift(res.data.bid)
+                    this.noBids= false
                 }
 			)
 		},
@@ -374,6 +374,7 @@ export default {
         axios.get(this.url)
         .then(res =>{
             console.log(res)
+            this.status = res.data.status
             this.project = res.data.project
             this.bids = res.data.bids_data_array
             this.hasBidded = res.data.has_bidded

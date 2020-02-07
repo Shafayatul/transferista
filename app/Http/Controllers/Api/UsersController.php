@@ -89,6 +89,7 @@ class UsersController extends Controller
 
     public function userInfoSave(Request $request)
     {
+        \Log::debug($request);
         $request->validate([
             'address' => 'required|string',
             'zip'     => 'required|string',
@@ -147,6 +148,13 @@ class UsersController extends Controller
         return response()->json([
             'user'    => $user_info,
             'message' => 'Successfully Updated user Information!'
+        ], 201);
+    }
+
+    public function currentUserEmail(Request $request){
+        $email = Auth::user()->email;
+        return response()->json([
+            'email'    => $email
         ], 201);
     }
 

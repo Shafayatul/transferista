@@ -48,14 +48,16 @@ class BidsController extends Controller
             'amount' => 'required'
         ]);
 
-        $bid                  = new Bid;
-        $bid->project_id      = $request->id;
-        $bid->transferista_id = Auth::id();
-        $bid->amount          = $request->amount;
+        $bid                        = new Bid;
+        $bid->project_id            = $request->id;
+        $bid->transferista_id       = Auth::id();
+        $bid->amount                = $request->amount;
         $bid->save();
-
+        
+        $bid->bid_transferista_name = Auth::user()->name;
+        $bid->bid_amount            = $request->amount;
         return response()->json([
-            'message' => 'Successfully bid submitted!'
+            'bid' => $bid
         ], 201);
     }
 

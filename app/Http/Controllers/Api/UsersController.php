@@ -6,6 +6,7 @@ use Hash;
 use App\User;
 use Carbon\Carbon;
 use App\UserInformation;
+use App\Rating;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -42,10 +43,16 @@ class UsersController extends Controller
     public function userDetails()
     {
         $user = Auth::user();
-        $user_info = $user->userInfo;
+        $user_info = $user->userInfo;;
+
+        $rating = Rating::where('rating_to', Auth::id())->with('ratingFrom')->get();
+        $avg_rating = number_format((User::findOrFail(Auth::id())->ratingTo()->sum('rating'))/(count(User::findOrFail(Auth::id())->ratingTo) > 0 ? count(User::findOrFail(Auth::id())->ratingTo) : 1),2,'.','');
+
         return response()->json([
             'user' => $user,
-            'user_info' => $user_info
+            'user_info' => $user_info,
+            'rating' => $rating,
+            'avg_rating' => $avg_rating
         ]);
 
     }
@@ -75,7 +82,7 @@ class UsersController extends Controller
             'user'         => $user,
             'access_token' => $tokenResult->accessToken,
             'token_type'   => 'Bearer',
-            'expires_at'   =>Carbon::parse($tokenResult->token->expires_at)->toDateTimeString(),
+            'expires_at'   =>Carbon::parse($tokenResult->token->expires_at)->timestamp,
         ]);
     }
 
@@ -126,25 +133,27 @@ class UsersController extends Controller
     public function userInfoUpdate(Request $request)
     {
         $user             = User::findOrFail(Auth::id());
-        $user->name       = $request->first_name.''.$request->last_name;
+        $user->name       = $request->first_name.' '.$request->last_name;
         $user->first_name = $request->first_name;
         $user->last_name  = $request->last_name;
         $user->save();
 
         $user_info                = UserInformation::where('user_id', $user->id)->first();
-        $user_info->address       = $request->user_info['address'];
-        $user_info->zip           = $request->user_info['zip'];
-        $user_info->town          = $request->user_info['town'];
-        $user_info->country       = $request->user_info['country'];
-        $user_info->company       = $request->user_info['company'];
-        $user_info->phone         = $request->user_info['phone'];
-        $user_info->email_company = $request->user_info['email_company'];
-        $user_info->vat           = $request->user_info['vat'];
-        $user_info->iban          = $request->user_info['iban'];
-        $user_info->bic           = $request->user_info['bic'];
-        $user_info->url           = $request->user_info['url'];
-        $user_info->paypal        = $request->user_info['paypal'];
-        $user_info->save();
+        if($user_info){
+            $user_info->address       = $request->user_info['address'];
+            $user_info->zip           = $request->user_info['zip'];
+            $user_info->town          = $request->user_info['town'];
+            $user_info->country       = $request->user_info['country'];
+            $user_info->company       = $request->user_info['company'];
+            $user_info->phone         = $request->user_info['phone'];
+            $user_info->email_company = $request->user_info['email_company'];
+            $user_info->vat           = $request->user_info['vat'];
+            $user_info->iban          = $request->user_info['iban'];
+            $user_info->bic           = $request->user_info['bic'];
+            $user_info->url           = $request->user_info['url'];
+            $user_info->paypal        = $request->user_info['paypal'];
+            $user_info->save();
+        }
         return response()->json([
             'user'    => $user_info,
             'message' => 'Successfully Updated user Information!'
@@ -198,5 +207,20 @@ class UsersController extends Controller
                 'message' => 'Please login then submit request.'
             ]);
         }
+    }
+
+    public function transferistaDetails($id)
+    {
+        $user = User::findOrFail($id);
+        $user->userInfo;
+       $rating = Rating::where('rating_to', $id)->with('ratingFrom')->get();
+       $avg_rating = number_format((User::findOrFail($id)->ratingTo()->sum('rating'))/(count(User::findOrFail($id)->ratingTo) > 0 ? count(User::findOrFail($id)->ratingTo) : 1),2,'.','') ;
+
+        return response()->json([
+            'user'=>$user,
+            'rating' => $rating,
+            'avg_rating' => $avg_rating
+            // 'from_data' => $from_data,
+        ]);
     }
 }

@@ -13,22 +13,50 @@ class RatingsController extends Controller
     public function store(Request $request)
     {
         $user = Auth::user();
+        
         if ($user->hasRole(['company', 'customer', 'employee'])) {
-            $rating = new Rating;
-            $rating->company_or_customer_id = Auth::id();
-            $rating->transferista_id = null;
-            $rating->project_id = $request->project_id;
-            $rating->rating = $request->rating;
-            $rating->rating_text = $request->rating_text;
-            $rating->save();
+            $rating = Rating::where('project_id', $request->project_id)->where('rating_from', Auth::id())->first();
+            $rating_to = Project::where('id', $request->project_id)->first()->transferista_id;
+            if($rating == null){
+                $rating = new Rating;
+                $rating->rating_from = Auth::id();
+                $rating->rating_to = $rating_to;
+                $rating->project_id = $request->project_id;
+                $rating->rating = $request->rating;
+                $rating->rating_text = $request->rating_text;
+                $rating->save();
+                return response()->json([
+                    'message' => 'Rating Submitted',
+                    'status' => 1
+                ]);
+            }else{
+                return response()->json([
+                    'message' => 'Already Done',
+                    'status' => 0
+                ]);
+            }
+            
         }elseif ($user->hasRole('driver')) {
-            $rating = new Rating;
-            $rating->transferista_id = Auth::id();
-            $rating->company_or_customer_id = null;
-            $rating->project_id = $request->project_id;
-            $rating->rating = $request->rating;
-            $rating->rating_text = $request->rating_text;
-            $rating->save();
+            $rating = Rating::where('project_id', $request->project_id)->where('rating_from', Auth::id())->first();
+            $rating_to = Project::where('id', $request->project_id)->first()->project_owner_id;
+            if($rating == null){
+                $rating = new Rating;
+                $rating->rating_from = Auth::id();
+                $rating->rating_to = $rating_to;
+                $rating->project_id = $request->project_id;
+                $rating->rating = $request->rating;
+                $rating->rating_text = $request->rating_text;
+                $rating->save();
+                return response()->json([
+                    'message' => 'Rating Submitted',
+                    'status' => 1
+                ]);
+            }else{
+                return response()->json([
+                    'message' => 'Already Done',
+                    'status' => 0
+                ]);
+            }
         }
     }
 }

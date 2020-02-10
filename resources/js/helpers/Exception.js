@@ -1,7 +1,7 @@
 import User from './User'
 class Exception{
     handle(error){
-        this.isExpired(error)
+        this.isExpired(error.response.data)
     }
     isExpired(error){
         if(error == 'Token is expired'){

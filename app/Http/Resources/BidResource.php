@@ -20,6 +20,7 @@ class BidResource extends JsonResource
             'project_description'=>$this->project->project_description,
             'time_for_delivery'=>$this->project->time_for_delivery,
             'estimated_cost'=>$this->project->estimated_cost,
+            'amount'=>$this->amount,
             'delivery_date'=>$this->project->delivery_date,
             'project_status'=>$this->project->project_status,
             'origin_address'=>$this->project->origin_address,

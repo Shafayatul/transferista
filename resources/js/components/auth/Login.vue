@@ -3,7 +3,8 @@
         <div class="card-heading">
             <h2 class="title">Login Form</h2>
         </div>
-        <div class="card-body">
+        <div class="card-body"> 
+            
             
             <form @submit.prevent="login">
                 <div class="form-row">
@@ -37,12 +38,18 @@
                                 Remember Me
                             </label><br>
                      <button class="btn btn--radius-2 btn--red" type="submit">Login</button>
-                
+                           
+                        <p class="pt-1">Have you forgotten your password?
+                            <router-link to="/forgot-password">
+                                <a>Click </a>
+                            </router-link>
+                        </p> 
                         <p class="pt-1">Not signed-up yet? 
                             <router-link to="/register">
                                 <a>Sign-up</a>
                             </router-link>
                         </p>
+
                 </div>
                 </div>
             </form>

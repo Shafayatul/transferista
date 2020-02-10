@@ -24,7 +24,7 @@
                                         <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Reviews</a>
                                     </li>
                                 </ul>
                             </div>
@@ -47,103 +47,89 @@
                                             <p>{{user.email}}</p>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Address</label>
+                                    <div v-if="userInfo">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Address</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{userInfo.address}}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <p>{{userInfo.address}}</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Town</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{userInfo.town}}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Town</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Country</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{userInfo.country}}</p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-6">
-                                            <p>{{userInfo.town}}</p>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Company Email</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p>{{userInfo.email_company}}</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Country</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>{{userInfo.country}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Company Email</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>{{userInfo.email_company}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Vat</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>{{userInfo.vat}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Url</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>{{userInfo.url}}</p>
+                                        <div v-if="flag1">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Vat</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{{userInfo.vat}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Url</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>{{userInfo.url}}</p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Experience</label>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+                                    <div class="row" v-if="flag">
+                                        <h4>No reviews to show</h4> 
+                                    </div>
+
+
+                                    <div class="row" v-for="(data,index) in rating" :key="index">
+                                        <div class="col-md-3">
+                                            <label>{{data.rating_from.name}}</label>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <i class="fas fa-star"  v-for="(data,index) in parseFloat(data.rating)" :key="index"></i>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>Expert</p>
+                                            {{data.rating_text}}
                                         </div>
                                     </div>
-                                    <div class="row">
+
+
+                                    <div class="row" >
                                         <div class="col-md-6">
-                                            <label>Hourly Rate</label>
+                                            <label>Average Rating :</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <p>10$/hr</p>
+                                            {{avg_rating}}
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Total Projects</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>230</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>English Level</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>Expert</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Availability</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <p>6 months</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Your Bio</label><br/>
-                                            <p>Your detail description</p>
-                                        </div>
-                                    </div>
-                                </div> -->
+                                    
+                                </div>
                             </div>
                             
                         </div>
@@ -165,16 +151,34 @@ export default {
         return{
             user:{},
             userInfo:{},
-            name:null
+            name:null,
+            rating:{},
+            avg_rating: 0,
+            flag: null,
+            flag1: null,
+            employee:true
         }
     }
     ,
     created(){
+        if(User.employee()){
+            this.employee = false;
+        }
+        if(User.transferista())
+        {
+            this.flag1 = true    
+        }        
         this.name = User.name()
         axios.get(`/api/user-details`)
         .then(res=>{
             this.user=res.data.user
             this.userInfo=res.data.user.user_info
+             this.rating = res.data.rating
+            if(this.rating.length==0){
+                this.flag = true
+            }
+            
+            this.avg_rating = res.data.avg_rating
 
         })
         .catch(error=>this.errors=error.response.data.errors)

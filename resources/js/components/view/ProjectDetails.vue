@@ -24,6 +24,18 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
+                        <!-- <div v-if="estimated_cost" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            Estimated cost is {{project.estimated_cost}}
+                            <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div> -->
+                        <div v-show="showCost" class="alert alert-warning alert-dismissible fade show" role="alert">
+                            Estimated cost is {{project.estimated_cost}}$
+                            <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                         <div v-show="bidded" class="alert alert-warning alert-dismissible fade show" role="alert">
                         Successfully Bidded
                             <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -76,7 +88,7 @@
                                 
                                     <p>State Zip: {{project.destination_zip}}</p>
                                 
-                                     <p>   Country: {{project.destination_country}}</p>
+                                     <p>Country: {{project.destination_country}}</p>
                                 </div>
                         
                             </div>
@@ -112,7 +124,7 @@
                                     <img class="mr-3" :src="'img/jobdetails/r1.png'" alt="">
                                     <div class="media-body">
                                         <div class="header d-flex justify-content-between">
-                                            <h4 class="mt-0">{{bid.bid_transferista_name}}</h4>
+                                            <a @click="transferistaDetails(bid.bid_transferista_id)" class="mt-0">{{bid.bid_transferista_name}}</a>
                                             <p>{{bid.bid_amount}}$</p>
                                             <div class="stars">
                                             </div>
@@ -194,6 +206,7 @@ import DashboardLayout from '../layers/DashboardLayout'
 export default {
     data(){
         return{
+            showCost:false,
             status: null,
             isShowBidButton: false,
             accept1:null,
@@ -217,7 +230,8 @@ export default {
             project_title: null,
             project_description: null,
             url: null,
-            hasBidded:false
+            hasBidded:false,
+            estimated_cost:false
         }
     },
     components:{
@@ -245,6 +259,14 @@ export default {
 				this.$router.push('../register')
 			}
             $('#modal').modal('show');
+        },
+        transferistaDetails(id){
+            this.$router.push({
+                name: 'transferista',
+                params:{
+                    id: id
+                }
+            })  
         },
         updatePath(e){
             this.center1.lat  =  e.lat
@@ -290,6 +312,7 @@ export default {
 			axios.post('/api/bids',bidData)
                 .then(res=>{
                     this.bidded = false
+                    this.isShowBidButton = false
                     this.bids.unshift(res.data.bid)
                     this.noBids= false
                 }
@@ -365,6 +388,9 @@ export default {
         if(User.transferista()){
             this.isShowBidButton = true
         }
+        // if(this.$route.params.estimated_cost){
+        //     this.estimated_cost = this.$route.params.estimated_cost
+        // }
         this.id = this.$route.params.id;
         if(User.loggedIn()){
             this.url = `/api/project-detail/${this.id}`
@@ -380,6 +406,8 @@ export default {
             this.hasBidded = res.data.has_bidded
             if(this.project.transferista_name === null){
                 this.isOwner = res.data.is_owner
+                this.isOwner == true ? this.showCost = true : this.showCost = false
+                
             }else{
                 this.transferista = this.project.transferista_name
                 this.accept = true

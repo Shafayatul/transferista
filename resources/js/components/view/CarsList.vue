@@ -11,7 +11,7 @@
                             <input v-model="form.brand" id="fullName" name="fullName" placeholder="Brand" class="form-control" required="true"  type="text"></div>
                             </div>
                         </div>
-                            <span v-if="errors.brand" class="help-block" role="alert">
+                            <span style="margin-left: 260px;" v-if="errors.brand" class="help-block" role="alert">
                                 <strong>{{errors.brand[0]}}</strong>
                             </span>
                         <div class="form-group d-flex">
@@ -22,7 +22,7 @@
                             </div>
                         </div>
                             
-                            <span v-if="errors.type" class="help-block" role="alert">
+                            <span style="margin-left: 260px;" v-if="errors.type" class="help-block" role="alert">
                                 <strong>{{errors.type[0]}}</strong>
                             </span>
                         <div class="form-group d-flex">
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                             
-                            <span v-if="errors.plate" class="help-block" role="alert">
+                            <span style="margin-left: 260px;" v-if="errors.plate" class="help-block" role="alert">
                                 <strong>{{errors.plate[0]}}</strong>
                             </span>
                         <div class="form-group d-flex">
@@ -51,6 +51,7 @@
                             <div class="col-md-3"></div>
                             <div class=" col-md-9" >     
                             <button v-show="editFlag" class="btn btn-primary" type="submit" >Update</button>
+                            <button v-show="cancelFlag" @click="cancel" class="btn btn-primary" >Cancel</button>
                             
                             <button v-if="!editFlag" class="btn btn-primary" type="submit" >Create</button>
                             
@@ -108,7 +109,8 @@ export default {
             editFlag:false,
             errors:{},
             cars:{},
-            i:null
+            i:null,
+            cancelFlag: false
         }
     },
     computed:{
@@ -130,6 +132,9 @@ export default {
             })
     },
     methods: {
+        scrollToTop(){
+            window.scrollTo(0,0)
+        },
         submit() {
             this.editFlag ? this.newInsert() :this.create()
             
@@ -142,6 +147,17 @@ export default {
             this.form.id = this.cars[index].id
             this.form.cargo_capacity = this.cars[index].cargo_capacity
             this.editFlag = true
+            this.scrollToTop()
+        },
+        cancel(){
+            this.form.brand = null
+            this.form.type = null
+            this.form.plate = null
+            this.form.cargo_capacity = null
+            this.form.id = null
+            this.editFlag = false
+            this.cancelFlag = false
+
         },
         // update(car) {
         //     axios.post(`/api/cars/${car.id}`,car)

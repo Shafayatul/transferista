@@ -58,6 +58,11 @@
                 <div>
                     <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
                 </div>
+                <p class="pt-1">All ready signed-up ? 
+                    <router-link to="/login">
+                        <a>Log-in</a>
+                    </router-link>
+                </p>
             </form>
         </div>
     </div>             

@@ -57,10 +57,11 @@ class EmployeesController extends Controller
         $employee->email      = $request->email;
         $employee->phone      = $request->phone;
         $employee->save();
-
+        
         $email = $request->email;
-
-        Mail::to($email)->send(new employeeLoginInfo($email, $password));
+        
+        $when = now()->addMinutes(10);
+        Mail::to($email)->later($when,new employeeLoginInfo($email, $password));
 
         return response()->json([
             'employee' => $employee

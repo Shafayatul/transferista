@@ -11,15 +11,14 @@ class User{
     responseAfterLogin(res){
         const access_token = res.data.access_token
         const username = res.data.user.name
-      
-        const expiration = res.data.expired_at
+        const expiration = res.data.expires_at
         if(res.data.roles[0] != undefined){
             console.log(res.data.roles[0])
             const role = res.data.roles 
             AppStorage.store(username,access_token,expiration,role)
-            window.location = '/'
+            window.location = '/profile/user'
         }else{
-        //  role = res.data.user.role
+            
             const role= false;
             AppStorage.store(username,access_token,expiration,role)
             window.location = '/role'

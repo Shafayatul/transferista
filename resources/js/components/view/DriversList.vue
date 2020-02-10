@@ -11,7 +11,7 @@
                                         <input v-model="form.first_name" id="fullName" name="fullName" placeholder="First Name" class="form-control" required="true"  type="text"></div>
                                         </div>
                                     </div>
-                                        <span v-if="errors.first_name" class="help-block" role="alert">
+                                        <span style="margin-left: 260px;" v-if="errors.first_name" class="help-block" role="alert">
                                             <strong>{{errors.first_name[0]}}</strong>
                                         </span>
                                     <div class="form-group d-flex">
@@ -21,18 +21,18 @@
                                         <input v-model="form.last_name" id="addressLine1" name="addressLine1" placeholder="Last name" class="form-control" required="true"  type="text"></div>
                                         </div>
                                     </div>
-                                        <span v-if="errors.last_name" class="help-block" role="alert">
+                                        <span style="margin-left: 260px;" v-if="errors.last_name" class="pull-right help-block" role="alert">
                                             <strong>{{errors.last_name[0]}}</strong>
                                         </span>
                                     <div class="form-group d-flex">
                                         <label class="col-md-3 control-label">Email</label>
                                         <div class="col-md-9 inputGroupContainer">
                                         <div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
-                                        <input v-model="form.email" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
+                                        <input v-model="form.email" id="addressLine2" name="addressLine2" placeholder="Email" class="form-control" required="true"  type="text"></div>
                                         </div>
                                         
                                     </div>
-                                        <span v-if="errors.email" class="help-block" role="alert">
+                                        <span style="margin-left: 260px;" v-if="errors.email" class="help-block" role="alert">
                                             <strong>{{errors.email[0]}}</strong>
                                         </span>
                                     <div class="form-group d-flex">
@@ -42,7 +42,7 @@
                                         <input v-model="form.phone" id="addressLine2" name="addressLine2" placeholder="Phone" class="form-control" required="true"  type="text"></div>
                                         </div>
                                     </div>
-                                        <span v-if="errors.phone" class="help-block" role="alert">
+                                        <span style="margin-left: 260px;" v-if="errors.phone" class="help-block" role="alert">
                                             <strong>{{errors.phone[0]}}</strong>
                                         </span>
                                      <div class="form-group d-flex">
@@ -50,6 +50,7 @@
                                         </label>
                                         <div class="col-md-9">   
                                         <button v-show="editFlag" class="btn btn-primary" type="submit" >Update</button>
+                            <button v-show="cancelFlag" @click="cancel" class="btn btn-primary" >Cancel</button>
                                         
                                         <button v-if="!editFlag" class="btn btn-primary" type="submit" >Create</button>
                                         
@@ -111,7 +112,8 @@ export default {
             errors:{},
             drivers:{},
             editFlag: false,
-            i:null
+            i:null,
+            cancelFlag: false
         }
     },
     components:{
@@ -129,6 +131,9 @@ export default {
         })
     },
     methods: {
+        scrollToTop(){
+            window.scrollTo(0,0)
+        },
         submit() {
             this.editFlag ? this.newInsert() :this.create()
             
@@ -141,6 +146,17 @@ export default {
             this.form.phone = this.drivers[index].phone
             this.form.id = this.drivers[index].id
             this.editFlag = true
+            this.scrollToTop()
+        },
+        cancel(){
+            this.form.first_name = null
+            this.form.last_name = null
+            this.form.email = null
+            this.form.phone = null
+            this.form.id = null
+            this.editFlag = false
+            this.cancelFlag = false
+
         },
         // update(driver) {
         //     axios.post('/api/driver-update',driver)
@@ -204,6 +220,7 @@ export default {
                 this.form.email = null 
                 this.form.phone = null 
                 this.form.id = null
+                 this.editFlag= false
                 this.drivers.splice(index,1)
 
             }

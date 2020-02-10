@@ -78,25 +78,21 @@
                         
                             </div>
                             <br>
-                            <button @click=sendPosition :disabled="started" v-if="project.project_status == 1" class="btn btn-success" ><a class="font-color" >Start</a></button>
+                            <button  :disabled="started" v-if="project.project_status == 1" @click=sendPosition class="btn btn-success font-color" >  Start</button>
                         
-                            <button v-show="completed || project.project_status==2" @click=finish class="btn btn-danger" ><a class="font-color" >End</a></button>
+                            <button v-show="completed || project.project_status==2" @click=finish class="btn btn-danger" ><a  class="font-color" >End</a></button>
                         
-                            <button @click="modal" v-show="project.project_status==3"  class="btn btn-danger" ><a class="font-color" >Reviw</a></button>
+                            <button @click="modal" v-show="project.project_status==3"  class="btn btn-danger" ><a  href="" class="font-color" >Reviw</a></button>
                         
                         </div>
                     </div>
                     <div class="col-md-4">
-                    <!--Card-->
-                        <label>
-                            Start at:
-                            <gmap-autocomplete @place_changed="updateCenter($event)" />
-                        </label>
 
                         <gmap-map
                         ref="map"
                         :zoom="12"
                         :center="center"
+                        motionTracking=true
                         style="width:100%;  height: 400px;"
                         >
                             <!-- <gmap-polyline v-if="path.length > 0" :path="path" :editable="true" @path_changed="updateEdited($event)"
@@ -195,6 +191,121 @@ export default {
        DashboardLayout, MyRating
     },
     methods:{
+        sendPosition() {    
+            this.started = true
+            this.flag = false
+            axios.get(`/api/project/transfer/${this.project.id}`)
+            .then(res => {
+                 if(navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((position)=> {
+                        console.log(position);
+                        //this. = id;
+                        this.center1.project_id = this.project.id
+                        this.center1.lat = position.coords.latitude; 
+                        this.center1.lng = position.coords.longitude;
+                         axios.post('/api/position',this.center1) 
+                
+                        this.center2.lat= parseFloat(this.project.destination_lat)
+                        this.center2.lng =parseFloat(this.project.destination_lng)
+                        
+                        var start = this.center1;
+                        var destination = this.center2;
+                        this.directionsDisplay.setMap(this.$refs.map.$mapObject)
+                        console.log(this.project)
+                        // google maps API's direction service
+                                        
+                        directionsService.route({
+                                origin: start,
+                                destination: destination,
+                                travelMode: 'DRIVING'
+                            }, (response, status)=> {
+                            if (status === 'OK') {
+                                // this.form.distance = response.routes[0].legs[0].distance.value
+                                console.log(response)
+                                this.directionsDisplay.setDirections(response);
+                            } else {
+                                window.alert('Directions request failed due to ' + status);
+                            }
+                        });
+                        // document.getElementById("result").innerHTML = positionInfo;
+                    });
+                        // this.directionsDisplay.setMap(this.$refs.map.$mapObject)
+                        // document.getElementById("result").innerHTML = positionInfo;
+                    
+                }
+                this.completed = true
+                // EventBus.$emit('onTheWay',this.project.id)
+            })
+            this.intervalid1 = setInterval(()=>{
+                // console.log ('success');
+
+                /* Get direction */
+                if(this.directionsDisplay === null){
+                    this.directionsDisplay = new google.maps.DirectionsRenderer;
+                }
+                var directionsService = new google.maps.DirectionsService;
+                if(navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition((position)=> {
+                        console.log(position);
+                        //this. = id;
+                        this.center1.project_id = this.project.id
+                        this.center1.lat = position.coords.latitude; 
+                        this.center1.lng = position.coords.longitude;
+                         axios.post('/api/position',this.center1)
+                         var start = this.center1;
+                
+                        var destination = this.center2;
+                        this.directionsDisplay.setMap(this.$refs.map.$mapObject)
+                        console.log(this.project)
+                        // google maps API's direction service
+                                        
+                        directionsService.route({
+                                origin: start,
+                                destination: destination,
+                                travelMode: 'DRIVING'
+                            }, (response, status)=> {
+                            if (status === 'OK') {
+                                // this.form.distance = response.routes[0].legs[0].distance.value
+                                console.log(response)
+                                this.directionsDisplay.setDirections(response);
+                            } else {
+                                window.alert('Directions request failed due to ' + status);
+                            }
+                        });
+                        // document.getElementById("result").innerHTML = positionInfo;
+                    });
+                }
+                // this.center1.lat= this.position.lat
+                // this.center1.lng =this.position.lng 
+                
+                this.center2.lat= parseFloat(this.project.destination_lat)
+                this.center2.lng =parseFloat(this.project.destination_lng)
+                
+                var start = this.center1;
+                
+                var destination = this.center2;
+                this.directionsDisplay.setMap(this.$refs.map.$mapObject)
+                console.log(this.project)
+                // google maps API's direction service
+                                
+                directionsService.route({
+                        origin: start,
+                        destination: destination,
+                        travelMode: 'DRIVING'
+                    }, (response, status)=> {
+                    if (status === 'OK') {
+                        // this.form.distance = response.routes[0].legs[0].distance.value
+                        console.log(response)
+                        this.directionsDisplay.setDirections(response);
+                    } else {
+                        window.alert('Directions request failed due to ' + status);
+                    }
+                });
+
+
+            }, 120000);
+            
+        },
         
 		modal(){
             $('#modal').modal('show');
@@ -203,9 +314,9 @@ export default {
             this.center1.lat  =  e.lat
             this.center1.lng  =  e.lng
             this.center = this.center1
-            if(this.directionsDisplay === null){
+            // if(this.directionsDisplay === null){
                 this.directionsDisplay = new google.maps.DirectionsRenderer;
-            }
+            // }
             // var directionsService = new google.maps.DirectionsService;
 
             
@@ -219,9 +330,9 @@ export default {
             var destination = this.center2;
 
 
-            this.marker = new google.maps.Marker({
+            // this.marker = new google.maps.Marker({
 
-            })
+            // })
             
             // if(this.$refs['map'] != undefined){
             //     this.directionsDisplay.setMap(this.$refs['map'].$mapObject)
@@ -287,63 +398,6 @@ export default {
             })
             .catch(error=>console.log(error))}
         
-        },
-        sendPosition(){    
-            this.started = true
-            this.flag = false
-            axios.get(`/api/project/transfer/${this.project.id}`)
-            .then(res => {
-                this.completed = true
-                // EventBus.$emit('onTheWay',this.project.id)
-            })
-            this.intervalid1 = setInterval(()=>{
-                // console.log ('success');
-
-                /* Get direction */
-                this.directionsDisplay = new google.maps.DirectionsRenderer;
-                
-                var directionsService = new google.maps.DirectionsService;
-                if(navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition((position)=> {
-                        console.log(position);
-                        //this. = id;
-                        this.center1.project_id = this.project.id
-                        this.center1.lat = position.coords.latitude; 
-                        this.center1.lng = position.coords.longitude;
-                         axios.post('/api/position',this.center1)
-                        // document.getElementById("result").innerHTML = positionInfo;
-                    });
-                }
-                // this.center1.lat= this.position.lat
-                // this.center1.lng =this.position.lng 
-                
-                this.center2.lat= parseFloat(this.project.destination_lat)
-                this.center2.lng =parseFloat(this.project.destination_lng)
-                
-                var start = this.center1;
-                
-                var destination = this.center2;
-                this.directionsDisplay.setMap(this.$refs.map.$mapObject)
-                console.log(this.project)
-                // google maps API's direction service
-                                
-                directionsService.route({
-                        origin: start,
-                        destination: destination,
-                        travelMode: 'DRIVING'
-                    }, (response, status)=> {
-                    if (status === 'OK') {
-                        // this.form.distance = response.routes[0].legs[0].distance.value
-                        console.log(response)
-                        this.directionsDisplay.setDirections(response);
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-                });
-
-
-            }, 10000);
-            
         },
         test(){
             console.log('test')

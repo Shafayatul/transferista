@@ -22,10 +22,10 @@
                 <!-- Right -->
                 <ul class="navbar-nav nav-flex-icons"> 
 
-                    <li class="nav-item" v-for="(item,index) in item1" :key="index">
-                        <router-link style=""  class="nav-link list-group-item  waves-effect"  :to="item.to" v-show="item.show">
+                    <li class="nav-item" v-for="(item,index) in item1" :key="index" :class="{no : currentPage}">
+                        <a style=""  class="nav-link list-group-item  waves-effect"  :href="item.to" v-show="item.show">
                             {{item.title}}
-                        </router-link>
+                        </a>
                         
                         <!-- <a  href="#banner"></a> -->
                     </li>
@@ -130,8 +130,8 @@ export default {
         return{
             loggedIn: false,
             item1:[
-                {title: 'Add Project',to:'/project/create',show: (User.company() ||User.customer())},
-                {title: 'My Projects',to:'/profile/projects',show: (User.company()  || User.customer())}
+                {title: 'Add Project',to:'/project/create',show: (User.company() ||User.customer() || User.employee())},
+                {title: 'My Projects',to:'/profile/projects',show: (User.company()  || User.customer() || User.employee())}
                 // {title: 'Accepted Bids',to:'/profile/edit-customer',show: User.transferista()},
                 
             ],

@@ -1,8 +1,10 @@
 <template>
-    
     <main class=" mx-lg-5 catagoris" >
        <section  id="catagoribody">
             <div class="container mamunurrashid_gig_wraper">
+                <div v-show="flag" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Currently you have no projects</strong> 
+                </div>
                 <div class=" mr_card" v-for="(data,index) in projects" :key="index">
                     <div class="mr_card_body">
                             <div class="p-box  ">											
@@ -18,7 +20,6 @@
                             </div>
                             <div class=" d-flex ">											
                                 <p class="sr col-md-4">
-                                
                                     <span class="review">
                                       Delivery date: {{data.delivery_date}}
                                     </span>
@@ -35,16 +36,8 @@
                                 <p class="col-md-4"><i class="fas fa-google-map"></i>Number Plate: {{cars[index].plate}}</p>
                                 <p class="col-md-4">Capacity: {{cars[index].cargo_capacity}}</p>
                             </div>
-                      
                     </div>
                 </div>
-                    <gmap-map
-                    ref="map"
-                    :center="position"
-                    :zoom="12"
-                    style="width:100%;  height: 400px;"
-                    >
-                    </gmap-map>
             </div>
         
        </section>
@@ -89,11 +82,15 @@ export default {
             }
         }
     ,
-    created : function(){
+    created(){
         axios.get('/api/driver-projects')
         .then(res=>{
              this.projects = res.data.projects
-            this.cars = res.data.cars})
+            this.cars = res.data.cars
+            if(this.projects.length > 0){
+                this.flag = false
+            }
+            })
             .catch(error=>console.log(error))
         //this.sendPosition()     
     },

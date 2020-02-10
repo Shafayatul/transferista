@@ -19,6 +19,7 @@
         "laravel/passport": "^8.2",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^1.1",
+        "nesbot/carbon": "^2.29",
         "pusher/pusher-php-server": "~4.0",
         "spatie/laravel-permission": "^3.6",
         "srmklive/paypal": "~1.0",

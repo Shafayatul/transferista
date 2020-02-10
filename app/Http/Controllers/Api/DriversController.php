@@ -97,9 +97,9 @@ class DriversController extends Controller
         $driver->user_id         = $user->id;
         $driver->phone           = $request->phone;
         $driver->save();
-
+        $when = now()->addMinutes(10);
         $email = $request->email;
-        Mail::to($email)->send(new driverLoginInfo($email, $password));
+        Mail::to($email)->later($when, new driverLoginInfo($email, $password));
 
         return new  DriverResource($driver);
     }

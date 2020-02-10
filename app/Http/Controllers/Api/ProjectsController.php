@@ -24,14 +24,16 @@ class ProjectsController extends Controller
 {
     public function index(Request $request)
     {
-        $per_page = 2;
+        $per_page = 1;
         $user = Auth::user();   
         if ($user->hasRole('company')) {
             $projects = Project::where('project_owner_id', Auth::id())->with('bids')->paginate($per_page);
         }elseif ($user->hasRole('customer')) {
-            $projects = Project::where('project_owner_id', Auth::id())->paginate($per_page);
+            $projects = Project::where('project_owner_id', Auth::id())->with('bids')->paginate($per_page);
         }elseif ($user->hasRole('transferista')) {
             $projects = Project::where('transferista_id', Auth::id())->with('bids')->paginate($per_page);
+        }elseif ($user->hasRole('employee')) {
+            $projects = Project::where('project_owner_id', Auth::id())->with('bids')->paginate($per_page);
         }else {
             $projects = Project::paginate($per_page);
         }
@@ -88,6 +90,7 @@ class ProjectsController extends Controller
 
         return response()->json([
             'id'=>$project->id,
+            'estimated_cost'=>$project->estimated_cost,
             'message' => 'Successfully created project!'
         ], 201);
     }
@@ -184,13 +187,22 @@ class ProjectsController extends Controller
             'driver_id' => 'required',
             'car_id' => 'required',
         ]);
+        $driver_to_project = DriverToProject::where('project_id', $request->project_id)->first();
+        if($driver_to_project){
+            $driver_to_project->transferista_id = Auth::id();
+            $driver_to_project->project_id      = $request->project_id;
+            $driver_to_project->driver_id       = $request->driver_id;
+            $driver_to_project->car_id          = $request->car_id;
+            $driver_to_project->save();
+        }else{
+            $driver_to_project                  = new DriverToProject;
+            $driver_to_project->transferista_id = Auth::id();
+            $driver_to_project->project_id      = $request->project_id;
+            $driver_to_project->driver_id       = $request->driver_id;
+            $driver_to_project->car_id          = $request->car_id;
+            $driver_to_project->save();
+        }
         
-        $driver_to_project                  = new DriverToProject;
-        $driver_to_project->transferista_id = Auth::id();
-        $driver_to_project->project_id      = $request->project_id;
-        $driver_to_project->driver_id       = $request->driver_id;
-        $driver_to_project->car_id          = $request->car_id;
-        $driver_to_project->save();
 
         return response()->json([
             'message' => 'Assign Completed'

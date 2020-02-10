@@ -32,9 +32,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                </li>
                             </ul>
                         </div>
                         <form>
@@ -59,63 +56,70 @@
                                             <input required v-model="user.email" class="form-control" placeholder="Email" data-type="string" data-original="islam" name="last_name" type="text" >
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <label class="col-3 control-label">Address</label>
-                                        <div class="col-9">
-                                            <input required v-model="user.user_info.address" class="form-control" placeholder="Address " data-type="string" data-original="islam" name="last_name" type="text">
+                                    <div v-if="user.user_info">
+                                        <div class="form-group row">
+                                            <label class="col-3 control-label">Address</label>
+                                            <div class="col-9">
+                                                <input required v-model="user.user_info.address" class="form-control" placeholder="Address " data-type="string" data-original="islam" name="last_name" type="text">
+                                            </div>
+                                        </div>
+            
+                                        <div class="form-group row">
+                                            <label class="col-3 control-label">Town </label>
+                                            <div class="col-9">
+                                                <input required  v-model="user.user_info.town" class="form-control" placeholder="Town" data-type="string" data-original="islam" name="last_name" type="text">
+                                            </div>
+                                        </div>
+            
+                                        <div class="form-group row">
+                                            <label class="col-3 control-label">Country</label>
+                                            <div class="col-9">
+                                                <input required v-model="user.user_info.country" class="form-control" placeholder="Country" data-type="string" data-original="islam" name="last_name" type="text">
+                                            </div>
+                                        </div>
+            
+                                        <div class="form-group row">
+                                            <label class="col-3 control-label">Company</label>
+                                            <div class="col-9">
+                                                <input required v-model="user.user_info.company" class="form-control" placeholder="Company" data-type="string" data-original="islam" name="last_name" type="text">
+                                            </div>
+                                        </div>
+            
+                                        <div v-show="flag" class="form-group row">
+                                            <label class="col-3 control-label">Vat</label>
+                                            <div class="col-9">
+                                                <input required v-model="user.user_info.vat" class="form-control" placeholder="Company" data-type="string" data-original="islam" name="last_name" type="text">
+                                            </div>
+                                        </div>
+            
+                                        <div class="form-group row">
+                                            <label class="col-3 control-label">Zip</label>
+                                            <div class="col-9">
+                                                <input required v-model="user.user_info.zip" class="form-control" placeholder="ZIP" data-type="string" data-original="islam" name="last_name" type="text">
+                                            </div>
+                                        </div>
+            
+            
+                                        <div class="form-group row">
+                                            <label class="col-3 control-label">Phone</label>
+                                            <div class="col-9">
+                                                <input  v-model="user.user_info.phone" class="form-control" placeholder="Phone" data-type="string" data-original="islam" name="last_name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-3 control-label">Paypal Account No:</label>
+                                            <div class="col-9">
+                                                <input  v-model="user.user_info.paypal" class="form-control" placeholder="Account no" data-type="string" data-original="islam" name="last_name" type="text">
+                                            </div>
                                         </div>
                                     </div>
-        
-                                    <div class="form-group row">
-                                        <label class="col-3 control-label">Town </label>
-                                        <div class="col-9">
-                                            <input required  v-model="user.user_info.town" class="form-control" placeholder="Town" data-type="string" data-original="islam" name="last_name" type="text">
-                                        </div>
-                                    </div>
-        
-                                    <div class="form-group row">
-                                        <label class="col-3 control-label">Country</label>
-                                        <div class="col-9">
-                                            <input required v-model="user.user_info.country" class="form-control" placeholder="Country" data-type="string" data-original="islam" name="last_name" type="text">
-                                        </div>
-                                    </div>
-        
-                                    <div class="form-group row">
-                                        <label class="col-3 control-label">Company</label>
-                                        <div class="col-9">
-                                            <input required v-model="user.user_info.company" class="form-control" placeholder="Company" data-type="string" data-original="islam" name="last_name" type="text">
-                                        </div>
-                                    </div>
-        
-                                    <div class="form-group row">
-                                        <label class="col-3 control-label">Zip</label>
-                                        <div class="col-9">
-                                            <input required v-model="user.user_info.zip" class="form-control" placeholder="ZIP" data-type="string" data-original="islam" name="last_name" type="text">
-                                        </div>
-                                    </div>
-        
-        
-                                    <!-- <div class="form-group row">
-                                        <label class="col-3 control-label">Phone</label>
-                                        <div class="col-9">
-                                            <input :disabled="flag" v-model="user.user_info.phone" class="form-control" placeholder="Phone" data-type="string" data-original="islam" name="last_name" type="text">
-                                        </div>
-                                    </div>
-        
-        
-                                    <div class="form-group row">
-                                        <label class="col-3 control-label">Paypal Account No:</label>
-                                        <div class="col-9">
-                                            <input :disabled="flag" v-model="user.user_info.paypal" class="form-control" placeholder="Account no" data-type="string" data-original="islam" name="last_name" type="text">
-                                        </div>
-                                    </div> -->
                                     <div class="form-group row">
                                         <div class="col-md-5 offset-3">         
                                             <button type="button" class="btn btn-info btn-sm" @click="submit">Update</button>
-                                       <!-- </div>  
+                                    <!-- </div>  
                                         <div class="col-md-4 offset-3">          -->
                                             <button type="button" class="btn btn-danger btn-sm" @click="cancel">Cancel</button>
-                                       </div>  
+                                        </div>  
                                     </div>
                                 </div>
                             </div>
@@ -142,8 +146,10 @@ export default {
         return {
             success:false,
             user: {
-                user_info: {}
-            }
+                user_info: {
+                }
+            },
+            flag:false
         }
     },
     methods:{
@@ -163,6 +169,11 @@ export default {
                 this.user = res.data.user
             })
         .catch(error=> console.log(error))
+    },
+    created(){
+        if(User.transferista()){
+            this.flag = true
+        }
     }
 }
 </script>

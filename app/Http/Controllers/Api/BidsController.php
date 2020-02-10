@@ -53,7 +53,7 @@ class BidsController extends Controller
         $bid->transferista_id       = Auth::id();
         $bid->amount                = $request->amount;
         $bid->save();
-        
+        $bid->bid_transferista_id = $bid->transferista_id;
         $bid->bid_transferista_name = Auth::user()->name;
         $bid->bid_amount            = $request->amount;
         return response()->json([

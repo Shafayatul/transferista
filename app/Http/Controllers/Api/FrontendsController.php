@@ -57,6 +57,7 @@ class FrontendsController extends Controller
             'project'         => $project,
             'bids_data_array' => $bids_data_array,
             'is_owner'        => $is_owner,
+
             'has_bidded'      => $has_bidded,
             'status'          => $status,
         ]);

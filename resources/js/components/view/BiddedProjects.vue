@@ -21,21 +21,10 @@
                                 <li class="mb-2"><small></small></li>
                             </ul>
                         </div>
-                        <div class=" d-flex ">											
-                            <p class="sr col-md-4">
-                                <!-- <span class="stars">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                </span><br> -->
-                                <span class="review">
-                                    Total bidded with: {{data.estimated_cost}}$
-                                </span>
-                            </p>
-                            <p class="col-md-4"><i class="fas fa-google-map"></i>From: {{data.origin_address}}</p>
-                            <p class="col-md-4">To: {{data.destination_address}}</p>
+                        <div class=" d-flex ">
+                            <p class="col-md-3"><i class="fas fa-google-map"></i>Bidded with: ${{data.amount}}</p>
+                            <p class="col-md-3"><i class="fas fa-google-map"></i>From: {{data.origin_address}}</p>
+                            <p class="col-md-3">To: {{data.destination_address}}</p>
                         </div>
                     </div>
                 </div>

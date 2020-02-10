@@ -3,8 +3,11 @@
         <div class="container-fluid">
             <div class="container emp-profile mt-5">
             <div class="row">
-                
              <div class="col-md-6">
+                
+                <div v-show="noProject" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Currently you have no projects</strong> 
+                </div> 
                  <div v-show="success" class="alert alert-warning alert-dismissible fade show" role="alert">
                  Driver Assigned successfully
                 <button @click="success =!success" type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -64,39 +67,10 @@
                         </div>
    
                         </div>
-
-
-						  <div class="paginationsarea">
-							<div class=" d-flex justify-content-end">
-								<nav aria-label="Page navigation example">
-									<ul class="pagination">
-										<li class="page-item">
-											<a class="page-link" aria-label="Previous" :disabled="meta.current_page == meta.from" @click="getResults(meta.current_page-1)">
-												<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-												<span class="sr-only">Previous</span>
-											</a>
-										</li>
-										<li v-if="meta.current_page-2 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-2)">{{meta.current_page-2}}</a></li>
-										<li v-if="meta.current_page-1 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-1)">{{meta.current_page-1}}</a></li>
-										<li class="page-item active"><a class="page-link">{{meta.current_page}}</a></li>
-										<li v-if="meta.current_page+1 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+1)">{{meta.current_page+1}}</a></li>
-										<li v-if="meta.current_page+2 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+2)">{{meta.current_page+2}}</a></li>
-										
-										<li class="page-item">
-											<a class="page-link" aria-label="Next" :disabled="meta.current_page == meta.total" @click="getResults(meta.current_page+1)">
-												<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-												<span class="sr-only">Next</span>
-											</a>
-										</li>
-									</ul>
-								</nav>
-							</div>
-						</div>
-
                 </div>    
              <div class="col-md-6">
                     
-                <gmap-map ref="mymap" :center="startLocation" :zoom="14" style="width: 100%; height: 100vh;">
+                <gmap-map ref="mymap" :center="startLocation" :zoom="4" style="width: 100%; height: 100vh;">
                     <gmap-info-window :options="infoOptions" :position="infoPosition" :opened="infoOpened" @closeclick="infoOpened=false">
                     {{infoContent}}
                     </gmap-info-window>
@@ -176,25 +150,26 @@ export default {
             errors:{},
 
             startLocation: {
-            lat: 10.3157,
-            lng: 123.8854
+            lat: 50.3785,
+            lng: 14.9706
             },
             coordinates: [
-                {
-                    name: 'Erich  Kunze',
-                    lat: '23.55',
-                    lng: '93.40'
-                },
-                 {
-                    name: 'Delmer Olson',
-                    lat: '23.32',
-                    lng: '93.89'
-                }
+                // {
+                //     name: 'Erich  Kunze',
+                //     lat: '23.55',
+                //     lng: '93.40'
+                // },
+                //  {
+                //     name: 'Delmer Olson',
+                //     lat: '23.32',
+                //     lng: '93.89'
+                // }
             ],
             infoPosition: null,
             infoContent: null,
             infoOpened: false,
             infoCurrentKey: null,
+            noProject: false,
             infoOptions: {
                 pixelOffset: {
                     width: 0,
@@ -203,6 +178,9 @@ export default {
             },
             form : {
                 email: null
+            },
+            meta:{
+                current_page:null
             }
         }
     },
@@ -225,7 +203,7 @@ export default {
         },
         toggleInfo(marker, key) {
             this.infoPosition = this.getPosition(marker)
-            this.infoContent = marker.full_name
+            this.infoContent = marker.name
             if (this.infoCurrentKey == key) {
                 this.infoOpened = !this.infoOpened
             } else {
@@ -238,12 +216,12 @@ export default {
             $(`#${ this.projects[index].id}`).modal('show');
         },
 		// Our method to GET results from a Laravel endpoint
-		getResults(page = 1) {
+		getResults() {
             axios.get('/api/projects')
             .then(res =>{ 
                 this.meta = res.data.meta;
                 this.projects = res.data.data
-                if(this.projects.length === 0){
+                if(this.projects.length == 0){
                     this.noProject = true
                 }
                     axios.get('/api/cars')

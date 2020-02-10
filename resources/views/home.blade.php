@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,15 +44,17 @@
     <link href="{{asset('css/style.css')}}" rel="stylesheet" media="all">
       
     <link rel="stylesheet" type="text/css" href="{{asset('css/jobdetails.css')}}">
-    <link href="{{asset('css/project.css')}}" rel="stylesheet" media="all">
-    @if(Auth::check()) <meta name="user-id" content= {{ Auth::user()->id }}> @endif
+    <!-- @if(Auth::check()) <meta name="user-id" content= {{ Auth::user()->id }}> @endif -->
 
 </head>
 
 <body id="profile-body">
-  <div id="app" >
+  <div id="app" >  
+    <!-- <grid-loader :loading="loading" :color="color"  :margin="margin" :radius="radius"></grid-loader> -->
     <app-home></app-home>
   </div>
+  <!-- <script src="path/to/vue.js"></script> -->
+  <!-- <script src="path/to/vue-spinner.js"></script> -->
   <!-- <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>  -->
   <!-- <script type="text/javascript" src="{{asset('js/jquery-3.4.1.min.js')}}"></script> -->
     <!-- Vendor JS-->

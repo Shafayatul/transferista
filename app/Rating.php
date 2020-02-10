@@ -15,13 +15,13 @@ class Rating extends Model
         return $this->belongsTo(Project::class, 'project_id');
     }
 
-    public function user()
+    public function ratingFrom()
     {
-        return $this->belongsTo(User::class, 'company_or_customer_id');
+        return $this->belongsTo(User::class, 'rating_from');
     }
 
-    public function transferista()
+    public function ratingTo()
     {
-        return $this->belongsTo(User::class, 'transferista_id');
+        return $this->belongsTo(User::class, 'rating_to');
     }
 }

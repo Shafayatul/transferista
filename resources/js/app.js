@@ -2,7 +2,7 @@
 require('./bootstrap');
 window.Vue = require('vue');
 import * as VueGoogleMaps from 'vue2-google-maps'
-
+// import CubeSpin from 'node-sass/vue-loading-spinner/components'
 // require('@/assets/css/style.css')
 
 // Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
@@ -40,14 +40,31 @@ window.EventBus = new Vue();
 
 Vue.component('app-home', require('./components/AppHome.vue').default);
 
+Vue.component('grid-loader', require('vue-spinner/src/GridLoader.vue').default);
+
+
 import router from './router/router'
 // router.beforeEach((to, from, next) => {
 //   document.title = to.meta.title
 //   next()
 // })
+Vue.config.debug = true // turn on debugging mode
 
 const app = new Vue({
     el: '#app',
+    Data(){
+      return {
+        color: '#3AB982',
+        height: '35px',
+        width: '4px',
+        margin: '2px',
+        radius: '2px',
+        loading: true
+      }
+    },
+    computed:{
+      // loading(){ return true;} 
+    },
     router,
     watch: {
       '$route' (to, from) {

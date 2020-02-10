@@ -10,14 +10,25 @@ import AvailableProjects from './view/AvailableProjects'
 export default {
     data(){
         return{
-            layout: 'div'
+            layout: 'div',
+            color: '#3AB982',
+            height: '35px',
+            width: '4px',
+            margin: '2px',
+            radius: '2px',
+            loading: null
         }
     },
     components:{
         AvailableProjects
     },
-    created() {
-                    
+    beforeCreate(){
+        this.loading=true
+    },
+    created() {         
+    },
+    mounted() {
+
     }
 }
 </script>

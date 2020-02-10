@@ -3,18 +3,8 @@
     <main class=" mx-lg-5 catagoris" >  
        <section  id="catagoribody">
             <div class="container mamunurrashid_gig_wraper">
-                <div v-show="noProject" class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>You haven't submitted any project</strong> 
-                </div>
-
-                <div class="mr_card" v-if="count == 0">
-                    <div class="mr_card_body">
-                        <div class="p-box  ">	
-                            <div class="list list-row block"  >
-                                <h2>There is no active project now.</h2>
-                            </div>
-                        </div>
-                    </div>
+                <div v-show="showed" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>No accepted Transferista to show</strong> 
                 </div>
 
                 <div class="mr_card" v-for="(data,index)  in  projects" :key="index">
@@ -23,21 +13,53 @@
                             <div class="list list-row block"  >
                                 <div class="list-item" data-id="19">
                                     
-                                    <div class="flex"> <a href="#" class="item-author text-color" data-abc="true"></a>
+                                    <div class="row w-100">
+                                         <a href="#" class="item-author text-color" data-abc="true"></a>
+                                    
+                                            <!-- <div class = "row address-row">
+                                                <div class="col-md-6">
+
+                                                    <p><b>From:</b></p>
+                                                    <p>{{project.origin_address}}</p>
+
+                                                    <p>City: {{data.transferista.name}}</p>
+
+                                                    <p>State Zip: {{data.transferista.email}}</p>
+
+                                                    <p>Country: {{data.transferista.user_info.address}}</p>
+
+
+                                                </div>
+                                                <div class="col-md-6">
+                                                <p><b>Destination:</b></p>
+                                                <p>{{project.destination_address}}</p>
+                                                
+                                                <p> City: {{data.transferista.user_info.zip}}</p>
+                                                
+                                                    <p>State Zip: {{data.transferista.user_info.country}}</p>
+                                                
+                                                    <p>Country: {{data.transferista.user_info.country}</p>
+                                                </div>
+                                        
+                                            </div> -->
+                                   <div class="col-md-6">
+                                        <p class="">Name: {{data.transferista.name}}</p>
+                                        <p class="">Email: {{data.transferista.email}}</p>
+                                        <p class="">Address: {{data.transferista.user_info.address}}</p>
+                                        <p class="">Zip: {{data.transferista.user_info.zip}}</p>
+                                   </div>
                                    
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.name}}</div>
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.email}}</div>
                                    
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.address}}</div>
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.zip}}</div>
-                                   
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.country}}</div>
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.phone}}</div>
-                                   
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.vat}}</div>
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.iban}}</div>
-                                        <div class="item-except text-muted text-sm h-1x">{{data.transferista.user_info.bic}}</div>
-                                        <button @click="modal(index)" v-if="data.project_status == 3">Give Review</button>
+                                       
+                                   <div class="col-md-6">
+                                        <p class="">Country: {{data.transferista.user_info.country}}</p>
+                                        <p class="">Phone: {{data.transferista.user_info.phone}}</p>
+                                       <p class="">Vat: {{data.transferista.user_info.vat}}%</p>
+                                        <p class="">IBAN: {{data.transferista.user_info.iban}}</p>
+                                        <p class="">BIC: {{data.transferista.user_info.bic}}</p>
+                                   </div>
+                                        
+                                        <!-- <button @click="modal(index)" v-if="data.project_status == 3">Give Review</button> -->
                                     </div>
                                      <div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="oneModalLabel" aria-hidden="true">
                                         <MyRating>  :id="data.id"></MyRating>
@@ -58,7 +80,7 @@ export default {
         return{
             count:null,
             projects:{},
-            showed:{}
+            showed:true
         }
     },
     methods:{
@@ -71,6 +93,10 @@ export default {
         .then(res=>{
             console.log(res.data.projects)
             this.projects = res.data.projects
+            this.showed = false
+            if(this.projects.length == 0){
+                this.showed = true
+            }
             // this.projects=res.data.projects
             // this.count = this.projects.length
             // this.projects = this.projects.slice()

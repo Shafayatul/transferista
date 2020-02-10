@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-use App\Events\SendPosition;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -17,6 +15,7 @@ use App\Events\SendPosition;
 //     return $request->user();
 // });
 Route::post('payment/success', 'Api\PaymentsController@paymentSuccess');
+Route::get('transferista-details/{id}', 'Api\UsersController@transferistaDetails');
 Route::group([
     'prefix' => 'password'
 ], function () {
@@ -25,14 +24,14 @@ Route::group([
     Route::post('reset', 'Api\Auth\PasswordResetController@reset');
 });
 
-Route:: post('/map',function (Request $request){
-    // dd($request);
-    $lat = $request->input('lat');
-    $lng = $request->input('long'); 
-    $location = ['lat'=>$lat,'lng'=>$lng];
-    event(new SendPosition($location));
-    return response()->json(['status'=>'success', 'data'=> $location]);
-});
+// Route:: post('/map',function (Request $request){
+//     // dd($request);
+//     $lat = $request->input('lat');
+//     $lng = $request->input('long'); 
+//     $location = ['lat'=>$lat,'lng'=>$lng];
+//     event(new SendPosition($location));
+//     return response()->json(['status'=>'success', 'data'=> $location]);
+// });
 
 Route::get('project-list/{status}', 'Api\FrontendsController@index');
 Route::get('visitor-project-detail/{id}', 'Api\FrontendsController@visitorProjectDetail');
@@ -70,7 +69,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 
         Route::get('project/accept/{project_id}/{transferista_id}', 'Api\ProjectsController@acceptProject');
         Route::get('project/transfer/{project_id}', 'Api\ProjectsController@transferProject');
-        // Route::get('payment/success', 'Api\PaymentsController@paymentSuccess');
+        // Route::post('payment/success', 'Api\PaymentsController@paymentSuccess');
     });
     // Route::group(['middleware' => ['role:employee|driver']], function () {
     //     Route::post('position', 'PositionsController@sendPosition');

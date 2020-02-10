@@ -48,7 +48,12 @@ export default {
     methods:{
         reset(){
             axios.get('/api/password-update',this.form)
-            .then(res=>this.success = true)
+            .then(res=>{
+                this.success = true
+                this.form.old_password = null
+                this.form.new_password = null
+                this.form.confirm_password = null
+                })
             .catch(error=>this.error = true)
         }
     }

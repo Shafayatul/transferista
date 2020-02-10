@@ -67,7 +67,7 @@ export default {
         // axios.get('/api/user-details')
         // .then(res=> this.user=res.data.user)
         // .catch(error =>console.log(error))
-        if(User.employee() || User.driver()){
+        if( User.driver()){
             this.info.name = User.name()
             this.location()
         }

@@ -32,13 +32,16 @@ import SingleProject from '../components/view/SingleProject'
 import review from '../components/view/rating/MyReview'
 import reviewed from '../components/view/rating/Review'
 import test from '../components/view/test'
+import reset from '../components/view/ForgotPassword'
+import NewPassword from '../components/view/Reset'
+import TransferistaInfo from '../components/view/TransferistaDetails'
 const routes = [
-    {path:'/',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Project Details' }},
-    {path:'/position',component: google},
+    {path:'/',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Home' }},
+    // {path:'/position',component: google},
     {path:'/project-details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate, meta: { auth: false, title: 'Create' }},    
     {path:'/profile',component: profile},
-    {path:'/register',component: register, name: 'register'},
+    {path:'/register',component: register, name: 'register', meta: { auth: false, title: 'Login' }},
     {path:'/login',component: login, name: 'login', meta: { auth: false, title: 'Login' }},
     {path:'/logout',component: logout},
     {path:'/role',component: role, name: 'role'},
@@ -49,7 +52,7 @@ const routes = [
         {path:'drivers',component: Driver, meta: { auth: true, title: 'Profile' }},
         {path:'edit-customer',component: CustomerEdit, meta: { auth: true, title: 'Profile' }},
         {path:'credentials',component: ChangePassword, meta: { auth: true, title: 'Profile' }},    
-        {path:'positions',component: markers,name:'list', meta: { auth: true, title: 'Profile' }},    
+        // {path:'positions',component: markers,name:'list', meta: { auth: true, title: 'Profile' }},    
         {path:'projects',component: MyProjects},
         {path:'transferista',component: TransferistaList},
         {path:'bidded-projects',component: BiddedProjects},
@@ -57,14 +60,17 @@ const routes = [
         {path:'my-projects',component: DriverProject}
     ]},
     
-    {path:'/customer/:role',component: UserCustomerForm, name: 'customer'},
+    {path:'/customer/:role',component: UserCustomerForm, name: 'customer', meta: { auth: true, title: 'User Information' }},
     {path:'/driver/project/:id',component: SingleProject, name: 'driver'},
-    {path:'/form/:role',component: UserCompanyTransferistaForm, name: 'form'},
+    {path:'/form/:role',component: UserCompanyTransferistaForm, name: 'form', meta: { auth: true, title: 'User Information' }},
     {path:'/review',component: review},
     {path:'/reviewed',component: reviewed},
     {path:'/show',component: show},
+    {path:'/forgot-password',component: reset},
     {path:'/paypal',component: PaypalData},
     {path:'/test',component: test},
+    {path:'/reset-password/:token',component: NewPassword},
+    {path:'/transferista-info/:id',component: TransferistaInfo,name: 'transferista'},
 ];
 
 const router = new VueRouter({
@@ -72,5 +78,20 @@ const router = new VueRouter({
     hashbang:false,
     mode:'history',
 });
+
+// router.beforeResolve((to, from, next) => {
+//     // If this isn't an initial page load.
+//     if (to.name) {
+//         // Start the route progress bar.
+//         NProgress.start()
+//     }
+//     next()
+//   })
+  
+//   router.afterEach((to, from) => {
+//     // Complete the animation of the route progress bar.
+//     NProgress.done()
+//   })
+  
 
 export default router

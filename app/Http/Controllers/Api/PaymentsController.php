@@ -46,26 +46,21 @@ class PaymentsController extends Controller
 
     public function paymentSuccess(Request $request)
     {
-        // \Log::debug('88888dasdf');
-        // dd('dksjhfdskj');
-        $data = $request->all();
-        // \Log::debug($data);
-        dd($data);
-        $provider         = new ExpressCheckout;
-        $checkout_details = $provider->getExpressCheckoutDetails($request->token);
-        $response         = $provider->doExpressCheckoutPayment($data, $request->token, $request->PayerID);
-        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
+        if ($request != null) {
             $payment                         = new Payment;
-            $payment->company_or_customer_id = $request->user_id;
+            $payment->company_or_customer_id = Auth::id();
             $payment->transferista_id        = $request->transferista_id;
             $payment->project_id             = $request->project_id;
             $payment->amount                 = $request->amount;
             $payment->payment_type           = "paypal";
-            $payment->transaction_id         = $response['PAYMENTINFO_0_TRANSACTIONID'];
             $payment->save();
             return response()->json([
                 'message' => 'payment Successful'
             ], 201);
+        }else{
+            return response()->json([
+                'message' => 'Data not found'
+            ]);
         }
     }
 

@@ -50,6 +50,7 @@ export default {
             .then(res=>{
                 console.log('-----')
                 EventBus.$emit('reviewed')
+                EventBus.$emit('CustomerReviewed',this.form.project_id)
             })
             .catch(error=>console.log(error))
         }

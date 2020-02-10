@@ -10,9 +10,21 @@
                         <div class="col-md-5">
                             <!-- Search form -->
                             <div class="row">
-                                <div class="col-md-9 padding-zero">
+                                <div class="col-md-2 padding-zero">
+                                    <label class=" label-title">From:</label>
+                                </div>
+                                <div class="col-md-7 padding-zero">
                                     <gmap-autocomplete
                                         @place_changed="setPlace1">
+                                         <template v-slot:input="slotProps">
+                                            <v-text-field outlined
+                                                
+                                                placeholder="From"
+                                                ref="input"
+                                                v-on:listeners="slotProps.listeners"
+                                            >
+                                            </v-text-field>
+                                        </template>
                                     </gmap-autocomplete>
                                 </div>
                                 <div class="col-md-3 padding-zero">
@@ -24,7 +36,10 @@
                         </div>
                         <div class="col-md-5">
                             <div class="row">
-                                <div class="col-md-9 padding-zero">
+                                <div class="col-md-2 padding-zero">
+                                    <label class=" label-title">To:</label>
+                                </div>
+                                <div class="col-md-7 padding-zero">
                                     <gmap-autocomplete
                                         @place_changed="setPlace2">
                                     </gmap-autocomplete>
@@ -144,6 +159,7 @@
                     ref="map"
                     :center="center"
                     :zoom="12"
+                    motionTracking=true
                     style="width:100%;  height: 400px;"
                     >
                         <gmap-marker v-show="this.center1" :position="this.center1">

@@ -1,5 +1,8 @@
 <template>
+	
     <div class="body-class catagoris">	
+		
+        <!-- <grid-loader :loading="loading" :color="color"  :margin="margin" :radius="radius"></grid-loader> -->
         <section id="catagoribody">
 			<div class="container">
 			<div class="row">
@@ -105,22 +108,22 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
 										<li class="page-item">
-											<a class="page-link" aria-label="Previous" :disabled="meta.current_page == meta.from" @click="getResults(meta.current_page-1)">
+											<button class="page-link" aria-label="Previous" v-show="left" :disabled="!left"   @click="getResults1(meta.current_page-1) , left-- , right++">
 												<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
 												<span class="sr-only">Previous</span>
-											</a>
+											</button>
 										</li>
-										<li v-if="meta.current_page-2 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-2)">{{meta.current_page-2}}</a></li>
-										<li v-if="meta.current_page-1 >= 1" class="page-item"><a class="page-link" @click="getResults(meta.current_page-1)">{{meta.current_page-1}}</a></li>
+										<li v-if="meta.current_page-2 >= 1" class="page-item"><a class="page-link" @click="getResults2(meta.current_page-2)">{{meta.current_page-2}}</a></li>
+										<li v-if="meta.current_page-1 >= 1" class="page-item"><a class="page-link" @click="getResults2(meta.current_page-1)">{{meta.current_page-1}}</a></li>
 										<li class="page-item active"><a class="page-link">{{meta.current_page}}</a></li>
-										<li v-if="meta.current_page+1 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+1)">{{meta.current_page+1}}</a></li>
-										<li v-if="meta.current_page+2 <= meta.total" class="page-item"><a class="page-link" @click="getResults(meta.current_page+2)">{{meta.current_page+2}}</a></li>
+										<li v-if="meta.current_page+1 <= meta.total" class="page-item"><a class="page-link" @click="getResults2(meta.current_page+1)">{{meta.current_page+1}}</a></li>
+										<li v-if="meta.current_page+2 <= meta.total" class="page-item"><a class="page-link" @click="getResults2(meta.current_page+2)">{{meta.current_page+2}}</a></li>
 										
 										<li class="page-item">
-											<a class="page-link" aria-label="Next" :disabled="meta.current_page == meta.total" @click="getResults(meta.current_page+1)">
+											<button class="page-link"  :disabled="right==1" aria-label="Next"  @click="getResults1(meta.current_page+1) , right-- , left++">
 												<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
 												<span class="sr-only">Next</span>
-											</a>
+											</button>
 										</li>
 									</ul>
 								</nav>
@@ -145,7 +148,7 @@ export default {
 	data(){
 		return{
 			seleted: 0,
-			count: 0,
+			count: null,
 			query: null,
 			filterBy: null,
 			// selectItem: null,
@@ -153,12 +156,24 @@ export default {
 			meta: {},
 			success: false,
 			flag:true,
-			bidded: false
+			bidded: false,
+            layout: 'div',
+            color: '#3AB982',
+            height: '35px',
+            width: '4px',
+            margin: '2px',
+            radius: '2px',
+			loading: true,
+			left:0,
+			right:null
 		}
 	},
     components:{
 		DashboardLayout,
 		bid
+	},
+	beforeCreate(){
+		this.loading = true
 	},
 	methods:{
 		singleProject(d){
@@ -202,39 +217,62 @@ export default {
 			this.visible = null;
 		},
 		// Our method to GET results from a Laravel endpoint
-		getResults(page = 1) {
-			console.log('1111111111111');
+		getResults1(page = 1) {
+			// v-show="meta.current_page-2 >= 1"
+			// v-show="meta.current_page+2 <= meta.total"
+			// console.log(this.left+' '+this.right)
+			
+			if(this.right+1>this.meta.total){
+				this.right = this.meta.total
+			}
+
+			
 			// axios.get('example/results?page=' + page)
 			// 	.then(response => {
 				// 		this.laravelData = response.data;
 			// 	});
 			axios.get('/api/project-list/available?page=' + page)
 			.then(res =>{ 
-				this.projects = res.data.data
-				this.count = this.projects.length;
-				console.log('2312321');
-				this.meta = res.data.meta;
-				console.log(res.data.meta);
+					this.projects = res.data.data
+					this.count = this.projects.length;
+					this.meta = res.data.meta;
+					if(this.right == null){
+						this.right = this.meta.total
+					}
+				})
+			.catch(error=>console.log(error))
+		},
+		getResults2(page) {
+			// v-show="meta.current_page-2 >= 1"
+			// v-show="meta.current_page+2 <= meta.total"
+			// console.log(this.left+' '+this.right)
+			this.left = page -1
+			this.right = this.meta.total - this.left
+			// axios.get('example/results?page=' + page)
+			// 	.then(response => {
+				// 		this.laravelData = response.data;
+			// 	});
+			axios.get('/api/project-list/available?page=' + page)
+			.then(res =>{ 
+					this.projects = res.data.data
+					this.count = this.projects.length;
+					this.meta = res.data.meta;
 				})
 			.catch(error=>console.log(error))
 		}
 	},
 	mounted() {
-			console.log('44444444444');
 		// Fetch initial results
-		this.getResults();
+		this.getResults1();
 	},
 	
     created(){
-		this.$emit(`update:layout`,DashboardLayout)
-		
-
-
-		if(User.customer() || User.company() || !User.loggedIn()){
+		this.loading = false
+		if(User.customer() || User.company() || User.employee() || !User.loggedIn()){
 			
 			this.flag = false
 		}
-		
+		this.$emit(`update:layout`,DashboardLayout)
     }
 }
 </script>

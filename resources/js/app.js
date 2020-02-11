@@ -17,6 +17,15 @@ Vue.use(VueGoogleMaps, {
     }
 });
 
+axios.interceptors.response.use(null , (error)=>{
+  if(error.response.status == 401){
+    
+    User.logout()
+  
+  }
+})
+
+
 // jQuery.extend(true, jQuery.fn.datetimepicker.defaults, {
 //   icons: {
 //     time: 'far fa-clock',

@@ -15,16 +15,8 @@
                                 </div>
                                 <div class="col-md-7 padding-zero">
                                     <gmap-autocomplete
+                                        :value="from"
                                         @place_changed="setPlace1">
-                                         <template v-slot:input="slotProps">
-                                            <v-text-field outlined
-                                                
-                                                placeholder="From"
-                                                ref="input"
-                                                v-on:listeners="slotProps.listeners"
-                                            >
-                                            </v-text-field>
-                                        </template>
                                     </gmap-autocomplete>
                                 </div>
                                 <div class="col-md-3 padding-zero">
@@ -41,6 +33,7 @@
                                 </div>
                                 <div class="col-md-7 padding-zero">
                                     <gmap-autocomplete
+                                        :value="to"
                                         @place_changed="setPlace2">
                                     </gmap-autocomplete>
                                 </div>
@@ -73,7 +66,7 @@
                                 <div class="form-group row">
                                         <label class="col-sm-3 label-title">Time for Delivery</label>
                                         <div class="col-sm-9">						
-                                        <select required v-model="form.time_for_delivery" class="form-control custom-select" id="exampleFormControlSelect1">
+                                        <select required v-model="form.time_for_delivery" class="form-control custom-select" id="example4">
                                             <option value="6-8 Hr" >6 - 8</option>
                                             <option value="8-10 Hr">8 - 10</option>
                                             <option value="10-12 Hr" >10 - 12</option>
@@ -156,9 +149,9 @@
                 <div class="col-lg-4">
                     <!--Card-->
                     <gmap-map
-                    ref="map"
+                    ref="gmap"
                     :center="center"
-                    :zoom="12"
+                    :zoom="3"
                     motionTracking=true
                     style="width:100%;  height: 400px;"
                     >
@@ -192,15 +185,18 @@ export default {
             state : {
                date: new Date(16 , 9, 2016)
             },
-            center: { lat: 45.508, lng: -73.587 },
+            center: { 
+                lat: 50.3785,
+                lng: 14.9706
+            },
             check:false,
             center1: {
-                lat:null,
-                lng:null
+                lat:0,
+                lng:0
             },
             center2: {
-                lat:null,
-                lng:null
+                lat:0,
+                lng:0
             },
             markers: [],
             places: [],
@@ -224,7 +220,9 @@ export default {
                 project_title:null,
                 project_description:null,
                 project_size:null,
-                distance:null
+                distance:null,
+                from: null,
+                to: null
             },
             errors:{},
             success:false
@@ -265,7 +263,7 @@ export default {
             console.log(place)
             var arr1 = place.formatted_address;
             var arr2 = place.name
-            arr1 = arr2.concat(arr1)
+            arr1 = arr2+' '+arr1
             this.form.origin_address = arr1; 
             var arr = arr1.split(',');
             this.form.origin_town = arr[arr.length - 2]
@@ -277,12 +275,12 @@ export default {
         setPlace2(place) {
             var arr1 = place.formatted_address;
             var arr2 = place.name
-            arr1 = arr2.concat(arr1)
+            arr1 = arr2 + ' ' + arr1
             this.form.destination_address = arr1; 
             var arr = arr1.split(',');
             this.form.destination_town = arr[arr.length - 2]
             this.form.destination_country =  arr[arr.length - 1]
-            console.log(this.form.origin_address)
+            console.log(this.form.destination_address)
             this.destination = place;
         
         },
@@ -347,36 +345,56 @@ export default {
             this.form.distance = this.getDistance();
 
 
-            if(this.flag>1){
-                this.directionsDisplay.setDirections(null)
-            }
-            if(this.directionsDisplay== null){
+            // if(this.flag>1){
+            //     this.directionsDisplay.setDirections(null)
+            // }
+            if(this.directionsDisplay ===  null){
                 this.directionsDisplay = new google.maps.DirectionsRenderer;
             }
-            var directionsService = new google.maps.DirectionsService;
+            var directionsService = new google.maps.DirectionsService();
             var start = this.center1;
             var destination = this.center2;
-            this.directionsDisplay.setMap(this.$refs.map.$mapObject);
-            
+            // console.log('---------------------------')
+            // console.log(this.$refs.gmap)
+            // console.log('---------------------------')
+            // console.log(typeof(this.$refs.gmap))
+            // let a = this.$refs
+            // console.log(a.gmap.finalLng)
+            // console.log(this.$refs.gmap.$attrs.motionTracking)
+            // console.log('--------------------------')
+            // console.log(this.$el)
 
-            //google maps API's direction service
-            function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
-                    directionsService.route({
-                        origin: start,
-                        destination: destination,
-                        travelMode: 'DRIVING'
-                    }, function(response, status) {
+            // if(this.$refs.map !== undefined){
+            //     this.directionsDisplay.setMap(this.$refs.map.$mapObject)
+            // }
+            // if(this.$refs.gmap == undefined){
+             this.directionsDisplay.setMap(this.$refs.gmap.$mapObject)
+
+             console.log(this.directionsDisplay)
+            // }
+            // let directionsDisplay = this.directionsDisplay
+            // Vue.set(directionsDisplay)
+            // //google maps API's direction service
+            // function calculateAndDisplayRoute(directionsService,directionsDisplay,  start, destination) {
+            directionsService.route({
+                    origin: start,
+                    destination: destination,
+                    travelMode: 'DRIVING'
+                }, (response, status)=>{
                     if (status === 'OK') {
+                        console.log('----------------')
+                        // console.log(directionsDisplay)
                         // this.form.distance = response.routes[0].legs[0].distance.value
-                        directionsDisplay.setDirections(response);
-                        
+                        console.log(response)
+                        this.directionsDisplay.setDirections(response);
+                    
                     } else {
                         window.alert('Directions request failed due to ' + status);
                     }
                 });
         
-            }
-            calculateAndDisplayRoute(directionsService,this.directionsDisplay, start, destination);
+            // }
+            // calculateAndDisplayRoute(directionsService,this.directionsDisplay, start, destination);
         
         },
         // geolocate: function() {
@@ -394,7 +412,33 @@ export default {
 		// }
 	},
     created(){
+        //  console.log('created0000000000')
         this.$emit(`update:layout`,DashboardLayout)
+        if(this.$route.params.size > 0){
+            this.center1.lat = this.$route.params.center1.lat
+            this.center1.lng = this.$route.params.center1.lng
+            this.center2.lat = this.$route.params.center2.lat
+            this.center2.lng = this.$route.params.center2.lng
+            this.form.project_size = this.$route.params.size
+            this.from = this.$route.params.place1.formatted_address
+            this.to = this.$route.params.place2.formatted_address
+            this.setPlace1(this.$route.params.place1)
+            this.setPlace2(this.$route.params.place2)
+
+            // this.getDirection()
+            
+        }
+    
+    },
+    mounted(){
+        
+        if(this.$route.params.size > 0){
+            // this.center1 = this.$route.params.center1
+            // this.center2 = this.$route.params.center2
+            // this.form.project_size = this.$route.params.size
+            console.log('created')
+            this.getDirection()
+        }
     }
 }
 

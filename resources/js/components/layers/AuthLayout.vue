@@ -1,5 +1,5 @@
 <template>
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+    <div class="page-wrapper p-t-45 p-b-50">
         <div class="wrapper wrapper--w790">
             
             <slot></slot>

@@ -5,23 +5,59 @@
         <!-- <grid-loader :loading="loading" :color="color"  :margin="margin" :radius="radius"></grid-loader> -->
         <section id="catagoribody">
 			<div class="container">
-			<div class="row">
-					
-					<!-- <div class="col-md-12">
-						 <div class="basic-search">
-							<div class="input-field">
-							<input id="search" type="text" placeholder="Type Keywords" />
-							<div class="icon-wrap">
-								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-								<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-								</svg>
+				<div class="row">
+						
+						<!-- <div class="col-md-12">
+							<div class="basic-search">
+								<div class="input-field">
+								<input id="search" type="text" placeholder="Type Keywords" />
+								<div class="icon-wrap">
+									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+									<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+									</svg>
+								</div>
+								</div>
 							</div>
+						</div> -->
+					</div>
+			</div>	
+            <div class="container">
+				<div class="row">
+					<div class="col-md-3">
+                        <label class=" label-title">Origin:</label>
+			
+						<gmap-autocomplete
+							@place_changed="setPlace1">
+						</gmap-autocomplete>
+					</div>
+					<div class="col-md-3">
+                        <label class=" label-title">Destination:</label>
+			
+						<gmap-autocomplete
+							@place_changed="setPlace2">
+						</gmap-autocomplete></div>
+					<div class="col-md-3">	
+                        <label class=" label-title">Product Size</label>				
+						<select  v-model="size" class="form-control custom-select" id="exampleFormControlSelect1">
+								<option value="5" >S: 100cm</option>
+								<option value="7.5">M: 150cm</option>
+								<option value="10">L: 180cm</option>
+								<option value="15">XL: 200cm</option>
+								<option value="20">XXL: 250cm</option>
+								<option value="25">XXXL: 300cm</option>
+						</select></div>
+					<div class="col-md-3">
+						<div class="row">
+							<div class="col-sm-8">
+								<h3>Estimated Price:</h3>
+								${{estimated_price}}
+							</div>
+							<div class="col-sm-4">
+								<button  @click="create" class="btn btn-success">Create</button>
 							</div>
 						</div>
-					</div> -->
+					</div>
 				</div>
-		</div>	
-            <div class="container">
 				<div class="row mamunurrashid_gig_wraper">
 					<!-- <div class="col-lg-3 order-last order-lg-first">
                         <div class="mr_aside">
@@ -108,7 +144,7 @@
 								<nav aria-label="Page navigation example">
 									<ul class="pagination">
 										<li class="page-item">
-											<button class="page-link" aria-label="Previous" v-show="left" :disabled="!left"   @click="getResults1(meta.current_page-1) , left-- , right++">
+											<button class="page-link" aria-label="Previous" v-show="left" :disabled="!left"   @click.prevent="getResults1(meta.current_page-1) , left-- , right++">
 												<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
 												<span class="sr-only">Previous</span>
 											</button>
@@ -120,7 +156,7 @@
 										<li v-if="meta.current_page+2 <= meta.total" class="page-item"><a class="page-link" @click="getResults2(meta.current_page+2)">{{meta.current_page+2}}</a></li>
 										
 										<li class="page-item">
-											<button class="page-link"  :disabled="right==1" aria-label="Next"  @click="getResults1(meta.current_page+1) , right-- , left++">
+											<button class="page-link"  :disabled="right==1" aria-label="Next"  @click.prevent="getResults1(meta.current_page+1) , right-- , left++">
 												<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
 												<span class="sr-only">Next</span>
 											</button>
@@ -139,6 +175,7 @@
         </section>
     </div>
 </template>
+<script src="vue-google-maps.js"></script>
 <script>
 // import Axios from 'axios'
 // Axios.defaults.baseURL = 'http://192.168.0.101:8000'
@@ -147,6 +184,17 @@ import DashboardLayout from "../layers/DashboardLayout";
 export default {
 	data(){
 		return{
+			size: null,
+			from: null,
+			to: null,
+			center1:{
+				lat: null,
+				lng: null
+			},
+			center2:{
+				lat:null,
+				lng:null
+			},
 			seleted: 0,
 			count: null,
 			query: null,
@@ -175,7 +223,64 @@ export default {
 	beforeCreate(){
 		this.loading = true
 	},
+	computed:{
+		estimated_price(){
+			if(this.center1.lng !== null && this.center2.lng !==null && this.size!==null ){
+				let dist =  this.getDistance()
+				let cost = parseFloat(dist*1.5 + parseFloat(this.size) )
+				return cost.toFixed(2)
+			}
+		}
+	},
 	methods:{
+		create(){
+			if((User.customer() || User.company()) && this.center1.lat !==null && this.center2.lat !== null && this.size !== null){
+				this.$router.push({
+					name: 'create',
+					params:{
+						center1: this.center1,
+						center2: this.center2,
+						size: this.size,
+						place1: this.from,
+						place2: this.to
+					}
+				})
+			}
+			if(!User.loggedIn())
+			this.$router.push('login')
+			
+		},
+        getDistance(){
+
+            var radlat1 = Math.PI * this.center1.lat/180;
+            var radlat2 = Math.PI * this.center2.lat/180;
+            var theta = this.center1.lng-this.center2.lng;
+            var radtheta = Math.PI * theta/180;
+            var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+            if (dist > 1) {
+                dist = 1;
+            }
+            dist = Math.acos(dist);
+            dist = dist * 180/Math.PI;
+            dist = dist * 60 * 1.1515;
+            dist = dist * 1.609344 
+            // console.log(dist)
+            return dist;
+        },
+		setPlace1(place){
+			this.from = place
+			this.center1 = {
+				lat: place.geometry.location.lat(),
+				lng: place.geometry.location.lng()
+			};
+		},
+		setPlace2(place){
+			this.to = place
+			this.center2 = {
+				lat: place.geometry.location.lat(),
+				lng: place.geometry.location.lng()
+			};
+		},
 		singleProject(d){
 			console.log(d)
 			const id = d

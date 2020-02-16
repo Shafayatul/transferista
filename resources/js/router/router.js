@@ -39,7 +39,7 @@ const routes = [
     {path:'/',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Home' }},
     // {path:'/position',component: google},
     {path:'/project-details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
-    {path:'/project/create',component: ProjectCreate, meta: { auth: false, title: 'Create' }},    
+    {path:'/project/create',component: ProjectCreate,name:'create', meta: { auth: false, title: 'Create' }},    
     {path:'/profile',component: profile},
     {path:'/register',component: register, name: 'register', meta: { auth: false, title: 'Login' }},
     {path:'/login',component: login, name: 'login', meta: { auth: false, title: 'Login' }},

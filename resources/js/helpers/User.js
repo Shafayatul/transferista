@@ -40,7 +40,7 @@ class User{
         localStorage.removeItem('user');
         localStorage.removeItem('expiration');
         localStorage.removeItem('role');
-        window.location = '/'
+        window.location = '/login'
     }
     role(){
         return localStorage.getItem('role');

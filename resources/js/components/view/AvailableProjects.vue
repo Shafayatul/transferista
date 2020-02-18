@@ -24,16 +24,16 @@
 				<div class="row">
 					<div class="col-md-3">
                         <label class=" label-title">Origin:</label>
-			            <div class="form-control">
-							<gmap-autocomplete
+			            <div class="form-control ">
+							<gmap-autocomplete class="no-border"
 								@place_changed="setPlace1">
 							</gmap-autocomplete>
 						</div>
 					</div>
 					<div class="col-md-3">
                         <label class=" label-title">Destination:</label>
-			            <div class="form-control">
-						<gmap-autocomplete
+			            <div class="form-control ">
+						<gmap-autocomplete class="no-border"
 							@place_changed="setPlace2">
 						</gmap-autocomplete>
 					</div>
@@ -58,9 +58,9 @@
 						</div>
 
 					</div>
-					<div class="col-md-12 text-center mt-5">  <button  @click="create" class="btn btn-light text-center btn-lg">Create</button></div>
+					<div class="col-md-12 text-center mt-5">  <button  @click="create" class="btn btn-light text-center btn-lg mb-4">Create</button></div>
 				 
-				<div class="row mamunurrashid_gig_wraper">
+<!-- 				<div class="row mamunurrashid_gig_wraper">
 					
 					<div class="col-lg-12 order-first order-lg-last">
 						<div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -98,7 +98,7 @@
 						
 					</div>
             	
-				</div>
+				</div> -->
             </div>
 															
         </section>
@@ -297,7 +297,7 @@ export default {
 	},
 	mounted() {
 		// Fetch initial results
-		this.getResults1();
+		// this.getResults1();
 	},
 	
     created(){
@@ -311,6 +311,13 @@ export default {
 }
 </script>
 <style scoped>
+.no-border{
+	border: none !important;
+	background: none !important;
+	padding: 0 !important;
+	padding-right: 5px !important;
+	margin-top: -5px !important;
+}
 .page-item.active .page-link {
     z-index: 3 !important;
     color: #fff !important;

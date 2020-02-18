@@ -575,8 +575,7 @@ input {
   display: none;
 }
 
-.input--style-5 {
-  background: #e5e5e5;
+.input--style-5 {  
   line-height: 50px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -739,7 +738,7 @@ input {
 }
 
 .card-5 {
-  background: #fff;
+ background: #dfe1d573;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;

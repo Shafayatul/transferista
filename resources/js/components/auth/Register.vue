@@ -55,14 +55,18 @@
                        
                     </div>
                 </div>
-                <div>
-                    <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
-                </div>
-                <p class="pt-1">All ready signed-up ? 
+               <div class="form-row">
+                 <div class="name"></div>
+                 <div class="value">
+                 <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
+                  <p class="pt-1">All ready signed-up ? 
                     <router-link to="/login">
                         <a>Log-in</a>
                     </router-link>
                 </p>
+              </div>
+                </div>
+               
             </form>
         </div>
     </div>             
@@ -102,6 +106,14 @@ export default {
 }
 </script>
 <style scoped>
+.page-wrapper{
+  background: url('/../img/bg.jpg') no-repeat center center fixed;
+ -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+}
 .card-5 {
    max-width: 70%;
 }

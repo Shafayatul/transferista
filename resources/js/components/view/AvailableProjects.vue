@@ -323,19 +323,12 @@ export default {
 		},
 		// Our method to GET results from a Laravel endpoint
 		getResults1(page = 1) {
-			// v-show="meta.current_page-2 >= 1"
-			// v-show="meta.current_page+2 <= meta.total"
-			// console.log(this.left+' '+this.right)
 			
 			if(this.right+1>this.meta.total){
 				this.right = this.meta.total
 			}
 
-			
-			// axios.get('example/results?page=' + page)
-			// 	.then(response => {
-				// 		this.laravelData = response.data;
-			// 	});
+		
 			axios.get('/api/project-list/available?page=' + page)
 			.then(res =>{ 
 					this.projects = res.data.data

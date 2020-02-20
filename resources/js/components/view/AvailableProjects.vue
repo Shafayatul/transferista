@@ -2,42 +2,44 @@
 	
     <div class="body-class catagoris">	
 		
-        <!-- <grid-loader :loading="loading" :color="color"  :margin="margin" :radius="radius"></grid-loader> -->
-        <section id="catagoribody">
+        <section id="catagoribody" class="catagoribody">
 			<div class="container">
-				<div class="row">
-						
-						<!-- <div class="col-md-12">
-							<div class="basic-search">
-								<div class="input-field">
-								<input id="search" type="text" placeholder="Type Keywords" />
-								<div class="icon-wrap">
-									<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-									<path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-									</svg>
-								</div>
-								</div>
-							</div>
-						</div> -->
-					</div>
-			</div>	
-            <div class="container">
+			<GmapMap
+			  :center="{lat:10, lng:10}"
+			  :zoom="7"
+			  map-type-id="terrain"
+			  style="width: 100%; height: 50vh;"
+			>
+			  <GmapMarker
+			    :key="index"
+			    v-for="(m, index) in markers"
+			    :position="m.position"
+			    :clickable="true"
+			    :draggable="true"
+			    @click="center=m.position"
+			  />
+			</GmapMap>
+			</div>
+            <div class="container mt-5 search-section">
 				<div class="row">
 					<div class="col-md-3">
                         <label class=" label-title">Origin:</label>
-			
-						<gmap-autocomplete
-							@place_changed="setPlace1">
-						</gmap-autocomplete>
+			            <div class="form-control ">
+							<gmap-autocomplete class="no-border"
+								@place_changed="setPlace1">
+							</gmap-autocomplete>
+						</div>
 					</div>
 					<div class="col-md-3">
                         <label class=" label-title">Destination:</label>
-			
-						<gmap-autocomplete
+			            <div class="form-control ">
+						<gmap-autocomplete class="no-border"
 							@place_changed="setPlace2">
-						</gmap-autocomplete></div>
+						</gmap-autocomplete>
+					</div>
+					</div>
 					<div class="col-md-3">	
-                        <label class=" label-title">Product Size</label>				
+                        <label class=" label-title">Product Size:</label>				
 						<select  v-model="size" class="form-control custom-select" id="exampleFormControlSelect1">
 								<option value="5" >S: 100cm</option>
 								<option value="7.5">M: 150cm</option>
@@ -46,47 +48,20 @@
 								<option value="20">XXL: 250cm</option>
 								<option value="25">XXXL: 300cm</option>
 						</select></div>
-					<div class="col-md-3">
-						<div class="row">
-							<div class="col-sm-8">
-								<h3>Estimated Price:</h3>
-								${{estimated_price}}
-							</div>
-							<div class="col-sm-4">
-								<button  @click="create" class="btn btn-success">Create</button>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row mamunurrashid_gig_wraper">
-					<!-- <div class="col-lg-3 order-last order-lg-first">
-                        <div class="mr_aside">
-                            <h3>Filters</h3>
-							<div class="filter-by m-4">
-								<p class="p-2">Short By :</p>
-								<form action="#">
-									<select class="mr_select w-100">
-										<option value="1">Best Selling</option>
-										<option value="2">New</option>
-										<option value="3">Popular</option>
-										<option value="4">Tranding</option>
-									</select>
-								</form>
-							</div>
-							<div class="filter-by m-4">
-								<p class="p-2">Duration :</p>
-								<form action="#">
-									<select  class="mr_select w-100" >
-										<option value="latest">Latest</option>
-										<option value="2">New</option>
-										<option value="3">Popular</option>
-										<option value="4">Tranding</option>
-									</select>
-								</form>
+					   <div class="col-md-3">
+					        <label class="label-title">Estimated Price:</label>						
+							<div class="form-control">
+								<h3>${{estimated_price}}</h3>
+								
 							</div>
 						
-                    	</div>
-                    </div> -->
+						</div>
+
+					</div>
+					<div class="col-md-12 text-center mt-5">  <button  @click="create" class="btn btn-light text-center btn-lg mb-4">Create</button></div>
+				 
+<!-- 				<div class="row mamunurrashid_gig_wraper">
+					
 					<div class="col-lg-12 order-first order-lg-last">
 						<div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
 								You should check in on some of those fields below.
@@ -113,63 +88,17 @@
 									<br>
 									<button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button>
 									<br>
-									<!-- <div class=" m-2 d-flex">
-										<p class="col-md-4">$10</p>
-										<p class="col-md-4">10 bid</p>
-										<p class="col-md-4"><button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button></p>
-									</div> -->
-									<!-- <div class=" d-flex  ">											
-										<p class="sr col-md-4">
-											<span class="stars">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
-											</span><br>
-											<span class="review">
-												23 Review
-											</span>
-										</p>
-										<p class="col-md-4"><i class="fas fa-google-map"></i>Location</p>
-										<p class="col-md-4">Review</p>
-									</div> -->
+									
 								</div>
 							<div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<bid  :bid="bid" :data="data"></bid>
 							</div>
 						</div>
-						  <div class="paginationsarea">
-							<div class=" d-flex justify-content-end">
-								<nav aria-label="Page navigation example">
-									<ul class="pagination">
-										<li class="page-item">
-											<button class="page-link" aria-label="Previous" v-show="left" :disabled="!left"   @click.prevent="getResults1(meta.current_page-1) , left-- , right++">
-												<span aria-hidden="true"><i class="fa fa-angle-left"></i></span>
-												<span class="sr-only">Previous</span>
-											</button>
-										</li>
-										<li v-if="meta.current_page-2 >= 1" class="page-item"><a class="page-link" @click="getResults2(meta.current_page-2)">{{meta.current_page-2}}</a></li>
-										<li v-if="meta.current_page-1 >= 1" class="page-item"><a class="page-link" @click="getResults2(meta.current_page-1)">{{meta.current_page-1}}</a></li>
-										<li class="page-item active"><a class="page-link">{{meta.current_page}}</a></li>
-										<li v-if="meta.current_page+1 <= meta.total" class="page-item"><a class="page-link" @click="getResults2(meta.current_page+1)">{{meta.current_page+1}}</a></li>
-										<li v-if="meta.current_page+2 <= meta.total" class="page-item"><a class="page-link" @click="getResults2(meta.current_page+2)">{{meta.current_page+2}}</a></li>
-										
-										<li class="page-item">
-											<button class="page-link"  :disabled="right==1" aria-label="Next"  @click.prevent="getResults1(meta.current_page+1) , right-- , left++">
-												<span aria-hidden="true"><i class="fa fa-angle-right"></i></span>
-												<span class="sr-only">Next</span>
-											</button>
-										</li>
-									</ul>
-								</nav>
-							</div>
-						</div>
-
+						  
 						
 					</div>
             	
-				</div>
+				</div> -->
             </div>
 															
         </section>
@@ -361,7 +290,7 @@ export default {
 	},
 	mounted() {
 		// Fetch initial results
-		this.getResults1();
+		// this.getResults1();
 	},
 	
     created(){
@@ -375,10 +304,38 @@ export default {
 }
 </script>
 <style scoped>
+.no-border{
+	border: none !important;
+	background: none !important;
+	padding: 0 !important;
+	padding-right: 5px !important;
+	margin-top: -5px !important;
+}
 .page-item.active .page-link {
     z-index: 3 !important;
     color: #fff !important;
     background-color: #007bff !important;
     border-color: #007bff !important;
+}
+.catagoribody{
+  background: url('/../img/bg.jpg') no-repeat center center fixed !important;
+ -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  height: auto;
+  padding-bottom: 10%;
+  padding-top:10%; 
+}
+.label-title{
+	color: #fff;
+	font-size: 22px;
+}
+.search-section{
+	background: #dfe1d573;
+box-shadow: 10px 5px 10px 10px
+rgba(0, 0, 0, 0.19);
+padding-top: 2%;
 }
 </style>

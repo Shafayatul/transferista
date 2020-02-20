@@ -91,9 +91,13 @@ export default {
 }
 </script>
 <style scoped>
+#profile-body{
+  background: red !important;
+}
 .card-5{
     max-width: 70%;
-    margin: 0 auto; 
+    margin: 0 auto;
+    display:  
 }
 .select2-selection__rendered {
     line-height: 50px;

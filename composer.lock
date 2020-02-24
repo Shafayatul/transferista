@@ -570,7 +570,7 @@
             "time": "2019-03-31T00:38:28+00:00"
         },
         {
-            "name": "egulias/email-validator"
+            "name": "egulias/email-validator",
             "version": "2.1.17",
             "source": {
                 "type": "git",

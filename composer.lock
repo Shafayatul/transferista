@@ -570,6 +570,7 @@
             "time": "2019-03-31T00:38:28+00:00"
         },
         {
+<<<<<<< HEAD
             "name": "egulias/email-validator",
 <<<<<<< HEAD
             "version": "2.1.16",
@@ -584,6 +585,10 @@
                 "reference": "5065fafc8c29d229ff207f2a89b02175f479a909",
 =======
             "version": "2.1.17",
+=======
+            "name": "egulias/email-validator"
+            "version": "2.1.17"
+>>>>>>> f085ce5a69b057fdbfea881eb04b56d2b7735312
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",

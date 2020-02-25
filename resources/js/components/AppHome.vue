@@ -1,6 +1,8 @@
 <template>
     <component :is="layout" >
+        <v-container>
         <router-view :layout.sync="layout"></router-view>
+        </v-container>
     </component>
 </template>
 <script>
@@ -25,7 +27,7 @@ export default {
     beforeCreate(){
         this.loading=true
     },
-    created() {         
+    created() {
     },
     mounted() {
 

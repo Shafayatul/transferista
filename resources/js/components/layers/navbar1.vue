@@ -93,85 +93,14 @@
                                     <div class="gat-quote pull-right">
                                         <a class="btn" href="#">gat a quote</a>
                                     </div>
-                                </div>    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </header>
-        <section id="banner">
-            <div class="inner-banner home5-inner-banner">
-                <div id="owl-demo" class="owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="image-holder">
-                            <img src="front/images/home5-banner-image.jpg" alt="" />
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="banner-text">
-                            <div class="chid-pernt">
-                                <div class="child">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h1>sky<span>ways</span></h1>
-                                                <h2>largest transportation company</h2>
-                                                <a class="btn free-get" href="#">Get a free quote</a>
-                                                <a class="btn" href="#">Raed More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="image-holder">
-                            <img src="front/images/home5-banner-image.jpg" alt="" />
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="banner-text">
-                            <div class="chid-pernt">
-                                <div class="child">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h1>sky<span>ways</span></h1>
-                                                <h2>largest transportation company</h2>
-                                                <a class="btn free-get" href="#">Get a free quote</a>
-                                                <a class="btn" href="#">Raed More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="image-holder">
-                            <img src="front/images/home5-banner-image.jpg }}" alt="" />
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="banner-text">
-                            <div class="chid-pernt">
-                                <div class="child">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h1>sky<span>ways</span></h1>
-                                                <h2>largest transportation company</h2>
-                                                <a class="btn free-get" href="#">Get a free quote</a>
-                                                <a class="btn" href="#">Raed More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
 		<slot></slot>
 
 	    <footer id="footer">
@@ -185,8 +114,8 @@
 	                                <a href="#"> <img src="front/images/footer-log.png" alt="" /> </a>
 	                            </div>
 	                            <p>Lorem ipsum dolor sit amet sectetuer esl adipiscing
-	                                elit sed diam nonummy nibhi euismod tincidunt ut 
-	                                laoreet dolore amet magna Vero eos et accusamus 
+	                                elit sed diam nonummy nibhi euismod tincidunt ut
+	                                laoreet dolore amet magna Vero eos et accusamus
 	                                et iusto odio dignissimos ducimus.</p>
 	                        </div>
 	                    </div>
@@ -216,13 +145,13 @@
 
 	                        </div>
 	                    </div>
-	                    <div class="col-md-4 col-sm-4 col-xs-12"> 
+	                    <div class="col-md-4 col-sm-4 col-xs-12">
 	                        <div class="inner-footer">
 	                            <h3>Newsletter Subscribe</h3>
 	                            <p>
-	                                If you want receive our all weekly updates about new 
-	                                offers and discount, signup below If you want receive offers 
-	                                and discount our all weekly updates about new offers and 
+	                                If you want receive our all weekly updates about new
+	                                offers and discount, signup below If you want receive offers
+	                                and discount our all weekly updates about new offers and
 	                                discount signup below.
 	                            </p>
 	                            <form>

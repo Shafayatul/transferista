@@ -1,139 +1,20 @@
 <template>
-	
-    <div class="body-class catagoris">	
-		
-        <!-- <section id="catagoribody" class="catagoribody">
-			<div class="container">
-			<GmapMap
-			  :center="{lat:10, lng:10}"
-			  :zoom="7"
-			  map-type-id="terrain"
-			  style="width: 100%; height: 50vh;"
-			>
-			  <GmapMarker
-			    :key="index"
-			    v-for="(m, index) in markers"
-			    :position="m.position"
-			    :clickable="true"
-			    :draggable="true"
-			    @click="center=m.position"
-			  />
-			</GmapMap>
-			</div>
-            <div class="container mt-5 search-section">
-				<div class="row">
-					<div class="col-md-3">
-                        <label class=" label-title">Origin:</label>
-			            <div class="form-control ">
-							<gmap-autocomplete class="no-border"
-								@place_changed="setPlace1">
-							</gmap-autocomplete>
-						</div>
-					</div>
-					<div class="col-md-3">
-                        <label class=" label-title">Destination:</label>
-			            <div class="form-control ">
-						<gmap-autocomplete class="no-border"
-							@place_changed="setPlace2">
-						</gmap-autocomplete>
-					</div>
-					</div>
-					<div class="col-md-3">	
-                        <label class=" label-title">Product Size:</label>				
-						<select  v-model="size" class="form-control custom-select" id="exampleFormControlSelect1">
-								<option value="5" >S: 100cm</option>
-								<option value="7.5">M: 150cm</option>
-								<option value="10">L: 180cm</option>
-								<option value="15">XL: 200cm</option>
-								<option value="20">XXL: 250cm</option>
-								<option value="25">XXXL: 300cm</option>
-						</select></div>
-					   <div class="col-md-3">
-					        <label class="label-title">Estimated Price:</label>						
-							<div class="form-control">
-								<h3>${{estimated_price}}</h3>
-								
-							</div>
-						
-						</div>
 
-					</div>
-					<div class="col-md-12 text-center mt-5">  <button  @click="create" class="btn btn-light text-center btn-lg mb-4">Create</button></div>				 
+    <div class="body-class catagoris">
 
-            </div>
-															
-        </section> -->
-        <section id="banner">
-            <div class="inner-banner home5-inner-banner">
-                <div id="owl-demo" class="owl-carousel owl-theme">
-                    <div class="item">
-                        <div class="image-holder">
-                            <img src="front/images/home5-banner-image.jpg" alt="" />
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="banner-text">
-                            <div class="chid-pernt">
-                                <div class="child">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h1>sky<span>ways</span></h1>
-                                                <h2>largest transportation company</h2>
-                                                <a class="btn free-get" href="#">Get a free quote</a>
-                                                <a class="btn" href="#">Raed More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="image-holder">
-                            <img src="front/images/home5-banner-image.jpg" alt="" />
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="banner-text">
-                            <div class="chid-pernt">
-                                <div class="child">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h1>sky<span>ways</span></h1>
-                                                <h2>largest transportation company</h2>
-                                                <a class="btn free-get" href="#">Get a free quote</a>
-                                                <a class="btn" href="#">Raed More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="image-holder">
-                            <img src="front/images/home5-banner-image.jpg" alt="" />
-                            <div class="overlay"></div>
-                        </div>
-                        <div class="banner-text">
-                            <div class="chid-pernt">
-                                <div class="child">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h1>sky<span>ways</span></h1>
-                                                <h2>largest transportation company</h2>
-                                                <a class="btn free-get" href="#">Get a free quote</a>
-                                                <a class="btn" href="#">Raed More</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+        <section id="banner mt-5">
+
+                <v-carousel>
+                    <v-carousel-item
+                    v-for="(item,i) in items"
+                    :key="i"
+                    :src="item.src"
+                    reverse-transition="fade-transition"
+                    transition="fade-transition"
+                    ></v-carousel-item>
+                </v-carousel>
+
         </section>
 
         <main class="main-containt">
@@ -149,7 +30,7 @@
                             </div>
                             <div class="text-box">
                                 <h3><a href="#">Air Freight</a></h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur 
+                                <p>Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. aenean nec eu augue posuere
                                     fermentem ut non</p>
                                 <a class="btn" href="#">Read more</a>
@@ -163,7 +44,7 @@
                             </div>
                             <div class="text-box">
                                 <h3><a href="#">Air Freight</a></h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur 
+                                <p>Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. aenean nec eu augue posuere
                                     fermentem ut non</p>
                                 <a class="btn" href="#">Read more</a>
@@ -177,14 +58,14 @@
                             </div>
                             <div class="text-box">
                                 <h3><a href="#">Air Freight</a></h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur 
+                                <p>Lorem ipsum dolor sit amet, consectetur
                                     adipiscing elit. aenean nec eu augue posuere
                                     fermentem ut non</p>
                                 <a class="btn" href="#">Read more</a>
                             </div>
                         </div>
                     </div>
-                </div>    
+                </div>
             </div>
         </section>
         <section class="requst-men">
@@ -210,7 +91,7 @@
 								  />
 								</GmapMap>
 							</div>
-                        </div>    
+                        </div>
                     </div>
                 </div>
             </div>
@@ -271,7 +152,7 @@
                                             <!-- <input type="text" placeholder="E-mail or number" /> -->
                                             <div class="form-control">
 												<h3>${{estimated_price}}</h3>
-												
+
 											</div>
                                         </div>
                                     </div>
@@ -312,7 +193,7 @@
                             <div class="blue-grid clearfix">
                                 <div class="image-holder">
                                     <div class="chid-pernt">
-                                        <div class="child">    
+                                        <div class="child">
                                             <i class="flaticon-air-transport"></i>
                                         </div>
                                     </div>
@@ -327,7 +208,7 @@
                             <div class="blue-grid green-grid clearfix">
                                 <div class="image-holder">
                                     <div class="chid-pernt">
-                                        <div class="child"> 
+                                        <div class="child">
                                             <i class="flaticon-delivery"></i>
                                         </div>
                                     </div>
@@ -342,7 +223,7 @@
                             <div class="blue-grid red-grid clearfix">
                                 <div class="image-holder">
                                     <div class="chid-pernt">
-                                        <div class="child"> 
+                                        <div class="child">
                                             <i class="flaticon-airplane-around-earth"></i>
                                         </div>
                                     </div>
@@ -357,7 +238,7 @@
                             <div class="blue-grid orenge-grid clearfix">
                                 <div class="image-holder">
                                     <div class="chid-pernt">
-                                        <div class="child"> 
+                                        <div class="child">
                                              <i class="flaticon-transport"></i>
                                         </div>
                                     </div>
@@ -372,7 +253,7 @@
                             <div class="blue-grid yellow-grid clearfix">
                                 <div class="image-holder">
                                     <div class="chid-pernt">
-                                        <div class="child"> 
+                                        <div class="child">
                                              <i class="flaticon-clock"></i>
                                         </div>
                                     </div>
@@ -387,7 +268,7 @@
                             <div class="blue-grid jamni-grid clearfix">
                                 <div class="image-holder">
                                     <div class="chid-pernt">
-                                        <div class="child"> 
+                                        <div class="child">
                                            <i class="flaticon-warehouse-with-boxes"></i>
                                         </div>
                                     </div>
@@ -468,13 +349,13 @@
                                 <span><img src="front/images/hedding-ven2-image.png" alt="" /></span>
                             </div>
                             <p>We have wide network of offices in all major locations to help you.</p>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="testimonail-inner">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="owl-testimonail" class="owl-carousel owl-theme">
+                            <div id="demo" class="carousel slide" data-ride="carousel">
                                 <div class="item">
                                     <div class="image-holder">
                                         <img src="front/images/clint-say-image-home2.jpg" alt="" />
@@ -562,13 +443,13 @@
                                 <span><img src="front/images/hedding-ven2-image.png" alt="" /></span>
                             </div>
                             <p>We have wide network of offices in all major locations to help you.</p>
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <div class="inner-clints">
                     <div class="row">
                         <div class="col-md-12">
-                            <div id="our-clints-owl">
+                            <div id="demo" class="carousel slide" data-ride="carousel">
                                 <div class="item">
                                     <div class="clints-sponser">
                                         <p>PARTNER</p>
@@ -678,9 +559,24 @@ export default {
             width: '4px',
             margin: '2px',
             radius: '2px',
-			loading: true,
+            loading: true,
+
 			left:0,
-			right:null
+            right:null,
+             items: [
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+          },
+        ],
 		}
 	},
     components:{
@@ -715,7 +611,7 @@ export default {
 			}
 			if(!User.loggedIn())
 			this.$router.push('login')
-			
+
 		},
         getDistance(){
 
@@ -730,7 +626,7 @@ export default {
             dist = Math.acos(dist);
             dist = dist * 180/Math.PI;
             dist = dist * 60 * 1.1515;
-            dist = dist * 1.609344 
+            dist = dist * 1.609344
             // console.log(dist)
             return dist;
         },
@@ -753,7 +649,7 @@ export default {
 			const id = d
 			this.$router.push({name: 'singleProject',params:{
 				id: id
-				} 
+				}
 			})
 		},
 		modal(index){
@@ -793,18 +689,18 @@ export default {
 			// v-show="meta.current_page-2 >= 1"
 			// v-show="meta.current_page+2 <= meta.total"
 			// console.log(this.left+' '+this.right)
-			
+
 			if(this.right+1>this.meta.total){
 				this.right = this.meta.total
 			}
 
-			
+
 			// axios.get('example/results?page=' + page)
 			// 	.then(response => {
 				// 		this.laravelData = response.data;
 			// 	});
 			axios.get('/api/project-list/available?page=' + page)
-			.then(res =>{ 
+			.then(res =>{
 					this.projects = res.data.data
 					this.count = this.projects.length;
 					this.meta = res.data.meta;
@@ -825,7 +721,7 @@ export default {
 				// 		this.laravelData = response.data;
 			// 	});
 			axios.get('/api/project-list/available?page=' + page)
-			.then(res =>{ 
+			.then(res =>{
 					this.projects = res.data.data
 					this.count = this.projects.length;
 					this.meta = res.data.meta;
@@ -833,15 +729,12 @@ export default {
 			.catch(error=>console.log(error))
 		}
 	},
-	mounted() {
-		// Fetch initial results
-		// this.getResults1();
-	},
-	
+
+
     created(){
 		this.loading = false
 		if(User.customer() || User.company() || User.employee() || !User.loggedIn()){
-			
+
 			this.flag = false
 		}
 		this.$emit(`update:layout`,navbar)
@@ -871,7 +764,7 @@ export default {
   width: 100%;
   height: auto;
   padding-bottom: 10%;
-  padding-top:10%; 
+  padding-top:10%;
 }
 .label-title{
 	color: #fff;
@@ -883,4 +776,8 @@ export default {
 	rgba(0, 0, 0, 0.19);
 	padding-top: 2%;
 }
+.v-window__next{
+    right: 0%;
+}
+
 </style>

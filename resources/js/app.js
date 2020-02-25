@@ -48,6 +48,7 @@ Vue.component('star-rating', StarRating);
 window.EventBus = new Vue();
 
 Vue.component('app-home', require('./components/AppHome.vue').default);
+Vue.component('nav-bar', require('./components/layers/navbar1.vue').default);
 
 Vue.component('grid-loader', require('vue-spinner/src/GridLoader.vue').default);
 

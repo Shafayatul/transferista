@@ -3,8 +3,8 @@
         <router-view :layout.sync="layout"></router-view>
     </component>
 </template>
-
 <script>
+
 // import show from './view/Show'
 import AvailableProjects from './view/AvailableProjects'
 export default {

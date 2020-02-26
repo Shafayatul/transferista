@@ -5,13 +5,13 @@
  is the file you need to edit to change the look of the
  theme.
  However we used Less script to make things easy to maintain, this is the compressed ourput, we recommend to edit the less files and then recombile the files and add the result here, if you don't like to use less you can edit this file here.
- 
+
  This files contents are outlined below.
  02.	Global Styling
  02.	Hadding
  03.	Header
  04.	Header Mid
- 05.	Header Last Navigation 
+ 05.	Header Last Navigation
  06.	Banner
  07.	Feature Item
  08.	Requst Men
@@ -138,7 +138,7 @@ p {
 a {
     font-family: 'Lato', sans-serif;
     font-size: 14px;
-    text-decoration: none; 
+    text-decoration: none;
     transition: all 0.5s ease-in-out;
 }
 a:hover, a:focus, a:active {
@@ -314,9 +314,7 @@ figure {
 /************************************
      Header Mid containt start
 *************************************/
-.mid-header{
-    padding: 23px 0; 
-}
+
 .logo {
     margin-top: 2px;
 }
@@ -379,7 +377,7 @@ figure {
     Header Last Navigation start
 *************************************/
 .last-header {
-    top: 136px;
+    top: 145px;
     left: 0;
     position: absolute;
     width: 100%;
@@ -457,7 +455,7 @@ figure {
         Banner start
 *************************************/
 #banner{
-    position: relative;
+    position: relative !important;
 }
 .inner-banner .image-holder{
     position: relative;
@@ -765,7 +763,7 @@ figure {
     position: relative;
 }
 .testimonail-inner .image-holder img{
-    border-radius: 50%; 
+    border-radius: 50%;
     height: 126px;
     width: 126px;
 }
@@ -957,15 +955,16 @@ figure {
     position: relative;
     margin-top: 25px;
 }
-.inner-footer input[type="submit"]{
+.inner-footer input[type="submit"] {
     border: medium none;
     border-radius: 50%;
-    bottom: 3px;
-    color: #ffffff;
+    bottom: 18px;
+    color:
+    #ffffff;
     font-size: 16px;
     height: 48px;
     position: absolute;
-    right: 19px;
+    right: 15px;
     width: 48px;
     transition: all 0.5s ease-in-out;
 }
@@ -1252,7 +1251,7 @@ figure {
     width: 970px;
     margin: 0  auto;
     padding: 35px 0 43px;
-    border: 10px solid #7ea074; 
+    border: 10px solid #7ea074;
     border-radius: 20px;
 }
 /************************************
@@ -1463,7 +1462,7 @@ figure {
     border: 1px solid transparent;
     transition: all 0.5s ease-in-out;
 }
-.amazing-feature .feature-inner:hover, 
+.amazing-feature .feature-inner:hover,
 .amazing-feature .green-feture:hover,
 .amazing-feature .yellow-feture:hover{
     border: 1px solid;
@@ -1718,4 +1717,83 @@ figure {
 }
 .grey_bg{
     background-color: #f9f9f9;
+}
+.v-btn__content  {
+
+}
+.v-application--is-ltr .v-window__prev {
+    left: 106px !important;
+    background: #869791;
+    -webkit-border-radius: 63px 63px 63px 63px/ 108px 108px 72px 72px;
+    /* border-radius: 50% 50% 50% 50%/60% 60% 40% 40%; */
+    width: 71px;
+    height: 81px;
+    opacity: 1;
+    padding: 23px;
+    margin: 0;
+    font-size: 24px;
+    transform: rotate(90deg);
+    transition: all 0.5s ease-in-out
+
+}
+.v-application--is-ltr .v-window__next {
+    position: absolute;
+    right: 107px !important;
+    background: #869791;
+    -webkit-border-radius: 63px 63px 63px 63px/ 108px 108px 72px 72px;
+    /* border-radius: 50% 50% 50% 50%/60% 60% 40% 40%; */
+    width: 71px;
+    height: 81px;
+    opacity: 1;
+    padding: 23px;
+    margin: 0;
+    font-size: 24px;
+    transform: rotate(90deg);
+    transition: all 0.5s ease-in-out
+}
+.v-btn--icon.v-size--default .v-icon, .v-btn--fab.v-size--default .v-icon {
+    height: 24px;
+    font-size: 14px !important;
+    width: 24px;
+}
+.v-btn--round .v-btn__content .v-icon {
+    color: currentColor;
+    transform: rotate(-90deg);
+
+}
+.banner-text h2 {
+    color: #fff;
+    font-size: 48px;
+    letter-spacing: 8px;
+    text-transform: uppercase;
+}
+.banner-text {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    left: 0;
+    height: 100%;
+    text-align: center;
+}
+.banner-text h1 {
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 23px;
+    margin-bottom: 19px;
+}
+.banner-text h2 span {
+    color: #fdb714;
+}
+.banner-text .btn {
+    background-color: #fff;
+    font-size: 16px;
+    margin: 0 5px;
+    color: #98ce44;
+}
+.banner-text h1 span, .home3-request-quote .yellow-sponser h3, .home4-inner-banner .banner-text h2 span {
+    color: #fdb714;
+}
+.banner-text .btn:hover, .inner-banner .owl-theme .owl-controls .owl-buttons div:hover, .quote-form .form-group .btn, .green-grid .image-holder, .green-grid:hover .image-holder:after, .green-counter-grid i, .start-now .btn, .inner-footer input[type="submit"]:hover, .btn:hover, .feature-inner .text-box .btn:hover, .home3-counter .green-counter-grid, .amazing-feature .green-feture .image-holder, .contact-form .form-group .btn {
+    background-color: #98ce44;
 }

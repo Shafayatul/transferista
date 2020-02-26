@@ -1,9 +1,11 @@
 <template>
+  <v-app>
     <component :is="layout" >
-        <v-container>
+
         <router-view :layout.sync="layout"></router-view>
-        </v-container>
+
     </component>
+  </v-app>
 </template>
 <script>
 

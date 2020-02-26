@@ -7,7 +7,7 @@
                         <div class="col-md-6 col-sm-8 col-xs-12">
                             <div class="top-contect">
                                 <ul>
-                                    <li> <i class="fa fa-envelope-o"></i> <a href="mailto:Support@designsvilla.com">Support@designsvilla.com</a></li>
+                                    <li><i class="fas fa-envelope"></i> <a href="mailto:Support@designsvilla.com">Support@designsvilla.com</a></li>
                                     <li> <i class="fa fa-phone"></i> <a href="tel://+921234567890">+92 123 456 7890</a></li>
                                 </ul>
                             </div>
@@ -15,18 +15,18 @@
                         <div class="col-md-6 col-sm-4 col-xs-12">
                             <div class="top-socail">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                    <li><a href="#"><i class="fab fa-facebook"></i></a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="mid-header">
-                <div class="container">
+            <div class="mid-header py-0">
+                <div class="container py-0">
                     <div class="row">
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="logo">
@@ -39,14 +39,14 @@
                             <div class="open-time">
                                 <ul>
                                     <li>
-                                        <strong><i class="fa fa-envelope-o"></i></strong>
+                                        <strong><i class="fas fa-envelope"></i></strong>
                                         <div class="text-box">
                                             <p>email contact</p>
                                             <a href="mailto:Hello@company.com">Hello@company.com</a>
                                         </div>
                                     </li>
                                     <li>
-                                        <strong><i class="fa fa-clock-o"></i></strong>
+                                        <strong><i class="fas fa-clock-o"></i></strong>
                                         <div class="text-box">
                                             <p>We Are Open</p>
                                             <span>9.00 AM - 6.00 Pm</span>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="last-header">
-                <div class="container">
+                <div class="container ">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <div class="navigation">
@@ -156,7 +156,7 @@
 	                            </p>
 	                            <form>
 	                                <input type="text" placeholder="Email Address"/>
-	                                <input type="submit" class="fa" value="&#xf1d9;">
+	                                <input type="submit" class="fas" value="">
 	                            </form>
 	                        </div>
 	                    </div>

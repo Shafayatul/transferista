@@ -204,7 +204,7 @@
   methods: {
     handleScroll() {
       if (this.lastPosition < window.scrollY && this.limitPosition < window.scrollY) {
-        this.scrolled = true;
+        this.scrolled = false;
         // move up!
       } 
       
@@ -214,7 +214,7 @@
       }
       
       this.lastPosition = window.scrollY;
-      // this.scrolled = window.scrollY > 250;
+      this.scrolled = window.scrollY > 250;
     }
   },
   created() {

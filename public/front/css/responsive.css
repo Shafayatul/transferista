@@ -285,8 +285,12 @@
         text-align: center;
     }
     .last-header {
-        top: 223px;
-    }
+    top: -24px;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 2000;
+   }
     .navigation {
         padding: 0;
     }
@@ -400,6 +404,7 @@
     }
     .inner-footer input[type="submit"] {
         right: 4px;
+        bottom: 5px;
     }
     .recent-post .text-box {
         margin-left: 20px;
@@ -597,7 +602,7 @@
         padding-bottom: 0;
     }
     .last-header {
-        top: 307px;
+        
     }
     .inner-banner .banner-text h1 {
         font-size: 40px;

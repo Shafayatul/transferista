@@ -319,7 +319,7 @@
                                 <h3><a href="#">INTERNATIONAL FREIGHT</a></h3>
                                 <span>12 june 2016, by <strong><a href="#">john</a></strong></span>
                                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. </p>
-                                <a href="#"> Read More <i class="fa fa-long-arrow-right"></i> </a>
+                                <a href="#"> Read More <i class="fas fa-long-arrow-right"></i> </a>
                             </div>
                         </div>
                     </div>

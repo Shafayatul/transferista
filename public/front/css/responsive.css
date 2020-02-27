@@ -40,7 +40,7 @@
     .navigation .nav > li > a {
         padding: 8px 15px;
     }
-    .inner-banner .owl-buttons {
+     .owl-buttons {
         top: 45%;
     }
     .owl-prev {
@@ -49,11 +49,11 @@
     .owl-next {
         right: 2%;
     }
-    .inner-banner .banner-text h2 {
+     .banner-text h2 {
         font-size: 40px;
         letter-spacing: 5px;
     }
-    .inner-banner .banner-text h1 {
+     .banner-text h1 {
         font-size: 80px;
     }
     .request-quote {
@@ -126,6 +126,12 @@
     }
 }
 @media only screen and (max-width: 991px)  {
+    .headroom--unpinned{
+    position: fixed !important;
+    width: 100%;
+    z-index: 2000;
+    top: -4% !important;
+    }
     .mid-header .open-time ul li {
         margin-right: 10px;
 
@@ -144,7 +150,7 @@
     .gat-quote .btn {
         padding: 7px 15px 8px;
     }
-    .inner-banner .image-holder img{
+     .image-holder img{
         height: 500px
     }
     .last-header {
@@ -284,13 +290,11 @@
         margin-top: 20px;
         text-align: center;
     }
-    .last-header {
-    top: -24px;
-    left: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 2000;
-   }
+    .last-header {      
+     top: 171px;
+
+    }
+    
     .navigation {
         padding: 0;
     }
@@ -355,7 +359,7 @@
     .navigation .navbar-nav > li:hover .sub-menu{
         display: block;
     }
-    .inner-banner .owl-theme .owl-controls .owl-buttons div{
+     .owl-theme .owl-controls .owl-buttons div{
         display: none;
     }
     .feature-item {
@@ -488,25 +492,32 @@
     .contact-location .col-xs-12{
         margin-bottom: 20px;
     }
+    .v-window__prev, .v-window__next {
+   
+    display: none;
 }
-@media only screen and (max-width: 640px)  {
+}
+@media only screen and (max-width: 670px)  {
     .home3-inner-banner .banner-text h2 {
         font-size: 30px;
         letter-spacing: 0;
     }
+    .last-header {
+    top: 281px;
+}
 }
 @media only screen and (max-width: 600px)  {
-    .inner-banner .banner-text h2 {
+    .banner-text h2 {
         font-size: 30px;
     }
-    .inner-banner .banner-text h1 {
+     .banner-text h1 {
         letter-spacing: 10px;
         font-size: 60px;
     }
-    .inner-banner .image-holder img {
+     .image-holder img {
         height: 350px;
     }
-    .inner-banner .owl-pagination {
+     .owl-pagination {
         bottom: 10px;
     }
     .home2-testimonail .testimonail-inner .item {
@@ -602,16 +613,16 @@
         padding-bottom: 0;
     }
     .last-header {
-        
+        top: 370px;
     }
-    .inner-banner .banner-text h1 {
+     .banner-text h1 {
         font-size: 40px;
         letter-spacing: 5px;
     }
-    .inner-banner .banner-text h2 {
+     .banner-text h2 {
         font-size: 22px;
     }
-    .inner-banner .banner-text .btn {
+     .banner-text .btn {
         margin: 0 2px;
         padding: 5px 18px;
     }
@@ -679,16 +690,16 @@
     }
 }
 @media only screen and (max-width: 379px)  {
-    .inner-banner .image-holder img {
+     .image-holder img {
         height: 300px;
     }
-    .inner-banner .banner-text .btn {
+     .banner-text .btn {
         display: none;
     }
-    .inner-banner .banner-text .free-get{
+     .banner-text .free-get{
         display: inline-block;
     }
-    .inner-banner .banner-text {
+     .banner-text {
         padding-top: 30px;
     }
     .counter .col-xs-6{
@@ -703,7 +714,7 @@
     .recent-post .image-holder {
         float: none;
     }
-    .inner-banner .banner-text p {
+     .banner-text p {
         display: none;
     }
     .banner-button {

@@ -1,10 +1,12 @@
 <template>
     <component :is="layout" >
+        <v-container>
         <router-view :layout.sync="layout"></router-view>
+        </v-container>
     </component>
 </template>
-
 <script>
+
 // import show from './view/Show'
 import AvailableProjects from './view/AvailableProjects'
 export default {
@@ -25,7 +27,7 @@ export default {
     beforeCreate(){
         this.loading=true
     },
-    created() {         
+    created() {
     },
     mounted() {
 

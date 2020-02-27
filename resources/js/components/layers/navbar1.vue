@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </div>
-            <div class="last-header">
+            <div class="last-header headroom" :class="{'headroom--unpinned':scrolled}" v-on="handleScroll">
                 <div class="container ">
                     <div class="row">
                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -75,7 +75,7 @@
                                     <div class="navbar-collapse collapse">
                                         <ul class="nav navbar-nav">
                                             <li class="active">
-                                                <router-link to="/">HOME</router-link>
+                                                <router-link to="/">sHOME</router-link>
                                             </li>
                                             <li>
                                                 <router-link to="/login">
@@ -192,9 +192,38 @@
 
 </template>
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+    export default {    
+      data() {
+    return {
+      limitPosition: 300,
+      scrolled: false,
+      lastPosition: 0
+    };
+  },
+
+  methods: {
+    handleScroll() {
+      if (this.lastPosition < window.scrollY && this.limitPosition < window.scrollY) {
+        this.scrolled = true;
+        // move up!
+      } 
+      
+      if (this.lastPosition > window.scrollY) {
+        this.scrolled = false;
+        // move down
+      }
+      
+      this.lastPosition = window.scrollY;
+      // this.scrolled = window.scrollY > 250;
+    }
+  },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  }
+
+
     }
 </script>

@@ -1,20 +1,33 @@
 <template>
 
-    <div class="body-class catagoris">
+    <div >
 
 
-        <section id="banner mt-5">
-
-                <v-carousel>
+        <section id="banner">
+               <v-carousel >
                     <v-carousel-item
                     v-for="(item,i) in items"
                     :key="i"
                     :src="item.src"
-                    reverse-transition="fade-transition"
-                    transition="fade-transition"
-                    ></v-carousel-item>
+                    >
+                       <div class="banner-text">
+                                <div class="chid-pernt">
+                                    <div class="child">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h2>WELCOME TO</h2>
+                                                    <h1>sky<span>ways</span></h1>
+                                                    <a class="btn free-get" href="#">Get a free quote</a>
+                                                    <a class="btn" href="#">Raed More</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </v-carousel-item>
                 </v-carousel>
-
         </section>
 
         <main class="main-containt">
@@ -339,171 +352,7 @@
                 </div>
             </div>
         </section>
-        <section class="section-padding testimonail home2-testimonail">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="haddings">
-                            <div class="hadding-inner">
-                                <h2>What Our <strong>Clients Say</strong></h2>
-                                <span><img src="front/images/hedding-ven2-image.png" alt="" /></span>
-                            </div>
-                            <p>We have wide network of offices in all major locations to help you.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonail-inner">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="demo" class="carousel slide" data-ride="carousel">
-                                <div class="item">
-                                    <div class="image-holder">
-                                        <img src="front/images/clint-say-image-home2.jpg" alt="" />
-                                    </div>
-                                    <div class="text-box">
-                                        <h3>Terence Wheels <span>CEO/ Skyways inc.</span></h3>
-                                        <div class="text-inner">
-                                            <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain. Completely synergize resource taxing via premier niche markets. Professionally cultivate one-to-one customer .</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-holder">
-                                        <img src="front/images/clint-say-image-home2.jpg" alt="" />
-                                    </div>
-                                    <div class="text-box">
-                                        <h3>Terence Wheels <span>CEO/ Skyways inc.</span></h3>
-                                        <div class="text-inner">
-                                            <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain. Completely synergize resource taxing via premier niche markets. Professionally cultivate one-to-one customer .</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="image-holder">
-                                        <img src="front/images/clint-say-image-home2.jpg" alt="" />
-                                    </div>
-                                    <div class="text-box">
-                                        <h3>Terence Wheels <span>CEO/ Skyways inc.</span></h3>
-                                        <div class="text-inner">
-                                            <p>Efficiently unleash cross-media information without cross-media value. Quickly maximize timely deliverables for real-time schemas. Dramatically maintain. Completely synergize resource taxing via premier niche markets. Professionally cultivate one-to-one customer .</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section-padding counter home3-counter home5-counter clearfix">
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="row">
-                    <div class="counter-grid">
-                        <i class="fa fa-male"></i>
-                        <h3 id="value">0</h3>
-                        <h4>People In Team</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="row">
-                    <div class="counter-grid green-counter-grid">
-                        <i class="fa fa-truck"></i>
-                        <h3 id="value2">0</h3>
-                        <h4>Owned Vehicles</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="row">
-                    <div class="counter-grid red-counter-grid">
-                        <i class="fa fa-rocket"></i>
-                        <h3 id="value3">0</h3>
-                        <h4>Projects Done</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-3 col-xs-6">
-                <div class="row">
-                    <div class="counter-grid blue-counter-grid">
-                        <i class="fa fa-users"></i>
-                        <h3 id="value4">0</h3>
-                        <h4>Clients Worldwide</h4>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="section-padding ouer-clint home2-ouer-clint">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="haddings">
-                            <div class="hadding-inner">
-                                <h2>Our <strong>CLIENTS</strong></h2>
-                                <span><img src="front/images/hedding-ven2-image.png" alt="" /></span>
-                            </div>
-                            <p>We have wide network of offices in all major locations to help you.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="inner-clints">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="demo" class="carousel slide" data-ride="carousel">
-                                <div class="item">
-                                    <div class="clints-sponser">
-                                        <p>PARTNER</p>
-                                        <h3>logo</h3>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="clints-sponser green-sponser">
-                                        <p>PARTNER</p>
-                                        <h3>logo</h3>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="clints-sponser red-sponser">
-                                        <p>PARTNER</p>
-                                        <h3>logo</h3>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="clints-sponser blue-sponser">
-                                        <p>PARTNER</p>
-                                        <h3>logo</h3>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="clints-sponser">
-                                        <p>PARTNER</p>
-                                        <h3>logo</h3>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="clints-sponser green-sponser">
-                                        <p>PARTNER</p>
-                                        <h3>logo</h3>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="clints-sponser red-sponser">
-                                        <p>PARTNER</p>
-                                        <h3>logo</h3>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="clints-sponser blue-sponser">
-                                        <p>PARTNER</p>
-                                        <h3>logo</h3>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+
         <section class="col-action home2-col-action">
             <div class="container">
                 <div class="row">
@@ -742,6 +591,20 @@ export default {
 }
 </script>
 <style scoped>
+.v-window__prev, .v-window__next {
+    background-color:
+    rgba(250, 250, 250, .10);
+    -webkit-border-radius: 63px 63px 63px 63px/ 108px 108px 72px 72px;
+    border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+    width: 71px;
+    height: 81px;
+    opacity: 1;
+    padding: 23px;
+    margin: 0;
+    font-size: 24px;
+    transform: rotate(90deg);
+    transition: all 0.5s ease-in-out;
+}
 .no-border{
 	border: none !important;
 	background: none !important;

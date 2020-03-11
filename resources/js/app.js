@@ -1,15 +1,20 @@
 
 require('./bootstrap');
+
 window.Vue = require('vue');
 import * as VueGoogleMaps from 'vue2-google-maps'
-// import CubeSpin from 'node-sass/vue-loading-spinner/components'
-// require('@/assets/css/style.css')
 
 // Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 import User from './helpers/User'
 
 window.User = User
-
+router.afterEach(() => {
+  const contentWrapper = document.querySelector(".v-content__wrap");
+  if(contentWrapper !== null){
+   contentWrapper.scrollTop = 0;
+   window.scroll(0,0);
+  }
+})
 Vue.use(VueGoogleMaps, {
     load: {
       key: 'AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo',
@@ -19,9 +24,9 @@ Vue.use(VueGoogleMaps, {
 
 axios.interceptors.response.use(null , (error)=>{
   if(error.response.status == 401){
-    
+
     User.logout()
-  
+
   }
 })
 
@@ -48,6 +53,7 @@ Vue.component('star-rating', StarRating);
 window.EventBus = new Vue();
 
 Vue.component('app-home', require('./components/AppHome.vue').default);
+Vue.component('nav-bar', require('./components/layers/navbar1.vue').default);
 
 Vue.component('grid-loader', require('vue-spinner/src/GridLoader.vue').default);
 
@@ -72,7 +78,7 @@ const app = new Vue({
       }
     },
     computed:{
-      // loading(){ return true;} 
+      // loading(){ return true;}
     },
     router,
     watch: {

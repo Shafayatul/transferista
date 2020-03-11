@@ -1,16 +1,10 @@
 <template>
 <div>
-    <header id="header">
-        <div id="main-menu">
-            <navbar></navbar>
-        </div>
-        <!-- Navbar -->
-    </header>
         
     <slot></slot>
     
 <!-- ========= Footer Section Start =========== -->
-    <footer id="footer" class="page-footer">
+    <!-- <footer id="footer" class="page-footer">
         <div class="container">
             <div class="row">
                 <div class="col-12 text-center footer-logo">
@@ -109,7 +103,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 </div>

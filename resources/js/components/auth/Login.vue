@@ -1,63 +1,67 @@
 <template>
-    <div class="card card-5">
-        <div class="card-heading">
-            <h2 class="title">Login Form</h2>
-        </div>
-        <div class="card-body"> 
-            
-            
-            <form @submit.prevent="login">
-                <div class="form-row">
-                    <div class="name col-md-3">Email</div>
-                    <div class="value col-md-9">
-                        <div class="input-group" >
-                            <input v-model="form.email" class="input--style-5"  name="email">
-                            <!-- <span v-if="errors.email" class="help-block" role="alert">
+   <div class="session-wrapper fade-in-up">
+      <div class="container container-full-width">
+         <div class="row">
+            <div class="col-sm-12 col-md-11 col-lg-9 mx-auto">
+               <div class="row no-gutters align-items-center">
+                  <div class="col-sm-12 col-md-6 d-xs-none">
+                     <div class="card text-white border-rad shadow border-0 z-index">
+                        <img class="card-img img-fluid" src="/static/img/login.png" alt="Card image" width="400" height="500" />
+                     </div>
+                  </div>
+                  <div class="col-sm-12 col-md-6">
+                     <div class="card border-0 p-5 rounded-0 card-shadow">
+                    
+                        <form @submit.prevent="login">
+                           <div class="social-widget mb-4">
+                              <h2 class="text-capitalize font-2x mb-4">Sign In</h2>
+                           </div><!-- Social widget closed -->
+                           <div class="mb-4">
+                              <div class="form-group">
+                                    <label for="InputEmail1">Email Address</label>
+                                    <input v-model="form.email" class="form-control form-control-lg"  name="InputEmail1">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="password" >Password</label>
+                                <input v-model="form.password" class="form-control form-control-lg" type="password" name="password">
+                            </div>
+                            <span v-if="errors" class="help-block" role="alert">
                                 <strong>{{errors}}</strong>
-                            </span> -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="name col-md-3">Password</div>
-                    <div class="value col-md-9" >
-                        <div class="input-group">
-                            <input v-model="form.password" class="input--style-5" type="password" name="password">
-                        </div>
-                        <span v-if="errors" class="help-block" role="alert">
-                            <strong>{{errors}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row input-group ">
+                            </span>
+                            <div class="form-row input-group ">
 
-                    <div class="col-lg-9 offset-3 ">
-                             <input class="form-check-input" type="checkbox" name="remember" id="remember" v-model="form.remember_me">
-                            <label class="form-check-label pt-1" for="remember">
-                                Remember Me
-                            </label><br>
-                     <button class="btn btn--radius-2 btn--red" type="submit">Login</button>
-                           
-                        <p class="pt-1">Have you forgotten your password?
-                            <router-link to="/forgot-password">
-                                <a>Click </a>
-                            </router-link>
-                        </p> 
-                        <p class="pt-1">Not signed-up yet? 
-                            <router-link to="/register">
-                                <a>Sign-up</a>
-                            </router-link>
-                        </p>
+                                <div class="col-lg-9 offset-3 ">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" v-model="form.remember_me">
+                                        <label class="form-check-label pt-1" for="remember">
+                                            Remember Me
+                                        </label><br>
+                                <button class="btn btn-primary btn-block btn-lg submit-btn" type="submit">Login</button>
+                                    
+                                    <p class="pt-1">Have you forgotten your password?
+                                        <router-link to="/forgot-password">
+                                            <a>Click </a>
+                                        </router-link>
+                                    </p> 
+                                    <p class="pt-1">Not signed-up yet? 
+                                        <router-link to="/register">
+                                            <a>Sign-up</a>
+                                        </router-link>
+                                    </p>
 
-                </div>
-                </div>
-            </form>
-        </div>
-    </div>             
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div><!-- container closed -->
+   </div><!-- session Wrapper closed -->
 </template>
 <script>
-import AuthLayout from '../layers/AuthLayout'
+import navbar from "../layers/navbar1";
 export default {
     data(){
         return{
@@ -72,7 +76,7 @@ export default {
     computed:{
     },
     components:{
-        AuthLayout
+        navbar
     },
     methods:{
         login(){
@@ -86,7 +90,7 @@ export default {
         
     },
     created(){
-        this.$emit(`update:layout`,AuthLayout)
+        this.$emit(`update:layout`,navbar)
     }
 }
 </script>
@@ -97,7 +101,6 @@ export default {
 .card-5{
     max-width: 70%;
     margin: 0 auto;
-    display:  
 }
 .select2-selection__rendered {
     line-height: 50px;

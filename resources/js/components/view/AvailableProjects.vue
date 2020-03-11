@@ -1,118 +1,313 @@
 <template>
-	
-    <div class="body-class catagoris">	
-		
-        <section id="catagoribody" class="catagoribody">
-			<div class="container">
-			<GmapMap
-			  :center="{lat:10, lng:10}"
-			  :zoom="7"
-			  map-type-id="terrain"
-			  style="width: 100%; height: 50vh;"
-			>
-			  <GmapMarker
-			    :key="index"
-			    v-for="(m, index) in markers"
-			    :position="m.position"
-			    :clickable="true"
-			    :draggable="true"
-			    @click="center=m.position"
-			  />
-			</GmapMap>
-			</div>
-            <div class="container mt-5 search-section">
-				<div class="row">
-					<div class="col-md-3">
-                        <label class=" label-title">Origin:</label>
-			            <div class="form-control ">
-							<gmap-autocomplete class="no-border"
-								@place_changed="setPlace1">
-							</gmap-autocomplete>
-						</div>
-					</div>
-					<div class="col-md-3">
-                        <label class=" label-title">Destination:</label>
-			            <div class="form-control ">
-						<gmap-autocomplete class="no-border"
-							@place_changed="setPlace2">
-						</gmap-autocomplete>
-					</div>
-					</div>
-					<div class="col-md-3">	
-                        <label class=" label-title">Product Size:</label>				
-						<select  v-model="size" class="form-control custom-select" id="exampleFormControlSelect1">
-								<option value="5" >S: 100cm</option>
-								<option value="7.5">M: 150cm</option>
-								<option value="10">L: 180cm</option>
-								<option value="15">XL: 200cm</option>
-								<option value="20">XXL: 250cm</option>
-								<option value="25">XXXL: 300cm</option>
-						</select></div>
-					   <div class="col-md-3">
-					        <label class="label-title">Estimated Price:</label>						
-							<div class="form-control">
-								<h3>${{estimated_price}}</h3>
-								
-							</div>
-						
-						</div>
 
-					</div>
-					<div class="col-md-12 text-center mt-5">  <button  @click="create" class="btn btn-light text-center btn-lg mb-4">Create</button></div>
-				 
-<!-- 				<div class="row mamunurrashid_gig_wraper">
-					
-					<div class="col-lg-12 order-first order-lg-last">
-						<div v-if="success" class="alert alert-warning alert-dismissible fade show" role="alert">
-								You should check in on some of those fields below.
-							<button @click="success = !success" type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
-						</div>
-						<div class="mr_card" v-if="count==0">
-							<div class="mr_card_body card-body p-3">
-								<h2>There is no available project at this moment.</h2>	
-							</div>								
-						</div>
-						<div class="mr_card" v-for="(data,index) in projects" :key="index">
-							<div class="mr_card_body card-body p-3">									
-																		
-									<a @click=singleProject(data.id) class="p " href="">
-										<h5 class="fonts-title">{{data.project_title}}<br><small>Posted {{ data.created_at }}</small></h5>
-										<div class="card-text">
-											<span class="body-color">
-												{{data.project_description}}
-											</span>
-										</div>
-									</a>
-									<br>
-									<button v-show="flag" class="btn btn-success" @click=singleProject(data.id) ><a class="font-color" >Bid Now</a></button>
-									<br>
-									
-								</div>
-							<div  class="modal fade" :id="data.id"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<bid  :bid="bid" :data="data"></bid>
-							</div>
-						</div>
-						  
-						
-					</div>
-            	
-				</div> -->
+    <div >
+    <div class="site-banner">
+        <div class="banner-wrapper ">
+            <div class="banner-inner">
+                <!-- <div class="banner-content container text-center container-full-width"> -->
+                    <!-- <div class="container"> -->
+                        <GmapMap
+                            :center="{lat:10, lng:10}"
+                            :zoom="7"
+                            map-type-id="terrain"
+                            style="width: 100%; height: 100vh;"
+                        >
+                            <GmapMarker
+                            :key="index"
+                            v-for="(m, index) in markers"
+                            :position="m.position"
+                            :clickable="true"
+                            :draggable="false"
+                            @click="center=m.position"
+                            />
+                        </GmapMap>
+                        <div class="request-quote">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="quote-form">
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <!-- <input type="text" placeholder="Location" /> -->
+                                                            <div class="form-control " style="height:3rem;">
+                                                                <gmap-autocomplete  class="no-border" placeholder="Origin"
+                                                                    @place_changed="setPlace1">
+                                                                </gmap-autocomplete>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <!-- <input type="text" placeholder="To Destination" /> -->
+                                                            <div class="form-control " style="height:3rem;">
+                                                                <gmap-autocomplete  class="no-border" placeholder="Destination"
+                                                                    @place_changed="setPlace2">
+                                                                </gmap-autocomplete>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <!-- <input type="text" placeholder="Person / Cargo" /> -->
+                                                        <select v-model="size" class="form-control custom-select" id="exampleFormControlSelect">
+                                                            <option value="5">S: 100cm</option>
+                                                            <option value="7.5">M: 150cm</option>
+                                                            <option value="10">L: 180cm</option>
+                                                            <option value="15">XL: 200cm</option>
+                                                            <option value="20">XXL: 250cm</option>
+                                                            <option value="25">XXXL: 300cm</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <div class="form-group">
+                                                            <!-- <input type="text" placeholder="E-mail or number" /> -->
+                                                            <div class="form-control" style="height:3rem;">
+                                                                <h3>${{estimated_price}}</h3>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <textarea>Message</textarea>
+                                                        </div>
+                                                    </div> -->
+                                                    <div class="col-md-12">
+                                                        <div class="form-group last-group">
+                                                            <!-- <input class="btn" type="submit" value="get a quote" /> -->
+                                                            <button  @click="create" class="btn">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                <!-- </div> -->
             </div>
-															
-        </section>
+        </div>
+    </div>
+    <div class="service section-gap">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 mx-auto text-center">
+              <h2>Best In Business</h2>
+              <p class="mb-0 lead">Dicta eveniet quasi reiciendis qui eius voluptatum harum optio quibusdam illum.</p>
+				          
+            </div>
+          </div>
+        </div>
+        <ServiceSection />
+      </div>
+    </div>
+   
+
+    <!-- <div class="feature-section section-gap  bg-light">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4 align-self-center bg-img pr-5" style="padding-left:8rem">
+            <h2 class="mb-3">How It Worked</h2>
+            <p class="mb-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, repellendus. Voluptas expedita ducimus minima. amet consectetur adipisicing elit. Rem, repellendus. Voluptas expedita ducimus minim</p>
+            <a href="#" class="btn btn-primary">Get Started</a>
+          </div>
+
+          <div class="col-md-8">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="step-item step-1">
+                  <div class="line-sep"></div>
+                  <div class="step-item-content">
+                    <div class="my-3">
+                      <i class="icon font-2x ion-md-analytics"></i>
+                    </div>
+                    <div class="d-flex">
+                      <div class="step-no">1</div>
+
+                      <div>
+                        <h4 class="mb-3">Analysis</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sunt consectetur harum officiis soluta vitae amet fugit corrupti dolorem excepturi ipsa</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="step-item step-2">
+                  <div class="line-sep"></div>
+                  <div class="step-item-content">
+                    <div class="my-3">
+
+							 <i class="icon font-2x ion-md-barcode"></i>
+                    </div>
+                    <div class="d-flex">
+                      <div class="step-no">2</div>
+
+                      <div>
+                        <h4 class="mb-3">Implementation</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sunt consectetur harum officiis soluta vitae amet fugit corrupti dolorem excepturi ipsa</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="step-item step-3">
+                  <div class="line-sep"></div>
+                  <div class="step-item-content">
+                    <div class="my-3">
+                      <i class="icon font-2x ion-md-umbrella"></i>
+                    </div>
+                    <div class="d-flex">
+                      <div class="step-no">3</div>
+
+                      <div>
+                        <h4 class="mb-3">Support</h4>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sunt consectetur harum officiis soluta vitae amet fugit corrupti dolorem excepturi ipsa</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <div class="mob-feature bg-light">
+      <div class="section-gap">
+        <div class="container">
+       
+          <MobileFeature />
+        </div>
+      </div>
+    </div>
+	  <div class="chk-video-section section-gap ">
+      <div class="container">
+        <VideoSectionV1 :videoContent="videoContent" />
+      </div>
+    </div>
+    <div class="Gallery-grid section-gap bg-gray-dark">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 mx-auto text-center">
+              <h2 class="text-white">Our Awesome Projects</h2>
+              <p class="mb-0 text-white lead">
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+              </p>
+            </div>
+          </div>
+        </div>
+        <PortfolioGrid :showNoOfPosts="6"></PortfolioGrid>
+      </div>
+    </div>
+    <div class="post-section bg-light section-gap">
+      <div class="container">
+       <div class="section-title-wrapper">
+          <div class="row">
+            <div class="col-sm-12 col-md-6 mx-auto text-center">
+              <h2>Our Recent Blogs</h2>
+              <p class="mb-0 lead">
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="card-deck">
+          <LatestBlog></LatestBlog>
+        </div>
+      </div>
+    </div>
+    <TeamGrid></TeamGrid>
+    <PricingV2></PricingV2>
+    <TestimonialSlider></TestimonialSlider>
+
+    <Subscriber />
+
+    <div class="contact-section">
+      <ContactInfo></ContactInfo>
+    </div>
+    <div class="send-msg-form bg-gray-dark style-form section-gap">
+
+        <div class="container">
+			<div class="section-title-wrapper">
+				<div class="row">
+					<div class="col-sm-12 col-md-6 mx-auto text-center">
+						<h2>Send Us Message</h2>
+						<p class="text-white mb-0 lead">We are driven by creating experiences that deliver results for your business.</p>
+					</div>
+				</div>
+			</div>
+          <div class="row">
+            <div class="col-sm-12 col-md-10 col-lg-7 mx-auto">
+              <!-- <SendMessage></SendMessage> -->
+              <form>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-4">
+                      <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        id="inputEmail4"
+                        placeholder="Your Name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-4">
+                      <input
+                        type="email"
+                        class="form-control form-control-lg"
+                        id="inputEmail4"
+                        placeholder="Email"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group mb-4">
+                      <textarea name id class="form-control form-control-lg" placeholder="Message"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn text-white btn-success btn-block">Get in Touch</button>
+              </form>
+            </div>
+          </div>
+        </div>
+  
+    </div>
     </div>
 </template>
 <script src="vue-google-maps.js"></script>
 <script>
 // import Axios from 'axios'
 // Axios.defaults.baseURL = 'http://192.168.0.101:8000'
+import Subscriber from "../sections/Subscriber";
+import Banner from "../banner/Banner";
+import ServiceSection from "../sections/ServiceSection";
+import TestimonialSlider from "../sections/TestimonialSlider.vue";
+import PricingV2 from "../sections/PricingV1.vue";
+import TeamGrid from "../sections/TeamGrid.vue";
+import MobileFeature from "../sections/MobileFeature.vue";
+import PortfolioGrid from "../sections/PortfolioGrid.vue";
+import LatestBlog from "../sections/LatestBlog.vue";
+import ContactInfo from "../sections/ContactInfo.vue";
+import SendMessage from "../sections/SendMessage.vue";
+import VideoSectionV1 from "../sections/VideoSectionV1.vue";
+import videoContent from "../data/home.json";
 import bid from './Bid'
-import DashboardLayout from "../layers/DashboardLayout";
+import navbar from "../layers/navbar1";
 export default {
 	data(){
 		return{
+            videoContent,
 			size: null,
 			from: null,
 			to: null,
@@ -124,6 +319,7 @@ export default {
 				lat:null,
 				lng:null
 			},
+			markers:[],
 			seleted: 0,
 			count: null,
 			query: null,
@@ -140,14 +336,41 @@ export default {
             width: '4px',
             margin: '2px',
             radius: '2px',
-			loading: true,
+            loading: true,
+
 			left:0,
-			right:null
+            right:null,
+             items: [
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+          },
+          {
+            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+          },
+        ],
 		}
 	},
     components:{
-		DashboardLayout,
-		bid
+		navbar,
+		bid,
+        Subscriber,
+        Banner,
+        ServiceSection,
+        TestimonialSlider,
+        PricingV2,
+        TeamGrid, 	
+        MobileFeature,
+        PortfolioGrid,
+        LatestBlog,
+        ContactInfo,
+        SendMessage,
+        VideoSectionV1
 	},
 	beforeCreate(){
 		this.loading = true
@@ -177,7 +400,7 @@ export default {
 			}
 			if(!User.loggedIn())
 			this.$router.push('login')
-			
+
 		},
         getDistance(){
 
@@ -192,7 +415,7 @@ export default {
             dist = Math.acos(dist);
             dist = dist * 180/Math.PI;
             dist = dist * 60 * 1.1515;
-            dist = dist * 1.609344 
+            dist = dist * 1.609344
             // console.log(dist)
             return dist;
         },
@@ -215,7 +438,7 @@ export default {
 			const id = d
 			this.$router.push({name: 'singleProject',params:{
 				id: id
-				} 
+				}
 			})
 		},
 		modal(index){
@@ -252,14 +475,21 @@ export default {
 		},
 		// Our method to GET results from a Laravel endpoint
 		getResults1(page = 1) {
-			
+			// v-show="meta.current_page-2 >= 1"
+			// v-show="meta.current_page+2 <= meta.total"
+			// console.log(this.left+' '+this.right)
+
 			if(this.right+1>this.meta.total){
 				this.right = this.meta.total
 			}
 
-		
+
+			// axios.get('example/results?page=' + page)
+			// 	.then(response => {
+				// 		this.laravelData = response.data;
+			// 	});
 			axios.get('/api/project-list/available?page=' + page)
-			.then(res =>{ 
+			.then(res =>{
 					this.projects = res.data.data
 					this.count = this.projects.length;
 					this.meta = res.data.meta;
@@ -280,7 +510,7 @@ export default {
 				// 		this.laravelData = response.data;
 			// 	});
 			axios.get('/api/project-list/available?page=' + page)
-			.then(res =>{ 
+			.then(res =>{
 					this.projects = res.data.data
 					this.count = this.projects.length;
 					this.meta = res.data.meta;
@@ -288,22 +518,33 @@ export default {
 			.catch(error=>console.log(error))
 		}
 	},
-	mounted() {
-		// Fetch initial results
-		// this.getResults1();
-	},
-	
+
+
     created(){
 		this.loading = false
 		if(User.customer() || User.company() || User.employee() || !User.loggedIn()){
-			
+
 			this.flag = false
 		}
-		this.$emit(`update:layout`,DashboardLayout)
+		this.$emit(`update:layout`,navbar)
     }
 }
 </script>
 <style scoped>
+.v-window__prev, .v-window__next {
+    background-color:
+    rgba(250, 250, 250, .10);
+    -webkit-border-radius: 63px 63px 63px 63px/ 108px 108px 72px 72px;
+    border-radius: 50% 50% 50% 50%/60% 60% 40% 40%;
+    width: 71px;
+    height: 81px;
+    opacity: 1;
+    padding: 23px;
+    margin: 0;
+    font-size: 24px;
+    transform: rotate(90deg);
+    transition: all 0.5s ease-in-out;
+}
 .no-border{
 	border: none !important;
 	background: none !important;
@@ -326,7 +567,7 @@ export default {
   width: 100%;
   height: auto;
   padding-bottom: 10%;
-  padding-top:10%; 
+  padding-top:10%;
 }
 .label-title{
 	color: #fff;
@@ -334,8 +575,12 @@ export default {
 }
 .search-section{
 	background: #dfe1d573;
-box-shadow: 10px 5px 10px 10px
-rgba(0, 0, 0, 0.19);
-padding-top: 2%;
+	box-shadow: 10px 5px 10px 10px
+	rgba(0, 0, 0, 0.19);
+	padding-top: 2%;
 }
+.v-window__next{
+    right: 0%;
+}
+
 </style>

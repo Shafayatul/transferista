@@ -36,7 +36,8 @@ import reset from '../components/view/ForgotPassword'
 import NewPassword from '../components/view/Reset'
 import TransferistaInfo from '../components/view/TransferistaDetails'
 const routes = [
-    {path:'/',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Home' }},
+    { path: '/',redirect: '/home' },
+    {path:'/home',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Home' }},
     // {path:'/position',component: google},
     {path:'/project-details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate,name:'create', meta: { auth: false, title: 'Create' }},    

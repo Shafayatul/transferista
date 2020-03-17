@@ -570,30 +570,8 @@
             "time": "2019-03-31T00:38:28+00:00"
         },
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            "name": "egulias/email-validator",
-<<<<<<< HEAD
-            "version": "2.1.16",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "5065fafc8c29d229ff207f2a89b02175f479a909"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/5065fafc8c29d229ff207f2a89b02175f479a909",
-                "reference": "5065fafc8c29d229ff207f2a89b02175f479a909",
-=======
-            "version": "2.1.17",
-=======
-            "name": "egulias/email-validator"
-            "version": "2.1.17"
->>>>>>> f085ce5a69b057fdbfea881eb04b56d2b7735312
-=======
             "name": "egulias/email-validator",
             "version": "2.1.17",
->>>>>>> ca0559dd5e30e39aaf771117e449cfa178fcb61d
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
@@ -603,7 +581,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ade6887fd9bd74177769645ab5c474824f8a418a",
                 "reference": "ade6887fd9bd74177769645ab5c474824f8a418a",
->>>>>>> 0a44c644db1e8896fa3681bf690299400a025f2c
                 "shasum": ""
             },
             "require": {
@@ -648,11 +625,7 @@
                 "validation",
                 "validator"
             ],
-<<<<<<< HEAD
-            "time": "2020-02-12T22:28:28+00:00"
-=======
             "time": "2020-02-13T22:36:52+00:00"
->>>>>>> 0a44c644db1e8896fa3681bf690299400a025f2c
         },
         {
             "name": "fideloper/proxy",

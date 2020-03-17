@@ -12,7 +12,7 @@ router.afterEach(() => {
   const contentWrapper = document.querySelector(".v-content__wrap");
   if(contentWrapper !== null){
    contentWrapper.scrollTop = 0;
-   window.scroll(0,0);
+   window.scroll(0,0); 
   }
 })
 Vue.use(VueGoogleMaps, {

@@ -1,59 +1,59 @@
 <template>
 	<div>
    <!--  Top menu -->
-        <nav 
-            id="mainNav" 
+        <nav
+            id="mainNav"
             class="navbar navbar-expand-md navbar-dark fixed-top bg-primary"
-            >      
+            >
             <div class="rtl-layout" @click="addToggleClass()"><a href="javascript:void(0);">RTL</a></div>
             <div class="container">
                 <router-link class="navbar-brand" to="/home" routerLinkActive="active-link">
                     <img src="/static/img/zemle-logo.png" class="img-fluid" width="110" height="37">
                 </router-link>
 
-                <button 
+                <button
                     class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="true" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul id="main" class="navbar-nav ml-auto main-menu list-unstyled">
-                    <li 
-                        @click="menuToggleLink('menuNo'+i);" 
+                    <li
+                        @click="menuToggleLink('menuNo'+i);"
                         class="parent nav-item"
                         v-for="(menuItem,i) in menus"
                         :id="'menuNo'+i"
-                        :key="i" 
+                        :key="i"
                         >
-                        <router-link 
-                            class="nav-link" 
-                            :to="menuItem.state"  
-                            v-if="menuItem.type == 'link'" 
+                        <router-link
+                            class="nav-link"
+                            :to="menuItem.state"
+                            v-if="menuItem.type == 'link'"
                             @click.native="removeCollapseInClass();"
                         >
                             {{ menuItem.name }}
                         </router-link>
-                        <a 
-                            v-if="menuItem.type == 'sub'" 
-                            class="nav-link" 
-                            href="javascript:void(0)"                     
+                        <a
+                            v-if="menuItem.type == 'sub'"
+                            class="nav-link"
+                            href="javascript:void(0)"
                         >
                             {{ menuItem.name }}&nbsp;
                             <i :class="menuItem.icon" @click.stop="menuToggle('menuNo'+i)"></i>
                         </a>
-                        <ul 
-                            v-if="menuItem.type == 'sub' && menuItem.children" 
+                        <ul
+                            v-if="menuItem.type == 'sub' && menuItem.children"
                             class="sub-menu arrow-up list-unstyled" >
-                            <li 
-                                class="nav-item" 
+                            <li
+                                class="nav-item"
                                 v-for="(grandchildItem,i) of menuItem.children"
                                 :key="i"
                                 >
-                                <router-link 
-                                class="nav-link" 
+                                <router-link
+                                class="nav-link"
                                 :to="grandchildItem.state"
-                                v-if="grandchildItem.type == 'link'" 
-                                @click.native="removeCollapseInClass()"      
+                                v-if="grandchildItem.type == 'link'"
+                                @click.native="removeCollapseInClass()"
                                 >
                                 {{ grandchildItem.name }}
                                 </router-link>
@@ -61,19 +61,19 @@
                         </ul>
                     </li>
                     <li>
-                        <div 
-                            class="search-form" 
-                            click-outside 
+                        <div
+                            class="search-form"
+                            click-outside
                         >
-                            <span 
-                                data-target="#search-style-simple" 
+                            <span
+                                data-target="#search-style-simple"
                                 @click="showSearch()"
                             >
                                 <i class="fa fa-search"></i>
                             </span>
-                            <div 
-                                class="module-container" 
-                                :class="{'search-active': searchactive}" 
+                            <div
+                                class="module-container"
+                                :class="{'search-active': searchactive}"
                                 id="search-style-simple"
                             >
                                 <form role="search" method="get" class="search-box" action="javascript:void(0);">
@@ -117,15 +117,15 @@
                         <span class="text-white ">&copy; 2019, All Right Reserved </span>
                     </div>
                 </div>
-                    
+
             </div><!-- container closed -->
         </div>
-   
+
     </div>
 
 </template>
 <script>
-    export default {    
+    export default {
       data() {
         return {
             limitPosition: 300,
@@ -161,7 +161,7 @@
                      { state: 'portfolio-v1', name: 'Portfolio V1', type:"link"},
                      { state: 'portfolio-v2', name: 'Portfolio V2', type:"link"},
                      { state: 'portfolio-v3', name: 'Portfolio V3', type:"link"}
-                   
+
                   ]
                },
                {
@@ -243,7 +243,7 @@
         };
     },
 
-methods: { 
+methods: {
     getUrl(){
         let val = this.$route.path.split("/");
         console.log(val)
@@ -251,23 +251,23 @@ methods: {
         {
             this.showSubscriber = false;
         } else {
-            this.showSubscriber = true;               
+            this.showSubscriber = true;
         }
     },
     handleScroll() {
       if (this.lastPosition < window.scrollY && this.limitPosition < window.scrollY) {
         this.scrolled = false;
         // move up!
-      } 
-      
+      }
+
       if (this.lastPosition > window.scrollY) {
         this.scrolled = false;
         // move down
       }
-      
+
       this.lastPosition = window.scrollY;
       this.scrolled = window.scrollY > 250;
-    }, 
+    },
     showSearch(){
             this.searchactive = !this.searchactive;
     },
@@ -280,10 +280,10 @@ methods: {
                 elements[i].classList.remove('open');
             }
             document.getElementById(id).classList.add("open");
-        }   
+        }
     },
     addToggleClass(){
-        document.querySelector("body").classList.toggle("rtl-enable");            
+        document.querySelector("body").classList.toggle("rtl-enable");
     },
     removeCollapseInClass(){
         document.getElementById("navbarCollapse").classList.remove('show');
@@ -298,7 +298,7 @@ methods: {
             }
         }
     }
-      
+
   },
   created() {
     window.addEventListener("scroll", this.handleScroll);
@@ -315,6 +315,6 @@ methods: {
 </script>
 <style>
    .scrollHeader{
-      background-color: #1565c0;
+      background-color: #575756;
    }
 </style>

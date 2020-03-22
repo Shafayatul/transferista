@@ -8,7 +8,7 @@
             <div class="rtl-layout" @click="addToggleClass()"><a href="javascript:void(0);">RTL</a></div>
             <div class="container">
                 <router-link class="navbar-brand" to="/home" routerLinkActive="active-link">
-                    <img src="/static/img/transferista-logo.png" class="img-fluid" width="110" height="37">
+                    <img src="/static/img/logo_1.png" class="img-fluid" width="114" height="39">
                 </router-link>
 
                 <button

@@ -15,7 +15,6 @@ router.afterEach(() => {
    window.scroll(0,0);
   }
 })
-alert();
 
 Vue.use(VueGoogleMaps, {
     load: {

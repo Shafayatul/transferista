@@ -12,9 +12,11 @@ router.afterEach(() => {
   const contentWrapper = document.querySelector(".v-content__wrap");
   if(contentWrapper !== null){
    contentWrapper.scrollTop = 0;
-   window.scroll(0,0); 
+   window.scroll(0,0);
   }
 })
+alert();
+
 Vue.use(VueGoogleMaps, {
     load: {
       key: 'AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo',
@@ -89,5 +91,3 @@ const app = new Vue({
        immediate: true
     },
 });
-
-

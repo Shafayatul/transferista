@@ -3,7 +3,7 @@
    <!--  Top menu -->
         <nav
             id="mainNav"
-            class="navbar navbar-dark bg-dark fixed-top bg-primary"
+            class="navbar navbar-expand-md navbar-dark fixed-top bg-primary"
             >
             <div class="rtl-layout" @click="addToggleClass()"><a href="javascript:void(0);">RTL</a></div>
             <div class="container">

@@ -1,12 +1,14 @@
 <template>
 	<div>
    <!--  Top menu -->
-        
-						<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <nav
+            id="mainNav"
+            class="navbar navbar-dark bg-dark fixed-top bg-primary"
+            >
             <div class="rtl-layout" @click="addToggleClass()"><a href="javascript:void(0);">RTL</a></div>
             <div class="container">
                 <router-link class="navbar-brand" to="/home" routerLinkActive="active-link">
-                    <img src="/static/img/logo_3.png" class="img-fluid" width="178" height="26">
+                    <img src="/static/img/logo_white.svg" class="img-fluid" width="150" height="22">
                 </router-link>
 
                 <button

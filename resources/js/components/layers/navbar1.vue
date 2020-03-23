@@ -8,7 +8,7 @@
             <div class="rtl-layout" @click="addToggleClass()"><a href="javascript:void(0);">RTL</a></div>
             <div class="container">
                 <router-link class="navbar-brand" to="/home" routerLinkActive="active-link">
-                    <img src="/static/img/logo_2.png" class="img-fluid" width="114" height="39">
+                    <img src="/static/img/logo_3.png" class="img-fluid" width="178" height="26">
                 </router-link>
 
                 <button

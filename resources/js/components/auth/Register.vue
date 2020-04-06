@@ -48,7 +48,7 @@
               <div class="card border-0 card-shadow">
                 <form  class="session-form mb-4" @submit.prevent="register">   
                   <div class="social-widget mb-4">
-                    <h2 class="text-capitalize font-2x">Sign Up</h2>
+                    <h2 class="text-capitalize font-2x mb-4">Sign Up</h2>
                 
                   </div>
                   <!-- Social widget closed -->

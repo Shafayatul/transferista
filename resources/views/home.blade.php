@@ -31,10 +31,10 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
         <div id="app" class="v-content__wrap">
-        <div id="xp-wrapper" >
-            <app-home></app-home>
+            <div id="xp-wrapper" >
+                <app-home></app-home>
+            </div>
         </div>
-      </div>
         <script src="{{asset('front/js/vendor/jquery.js') }}"></script>
         <script src="{{asset('front/js/vendor/jquery-ui.min.js') }}"></script>
         <script src="{{asset('front/js/vendor/owl.carousel.min.js') }}"></script>

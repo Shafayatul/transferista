@@ -1,9 +1,9 @@
 <template>
   <!-- Sign Up Layout -->
-  <div class="session-wrapper fade-in-up sign-up-page" style="background-image: url('/public/images/office-1209640_1920.jpg'); background-color: rebeccapurple; ">
+  <div class="session-wrapper fade-in-up sign-up-page">
     <div class="container container-full-width">
       <div class="row">
-        <div class="col-sm-12 col-md-11 col-lg-10 mx-auto"> 
+        <div class="col-sm-12 col-md-11 col-lg-10 mx-auto">
           <div class="row no-gutters align-items-center">
             <div class="col-sm-12 col-md-6 d-xs-none">
               <div class="card text-white border-rad shadow-md border-0">
@@ -44,15 +44,14 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-12 col-md-6">
-              <div class="card border-0 card-shadow">
+            <div class="col-sm-12 col-md-6 py-4">
+              <div class="card border-0 p-5 card-shadow">
                 <form  class="session-form mb-4" @submit.prevent="register">   
                   <div class="social-widget mb-4">
-                    <h2 class="text-capitalize font-2x">Sign Up</h2>
+                    <h2 class="text-capitalize font-2x mb-4">Sign Up</h2>
                 
                   </div>
                   <!-- Social widget closed -->
-                    
                     <div class="form-group">
                         <label for="name">Frist Name</label>
                     
@@ -61,13 +60,12 @@
                             <strong> <label v-if="errors.first_name" class="help-block p-2" role="alert" >{{errors.first_name[0]}}</label></strong>
                         </div>
                     </div>
-                    <div class="form-group">
+                    
                     <label for="last_name">Last Name</label>
                 
                     <div class="input-group" :class="{error: errors.email}">
-                        <input v-model="form.last_name" :class="{error: errors.name}" class="form-control form-control-lg" type="text" placeholder="Last Name" id="last_name" name="last_name">
+                        <input v-model="form.last_name" :class="{error: errors.name}" class="form-control form-control-lg" type="text" placeholder="Frist Name" id="last_name" name="last_name">
                         <strong><label  v-if="errors.last_name" class="help-block p-2" role="alert">{{errors.last_name[0]}}</label></strong>
-                    </div>
                     </div>
                     <div class="form-group">
                         <label class="name">Email</label>
@@ -88,7 +86,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mb-4">
                     <label for="confirm">Confirm Password</label>
                    
                         <div class="input-group" :class="{error: errors.password}">
@@ -99,7 +97,7 @@
                 <div class="form-row">
                     <div class="name"></div>
                        
-                        <button class="btn btn-primary btn-block btn-lg submit-btn customBtn" type="submit">Register</button>
+                        <button class="btn btn-primary btn-block btn-lg submit-btn" type="submit">Register</button>
                         <p class="pt-1">All ready signed-up ? 
                             <router-link to="/login">
                                 <a>Log-in</a>

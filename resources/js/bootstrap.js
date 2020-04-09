@@ -11,8 +11,8 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-    // require('mdbvue');
 } catch (e) {}
+
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
  * to our Laravel back-end. This library automatically handles sending the
@@ -21,24 +21,7 @@ try {
 
 window.axios = require('axios');
 
-
-  
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-
-const passportToken  = `Bearer ${localStorage.getItem('token')}`;
-window.axios.defaults.headers.common['Authorization'] = passportToken;
-
-
-
-let token = document.head.querySelector('meta[name="csrf-token"]');
-
-if (token) {
-    window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-    console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
@@ -46,18 +29,13 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
-import Echo from 'laravel-echo';
+// import Echo from 'laravel-echo';
 
-window.Pusher = require('pusher-js');
+// window.Pusher = require('pusher-js');
 
-window.Echo = new Echo({
-    broadcaster: 'pusher',
-    key: 'ac11347c5fd2b32684fa',
-    cluster: 'ap2',
-    forceTLS: true,
-    auth: {
-        headers: {
-            Authorization:  passportToken
-        },
-    },
-});
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     encrypted: true
+// });

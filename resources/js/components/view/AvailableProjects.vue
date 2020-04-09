@@ -106,79 +106,6 @@
         <ServiceSection />
       </div>
     </div>
-   
-
-    <!-- <div class="feature-section section-gap  bg-light">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-md-4 align-self-center bg-img pr-5" style="padding-left:8rem">
-            <h2 class="mb-3">How It Worked</h2>
-            <p class="mb-4">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Rem, repellendus. Voluptas expedita ducimus minima. amet consectetur adipisicing elit. Rem, repellendus. Voluptas expedita ducimus minim</p>
-            <a href="#" class="btn btn-primary">Get Started</a>
-          </div>
-
-          <div class="col-md-8">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="step-item step-1">
-                  <div class="line-sep"></div>
-                  <div class="step-item-content">
-                    <div class="my-3">
-                      <i class="icon font-2x ion-md-analytics"></i>
-                    </div>
-                    <div class="d-flex">
-                      <div class="step-no">1</div>
-
-                      <div>
-                        <h4 class="mb-3">Analysis</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sunt consectetur harum officiis soluta vitae amet fugit corrupti dolorem excepturi ipsa</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="step-item step-2">
-                  <div class="line-sep"></div>
-                  <div class="step-item-content">
-                    <div class="my-3">
-
-							 <i class="icon font-2x ion-md-barcode"></i>
-                    </div>
-                    <div class="d-flex">
-                      <div class="step-no">2</div>
-
-                      <div>
-                        <h4 class="mb-3">Implementation</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sunt consectetur harum officiis soluta vitae amet fugit corrupti dolorem excepturi ipsa</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="step-item step-3">
-                  <div class="line-sep"></div>
-                  <div class="step-item-content">
-                    <div class="my-3">
-                      <i class="icon font-2x ion-md-umbrella"></i>
-                    </div>
-                    <div class="d-flex">
-                      <div class="step-no">3</div>
-
-                      <div>
-                        <h4 class="mb-3">Support</h4>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod sunt consectetur harum officiis soluta vitae amet fugit corrupti dolorem excepturi ipsa</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
     <div class="mob-feature bg-light">
       <div class="section-gap">
         <div class="container">
@@ -212,9 +139,9 @@
        <div class="section-title-wrapper">
           <div class="row">
             <div class="col-sm-12 col-md-6 mx-auto text-center">
-              <h2>Our Recent Blogs</h2>
+              <h2>Our Services</h2>
               <p class="mb-0 lead">
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500
+                Transferista is the new way of transportation
               </p>
             </div>
           </div>
@@ -233,7 +160,7 @@
     <div class="contact-section">
       <ContactInfo></ContactInfo>
     </div>
-    <div class="send-msg-form bg-gray-dark style-form section-gap">
+    <!--div class="send-msg-form bg-gray-dark style-form section-gap">
 
         <div class="container">
 			<div class="section-title-wrapper">
@@ -246,8 +173,8 @@
 			</div>
           <div class="row">
             <div class="col-sm-12 col-md-10 col-lg-7 mx-auto">
-              <!-- <SendMessage></SendMessage> -->
-              <form>
+              <! <SendMessage></SendMessage> -->
+              <!--form>
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group mb-4">
@@ -282,7 +209,7 @@
           </div>
         </div>
   
-    </div>
+    </div-->
     </div>
 </template>
 <script src="vue-google-maps.js"></script>

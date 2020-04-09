@@ -116,7 +116,7 @@ section {
 
 body {
   margin: 0;
-  font-family: "Muli", sans-serif;
+  font-family: "Muli", sans-serif, -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.7;
@@ -4027,7 +4027,7 @@ tbody.collapse.show {
   background-color: #fff;
   background-clip: border-box;
   border: 1px solid rgba(0, 0, 0, 0.125);
-  /*border-radius: 0.35rem;*/
+  border-radius: 0.35rem;
 }
 
 .card-body {
@@ -4113,7 +4113,7 @@ tbody.collapse.show {
 
 .card-img {
   width: 100%;
-  /*border-radius: calc(0.35rem - 1px);*/
+  border-radius: calc(0.35rem - 1px);
 }
 
 .card-img-top {
@@ -5686,10 +5686,6 @@ button.close {
 
 .bg-primary {
   background-color: #3C3C3B !important;
-}
-li#menuNo3 a {
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 8px;
 }
 
 a.bg-primary:focus,
@@ -7294,7 +7290,7 @@ a.bg-dark:hover {
 }
 
 .p-5 {
- /* padding: 3.6rem !important;*/
+  padding: 3.6rem !important;
 }
 
 .pt-5 {
@@ -9252,6 +9248,7 @@ body {
 
 .navbar.fixed-top {
   position: fixed;
+  border-radius: 0;
 }
 
 select,
@@ -9311,6 +9308,10 @@ a:hover {
   cursor: pointer;
 }
 
+.border-rad,
+.card-img {
+  border-radius: 1rem;
+}
 
 .border-rad-top {
   border-top-left-radius: 0.8rem;
@@ -9770,6 +9771,9 @@ textarea::-moz-placeholder {
     font-weight: 600;
     text-transform: none;
   }
+  ul#main li a {
+    font-family: Roboto;
+}
 
   .main-menu a .fa-search {
     position: absolute;
@@ -10363,6 +10367,10 @@ p {
 .width-paragraph span {
   width: calc(100% - 25px);
 }
+li#menuNo3 a {
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    border-radius: 3px;
+}
 
 .sign-up-page .card-img-overlay.border-rad.p-4,
 .sign-up-page .card-img-overlay.p-4.card-img {
@@ -10372,32 +10380,7 @@ p {
           align-items: center;
   background-color: rgba(23, 22, 22, 0.5);
 }
-/*.session-wrapper.fade-in-up.sign-up-page {
-  background-color: rebeccapurple;
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 4'%3E%3Cpath stroke='%23fff' d='M0 2h4'/%3E%3C/svg%3E");
-}*/
 
-.card.border-0.card-shadow {
-  padding: 0 2rem;
-}
-h2.text-capitalize.font-2x.mb-4 {
-  margin: 5px 0;
-}
-.customBtn {
-  border-radius: 0;
-}h2.text-capitalize.font-2x.mb-4 {
-  margin: 37px 0;
-}
-form.session-form.mb-4 label {
-  font-size: 14px;
-  font-weight: 600;
-}
-form.session-form.mb-4 input {
-  font-size: 14px;
-  border-radius: 0;
-  line-height: 30px;
-  padding: 20px 15px;
-}
 .thankyou-wrap .card-img-overlay {
   background-color: rgba(23, 22, 22, 0.5);
 }

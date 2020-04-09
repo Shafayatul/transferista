@@ -1,18 +1,33 @@
 <template>
    <div class="session-wrapper fade-in-up">
+      <div id="login" class="view jarallax page-wrapper" data-jarallax='{"speed": 0.2}'>
+        <div class="mask rgba-stylish-light">
+            <div class="container h-100 d-flex justify-content-center align-items-center">
+                <div class="row pt-5 mt-3">
+                    <div class="col-md-12 mb-3">
+                        <div class="intro-info-content text-center">
+                            <h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s">Sign In</h1>
+                            <h5 class="text-uppercase white-text mb-5 mt-1 font-weight-bold wow fadeInDown" data-wow-delay="0.3s"> </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="loginPge">
       <div class="container container-full-width">
-         <div class="row">
+      <div class="row" style="margin-top: -100px;">
             <div class="col-sm-12 col-md-11 col-lg-9 mx-auto">
                <div class="row no-gutters align-items-center">
-                  <div class="col-sm-12 col-md-6 d-xs-none">
+                  <div class="col-sm-12 col-md-6 d-xs-none bg-image card-shadow">
                      <div class="card text-white border-rad shadow border-0 z-index">
-                        <img class="card-img img-fluid" src="/static/img/login.png" alt="Card image" width="400" height="500" />
+                        
                      </div>
                   </div>
                   <div class="col-sm-12 col-md-6">
-                     <div class="card border-0 p-5 rounded-0 card-shadow">
+                     <div class="card border-0 rounded-0 card-shadow">
                     
-                        <form @submit.prevent="login">
+                        <form @submit.prevent="login" class="session-form">
                            <div class="social-widget mb-4">
                               <h2 class="text-capitalize font-2x mb-4">Sign In</h2>
                            </div><!-- Social widget closed -->
@@ -29,14 +44,12 @@
                             <span v-if="errors" class="help-block" role="alert">
                                 <strong>{{errors}}</strong>
                             </span>
-                            <div class="form-row input-group ">
-
-                                <div class="col-lg-9 offset-3 ">
+                            <div class="form-row input-group regBtn">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember" v-model="form.remember_me">
-                                        <label class="form-check-label pt-1" for="remember">
+                                        <label class="form-check-label pt-1 remember" for="remember">
                                             Remember Me
                                         </label><br>
-                                <button class="btn btn-primary btn-block btn-lg submit-btn" type="submit">Login</button>
+                                <button class="btn btn-primary btn-block btn-lg submit-btn customBtn" type="submit">Login</button>
                                     
                                     <p class="pt-1">Have you forgotten your password?
                                         <router-link to="/forgot-password">
@@ -48,8 +61,6 @@
                                             <a>Sign-up</a>
                                         </router-link>
                                     </p>
-
-                            </div>
                             </div>
                         </form>
                     </div>
@@ -58,6 +69,7 @@
             </div>
          </div>
       </div><!-- container closed -->
+     </div> 
    </div><!-- session Wrapper closed -->
 </template>
 <script>
@@ -97,6 +109,81 @@ export default {
 <style scoped>
 #profile-body{
   background: red !important;
+}
+.page-wrapper{
+  background-image: url('/../static/img/transferista_4.jpg');
+ -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  overflow: hidden;
+  
+}
+.remember {
+    position: relative;
+    top: -5px;
+    font-size: 14px;
+}
+.sign-up-page {
+    margin: 30px 0 40px;
+}
+.loginPge{
+    margin-top:30px;
+}
+.bg-image{ 
+  background-image: url('/../static/img/login.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  margin: 0px;
+  padding-left: 0;
+  min-height: 650px;
+  
+}
+.customBtn {
+  border-radius: 0;
+}
+.sign-up-using {
+  margin: 0 2rem;
+}
+form.session-form input {
+    font-size: 14px;
+    border-radius: 0;
+}
+.form-row.regBtn {
+    margin: 0px;
+}
+
+.sign-up-using.text-center {
+    margin: 0 2rem;
+}
+.session-wrapper {
+  padding-top: 0 !important;
+}
+.white-text {
+    color: #fff;
+    font-weight: 900;
+}
+form.session-form {
+    padding: 30px;
+}
+.card.border-0.card-shadow {
+    min-height: 650px;
+    border-radius: 0;
+}
+.jarallax {
+    height: 100px !important;
+    min-height: 600px;
+}
+.rgba-stylish-light {
+    background-color: rgba(62,69,81,0.5);
+    height: 100%;
 }
 .card-5{
     max-width: 70%;

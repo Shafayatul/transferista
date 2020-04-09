@@ -2,27 +2,39 @@
    "data":[
       {
         "image_path":"./static/img/1-blog.jpg",
-        "title":" How Design Works",
-        "content":"Quisque et tincidunt ex, ut mollis ante. Vestibulum vulputate eget nulla sed tincidunt. Nam euismod sem...",
+        "title":"Transferista",
+        "content":"Simple, fast and very handy...",
         "user_icon":"fa-user-circle-o",
         "user_name":"Admin",
-        "date":"jul-16-2019"
+        "date":"Apr-02-2020",
+        "link": "/how-it-works"
       },
       {
         "image_path":"./static/img/2-blog.jpg",
-        "title":" Power Of Technology",
-        "content":"Quisque et tincidunt ex, ut mollis ante. Vestibulum vulputate eget nulla sed tincidunt. Nam euismod sem...",
+        "title":"Drop the Bag",
+        "content":"Simple store your luggage...",
         "user_icon":"fa-user-circle-o",
         "user_name":"Admin",
-        "date":"jul-20-2019"
+        "date":"Mar-20-2020",
+        "link": "https://dropthebag.com/"
       },
       {
         "image_path":"./static/img/3-blog.jpg",
-        "title":" Mobile Experience",
-        "content":"Quisque et tincidunt ex, ut mollis ante. Vestibulum vulputate eget nulla sed tincidunt. Nam euismod sem...",
+        "title":" Mobile Experience - Android",
+        "content":"Stay connected with transferista using your Android Mobile...",
         "user_icon":"fa-user-circle-o",
         "user_name":"Admin",
-        "date":"jul-25-2019"
+        "date":"Feb-25-2020",
+        "link": "#"
+      },
+      {
+        "image_path":"./static/img/3-blog.jpg",
+        "title":" Mobile Experience - Apple",
+        "content":"Stay connected with transferista using your Apple Iphone...",
+        "user_icon":"fa-user-circle-o",
+        "user_name":"Admin",
+        "date":"Feb-25-2020",
+        "link": "#"
       }
    ]
 }

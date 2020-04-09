@@ -8,6 +8,7 @@ import ProjectDetails from '../components/view/ProjectDetails'
 import google from '../components/googlemap'
 import markers from '../components/view/Markers'
 import register from '../components/auth/Register'
+import partnerRegister from '../components/auth/PartnerRegister'
 import login from '../components/auth/Login'
 import role from '../components/view/Role'
 import profile from '../components/view/Profile'
@@ -16,6 +17,8 @@ import UserCustomerForm from '../components/view/UserCustomerForm'
 import UserCompanyTransferistaForm from '../components/view/UserCompanyTransferistaForm'
 import Employee from '../components/view/EmployeeList'
 import Car from '../components/view/CarsList'
+import HowItWorks from '../components/view/HowItWorks'
+import Impressum from '../components/view/Impressum'
 import Driver from '../components/view/DriversList'
 import show from '../components/view/Show'
 import logout from '../components/layers/Logout'
@@ -35,6 +38,9 @@ import test from '../components/view/test'
 import reset from '../components/view/ForgotPassword'
 import NewPassword from '../components/view/Reset'
 import TransferistaInfo from '../components/view/TransferistaDetails'
+import TermConditions from '../components/view/TermConditions'
+import Gdpr from '../components/view/Gdpr'
+import About from '../components/view/AboutUs'
 const routes = [
     { path: '/',redirect: '/home' },
     {path:'/home',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Home' }},
@@ -42,7 +48,8 @@ const routes = [
     {path:'/project-details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate,name:'create', meta: { auth: false, title: 'Create' }},    
     {path:'/profile',component: profile},
-    {path:'/register',component: register, name: 'register', meta: { auth: false, title: 'Login' }},
+    {path:'/register',component: register, name: 'register', meta: { auth: false, title: 'Register' }}, 
+    {path:'/partner-register',component: partnerRegister, name: 'partnerRegister', meta: { auth: false, title: 'Partner Register' }},
     {path:'/login',component: login, name: 'login', meta: { auth: false, title: 'Login' }},
     {path:'/logout',component: logout},
     {path:'/role',component: role, name: 'role'},
@@ -68,6 +75,11 @@ const routes = [
     {path:'/reviewed',component: reviewed},
     {path:'/show',component: show},
     {path:'/forgot-password',component: reset},
+    {path:'/how-it-works',component: HowItWorks},
+    {path:'/impressum',component: Impressum, name: 'Impressum' ,meta: { auth: false, title: 'Impressum' }},
+    {path:'/term-conditions',component: TermConditions, name: 'Term & Conditions' ,meta: { auth: false, title: 'Term & Conditions' }},
+    {path:'/gdpr',component: Gdpr, name: 'GDPR' ,meta: { auth: false, title: 'GDPR' }},
+    {path:'/about',component: About},
     {path:'/paypal',component: PaypalData},
     {path:'/test',component: test},
     {path:'/reset-password/:token',component: NewPassword},

@@ -115,7 +115,7 @@
                     name: "Book",
                     type: "link"
                 },{
-                    state: "/home",
+                    state: "/how-it-works",
                     name: "How It Works",
                     type: "link"
                 },{
@@ -134,28 +134,33 @@
             ],
             footer2Menu:[
                {
-                  state: "home",
+                  state: "/home",
                   name: "Home",
                   type:"link"
                },
                {
-                  state:"sidebar-widgets",
-                  name:"Widgets",
+                  state:"/about",
+                  name:"About Us",
                   type:"link"
                },
                {
-                  state:"about",
-                  name:"About",
-                  type:"link"
-               },
-               {
-                  state:"contact",
+                  state:"/contact",
                   name:"Contact",
                   type:"link"
                },
                {
-                  state:"features",
-                  name:"Features",
+                  state:"/gdpr",
+                  name:"GDPR",
+                  type:"link"
+               },
+               {
+                  state:"/impressum",
+                  name:"Impressum",
+                  type:"link"
+               },
+               {
+                  state:"/services ",
+                  name:"Services ",
                   type:"link"
                },
                {
@@ -164,8 +169,8 @@
                   type:"link"
                },
                {
-                  state:"search",
-                  name:"Search",
+                  state:"/term-conditions ",
+                  name:"Terms & Conditions ",
                   type:"link"
                }
             ]

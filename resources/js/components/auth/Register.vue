@@ -1,52 +1,61 @@
 <template>
   <!-- Sign Up Layout -->
-  <div class="session-wrapper fade-in-up sign-up-page" style="background-image: url('/public/images/office-1209640_1920.jpg'); background-color: rebeccapurple; ">
+  
+  <div class="session-wrapper fade-in-up" >
+    <div id="home" class="view jarallax page-wrapper" data-jarallax='{"speed": 0.2}'>
+        <div class="mask rgba-stylish-light">
+            <div class="container h-100 d-flex justify-content-center align-items-center">
+                <div class="row pt-5 mt-3">
+                    <div class="col-md-12 mb-3">
+                        <div class="intro-info-content text-center">
+                            <h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s">Sign Up</h1>
+                            <h5 class="text-uppercase white-text mb-5 mt-1 font-weight-bold wow fadeInDown" data-wow-delay="0.3s"> </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="sign-up-page">
     <div class="container container-full-width">
-      <div class="row">
+      <div class="row" style="margin-top: -100px;">
         <div class="col-sm-12 col-md-11 col-lg-10 mx-auto"> 
           <div class="row no-gutters align-items-center">
-            <div class="col-sm-12 col-md-6 d-xs-none">
-              <div class="card text-white border-rad shadow-md border-0">
-                <img
-                  class="card-img w-100"
-                  src="/static/img/sign-up.png"
-                  alt="Card image"
-                  width="445"
-                  height="649"
-                />
-                <div class="card-img-overlay border-rad p-4 text-center">
+            <div class="col-sm-12 col-md-6 d-xs-none card-shadow bg-image">
+              <div class="card text-white border-rad shadow-md border-0 sub-heading">
+                <div class="sub-heading border-rad text-center">
                   <div>
                     <h2 class="text-white display-4 fw-700 text-uppercase">
                       WelCome!
                     </h2>
                     <p class="lead text-white mb-5">Register and enjoy our benifits, Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-							<div class="sign-up-using text-center">
-								<h4 class="text-white mb-4">Sign Up Using</h4>
-						   <ul class="list-inline">
-                      <li class="list-inline-item mx-2">
-                        <a href="javascript:void(0)" class="square-50 bg-facebook">
-                          <i class="fa fa-facebook-f fa-inverse"></i>
-                        </a>
-                      </li>
-                      <li class="list-inline-item mx-2">
-                        <a href="javascript:void(0)" class="square-50 bg-twitter">
-                          <i class="fa fa-twitter fa-inverse"></i>
-                        </a>
-                      </li>
-                      <!-- <li class="list-inline-item mx-2">
-                        <a href="javascript:void(0)" class="square-50 bg-google">
-                          <i class="fa fa-google-plus-g fa-inverse"></i>
-                        </a>
-                      </li> -->
-                    </ul>
-						</div>
+                    <div class="sign-up-using text-center">
+                      <h4 class="text-white mb-4">Sign Up Using</h4>
+                    <ul class="list-inline">
+                            <li class="list-inline-item mx-2">
+                              <a href="javascript:void(0)" class="square-50 bg-facebook">
+                                <i class="fa fa-facebook-f fa-inverse"></i>
+                              </a>
+                            </li>
+                            <li class="list-inline-item mx-2">
+                              <a href="javascript:void(0)" class="square-50 bg-twitter">
+                                <i class="fa fa-twitter fa-inverse"></i>
+                              </a>
+                            </li>
+                            <!-- <li class="list-inline-item mx-2">
+                              <a href="javascript:void(0)" class="square-50 bg-google">
+                                <i class="fa fa-google-plus-g fa-inverse"></i>
+                              </a>
+                            </li> -->
+                          </ul>
+                  </div>
                   </div>
                 </div>
               </div>
             </div>
             <div class="col-sm-12 col-md-6">
               <div class="card border-0 card-shadow">
-                <form  class="session-form mb-4" @submit.prevent="register">   
+                <form  class="session-form" @submit.prevent="register">   
                   <div class="social-widget mb-4">
                     <h2 class="text-capitalize font-2x mb-4">Sign Up</h2>
                 
@@ -96,7 +105,7 @@
                         </div>
                     
                     </div>
-                <div class="form-row">
+                <div class="form-row regBtn">
                     <div class="name"></div>
                        
                         <button class="btn btn-primary btn-block btn-lg submit-btn customBtn" type="submit">Register</button>
@@ -115,6 +124,7 @@
       </div>
     </div>
     <!-- container closed -->
+    </div>
   </div>         
 </template>
 <script>
@@ -153,12 +163,80 @@ export default {
 </script>
 <style scoped>
 .page-wrapper{
-  background: url('/../img/bg.jpg') no-repeat center center fixed;
+  background-image: url('/../static/img/transferista_5.jpg');
  -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  width: 100%;
+  background-repeat: no-repeat;
+  height: 100%;
+  overflow: hidden;
+  
+}
+.sign-up-page {
+    margin: 30px 0 40px;
+}
+.bg-image{ 
+  background-image: url('/../static/img/sign-up.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  margin: 0px;
+  padding-left: 0;
+  min-height: 650px;
+  
+}
+.customBtn {
+  border-radius: 0;
+}
+.sign-up-using {
+  margin: 0 2rem;
+}
+form.session-form input {
+    font-size: 14px;
+    border-radius: 0;
+}
+.form-row.regBtn {
+    margin: 0px;
+}
+.sub-heading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
+.sign-up-using.text-center {
+    margin: 0 2rem;
+}
+.session-wrapper {
+  padding-top: 0 !important;
+}
+.white-text {
+    color: #fff;
+    font-weight: 900;
+}
+form.session-form {
+    padding: 30px;
+}
+.card.border-0.card-shadow {
+    min-height: 650px;
+    border-radius: 0;
+}
+.jarallax {
+    height: 100px !important;
+    min-height: 600px;
+}
+.rgba-stylish-light {
+    background-color: rgba(62,69,81,0.5);
+    height: 100%;
 }
 .card-5 {
    max-width: 70%;

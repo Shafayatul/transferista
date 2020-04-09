@@ -4,7 +4,7 @@
             <strong>An Email has been sent to your mail address</strong> 
         </div> 
         <div class="card-heading">
-            <h2 class="title">Forgot Password ?</h2>
+            <h2 class="title">Forgot Password  hnnbmb ?</h2>
         </div>
         <div class="card-body">
             

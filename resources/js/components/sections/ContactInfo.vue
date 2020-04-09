@@ -41,8 +41,38 @@
                   <i class="ion-ios-pin font-3x text-warning"></i>
                 </div>
                 <div class>
-                  <h4 class="mb-2">Our Location</h4>
-                  <div class="mr-4">{{info.data.location}}</div>
+                  <h4 class="mb-2">Contact Us</h4>
+                  <form id="contact_us">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <input
+                        type="text"
+                        class="form-control form-control-lg"
+                        id="inputEmail4"
+                        placeholder="Your Name"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <input
+                        type="email"
+                        class="form-control form-control-lg"
+                        id="inputEmail4"
+                        placeholder="Email"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <textarea name id class="form-control form-control-lg" placeholder="Message"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn text-white btn-success btn-block">Send</button>
+              </form>
                 </div>
               </div>
             </div>
@@ -51,21 +81,23 @@
                 <div class="mr-4">
                   <i class="ion-ios-chatboxes font-3x text-warning"></i>
                 </div>
-                <div class>
+                <div class id="contact_info">
                   <h4 class="mb-2">Contact Info</h4>
-                  <span class="truncated-parent" v-for="email of info.data.email" :key="email.value">
+                  <span class="truncated-parent mb-2" v-for="email of info.data.email" :key="email.value">
                     <span class="truncated" v-if="email.status == 1">
                       <a class="d-block mb-1 text-dark" href="#">{{email.value}}</a>
                     </span>
                   </span>
-                  <span v-for="phone of info.data.phone" :key="phone.value">
+                  <span class="mb-2">
+                    Mag. Bianca Lehrner<br> Himmelpfortgasse 20<br> 1010 Wien <br> Austria
+                  </span>
+                  <span class="mb-2" v-for="phone of info.data.phone" :key="phone.value">
                     <span v-if="phone.status == 1">
                       <a href="phone.value" class="d-block mb-1 text-dark">{{phone.value}}</a>
                     </span>
                   </span>
-                  <span v-for="hour of info.data.business_hours" :key="hour.id">
-                    <span v-if="hour.status == 1">{{hour.value}}</span>
-                  </span>
+                  <span>Wirtschaftskammer Wien</span>
+                  
                 </div>
               </div>
             </div>
@@ -94,3 +126,11 @@ export default {
   }
 };
 </script>
+<style scoped>
+form#contact_us input, form#contact_us textarea {
+    font-size: 14px;
+}
+#contact_info a {
+    font-size: 1rem;
+}
+</style>

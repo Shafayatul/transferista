@@ -25,23 +25,4 @@ class HomeController extends Controller
     {
         return view('home');
     }
-
-    public function FirstLogin(Request $request)  {
-
-      if ($request->typ == "transferista") {
-
-        return view('usertransferista');
-
-      } elseif ($request->typ == "b2c") {
-
-        return view('userprivate');
-
-      } elseif ($request->typ == "b2b") {
-
-        return view('usercompany');
-
-      }
-
-
-    }
 }

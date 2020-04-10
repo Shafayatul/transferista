@@ -599,9 +599,7 @@ figure {
         Requst Quote start
 *************************************/
 .request-quote{
-    /* background-color: #4d6cf1; */
-    padding: 135px 0 80px;
-    margin-top: -267px;
+    margin-top: 200px;
 }
 .request-quote .haddings {
     margin-top: -115px;

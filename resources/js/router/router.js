@@ -41,15 +41,19 @@ import TransferistaInfo from '../components/view/TransferistaDetails'
 import TermConditions from '../components/view/TermConditions'
 import Gdpr from '../components/view/Gdpr'
 import About from '../components/view/AboutUs'
+import Home from '../components/view/Home'
+import ContactUs from '../components/view/ContactUs'
+import Services from '../components/view/Services'
 const routes = [
     { path: '/',redirect: '/home' },
-    {path:'/home',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Home' }},
+    {path:'/home',component: Home,name: 'home' ,meta: { auth: false, title: 'Home' }},
+    //{path:'/home',component: AvailableProjects,name: 'home' ,meta: { auth: false, title: 'Home' }},
     // {path:'/position',component: google},
     {path:'/project-details/:id',component: ProjectDetails,name:'singleProject', meta: { auth: false, title: 'Project Details' }},
     {path:'/project/create',component: ProjectCreate,name:'create', meta: { auth: false, title: 'Create' }},    
     {path:'/profile',component: profile},
     {path:'/register',component: register, name: 'register', meta: { auth: false, title: 'Register' }}, 
-    {path:'/partner-register',component: partnerRegister, name: 'partnerRegister', meta: { auth: false, title: 'Partner Register' }},
+    {path:'/partner-register', component: partnerRegister, name: 'Partner Register', meta: { auth: false, title: 'Partner Register' }},
     {path:'/login',component: login, name: 'login', meta: { auth: false, title: 'Login' }},
     {path:'/logout',component: logout},
     {path:'/role',component: role, name: 'role'},
@@ -78,6 +82,8 @@ const routes = [
     {path:'/how-it-works',component: HowItWorks},
     {path:'/impressum',component: Impressum, name: 'Impressum' ,meta: { auth: false, title: 'Impressum' }},
     {path:'/term-conditions',component: TermConditions, name: 'Term & Conditions' ,meta: { auth: false, title: 'Term & Conditions' }},
+    {path:'/contact-us',component: ContactUs, name: 'Contact Us' ,meta: { auth: false, title: 'Contact Us' }},
+    {path:'/services',component: Services, name: 'Services' ,meta: { auth: false, title: 'Services' }},
     {path:'/gdpr',component: Gdpr, name: 'GDPR' ,meta: { auth: false, title: 'GDPR' }},
     {path:'/about',component: About},
     {path:'/paypal',component: PaypalData},

@@ -123,7 +123,7 @@
                     name: "User Registration",
                     type: "link"
                 },{
-                    state: "/parnter-register",
+                    state: "/partner-register",
                     name: "Partner Registration",
                     type: "link", 
                 },{
@@ -140,12 +140,12 @@
                },
                {
                   state:"/about",
-                  name:"About Us",
+                  name:"About",
                   type:"link"
                },
                {
-                  state:"/contact",
-                  name:"Contact",
+                  state:"/contact-us",
+                  name:"Contact Us",
                   type:"link"
                },
                {
@@ -159,13 +159,8 @@
                   type:"link"
                },
                {
-                  state:"/services ",
+                  state:"/services",
                   name:"Services ",
-                  type:"link"
-               },
-               {
-                  state:"support",
-                  name:"Support",
                   type:"link"
                },
                {

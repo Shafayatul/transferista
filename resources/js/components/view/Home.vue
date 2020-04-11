@@ -20,7 +20,7 @@
                                                         <div class="form-group">
                                                             <!-- <input type="text" placeholder="Location" /> -->
                                                             <div class="form-control " style="height:3rem;">
-                                                                <gmap-autocomplete  class="no-border" placeholder="Origin"
+                                                                <gmap-autocomplete  class="no-border"  :placeholder="placeholderValue"
                                                                     @place_changed="setPlace1">
                                                                 </gmap-autocomplete>
                                                             </div>
@@ -29,7 +29,7 @@
                                                         <div class="form-group">
                                                             <!-- <input type="text" placeholder="To Destination" /> -->
                                                             <div class="form-control " style="height:3rem;">
-                                                                <gmap-autocomplete  class="no-border" placeholder="Destination"
+                                                                <gmap-autocomplete  class="no-border" placeholder="To"
                                                                     @place_changed="setPlace2">
                                                                 </gmap-autocomplete>
                                                             </div>
@@ -38,6 +38,7 @@
                                                         <div class="form-group">
                                                             <!-- <input type="text" placeholder="Person / Cargo" /> -->
                                                         <select v-model="size" class="form-control custom-select" id="exampleFormControlSelect">
+                                                            <option :value="null" disabled>Item Size: l/b/h</option>
                                                             <option value="5">S: 100cm</option>
                                                             <option value="7.5">M: 150cm</option>
                                                             <option value="10">L: 180cm</option>
@@ -91,28 +92,7 @@
             </div>
         </div>
     </div>  
-    <div class="service section-gap">
-      <div class="container">
-        <div class="section-title-wrapper">
-          <div class="row">
-            <div class="col-sm-12 col-md-6 mx-auto text-center">
-              <h2>Best In Business</h2>
-              <p class="mb-0 lead">Dicta eveniet quasi reiciendis qui eius voluptatum harum optio quibusdam illum.</p>
-				          
-            </div>
-          </div>
-        </div>
-        <ServiceSection />
-      </div>
-    </div>
-    <div class="mob-feature bg-light">
-      <div class="section-gap">
-        <div class="container">
-       
-          <MobileFeature />
-        </div>
-      </div>
-    </div>
+    <div class="mb7"></div>
 </div>
 </template>
 <script src="vue-google-maps.js"></script>
@@ -131,6 +111,7 @@ export default {
 	data(){
 		return{
             videoContent,
+            placeholderValue: 'From',
 			size: null,
 			from: null,
 			to: null,
@@ -356,6 +337,9 @@ export default {
     overflow: hidden;
     max-height: 575px;
 }
+.mb7 {
+    margin-bottom: 7rem;
+}
 .map_loc {
     height: 100% !important;
 }
@@ -424,11 +408,23 @@ button.btn.orderNow:hover {
 }
 
 .no-border{
-	border: none !important;
-	background: none !important;
 	padding: 0 !important;
 	padding-right: 5px !important;
 	margin-top: -5px !important;
+}
+::-webkit-input-placeholder {
+   color: #637282;
+}
+:-moz-placeholder { /* Firefox 18- */
+   color: #637282;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #637282;  
+}
+
+:-ms-input-placeholder {  
+   color: #637282;  
 }
 .page-item.active .page-link {
     z-index: 3 !important;
@@ -459,6 +455,9 @@ button.btn.orderNow:hover {
 }
 .v-window__next{
     right: 0%;
+}
+.quote-form input:focus {
+    outline: none;
 }
 
 </style>

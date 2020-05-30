@@ -73,7 +73,7 @@
                     <div class="bottom-footer">
                         <ul class="list-inline mb-0"  v-if="footer2Menu">
                             <li class="list-inline-item" v-for="(menu,i) of footer2Menu" :key="i">
-                            <a :href="menu.state" routerLinkActive="active-link" v-if="menu.type === 'link'" class="text-white">
+                            <a :href="menu.state" routerLinkActive="active-link" v-if="menu.type === 'link'" class="nav-link">
                                 <span>{{ menu.name }}</span>
                             </a>
                             </li>
@@ -83,16 +83,16 @@
                 <div class="col-sm-12 col-md-12 col-lg-12 mb-4">
                     <div class="social-without-bg">
                         <ul class="list-inline mb-0">
-                            <li class="list-inline-item"><a class="text-white" href="javascript:void(0)"><i class="fa fa-facebook-f"></i></a></li>
-                            <li class="list-inline-item"><a class="text-white" href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-                            <li class="list-inline-item"><a class="text-white" href="javascript:void(0)"><i class="fa fa-google-plus-g"></i></a></li>
-                            <li class="list-inline-item"><a class="text-white" href="javascript:void(0)"><i class="fa fa-pinterest"></i></a></li>
-                            <li class="list-inline-item"><a class="text-white" href="javascript:void(0)"><i class="fas fa-linkedin-in"></i></a></li>
+                            <li class="list-inline-item "><a class="nav-link" href="javascript:void(0)"><i class="fa fa-facebook-f"></i></a></li>
+                            <li class="list-inline-item"><a class="nav-link" href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
+                            <li class="list-inline-item"><a class="nav-link" href="javascript:void(0)"><i class="fa fa-google-plus-g"></i></a></li>
+                            <li class="list-inline-item"><a class="nav-link" href="javascript:void(0)"><i class="fa fa-pinterest"></i></a></li>
+                            <li class="list-inline-item"><a class="nav-link" href="javascript:void(0)"><i class="fa fa-linkedin-in"></i></a></li>
                         </ul>
                     </div>
-                </div>
-                        <div class="copright text-center col-sm-12 col-md-12 col-lg-12">
-                        <span class="text-white ">&copy; 2019, All Right Reserved </span>
+                 </div>
+                    <div class="copright text-center col-sm-12 col-md-12 col-lg-12">
+                        <span class=" ">&copy; 2019, All Right Reserved </span>
                     </div>
                 </div>
 
@@ -245,5 +245,8 @@ methods: {
 <style>
    .scrollHeader{
       background-color: #575756;
+   }
+   .nav-link{
+       color: #575756;
    }
 </style>

@@ -22,9 +22,12 @@ export default {
   -o-background-size: cover;
   background-size: cover;
   width: 100%;
+  height: 100vh;
+  padding-top: 120px;
+  padding-bottom: 120px;
 }
 .card-5{
-    max-width: 70%;
+    max-width: 40%;
     margin: 0 auto;
     display:  
 }

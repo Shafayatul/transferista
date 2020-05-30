@@ -59,8 +59,8 @@
                                                         <div class="form-group">
                                                             <!-- <input class="btn" type="submit" value="get a quote" /> -->
                                                             
-                                                                <button  @click="create" class="btn orderNow">Order now</button>
-                                                                <button  @click="create" class="btn bookAdv">Book in advance</button>
+                                                                <button  @click="create" class="btn btn-primary btn-lg submit-btn btn orderNow">Order now</button>
+                                                                <button  @click="create" class="btn btn-primary btn-lg submit-btn btn bookAdv">Book in advance</button>
                                                             
                                                         </div>
                                                     

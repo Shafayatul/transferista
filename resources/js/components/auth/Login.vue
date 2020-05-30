@@ -1,33 +1,21 @@
 <template>
-   <div class="session-wrapper fade-in-up">
-      <div id="login" class="view jarallax page-wrapper" data-jarallax='{"speed": 0.2}'>
-        <div class="mask rgba-stylish-light">
-            <div class="container h-100 d-flex justify-content-center align-items-center">
-                <div class="row pt-5 mt-3">
-                    <div class="col-md-12 mb-3">
-                        <div class="intro-info-content text-center">
-                            <h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s">Sign In</h1>
-                            <h5 class="text-uppercase white-text mb-5 mt-1 font-weight-bold wow fadeInDown" data-wow-delay="0.3s"> </h5>
-                        </div>
-                    </div>
+
+  <div class="session-wrapper fade-in-up " >
+   <div id="partner_register">
+       <div class="container container-full-width">
+            <div class="row">
+                <div class="col-sm-12 col-md-5 partnerRegContent">
+                    <h5>Are you a transferista? Be part of it</h5>
+                        <h2>Join Transferista  </h2>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="loginPge">
-      <div class="container container-full-width">
-      <div class="row" style="margin-top: -100px;">
-            <div class="col-sm-12 col-md-11 col-lg-9 mx-auto">
-               <div class="row no-gutters align-items-center">
-                  <div class="col-sm-12 col-md-6 d-xs-none bg-image card-shadow">
-                     <div class="card text-white border-rad shadow border-0 z-index">
-                        
-                     </div>
-                  </div>
-                  <div class="col-sm-12 col-md-6">
-                     <div class="card border-0 rounded-0 card-shadow">
-                    
-                        <form @submit.prevent="login" class="session-form">
+       <div class="page-wrapper"> 
+    <div class="container container-full-width">
+      <div class="row">
+            <div class="col-sm-12 col-md-offset-7 col-md-5 partnerRegFrm">
+              <div class="card border-0 card-shadow">
+                 <form @submit.prevent="login" class="session-form">
                            <div class="social-widget mb-4">
                               <h2 class="text-capitalize font-2x mb-4">Sign In</h2>
                            </div><!-- Social widget closed -->
@@ -44,11 +32,13 @@
                             <span v-if="errors" class="help-block" role="alert">
                                 <strong>{{errors}}</strong>
                             </span>
-                            <div class="form-row input-group regBtn">
-                                        <input class="form-check-input" type="checkbox" name="remember" id="remember" v-model="form.remember_me">
-                                        <label class="form-check-label pt-1 remember" for="remember">
-                                            Remember Me
-                                        </label><br>
+                            <div class="">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" v-model="form.remember_me">
+                                    <label class="form-check-label pt-1 remember" for="remember">
+                                        Remember Me
+                                    </label>
+                                </div>    
                                 <button class="btn btn-primary btn-block btn-lg submit-btn customBtn" type="submit">Login</button>
                                     
                                     <p class="pt-1">Have you forgotten your password?
@@ -63,14 +53,14 @@
                                     </p>
                             </div>
                         </form>
-                    </div>
-                  </div>
-               </div>
+             </div>
             </div>
-         </div>
-      </div><!-- container closed -->
-     </div> 
-   </div><!-- session Wrapper closed -->
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <!-- container closed -->       
 </template>
 <script>
 import navbar from "../layers/navbar1";
@@ -117,37 +107,39 @@ export default {
   -o-background-size: cover;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
-  overflow: hidden;
+    height: 550px;
+ background-position: center;
   
 }
 .remember {
-    position: relative;
-    top: -5px;
+   
+  
     font-size: 14px;
 }
-.sign-up-page {
-    margin: 30px 0 40px;
+form.session-form p {
+    font-size: 13px;
 }
-.loginPge{
-    margin-top:30px;
+#partner_register{
+
+    margin-top:210px;
 }
-.bg-image{ 
-  background-image: url('/../static/img/login.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  -ms-background-size: cover;
-  margin: 0px;
-  padding-left: 0;
-  min-height: 650px;
-  
+.partnerRegFrm {
+    position: relative;
+    top: -140px;
 }
 .customBtn {
   border-radius: 0;
+ background-color: #000;
+ border: 0;
+}
+.partnerRegContent h2 {
+    font-weight: 900;
+}
+.customBtn:hover {
+    color: #fff;
+    background-color: #000;
+    border: 0;
+    opacity: .9;
 }
 .sign-up-using {
   margin: 0 2rem;
@@ -159,7 +151,16 @@ form.session-form input {
 .form-row.regBtn {
     margin: 0px;
 }
-
+.sub-heading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100%;
+    color: #fff;
+    text-align: center;
+}
 .sign-up-using.text-center {
     margin: 0 2rem;
 }
@@ -171,10 +172,10 @@ form.session-form input {
     font-weight: 900;
 }
 form.session-form {
-    padding: 30px;
+    padding: 30px 15px;
 }
 .card.border-0.card-shadow {
-    min-height: 650px;
+   
     border-radius: 0;
 }
 .jarallax {
@@ -185,9 +186,8 @@ form.session-form {
     background-color: rgba(62,69,81,0.5);
     height: 100%;
 }
-.card-5{
-    max-width: 70%;
-    margin: 0 auto;
+.card-5 {
+   max-width: 70%;
 }
 .select2-selection__rendered {
     line-height: 50px;

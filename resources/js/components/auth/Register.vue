@@ -1,61 +1,21 @@
 <template>
-  <!-- Sign Up Layout -->
-  
-  <div class="session-wrapper fade-in-up" >
-    <div id="home" class="view jarallax page-wrapper" data-jarallax='{"speed": 0.2}'>
-        <div class="mask rgba-stylish-light">
-            <div class="container h-100 d-flex justify-content-center align-items-center">
-                <div class="row pt-5 mt-3">
-                    <div class="col-md-12 mb-3">
-                        <div class="intro-info-content text-center">
-                            <h1 class="display-3 white-text mb-5 wow fadeInDown" data-wow-delay="0.3s">Sign Up</h1>
-                            <h5 class="text-uppercase white-text mb-5 mt-1 font-weight-bold wow fadeInDown" data-wow-delay="0.3s"> </h5>
-                        </div>
-                    </div>
+
+  <div class="session-wrapper fade-in-up " >
+   <div id="partner_register">
+       <div class="container container-full-width">
+            <div class="row">
+                <div class="col-sm-12 col-md-5 partnerRegContent">
+                    <h5>Are you a transferista? Be part of it</h5>
+                        <h2>Join Transferista  </h2>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="sign-up-page">
+       <div class="page-wrapper"> 
     <div class="container container-full-width">
-      <div class="row" style="margin-top: -100px;">
-        <div class="col-sm-12 col-md-11 col-lg-10 mx-auto"> 
-          <div class="row no-gutters align-items-center">
-            <div class="col-sm-12 col-md-6 d-xs-none card-shadow bg-image">
-              <div class="card text-white border-rad shadow-md border-0 sub-heading">
-                <div class="sub-heading border-rad text-center">
-                  <div>
-                    <h2 class="text-white display-4 fw-700 text-uppercase">
-                      WelCome!
-                    </h2>
-                    <p class="lead text-white mb-5">Register and enjoy our benifits, Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
-                    <div class="sign-up-using text-center">
-                      <h4 class="text-white mb-4">Sign Up Using</h4>
-                    <ul class="list-inline">
-                            <li class="list-inline-item mx-2">
-                              <a href="javascript:void(0)" class="square-50 bg-facebook">
-                                <i class="fa fa-facebook-f fa-inverse"></i>
-                              </a>
-                            </li>
-                            <li class="list-inline-item mx-2">
-                              <a href="javascript:void(0)" class="square-50 bg-twitter">
-                                <i class="fa fa-twitter fa-inverse"></i>
-                              </a>
-                            </li>
-                            <!-- <li class="list-inline-item mx-2">
-                              <a href="javascript:void(0)" class="square-50 bg-google">
-                                <i class="fa fa-google-plus-g fa-inverse"></i>
-                              </a>
-                            </li> -->
-                          </ul>
-                  </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-12 col-md-6">
+      <div class="row">
+            <div class="col-sm-12 col-md-offset-7 col-md-5 partnerRegFrm">
               <div class="card border-0 card-shadow">
-                <form  class="session-form" @submit.prevent="register">   
+                  <form  class="session-form" @submit.prevent="register">   
                   <div class="social-widget mb-4">
                     <h2 class="text-capitalize font-2x mb-4">Sign Up</h2>
                 
@@ -123,9 +83,8 @@
         </div>
       </div>
     </div>
-    <!-- container closed -->
     </div>
-  </div>         
+    <!-- container closed -->       
 </template>
 <script>
 import navbar from "../layers/navbar1";
@@ -169,29 +128,36 @@ export default {
   -o-background-size: cover;
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100%;
-  overflow: hidden;
+   height: 550px;
   
 }
 .sign-up-page {
     margin: 30px 0 40px;
 }
-.bg-image{ 
-  background-image: url('/../static/img/sign-up.png');
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  -moz-background-size: cover;
-  -webkit-background-size: cover;
-  -o-background-size: cover;
-  -ms-background-size: cover;
-  margin: 0px;
-  padding-left: 0;
-  min-height: 650px;
-  
+form.session-form p {
+    font-size: 13px;
+}
+#partner_register{
+
+    margin-top:210px;
+}
+.partnerRegFrm {
+    position: relative;
+    top: -140px;
 }
 .customBtn {
-  border-radius: 0;
+ border-radius: 0;
+ background-color: #000;
+ border: 0;
+}
+.partnerRegContent h2 {
+    font-weight: 900;
+}
+.customBtn:hover {
+    color: #fff;
+    background-color: #000;
+    border: 0;
+    opacity: .9;
 }
 .sign-up-using {
   margin: 0 2rem;
@@ -224,10 +190,10 @@ form.session-form input {
     font-weight: 900;
 }
 form.session-form {
-    padding: 30px;
+    padding: 30px 15px;
 }
 .card.border-0.card-shadow {
-    min-height: 650px;
+   
     border-radius: 0;
 }
 .jarallax {

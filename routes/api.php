@@ -122,4 +122,11 @@ Route::group(['middleware' => ['auth:api']], function() {
     Route::get('transferista','Api\DriversController@email');
     Route::post('position', 'PositionsController@sendPosition');
     Route::post('send-position', 'PositionsController@location');
+
+    //Rate
+    Route::get('rates', 'Api\RatesController@index');
+    Route::post('rates', 'Api\RatesController@store');
+    Route::get('rates/{id}', 'Api\RatesController@show');
+    Route::post('rates/{id}', 'Api\RatesController@update');
+    Route::delete('rates/{id}', 'Api\RatesController@destroy');
 });

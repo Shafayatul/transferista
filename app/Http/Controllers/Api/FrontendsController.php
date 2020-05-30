@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\ProjectResource;
 use App\Project;
 use App\Bid;
+use App\Rate;
 use Auth;
 
 class FrontendsController extends Controller

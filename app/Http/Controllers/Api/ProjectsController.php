@@ -18,6 +18,7 @@ use App\Mail\Credits;
 use App\Mail\Invoices;
 use App\Invoice;
 use App\Credit;
+use App\Rate;
 use PDF;
 
 class ProjectsController extends Controller
@@ -64,7 +65,13 @@ class ProjectsController extends Controller
             'distance'            => 'required',
         ]);
 
-        $estimated_cost = (float)$request->distance*1.5+(float)$request->project_size;
+        $rate = Rate::where('country', $request->origin_country)->first();
+
+        if($rate != null){
+            $estimated_cost = (float)$request->distance*(float)$rate->amount+(float)$request->project_size;
+        }else{
+            $estimated_cost = (float)$request->distance*1.5+(float)$request->project_size;
+        }
 
         $project                      = new Project;
         $project->project_owner_id    = Auth::id();
@@ -111,7 +118,13 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
 
-        $estimated_cost = (float) $request->distance * 1.5 + (float) $request->project_size;
+        $rate = Rate::where('country', $request->origin_country)->first();
+
+        if($rate != null){
+            $estimated_cost = (float)$request->distance*(float)$rate->amount+(float)$request->project_size;
+        }else{
+            $estimated_cost = (float)$request->distance*1.5+(float)$request->project_size;
+        }
 
         $project                      = Project::findOrFail($id);
         $project->project_owner_id    = Auth::id();

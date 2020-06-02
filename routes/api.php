@@ -16,6 +16,8 @@
 // });
 Route::post('payment/success', 'Api\PaymentsController@paymentSuccess');
 Route::get('transferista-details/{id}', 'Api\UsersController@transferistaDetails');
+Route::get('get-currency/{country}', 'Api\RatesController@getCurrency');
+
 Route::group([
     'prefix' => 'password'
 ], function () {

@@ -38,7 +38,7 @@
 
                     <li class="dropdown  nav-item" v-show="loggedIn">
                             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user" aria-expanded="true">
-                        <img alt="image" :src="'/img/avatar-1.png'" class="rounded-circle mr-1">
+                        <img width="40" alt="image" :src="'/img/avatar-1.png'" class="rounded-circle mr-1">
                         <div class="d-sm-none d-lg-inline-block">{{name}}</div></a>
                         <div class="dropdown-menu dropdown-menu-right ">
                             <!-- <div class="dropdown-title">

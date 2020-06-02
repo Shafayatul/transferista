@@ -25,6 +25,31 @@ class User{
         }
     
     }
+    SocialLogin(data){       
+        axios.post('sociallogin/',data)
+        .then(res=>this.responseAftersocalLogin(res))
+        .catch(error=>{ return error })
+    } 
+    responseAftersocalLogin(res){
+        const access_token = res.data.access_token
+        const username = res.data.user.name
+        const expiration = res.data.expires_at
+        if(res.data.user.roles[0].name == 'customer'){
+            console.log('if')
+            console.log(res.data.user.roles[0].name)
+            const role = res.data.user.roles[0].name 
+            AppStorage.store(username,access_token,expiration,role)
+            window.location = '/profile/user'
+           
+        }else{
+            console.log(res.data.user.roles[0].name)
+            console.log('else')
+            const role= false;
+            AppStorage.store(username,access_token,expiration,role)
+            window.location = '/role'
+        }
+    
+    }
     hasToken(){
         const storedToken = AppStorage.getToken();
         if(storedToken){
@@ -59,6 +84,7 @@ class User{
     }
     customer(){
         if(this.loggedIn()){
+            console.log(this.role())
             if(this.role() === 'customer'){
                 return true;
             }

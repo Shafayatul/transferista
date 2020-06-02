@@ -111,4 +111,11 @@ class RatesController extends Controller
             'msg' => 'Rate deleted'
         ]);
     }
+
+    public function getCurrency($country){
+        $rate = Rate::where('country', $country)->first();
+        return response()->json([
+            'rate' => $rate
+        ]);
+    }
 }

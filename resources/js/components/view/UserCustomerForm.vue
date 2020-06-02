@@ -5,81 +5,39 @@
         </div>
         <div class="card-body">
             <form @submit.prevent="userInfo">
-                <div class="form-row m-b-55">
-                    <div class="name">Address</div>
-                    <div class="value">
-                        <div class="row row-space">
-                            <div class="col-6">
-                                <div class="input-group-desc" >
-                                    <input v-model="form.address" class="input--style-5" type="text" name="Address">
-                                    <span v-if="errors.address" class="help-block" role="alert">
-                                        <strong>{{errors.address[0]}}</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">Zip</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.zip}">
-                            <input v-model="form.zip" class="input--style-5"  name="zip">
-                            <span v-if="errors.zip" class="help-block" role="alert">
-                                <strong>{{errors.zip[0]}}</strong>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="name">Town</div>
-                    <div class="value" >
-                        <div class="input-group">
-                            <input v-model="form.town" class="input--style-5" type="text" name="town">
-                        </div>
-                        <span v-if="errors.town" class="help-block" role="alert">
-                            <strong>{{errors.town[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">Country</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.country}">
-                            <input v-model="form.country" class="input--style-5" type="text" name="country">
-                        </div>
-                        <span v-if="errors.country" class="help-block" role="alert">
-                            <strong>{{errors.country[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row m-b-55">
-                    <div class="name">Phone</div>
-                    <div class="value">
-                        <div class="row row-refine">
-                            <div class="col-6">
-                                <div class="input-group-desc">
-                                    <input v-model="area_code" class="input--style-5" type="text" name="area_code">
-                                    <label class="label--desc">Area Code</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="input-group-desc">
-                                    <input v-model="number" class="input--style-5" type="text" name="phone">
-                                    <label class="label--desc">Phone Number</label>
-                                </div>
-                            </div>
-                            <span v-if="errors.phone" class="help-block" role="alert">
-                                <strong>{{errors.phone[0]}}</strong>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                       
-                <div>
-                    <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
-                </div>
+               <div class="row">
+                 <div class="form-group col-md-6">
+                   <label for="exampleInputEmail1">Address</label>
+                   <input v-model="form.address" type="text" class="form-control"  placeholder="Enter Address">
+                  <small class="form-text text-muted" v-if="errors.address">{{errors.address[0]}}</small>
+               </div>    
+               <div class="form-group col-md-6">
+                   <label >Zip</label>
+                   <input v-model="form.zip" type="text" class="form-control"  placeholder="Enter Zip">
+                  <small class="form-text text-muted" v-if="errors.zip">{{errors.zip[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Town</label>
+                   <input v-model="form.town" type="text" class="form-control"  placeholder="Enter Town">
+                  <small class="form-text text-muted" v-if="errors.town">{{errors.town[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Country</label>
+                   <input v-model="form.country" type="text" class="form-control"  placeholder="Enter Country">
+                  <small class="form-text text-muted" v-if="errors.country">{{errors.country[0]}}</small>
+               </div>
+                 <div class="form-group col-md-6">
+                   <label >Phone Number</label>
+                   <input v-model="number" type="text" class="form-control"  placeholder="Enter Phone Number">
+                  <small class="form-text text-muted" v-if="errors.phone">{{errors.phone[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Area Code</label>
+                   <input v-model="area_code" type="text" class="form-control"  placeholder="Enter Area Code">
+                  <small class="form-text text-muted" v-if="errors.paypal">{{errors.paypal[0]}}</small>
+               </div>
+               </div>       
+               <button class="btn btn-primary  btn-lg submit-btn customBtn" type="submit">Register</button>
             </form>
         </div>
     </div>             
@@ -124,3 +82,13 @@ export default{
     }
 }
 </script>
+<style scoped>
+.card-5 {
+   
+    padding: 20px;
+}
+.customBtn {
+ background-color: #000;
+ 
+}
+</style>

@@ -50,8 +50,8 @@
                                                     
                                                         <div class="form-group">
                                                             <!-- <input type="text" placeholder="E-mail or number" /> -->
-                                                            <div class="form-control" style="height:3rem;">
-                                                                <h3>${{estimated_price}}</h3>
+                                                            <div class="">
+                                                                <h3>{{estimated_price}}</h3>
 
                                                             </div>
                                                         </div>
@@ -144,20 +144,20 @@ export default {
 
 			left:0,
             right:null,
-             items: [
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
-          },
-          {
-            src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
-          },
-        ],
+        //      items: [
+        //   {
+        //     src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
+        //   },
+        //   {
+        //     src: 'https://cdn.vuetifyjs.com/images/carousel/sky.jpg',
+        //   },
+        //   {
+        //     src: 'https://cdn.vuetifyjs.com/images/carousel/bird.jpg',
+        //   },
+        //   {
+        //     src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg',
+        //   },
+        // ],
 		}
 	},
     components:{

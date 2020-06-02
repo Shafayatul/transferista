@@ -12,7 +12,7 @@
             margin: 15px;
             background: #FFFFFF; 
             font-family: Arial, sans-serif; 
-            font-size: 12px; 
+           
   
         }   
 

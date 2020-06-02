@@ -5,158 +5,76 @@
         </div>
         <div class="card-body">
             <form @submit.prevent="userInfo">
-                <div class="form-row m-b-55">
-                    <div class="name">Address</div>
-                    <div class="value">
-                        <div class="row row-space">
-                            <div class="col-6">
-                                <div class="input-group-desc" >
-                                    <input v-model="form.address" class="input--style-5" type="text" name="Address" required>
-                                    <span v-if="errors.address" class="help-block" role="alert">
-                                        <strong>{{errors.address[0]}}</strong>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">Zip</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.zip}">
-                            <input v-model="form.zip" class="input--style-5"  name="zip" required>
-                            <span v-if="errors.zip" class="help-block" role="alert">
-                                <strong>{{errors.zip[0]}}</strong>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="name">Town</div>
-                    <div class="value" >
-                        <div class="input-group">
-                            <input v-model="form.town" class="input--style-5" type="text" name="town" required>
-                        </div>
-                        <span v-if="errors.town" class="help-block" role="alert">
-                            <strong>{{errors.town[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">Country</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.country}">
-                            <input v-model="form.country" class="input--style-5" type="text" name="country" required>
-                        </div>
-                        <span v-if="errors.country" class="help-block" role="alert">
-                            <strong>{{errors.country[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">Company</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.company}">
-                            <input v-model="form.company" class="input--style-5" type="text" name="country" required>
-                        </div>
-                        <span v-if="errors.company" class="help-block" role="alert">
-                            <strong>{{errors.company[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">Company Email</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.email_company}">
-                            <input v-model="form.email_company" class="input--style-5" type="text" name="country" required>
-                        </div>
-                        <span v-if="errors.email_company" class="help-block" role="alert">
-                            <strong>{{errors.email_company[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div v-if="flag" class="form-row">
-                    <div class="name">VAT</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.vat}">
-                            <input v-model="form.vat" class="input--style-5" type="text" name="country" required>
-                        </div>
-                        <span v-if="errors.vat" class="help-block" role="alert">
-                            <strong>{{errors.vat[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">IBAN</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.iban}">
-                            <input v-model="form.iban" class="input--style-5" type="text" name="country" required>
-                        </div>
-                        <span v-if="errors.iban" class="help-block" role="alert">
-                            <strong>{{errors.iban[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">BIC</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.bic}">
-                            <input v-model="form.bic" class="input--style-5" type="text" name="country" required>
-                        </div>
-                        <span v-if="errors.bic" class="help-block" role="alert">
-                            <strong>{{errors.bic[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">URL</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.url}">
-                            <input v-model="form.url" class="input--style-5" type="text" name="country" required>
-                        </div>
-                        <span v-if="errors.url" class="help-block" role="alert">
-                            <strong>{{errors.url[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="name">Paypal Account Email:</div>
-                    <div class="value">
-                        <div class="input-group" :class="{error: errors.paypal}">
-                            <input v-model="form.paypal" class="input--style-5" type="text" name="country" required>
-                        </div>
-                        <span v-if="errors.paypal" class="help-block" role="alert">
-                            <strong>{{errors.paypal[0]}}</strong>
-                        </span>
-                    </div>
-                </div>
-                <div class="form-row m-b-55">
-                    <div class="name">Phone</div>
-                    <div class="value">
-                        <div class="row row-refine">
-                            <div class="col-6">
-                                <div class="input-group-desc">
-                                    <input v-model="area_code" class="input--style-5" type="text" name="area_code">
-                                    <label class="label--desc">Area Code</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="input-group-desc">
-                                    <input v-model="number" class="input--style-5" type="text" name="phone">
-                                    <label class="label--desc">Phone Number</label>
-                                </div>
-                            </div>
-                            <span v-if="errors.phone" class="help-block" role="alert">
-                                <strong>{{errors.phone[0]}}</strong>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                       
-                <div>
-                    <button class="btn btn--radius-2 btn--red" type="submit">Register</button>
-                </div>
+              <div class="row">  
+                <div class="form-group col-md-6">
+                   <label for="exampleInputEmail1">Address</label>
+                   <input v-model="form.address" type="text" class="form-control"  placeholder="Enter Address">
+                  <small class="form-text text-muted" v-if="errors.address">{{errors.address[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Zip</label>
+                   <input v-model="form.zip" type="text" class="form-control"  placeholder="Enter Zip">
+                  <small class="form-text text-muted" v-if="errors.zip">{{errors.zip[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Town</label>
+                   <input v-model="form.town" type="text" class="form-control"  placeholder="Enter Town">
+                  <small class="form-text text-muted" v-if="errors.town">{{errors.town[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Country</label>
+                   <input v-model="form.country" type="text" class="form-control"  placeholder="Enter Country">
+                  <small class="form-text text-muted" v-if="errors.country">{{errors.country[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Company </label>
+                   <input v-model="form.company" type="text" class="form-control"  placeholder="Enter zip">
+                  <small class="form-text text-muted" v-if="errors.company">{{errors.company[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Company Email</label>
+                   <input v-model="form.email_company" type="text" class="form-control"  placeholder="Enter Company">
+                  <small class="form-text text-muted" v-if="errors.email_company">{{errors.email_company[0]}}</small>
+               </div>
+                <div v-if="flag" class="form-group col-md-6">
+                   <label >VAT</label>
+                   <input :class="{error: errors.vat}" v-model="form.vat" type="text" class="form-control"  placeholder="Enter VAT">
+                  <small class="form-text text-muted" v-if="errors.email_company">{{errors.email_company[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >IBAN</label>
+                   <input :class="{error: errors.iban}" v-model="form.iban" type="text" class="form-control"  placeholder="Enter IBAN">
+                  <small class="form-text text-muted" v-if="errors.iban">{{errors.iban[0]}}</small>
+               </div>
+               <div class="form-group col-md-6">
+                   <label >BIC</label>
+                   <input :class="{error: errors.bic}" v-model="form.bic" type="text" class="form-control"  placeholder="Enter BIC">
+                  <small class="form-text text-muted" v-if="errors.bic">{{errors.bic[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >URL</label>
+                   <input :class="{error: errors.url}" v-model="form.url" type="text" class="form-control"  placeholder="Enter URL">
+                  <small class="form-text text-muted" v-if="errors.url">{{errors.url[0]}}</small>
+               </div>
+               <div class="form-group col-md-6">
+                   <label >Paypal Account Email:</label>
+                   <input :class="{error: errors.paypal}" v-model="form.paypal" type="text" class="form-control"  placeholder="Enter Paypal Account Email">
+                  <small class="form-text text-muted" v-if="errors.paypal">{{errors.paypal[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Phone Number</label>
+                   <input v-model="number" type="text" class="form-control"  placeholder="Enter Phone Number">
+                  <small class="form-text text-muted" v-if="errors.phone">{{errors.phone[0]}}</small>
+               </div>
+                <div class="form-group col-md-6">
+                   <label >Area Code</label>
+                   <input v-model="area_code" type="text" class="form-control"  placeholder="Enter Area Code">
+                  <small class="form-text text-muted" v-if="errors.paypal">{{errors.paypal[0]}}</small>
+               </div>
+              </div>                      
+               
+                 <button class="btn btn-primary  btn-lg submit-btn customBtn" type="submit">Register</button>
+               
             </form>
         </div>
     </div>             
@@ -228,3 +146,13 @@ export default{
     }
 }
 </script>
+<style scoped>
+.card-5 {
+   
+    padding: 20px;
+}
+.customBtn {
+ background-color: #000;
+ 
+}
+</style>

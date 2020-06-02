@@ -1,11 +1,5 @@
 <template>
-    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="basic-from">
-            <div class="card card-5">
+          <div class="card card-5">
                 <div class="card-heading">
                     <h2 class="title">Basic Information Form</h2>
                 </div>
@@ -30,26 +24,23 @@
                           </label>
                         </div>
                        
-                        <div class="margin-1">
-                            <button class="btn btn--radius-2 btn-success" type="submit">Confirm</button>
-                        </div>
+                       
+                            <button class="btn btn-primary  btn-lg submit-btn customBtn" type="submit">Confirm</button>
+                       
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+       
 </template>
 <script>
-import DashboardLayoutVue from '../layers/DashboardLayout.vue'
+import AuthLayout from '../layers/AuthLayout'
 export default {
     data(){
         return{
             role: null
         }
     },
-    components:{
-        DashboardLayoutVue
-    },
+   
     methods:{
         enter(){
             if(this.role == 1){
@@ -72,7 +63,20 @@ export default {
         }
     },
     created(){
-        this.$emit(`update:layout`, DashboardLayoutVue)
+       this.$emit(`update:layout`,AuthLayout)
     }
 }
 </script>
+<style scoped>
+.card-5 {
+    padding: 20px;
+    max-width: 300px;
+}
+.customBtn {
+ background-color: #000;
+ 
+}
+.form-check-input{
+   position: inherit !important;
+}
+</style>

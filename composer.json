@@ -11,6 +11,7 @@
         "php": "^7.2",
         "alexpechkarev/google-maps": "6.0",
         "barryvdh/laravel-dompdf": "^0.8.5",
+        "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "fruitcake/laravel-cors": "^1.0",
         "fzaninotto/faker": "^1.9",

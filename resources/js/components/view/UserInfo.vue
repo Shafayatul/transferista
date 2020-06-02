@@ -7,7 +7,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <div class="profile-img">
-                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                <img width="40" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
                                 <div class="file btn btn-lg btn-primary">
                                     Change Photo
                                     <input type="file" name="file"/>
@@ -171,8 +171,8 @@ export default {
         this.name = User.name()
         axios.get(`/api/user-details`)
         .then(res=>{
-            this.user=res.data.user
-            this.userInfo=res.data.user.user_info
+            this.user = res.data.user
+            this.userInfo = res.data.user.user_info
              this.rating = res.data.rating
             if(this.rating.length==0){
                 this.flag = true

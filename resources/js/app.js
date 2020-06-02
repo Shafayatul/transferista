@@ -1,8 +1,23 @@
 
 require('./bootstrap');
-
+import VueSocialauth from 'vue-social-auth'
+import VueAxios from 'vue-axios'
 window.Vue = require('vue');
 import * as VueGoogleMaps from 'vue2-google-maps'
+Vue.use(VueAxios, axios)
+Vue.use(VueSocialauth,
+  {
+      providers: {
+    facebook: {
+      clientId: '198276534600950',
+      redirectUri: window.location.origin+ '/auth/facebook/callback' // Your client app URL
+    },
+     twitter: {
+      clientId: '',     
+      redirectUri: window.location.origin+ '/auth/twitter/callback' // Your client app URL
+    }
+  },
+  })
 
 // Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 import User from './helpers/User'
@@ -23,13 +38,13 @@ Vue.use(VueGoogleMaps, {
     }
 });
 
-axios.interceptors.response.use(null , (error)=>{
-  if(error.response.status == 401){
+// axios.interceptors.response.use(null , (error)=>{
+//   if(error.response.status == 401){
 
-    User.logout()
+//     User.logout()
 
-  }
-})
+//   }
+// })
 
 
 // jQuery.extend(true, jQuery.fn.datetimepicker.defaults, {

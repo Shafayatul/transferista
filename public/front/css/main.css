@@ -1795,3 +1795,81 @@ figure {
 .banner-text .btn:hover, .inner-banner .owl-theme .owl-controls .owl-buttons div:hover, .quote-form .form-group .btn, .green-grid .image-holder, .green-grid:hover .image-holder:after, .green-counter-grid i, .start-now .btn, .inner-footer input[type="submit"]:hover, .btn:hover, .feature-inner .text-box .btn:hover, .home3-counter .green-counter-grid, .amazing-feature .green-feture .image-holder, .contact-form .form-group .btn {
     background-color: #98ce44;
 }
+
+.tab-content > .active {   
+    opacity: 2.0 !important;
+}
+.emp-profile{
+    padding: 3%;
+  
+   
+}
+.profile-color{
+  border-radius: 0.5rem;
+  background: #fff;
+   padding: 3%;
+}
+.customBtn{
+    color: #fff;
+    background-color: #000;
+    border: 0;
+    opacity: .9;
+}
+.bar{
+    display: block;
+    height: 5px;
+    width: 35px;
+    background: #000;
+    margin: 5px auto;
+  }
+  
+  .midopen{
+      
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-250px);
+  }
+  .bar{
+    transition: all .3s ease;
+  }
+  .topopen{
+    transform: translateY(10px) rotateZ(45deg);
+  }
+  .botopen{
+    transform: translateY(-10px) rotateZ(-45deg);
+  }
+  .side-nav{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;  
+    opacity: 0.9;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.3s;
+    background: #ffffff;
+  }
+  
+  .sidenavopen{
+    height: 100%;
+    width: 250px;
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    background: #ffffff;
+    opacity: 1.9;
+    overflow-x: hidden;
+    padding-top: 60px;
+    transition: 0.3s;
+  }
+  .mainopen{
+    transition: margin-left 0.3s;
+    padding: 20px;
+    overflow: hidden;
+    width: 100%;
+    margin-left: 250px;
+  }
+  

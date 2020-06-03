@@ -1,30 +1,21 @@
 <template>
-<div id="profile-design">
-    <main class="pt-5 mx-lg-5">
-        <div class="container-fluid mt-5">
-            <div class="container emp-profile">
+    <main class=" " style="height: 90vh;">
+        <div class="container emp-profile">
+          
                 <form method="post">
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="profile-img">
-                                <img width="40" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                                <div class="file btn btn-lg btn-primary">
-                                    Change Photo
-                                    <input type="file" name="file"/>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="profile-head">
-                                <h5>
-                                   {{name}}
-                                </h5>
+                 
+                        
+                        <div class="col-md-8 mx-auto profile-color">
+                            <div class="profile-head">                                
                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                                        <a class="nav-link  active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                     </li>
                                     <li class="nav-item">
                                         <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Reviews</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                         <router-link class="nav-link" to='edit-customer'>Edit Profile</router-link>
                                     </li>
                                 </ul>
                             </div>
@@ -102,10 +93,9 @@
                                 </div>
                                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-                                    <div class="row" v-if="flag">
+                                  
                                         <h4>No reviews to show</h4> 
-                                    </div>
-
+                                
 
                                     <div class="row" v-for="(data,index) in rating" :key="index">
                                         <div class="col-md-3">
@@ -133,17 +123,14 @@
                             </div>
                             
                         </div>
-                        <div class="col-md-2">
-                            <router-link to='edit-customer'>Edit Profile</router-link>
-                            
-                        </div>
-                    </div>
+                     
+                   
                     
                 </form>           
-            </div>
-        </div> 
+            
+       </div>
     </main>
-</div>
+
 </template>
 <script>
 export default {
@@ -193,23 +180,13 @@ export default {
 #profile-body {
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
-#profile-design{
-    background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
+.tab-content > .active {
+    display: block;
+    z-index: 2000;
+    opacity: 2.0 !important;
 }
-/* body{
- background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
-} */
-main{
-    padding-left: 270px;
-    padding-bottom: 15%;
-    height:auto ;
-}
-.emp-profile{
-    padding: 3%;
-    margin-top: 3%;    
-    border-radius: 0.5rem;
-    background: #fff;
-}
+
+
 .profile-img{
     text-align: center;
 }

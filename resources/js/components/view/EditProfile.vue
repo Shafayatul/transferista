@@ -2,25 +2,13 @@
 
 
 <template>
-
-<div id="profile-design">
     <!-- Sidebar -->
     <!--Main layout-->
-    <main class="pt-5 mx-lg-5">
-        <div class="container-fluid mt-5">
-            <div class="container emp-profile">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="profile-img">
-                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
-                            <div class="file btn btn-lg btn-primary">
-                                Change Photo
-                                <input type="file" name="file"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div v-show="success" class="alert alert-warning alert-dismissible fade show" role="alert">
+    <main class=" mx-lg-5">
+        <div class="container emp-profile">
+                      
+                    <div class="col-md-8 mx-auto profile-color">
+                        <div v-show="success" class="alert alert-warning alert-dismissible fade " role="alert">
                             Profile Updated Successfully
                             <button @click="success =!success" type="button" class="close" data-dismiss="alert" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -115,10 +103,10 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-5 offset-3">         
-                                            <button type="button" class="btn btn-info btn-sm" @click="submit">Update</button>
+                                            <button type="button" class="btn customBtn " @click="submit">Update</button>
                                     <!-- </div>  
                                         <div class="col-md-4 offset-3">          -->
-                                            <button type="button" class="btn btn-danger btn-sm" @click="cancel">Cancel</button>
+                                            <button type="button" class="btn btn-danger " @click="cancel">Cancel</button>
                                         </div>  
                                     </div>
                                 </div>
@@ -126,14 +114,14 @@
                         </form>
 
 
-                    </div>
-                </div>
-            </div>
+                  
+         
+        </div>
         </div>
     </main> 
   <!--Main layout-->
 
-</div>
+
 </template>
 <script>
 
@@ -182,16 +170,14 @@ export default {
 #profile-design{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff) !important;
 }
-main{
-    padding-left: 270px;
+.customBtn{
+    color: #fff;
+    background-color: #000;
+    border: 0;
+    opacity: .9;
 }
-.emp-profile{
-    padding: 3%;
-    margin-top: 3%;
-   
-    border-radius: 0.5rem;
-    background: #fff;
-}
+
+
 .profile-img{
     text-align: center;
 }

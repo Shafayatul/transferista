@@ -1,33 +1,34 @@
 <template>
     <main class="pt-5 mx-lg-5" style="height:90vh;">
-        <div class="container-fluid mt-5">
-            <div class="container emp-profile">
-                <div v-show="error" class="alert alert-warning alert-dismissible fade show" role="alert">
+            <div class=" emp-profile">
+            <div class="profile-color col-lg-6 mr-auto">
+                <div v-show="error" class="alert alert-warning alert-dismissible fade " role="alert">
                 Credentials dont match
                 <button @click="error =!error" type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
-                <div v-show="success" class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div v-show="success" class="alert alert-warning alert-dismissible fade " role="alert">
                  Paassword changed successfully
                 <button @click="success =!success" type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
-                <div class="row">
-                    <div class="col-lg-6 offset-3">
+                
                         <p class="">Use the form below to change your password. Your password cannot be the same as your username.</p>
                         <form   @submit.prevent="reset" id="passwordForm">
-                            <input type="password" v-model="form.old_password" class=" form-control pass-input" name="password1" id="password1" placeholder="Previous Password" autocomplete="off">
-                        
+                        <div class="form-group">
+                           <input type="password" v-model="form.old_password" class=" form-control pass-input" name="password1" id="password1" placeholder="Previous Password" autocomplete="off">
+                        </div>
+                        <div class="form-group">
                             <input type="password" v-model="form.new_password" class=" form-control pass-input" name="password1" id="password1" placeholder="New Password" autocomplete="off">
-                        
+                        </div>
+                        <div class="form-group">
                             <input type="password" v-model="form.confirm_password" class=" form-control pass-input" name="password2" id="password2" placeholder="Repeat Password" autocomplete="off">
-                        
-                            <button type="submit" class="col-xs-12 btn btn-primary btn-load " data-loading-text="Changing Password..." >Submit</button>
+                        </div>
                         </form>
-                    </div>
-                </div>     
+                            <button type="submit" class=" btn customBtn btn-load " data-loading-text="Changing Password..." >Submit</button>
+                    
             </div>
         </div> 
     </main>
@@ -59,3 +60,11 @@ export default {
     }
 }
 </script>
+<style scoped>
+.customBtn{
+    color: #fff;
+    background-color: #000;
+    border: 0;
+    opacity: .9;
+}
+</style>

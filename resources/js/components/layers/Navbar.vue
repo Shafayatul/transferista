@@ -2,10 +2,6 @@
 <!-- Navbar -->
     <nav class="navbar navbar-expand-md  navbar-light">
         <div class="container">
-            
-            <router-link to="/" class="navbar-brand" :class="{no : currentPage}">
-                <img :src="'/img/TransferistaC22b-A00aT03a-Z.png'">
-            </router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -15,20 +11,29 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left -->
                 <ul class="navbar-nav mr-auto">
-                
+                    <li class="nav-item">
+                  <a class="nav-link list-group-item" href="#" @click="opened = !opened">
+                    <div>
+                        <div class="bar" :class="{topopen: opened}"></div>
+                        <div class="bar" :class="{midopen: opened}"></div>
+                        <div class="bar" :class="{botopen: opened}"></div>
+                    </div>
+                    </a>
+                </li>
                 </ul>
                 
                 
                 <!-- Right -->
                 <ul class="navbar-nav nav-flex-icons"> 
-
-                    <li class="nav-item" v-for="(item,index) in item1" :key="index" :class="{no : currentPage}">
+               
+               
+                    <!-- <li class="nav-item" v-for="(item,index) in item1" :key="index" :class="{no : currentPage}">
                         <a style=""  class="nav-link list-group-item  waves-effect"  :href="item.to" v-show="item.show">
                             {{item.title}}
                         </a>
                         
-                        <!-- <a  href="#banner"></a> -->
-                    </li>
+                        <a  href="#banner"></a>
+                    </li> -->
 
                     <li class="nav-item" v-for="item in item2" :key="item.title">
                         <router-link style=""  class="nav-link list-group-item  waves-effect"  :to="item.to" v-show="item.show">
@@ -66,6 +71,7 @@ export default {
     data(){
         return{
             loggedIn: false,
+            opened: false,
             item1:[
                 {title: 'Add Project',to:'/project/create',show: (User.company() ||User.customer() || User.employee())},
                 {title: 'My Projects',to:'/profile/projects',show: (User.company()  || User.customer() || User.employee())}

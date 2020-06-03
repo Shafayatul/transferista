@@ -188,6 +188,7 @@ export default {
 	methods:{
         location(){
              if(navigator.geolocation) {
+                 this.errors=null
                 navigator.geolocation.getCurrentPosition(function(position) {
                     console.log(position);
                      $.getJSON('http://api.geonames.org/countryCodeJSON?lat='+position.coords.latitude+'&lng='+position.coords.longitude+'&username=ishmam505',
@@ -202,7 +203,7 @@ export default {
                         }).catch((err) => {
                             this.errors=true
                             
-                            
+
                         });
                     });
                     

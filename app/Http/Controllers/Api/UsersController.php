@@ -30,7 +30,7 @@ class UsersController extends Controller
             'last_name'  => $request->last_name,
             'first_name' => $request->first_name,
             'password'   => Hash::make($request->password),
-            'name'       => $request->first_name.' '.$request->last_name,
+            'name'       => $request->first_name . ' ' . $request->last_name,
         ]);
 
         $user->save();
@@ -46,7 +46,7 @@ class UsersController extends Controller
         $user_info = $user->userInfo;;
 
         $rating = Rating::where('rating_to', Auth::id())->with('ratingFrom')->get();
-        $avg_rating = number_format((User::findOrFail(Auth::id())->ratingTo()->sum('rating'))/(count(User::findOrFail(Auth::id())->ratingTo) > 0 ? count(User::findOrFail(Auth::id())->ratingTo) : 1),2,'.','');
+        $avg_rating = number_format((User::findOrFail(Auth::id())->ratingTo()->sum('rating')) / (count(User::findOrFail(Auth::id())->ratingTo) > 0 ? count(User::findOrFail(Auth::id())->ratingTo) : 1), 2, '.', '');
 
         return response()->json([
             'user' => $user,
@@ -54,7 +54,6 @@ class UsersController extends Controller
             'rating' => $rating,
             'avg_rating' => $avg_rating
         ]);
-
     }
 
     public function login(Request $request)
@@ -65,24 +64,24 @@ class UsersController extends Controller
             'email'       => 'required|string|email',
         ]);
         $credentials = request(['email', 'password']);
-        if(!Auth::attempt($credentials))
+        if (!Auth::attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
         $user = $request->user();
         $roles = $user->getRoleNames();
         $tokenResult = $user->createToken('Personal Access Token');
-        
+
         $token = $tokenResult->token;
         if ($request->remember_me)
             $token->expires_at = Carbon::now()->addWeeks(1);
-            $token->save();
+        $token->save();
         return response()->json([
             'roles'        => $roles,
             'user'         => $user,
             'access_token' => $tokenResult->accessToken,
             'token_type'   => 'Bearer',
-            'expires_at'   =>Carbon::parse($tokenResult->token->expires_at)->timestamp,
+            'expires_at'   => Carbon::parse($tokenResult->token->expires_at)->timestamp,
         ]);
     }
 
@@ -119,7 +118,7 @@ class UsersController extends Controller
         $user_info->url           = $request->url;
         $user_info->paypal        = $request->paypal;
         $user_info->save();
-        if($user_info){
+        if ($user_info) {
             $role = Role::findOrFail($request->role_id);
             $user = Auth::user();
             $user->syncRoles([$role->name]);
@@ -133,13 +132,13 @@ class UsersController extends Controller
     public function userInfoUpdate(Request $request)
     {
         $user             = User::findOrFail(Auth::id());
-        $user->name       = $request->first_name.' '.$request->last_name;
+        $user->name       = $request->first_name . ' ' . $request->last_name;
         $user->first_name = $request->first_name;
         $user->last_name  = $request->last_name;
         $user->save();
 
         $user_info                = UserInformation::where('user_id', $user->id)->first();
-        if($user_info){
+        if ($user_info) {
             $user_info->address       = $request->user_info['address'];
             $user_info->zip           = $request->user_info['zip'];
             $user_info->town          = $request->user_info['town'];
@@ -160,7 +159,8 @@ class UsersController extends Controller
         ], 201);
     }
 
-    public function currentUserEmail(Request $request){
+    public function currentUserEmail(Request $request)
+    {
         $email = Auth::user()->email;
         return response()->json([
             'email'    => $email
@@ -213,11 +213,11 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user->userInfo;
-       $rating = Rating::where('rating_to', $id)->with('ratingFrom')->get();
-       $avg_rating = number_format((User::findOrFail($id)->ratingTo()->sum('rating'))/(count(User::findOrFail($id)->ratingTo) > 0 ? count(User::findOrFail($id)->ratingTo) : 1),2,'.','') ;
+        $rating = Rating::where('rating_to', $id)->with('ratingFrom')->get();
+        $avg_rating = number_format((User::findOrFail($id)->ratingTo()->sum('rating')) / (count(User::findOrFail($id)->ratingTo) > 0 ? count(User::findOrFail($id)->ratingTo) : 1), 2, '.', '');
 
         return response()->json([
-            'user'=>$user,
+            'user' => $user,
             'rating' => $rating,
             'avg_rating' => $avg_rating
             // 'from_data' => $from_data,

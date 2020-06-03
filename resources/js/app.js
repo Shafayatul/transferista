@@ -7,16 +7,16 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueAxios, axios)
 Vue.use(VueSocialauth,
   {
-      providers: {
-    facebook: {
-      clientId: '198276534600950',
-      redirectUri: window.location.origin+ '/auth/facebook/callback' // Your client app URL
+    providers: {
+      facebook: {
+        clientId: '198276534600950',
+        redirectUri: window.location.origin + '/auth/facebook/callback' // Your client app URL
+      },
+      twitter: {
+        clientId: '',
+        redirectUri: window.location.origin + '/auth/twitter/callback' // Your client app URL
+      }
     },
-     twitter: {
-      clientId: '',     
-      redirectUri: window.location.origin+ '/auth/twitter/callback' // Your client app URL
-    }
-  },
   })
 
 // Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
@@ -25,26 +25,26 @@ import User from './helpers/User'
 window.User = User
 router.afterEach(() => {
   const contentWrapper = document.querySelector(".v-content__wrap");
-  if(contentWrapper !== null){
-   contentWrapper.scrollTop = 0;
-   window.scroll(0,0);
+  if (contentWrapper !== null) {
+    contentWrapper.scrollTop = 0;
+    window.scroll(0, 0);
   }
 })
 
 Vue.use(VueGoogleMaps, {
-    load: {
-      key: 'AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo',
-      libraries: 'places',
-    }
+  load: {
+    key: 'AIzaSyAGgNecpav_4MaZdtBjZVSlJhYodFX-PUo',
+    libraries: 'places',
+  }
 });
 
-// axios.interceptors.response.use(null , (error)=>{
-//   if(error.response.status == 401){
+axios.interceptors.response.use(null, (error) => {
+  if (error.response.status == 401) {
 
-//     User.logout()
+    User.logout()
 
-//   }
-// })
+  }
+})
 
 
 // jQuery.extend(true, jQuery.fn.datetimepicker.defaults, {
@@ -82,26 +82,26 @@ import router from './router/router'
 Vue.config.debug = true // turn on debugging mode
 
 const app = new Vue({
-    el: '#app',
-    Data(){
-      return {
-        color: '#3AB982',
-        height: '35px',
-        width: '4px',
-        margin: '2px',
-        radius: '2px',
-        loading: true
-      }
+  el: '#app',
+  Data() {
+    return {
+      color: '#3AB982',
+      height: '35px',
+      width: '4px',
+      margin: '2px',
+      radius: '2px',
+      loading: true
+    }
+  },
+  computed: {
+    // loading(){ return true;}
+  },
+  router,
+  watch: {
+    '$route'(to, from) {
+      document.title = to.meta.title || 'Home'
     },
-    computed:{
-      // loading(){ return true;}
-    },
-    router,
-    watch: {
-      '$route' (to, from) {
-        document.title = to.meta.title || 'Home'
-      },
-       deep: true,
-       immediate: true
-    },
+    deep: true,
+    immediate: true
+  },
 });

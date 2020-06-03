@@ -65,7 +65,7 @@
                                                         <div class="form-group">
                                                             <!-- <input type="text" placeholder="E-mail or number" /> -->
                                                             <div class="form-control" style="height:3rem;">
-                                                                <h3>${{estimated_price}}</h3>
+                                                                <h3>{$}{{estimated_price}}</h3>
 
                                                             </div>
                                                         </div>

@@ -50,12 +50,14 @@
                                                     
                                                         <div class="form-group">
                                                             <!-- <input type="text" placeholder="E-mail or number" /> -->
-                                                            <div class="">
-                                                                <h3>{{estimated_price}}</h3>
+                                                            <div class="form-control" style="height:3rem;">
+                                                                <h3>{{currency_short}}{{estimated_price}}</h3>
 
                                                             </div>
                                                         </div>
-                                                    
+                                                        <span v-if="errors" class="help-block" role="alert">
+                                                            <strong>Country not available</strong>
+                                                        </span>
                                                         <div class="form-group">
                                                             <!-- <input class="btn" type="submit" value="get a quote" /> -->
                                                             
@@ -141,9 +143,11 @@ export default {
             margin: '2px',
             radius: '2px',
             loading: true,
-
+            amount:0,
 			left:0,
             right:null,
+            currency_short:'',
+            errors:null
         //      items: [
         //   {
         //     src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg',
@@ -176,12 +180,37 @@ export default {
 		estimated_price(){
 			if(this.center1.lng !== null && this.center2.lng !==null && this.size!==null ){
 				let dist =  this.getDistance()
-				let cost = parseFloat(dist*1.5 + parseFloat(this.size) )
+				let cost = parseFloat(dist*this.amount + parseFloat(this.size) )
 				return cost.toFixed(2)
 			}
 		}
 	},
 	methods:{
+        location(){
+             if(navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    console.log(position);
+                     $.getJSON('http://api.geonames.org/countryCodeJSON?lat='+position.coords.latitude+'&lng='+position.coords.longitude+'&username=ishmam505',
+                      (result)=>{
+                        // alert(result.countryName);
+                        axios.get(`/api/get-currency/${result.countryName}`)
+                        .then((result) => {
+                            console.log(result.data.rate.amount)
+                            let temp=result.data.rate
+                            this.amount=temp.amount
+                            this.currency_short=temp.currency_short
+                        }).catch((err) => {
+                            this.errors=true
+                            
+                        });
+                    });
+                    
+                }.bind(this));
+            } else {
+                alert("Sorry, your browser does not support HTML5 geolocation.");
+            }
+    
+        },
 		create(){
 			if((User.customer() || User.company()) && this.center1.lat !==null && this.center2.lat !== null && this.size !== null){
 				this.$router.push({
@@ -318,6 +347,7 @@ export default {
 
 
     created(){
+        this.location()
 		this.loading = false
 		if(User.customer() || User.company() || User.employee() || !User.loggedIn()){
 

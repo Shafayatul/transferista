@@ -21,7 +21,7 @@
                                 </div>
                                 <div class="col-md-3 padding-zero">
                                     <button  @click="addMarker1" class="btn btn-info btn-search no-border-radius-left" aria-label="Search">
-                                        <i class="fas fa-search btn-info" aria-hidden="true"></i>
+                                        <i class="fa fa-search btn-info" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </div>                           
@@ -39,7 +39,7 @@
                                 </div>
                                 <div class="col-md-3 padding-zero">
                                     <button @click="addMarker2" class="btn btn-info btn-search no-border-radius-left" aria-label="Search">
-                                        <i class="fas fa-search" aria-hidden="true"></i>
+                                        <i class="fa fa-search" aria-hidden="true"></i>
                                     </button>
                                 </div>
                             </div>

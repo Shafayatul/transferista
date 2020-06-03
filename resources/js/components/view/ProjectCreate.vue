@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-md-5">
                             <!-- Search form -->
-                            <div class="row">
+                            <div class="d-flex form-group">
                                 <div class="col-md-2 padding-zero">
                                     <label class=" label-title">From:</label>
                                 </div>
@@ -27,7 +27,7 @@
                             </div>                           
                         </div>
                         <div class="col-md-5">
-                            <div class="row">
+                            <div class="d-flex form-group">
                                 <div class="col-md-2 padding-zero">
                                     <label class=" label-title">To:</label>
                                 </div>
@@ -45,7 +45,9 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <button class="btn btn-success search btn-block" @click="getDirection">confirm</button>
+                            <div class="form-group">
+                            <button class="btn btn-success search " @click="getDirection">confirm</button>
+                            </div>
                         </div>
                     </div> 
                     <form @submit.prevent="create" class="main-form">

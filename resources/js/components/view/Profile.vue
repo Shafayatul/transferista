@@ -1,7 +1,8 @@
 <template>
 <main>
-    <nav class="navbar navbar-expand-md  navbar-light"  :class="{navbaropen: opened}">
+    <nav class=""  :class="{navbaropen: opened}">
         <div class="container">
+            
              <a class="navbar-brand" href="#" @click="opened = !opened">
                     <div>
                         <div class="bar" :class="{topopen: opened}"></div>
@@ -9,23 +10,10 @@
                         <div class="bar" :class="{botopen: opened}"></div>
                     </div>
               </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+           
             
             <!-- Links -->
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left -->
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                 
-                </li>
-                </ul>
-                
-                
-                <!-- Right -->
-                <ul class="navbar-nav "> 
+           <ul class="nav justify-content-end"> 
                
                
                     <!-- <li class="nav-item" v-for="(item,index) in item1" :key="index" :class="{no : currentPage}">
@@ -36,11 +24,7 @@
                         <a  href="#banner"></a>
                     </li> -->
 
-                    <li class="nav-item" v-for="item in item2" :key="item.title">
-                        <router-link style=""  class="nav-link list-group-item  waves-effect"  :to="item.to" v-show="item.show">
-                            {{item.title}}
-                        </router-link>
-                    </li>
+                   
 
                     <li class="dropdown  nav-item" v-show="loggedIn">
                             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user" aria-expanded="true">
@@ -62,13 +46,13 @@
                         </div>
                     </li>
                 </ul>
-            </div>
         </div>
     </nav> 
      <div id="profile-design">
     
     <!-- Sidebar -->
     <side-bar  :class="{sidenavopen: opened}"></side-bar>
+    
     <!-- Sidebar -->
     <!--Main layout-->
    <div :class="{mainopen: opened}"> 
@@ -94,12 +78,7 @@ export default {
                 lat:null,
                 lng:null
             },
-             item1:[
-                {title: 'Add Project',to:'/project/create',show: (User.company() ||User.customer() || User.employee())},
-                {title: 'My Projects',to:'/profile/projects',show: (User.company()  || User.customer() || User.employee())}
-                // {title: 'Accepted Bids',to:'/profile/edit-customer',show: User.transferista()},
-                
-            ],
+             
         
             items:[
                 {title:'Profile',to:'/profile/user',show: User.loggedIn()},
@@ -214,6 +193,9 @@ footer.page-footer {
  
   margin-left: 250px;
 }
-
+.navbar-brand {
+ 
+    margin-top: 4px;
+}
 </style>
 

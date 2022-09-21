@@ -42,7 +42,7 @@
         "vue-star-rating": "^1.6.1",
         "vue2-google-maps": "^0.10.7",
         "vuejs-datepicker": "^1.6.2",
-        "vuetify": "^2.2.14",
+        "vuetify": "^2.6.10",
         "vuetify-loader": "^1.4.3"
     }
 }
